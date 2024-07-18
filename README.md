@@ -19,3 +19,4 @@ or directly `cd` to the workspace of each flow:
 $ cd caravel_fsic_vic/flow/0_synthesis/work
 $ make all
 ```
+**Notice that `caravel_fsic_vic/flow/ndm_libs` and its sub-directories need to be extracted**
