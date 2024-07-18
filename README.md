@@ -3,7 +3,7 @@
 You should download the latest version(2024) of `SAED32_EDK`
 and place `SAED32_EDK` and `caravel_fsic_vic` in the same directory
 ```
-- /Your working directory
+/Your working directory
    - /caravel_fsic_vic
    - /SAED32_EDK
 ```
