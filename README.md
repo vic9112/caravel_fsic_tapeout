@@ -2,6 +2,10 @@
  A project which integrates FSIC and Falcon into Caravel SoC and tape-out
 
 ## Makefile
+``` bash
+$ cd caravel_fsic_vic
+```
+
 1. Synthesis
 ``` bash
 $ make saed32_syn
