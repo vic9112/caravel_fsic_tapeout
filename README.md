@@ -1,5 +1,4 @@
 # caravel_fsic_tapeout
- A project which integrates FSIC and Falcon into Caravel SoC and tape-out
 
 ## Makefile
 ``` bash
