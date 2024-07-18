@@ -1,2 +1,21 @@
 # caravel_fsic_tapeout
- A project which integrate FSIC and Falcon into Caravel SoC and tape out
+ A project which integrates FSIC and Falcon into Caravel SoC and tape-out
+
+## Makefile
+1. Synthesis
+``` bash
+$ make saed32_syn
+```
+2. Pre-sim
+``` bash
+$ make saed32_sim
+```
+3. Floorplan
+``` bash
+$ make saed32_planning
+```
+or directly `cd` to the workspace of each flow:
+``` bash
+$ cd caravel_fsic_vic/flow/0_synthesis/work
+$ make all
+```
