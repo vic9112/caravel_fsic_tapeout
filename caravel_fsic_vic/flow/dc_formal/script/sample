@@ -1,0 +1,27 @@
+#set_svf ./
+source ../../common/common.tcl 
+
+#set_svf {/remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/lab2_pnr/work/default-20240108_us01odcvde38380_55191.svf /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/lab2_pnr/work/default-20240108_us01odcvde38380_56491.svf /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/lab2_pnr/work/default-20240108_us01odcvde38380_61131.svf /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/lab4_finishing/work/default-20240108_us01odcvde38380_22555.svf}
+
+set DESIGN_NAME i2c_master_top
+
+read_db "$Std_cell_lib $Ram_lib"
+
+set hdlin_interface_only "" ;# set block_box
+
+#refence design (the golden design) 
+read_verilog -r ../../input/i2c_master_top.v -work_library WORK
+set_top -auto
+
+#implement design (the target design)
+read_verilog -i ../../results/i2c_master_top.pg.v
+set_top i:WORK/i2c_master_top
+
+set verification_set_undriven_signals BINARY
+set verification_check_gate_reserve_gating true
+
+verify
+
+quit
+
+

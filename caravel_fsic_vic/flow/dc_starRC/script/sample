@@ -1,0 +1,63 @@
+
+*********************************************************************************
+** Stand-alone StarRC Reference Methodology 				       **
+** Gate Level Flow							       **
+** Version: U-2022.12-SP2                                       **
+** Copyright (C) 1998-2022 Synopsys, Inc. All rights reserved.		       **
+*********************************************************************************
+
+***********	SETUP	  ********** 
+
+* Specify block name for parasitic extraction
+ BLOCK:  i2c_master_top
+
+* Provide the input NDM design database 
+* NDM_DATABASE:  ../../results/i2c_master_top
+
+TOP_DEF_FILE: /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/results/i2c_master_top.out.def
+
+* Provide the mapping file in which design layers mapped to process layers 
+MAPPING_FILE:  /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/synopsys_eda_tool_flow_back-end_lab_files_2020-03-30/SAED14_EDK/tech/star_rc/saed14nm_tf_itf_tluplus.map
+* MAPPING_FILE:  /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/synopsys_eda_tool_flow_back-end_lab_files_2020-03-30/SAED14_EDK/tech/star_rc/saed14nm_1p9m_layer.map
+
+* LEF_FILE:  /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/synopsys_eda_tool_flow_back-end_lab_files_2020-03-30/SAED14_EDK/tech/milkyway/saed14nm_1p9m_mw.tf
+ LEF_FILE:  /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/lab_starRC/work/saed14nm_rvt_1p9m.lef
+
+REDUCTION: NO_EXTRA_LOOPS 
+NETS: *
+EXTRACTION: RC 
+DPT: YES 
+
+***********     FLOW SELECTION       **********
+NUM_CORES: 4
+STARRC_DP_STRING: 
+CORNERS_FILE: /remote/testcases/TC102/042022/4196128/LIB_AJ/ICC2/FlowTraining_BE/TEST_AJ/University_LAB/lab_formal_release/lab_starRC/script/StarRC.smc
+DENSITY_BASED_THICKNESS: YES
+SELECTED_CORNERS: slow fast 
+SIMULTANEOUS_MULTI_CORNER: YES
+
+
+***********     SKIPPING ALL CELLS **********
+
+SKIP_CELLS: * 
+
+***********     PARASITIC OUTPUT       **********
+
+COUPLE_TO_GROUND: NO 
+
+COUPLING_ABS_THRESHOLD: 3e-15
+COUPLING_REL_THRESHOLD: 0.03
+REDUCTION_MAX_DELAY_ERROR: 1e-14
+
+NETLIST_FORMAT: SPEF 
+
+* Provide the name of a file to which output parasitic netlist is written
+NETLIST_FILE: ./../../results/i2c_master_top.spef 
+
+* Provide the name of a summary file to which runtime and memory usage is written
+SUMMARY_FILE: ./../../results/i2c_master_top.star_sum 
+
+* Provide the working directory name to which StarRC internal information is written in binary
+STAR_DIRECTORY: ./star_directory
+
+

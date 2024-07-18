@@ -1,0 +1,8 @@
+CORNER_NAME: fast
+OPERATING_TEMPERATURE: 25
+TCAD_GRD_FILE: //home/raid7_2/user12/r12003/University_LAB_0220/lab_formal_release/lab_starRC/script/saed14nm_1p9m_Cmin.nxtgrd
+
+CORNER_NAME: slow
+OPERATING_TEMPERATURE: 25
+TCAD_GRD_FILE: //home/raid7_2/user12/r12003/University_LAB_0220/lab_formal_release/lab_starRC/script/saed14nm_1p9m_Cmax.nxtgrd
+
