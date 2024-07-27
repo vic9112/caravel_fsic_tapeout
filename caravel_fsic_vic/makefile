@@ -46,7 +46,7 @@ saed32: saed32_cleanall
 # Vic: separate synthesis (Design Compiler) and simulation (VCS)
 .PHONY: saed32_syn
 saed32_syn: setup_saed32
-	$(MAKE) cleanall -C ./flow/0_synthesis/work
+	$(MAKE) cleanall -C ./flow/0_synthesis/work | tee saed32_syn.log
 
 .PHONY: saed32_sim
 saed32_sim:
@@ -64,14 +64,21 @@ t18_sim:
 	$(MAKE) setup -C   ./sim
 	$(MAKE) pre_sim -C ./sim TARGET_PROCESS=T18 | tee t18_presim.log
 ############################### Floor Planning #################################
-.PHONY: saed32_planning
-saed32_planning:
+.PHONY: saed32_plan
+saed32_plan:
 	$(MAKE) all -C ./flow/1_planning/work
 
-.PHONY: t18_planning
-t18_planning:
+.PHONY: t18_plan
+t18_plan:
 	$(MAKE) all -C ./flow/1_planning/work
+################################# Placement ####################################
+.PHONY: saed32_pnr
+saed32_pnr:
+	$(MAKE) all -C ./flow/2_place_and_route/work
 ################################################################################
+
+.PHONY: all
+all: saed32_syn saed32_sim saed32_plan saed32_pnr
 
 # for debug and test in sim_vcs folder
 .PHONY: t18_vcs
@@ -116,8 +123,8 @@ clean:
 	$(MAKE) clean -C ./sim/sim_vcs
 	$(MAKE) clean -C ./flow/0_synthesis/work
 	$(MAKE) clean -C ./flow/1_planning/work
-#	$(MAKE) clean -C 2_place_and_route/work
-#	$(MAKE) clean -C 3_signoff/work
+	$(MAKE) clean -C ./flow/2_place_and_route/work
+#	$(MAKE) clean -C ./flow/3_signoff/work
 #	$(MAKE) clean -C 4_finishing/work
 #	$(MAKE) clean -C 5_upf/work
 	- rm *.log

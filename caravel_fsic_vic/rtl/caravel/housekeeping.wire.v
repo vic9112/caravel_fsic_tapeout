@@ -1,4 +1,7 @@
-//`include "fsic_defines.v"
+//===========================================================
+// Modified by Vic Chen
+// July 26, 2024
+//===========================================================
 
 // SPDX-FileCopyrightText: 2020 Efabless Corporation
 //
@@ -62,128 +65,129 @@ module housekeeping #(
     parameter SYS_BASE_ADR = 32'h2620_0000,
     parameter IO_CTRL_BITS = 13
 ) (
-`ifdef USE_POWER_PINS
-inout wire VPWR,
-inout wire VGND,
-`endif
+    inout wire VPWR,
+    inout wire VGND,
 
     // Wishbone interface to management SoC
-input wire wb_clk_i,
-input wire wb_rstn_i,
-input wire [31:0] wb_adr_i,
-input wire [31:0] wb_dat_i,
-input wire [3:0] wb_sel_i,
-input wire wb_we_i,
-input wire wb_cyc_i,
-input wire wb_stb_i,
+    input wire wb_clk_i,
+    input wire wb_rstn_i,
+    input wire [31:0] wb_adr_i,
+    input wire [31:0] wb_dat_i,
+    input wire [3:0] wb_sel_i,
+    input wire wb_we_i,
+    input wire wb_cyc_i,
+    input wire wb_stb_i,
     output reg wb_ack_o,
     output reg [31:0] wb_dat_o,
 
     // Primary reset
-input wire porb,
+    input wire porb,
 
-    // Clocking control parameters
-    output reg pll_ena,
-    output reg pll_dco_ena,
-    output reg [4:0] pll_div,
-    output reg [2:0] pll_sel,
-    output reg [2:0] pll90_sel,
-    output reg [25:0] pll_trim,
-    output reg pll_bypass,
+	/////////////////////////////
+	//// [Vic]: PLL is unsed ////
+	// Clocking control parameters
+    // output reg pll_ena,
+    // output reg pll_dco_ena,
+    // output reg [4:0] pll_div,
+    // output reg [2:0] pll_sel,
+    // output reg [2:0] pll90_sel,
+    // output reg [25:0] pll_trim,
+    // output reg pll_bypass,
+	/////////////////////////////
 
     // Module enable status from SoC
-input wire qspi_enabled,
-input wire uart_enabled,
-input wire spi_enabled,
-input wire debug_mode,
-
+    input wire qspi_enabled,
+    input wire uart_enabled,
+    input wire spi_enabled,
+    input wire debug_mode,
+    
     // UART interface to/from SoC
-input wire ser_tx,
-output wire ser_rx,
+    input wire ser_tx,
+    output wire ser_rx,
 
     // SPI master interface to/from SoC
-output wire spi_sdi,
-input wire spi_csb,
-input wire spi_sck,
-input wire spi_sdo,
-input wire spi_sdoenb,
+    output wire spi_sdi,
+    input wire spi_csb,
+    input wire spi_sck,
+    input wire spi_sdo,
+    input wire spi_sdoenb,
 
     // External (originating from SPI and pad) IRQ and reset
-output wire [2:0] irq,
-output wire reset,
+    output wire [2:0] irq,
+    output wire reset,
 
     // GPIO serial loader programming interface
-output wire serial_clock,
-output wire serial_load,
-output wire serial_resetn,
-output wire serial_data_1,
-output wire serial_data_2,
+    output wire serial_clock,
+    output wire serial_load,
+    output wire serial_resetn,
+    output wire serial_data_1,
+    output wire serial_data_2,
 
     // GPIO data management (to padframe)---three-pin interface
-input wire [`MPRJ_IO_PADS-1:0] mgmt_gpio_in,
-output wire [`MPRJ_IO_PADS-1:0] mgmt_gpio_out,
-output wire [`MPRJ_IO_PADS-1:0] mgmt_gpio_oeb,
+    input wire [`MPRJ_IO_PADS-1:0] mgmt_gpio_in,
+    output wire [`MPRJ_IO_PADS-1:0] mgmt_gpio_out,
+    output wire [`MPRJ_IO_PADS-1:0] mgmt_gpio_oeb,
 
     // Power control output (reserved for future use with LDOs)
     output reg [`MPRJ_PWR_PADS-1:0] pwr_ctrl_out,
 
     // CPU trap state status (for system monitoring)
-input wire trap,
+    input wire trap,
 
     // User clock (for system monitoring)
-input wire user_clock,
+    input wire user_clock,
 
     // Mask revision/User project ID
-input wire [31:0] mask_rev_in,
+    input wire [31:0] mask_rev_in,
 
     // SPI flash management (management SoC side)
-input wire spimemio_flash_csb,
-input wire spimemio_flash_clk,
-input wire spimemio_flash_io0_oeb,
-input wire spimemio_flash_io1_oeb,
-input wire spimemio_flash_io2_oeb,
-input wire spimemio_flash_io3_oeb,
-input wire spimemio_flash_io0_do,
-input wire spimemio_flash_io1_do,
-input wire spimemio_flash_io2_do,
-input wire spimemio_flash_io3_do,
-output wire spimemio_flash_io0_di,
-output wire spimemio_flash_io1_di,
-output wire spimemio_flash_io2_di,
-output wire spimemio_flash_io3_di,
+    input wire spimemio_flash_csb,
+    input wire spimemio_flash_clk,
+    input wire spimemio_flash_io0_oeb,
+    input wire spimemio_flash_io1_oeb,
+    input wire spimemio_flash_io2_oeb,
+    input wire spimemio_flash_io3_oeb,
+    input wire spimemio_flash_io0_do,
+    input wire spimemio_flash_io1_do,
+    input wire spimemio_flash_io2_do,
+    input wire spimemio_flash_io3_do,
+    output wire spimemio_flash_io0_di,
+    output wire spimemio_flash_io1_di,
+    output wire spimemio_flash_io2_di,
+    output wire spimemio_flash_io3_di,
 
     // Debug interface (routes to first GPIO) from management SoC
-output wire debug_in,
-input wire debug_out,
-input wire debug_oeb,
+    output wire debug_in,
+    input wire debug_out,
+    input wire debug_oeb,
 
     // SPI flash management (padframe side)
     // (io2 and io3 are part of GPIO array, not dedicated pads)
-output wire pad_flash_csb,
-output wire pad_flash_csb_oeb,
-output wire pad_flash_clk,
-output wire pad_flash_clk_oeb,
-output wire pad_flash_io0_oeb,
-output wire pad_flash_io1_oeb,
-output wire pad_flash_io0_ieb,
-output wire pad_flash_io1_ieb,
-output wire pad_flash_io0_do,
-output wire pad_flash_io1_do,
-input wire pad_flash_io0_di,
-input wire pad_flash_io1_di,
-
-`ifdef USE_SRAM_RO_INTERFACE
-output wire sram_ro_clk,
-output wire sram_ro_csb,
-output wire [7:0] sram_ro_addr,
-input wire [31:0] sram_ro_data,
-`endif
+    output wire pad_flash_csb,
+    output wire pad_flash_csb_oeb,
+    output wire pad_flash_clk,
+    output wire pad_flash_clk_oeb,
+    output wire pad_flash_io0_oeb,
+    output wire pad_flash_io1_oeb,
+    output wire pad_flash_io0_ieb,
+    output wire pad_flash_io1_ieb,
+    output wire pad_flash_io0_do,
+    output wire pad_flash_io1_do,
+    input wire pad_flash_io0_di,
+    input wire pad_flash_io1_di,
+    
+    `ifdef USE_SRAM_RO_INTERFACE
+    output wire sram_ro_clk,
+    output wire sram_ro_csb,
+    output wire [7:0] sram_ro_addr,
+    input wire [31:0] sram_ro_data,
+    `endif
 
     // System signal monitoring
-input wire usr1_vcc_pwrgood,
-input wire usr2_vcc_pwrgood,
-input wire usr1_vdd_pwrgood,
-input wire usr2_vdd_pwrgood
+    input wire usr1_vcc_pwrgood,
+    input wire usr2_vcc_pwrgood,
+    input wire usr1_vdd_pwrgood,
+    input wire usr2_vdd_pwrgood
 );
 
     localparam OEB = 1;		// Offset of output enable (bar) in shift register
@@ -242,8 +246,8 @@ input wire usr2_vdd_pwrgood
     wire	csclk;	// Combination of SPI SCK and back door access trigger
 
 
-// Output clock signals buffer wires
-wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff, pad_flash_clk_prebuff;
+	// Output clock signals buffer wires
+	wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff, pad_flash_clk_prebuff;
 
 
 `ifdef USE_SRAM_RO_INTERFACE
@@ -261,7 +265,6 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
 	
     // Pass-through mode.  Housekeeping SPI signals get inserted
     // between the management SoC and the flash SPI I/O.
-
     assign pad_flash_csb = (pass_thru_mgmt_delay) ? mgmt_gpio_in[3] : spimemio_flash_csb;
     assign pad_flash_csb_oeb = (pass_thru_mgmt_delay) ? 1'b0 : (~porb ? 1'b1 : 1'b0);
     assign pad_flash_clk_prebuff = (pass_thru_mgmt) ? mgmt_gpio_in[4] : spimemio_flash_clk;
@@ -275,13 +278,11 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     assign spimemio_flash_io0_di = (pass_thru_mgmt_delay) ? 1'b0 : pad_flash_io0_di;
     assign spimemio_flash_io1_di = (pass_thru_mgmt) ? 1'b0 : pad_flash_io1_di;
 
-(* keep *) sky130_fd_sc_hd__clkbuf_8 pad_flashh_clk_buff_inst (
-`ifdef USE_POWER_PINS
-        .VPWR(VPWR),
-        .VGND(VGND),
-        .VPB(VPWR),
-        .VNB(VGND),
-`endif
+(* keep *) clkbuffer pad_flashh_clk_buff_inst (
+    .VPWR(VPWR),
+    .VGND(VGND),
+    .VPB(VPWR),
+    .VNB(VGND),
 	.A(pad_flash_clk_prebuff),
     .X(pad_flash_clk));
 
@@ -308,12 +309,12 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     // low until all bytes have been transferred between the processor and
     // housekeeping SPI.
 
-    reg [3:0] 	wbbd_state;
-    reg [7:0] 	wbbd_addr;	/* SPI address translated from WB */
-    reg [7:0] 	wbbd_data;	/* SPI data translated from WB */
-    reg  	wbbd_sck;	/* wishbone access trigger (back-door clock) */
-    reg  	wbbd_write;	/* wishbone write trigger (back-door strobe) */
-    reg		wbbd_busy;	/* Raised during a wishbone read or write */
+    reg [3:0] wbbd_state;
+    reg [7:0] wbbd_addr;	/* SPI address translated from WB */
+    reg [7:0] wbbd_data;	/* SPI data translated from WB */
+    reg       wbbd_sck;	    /* wishbone access trigger (back-door clock) */
+    reg       wbbd_write;	/* wishbone write trigger (back-door strobe) */
+    reg       wbbd_busy;	/* Raised during a wishbone read or write */
 
     // This defines a state machine that accesses the SPI registers through
     // the back door wishbone interface.  The process is relatively slow
@@ -354,18 +355,19 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
 	    8'h06 : fdata = mask_rev[15:8];		// Mask rev (via programmed)
 	    8'h07 : fdata = mask_rev[7:0];		// Mask rev (via programmed)
 
+		// [Vic]: Remove PLL signals
 	    /* Clocking control */
-	    8'h08 : fdata = {6'b000000, pll_dco_ena, pll_ena};
-	    8'h09 : fdata = {7'b0000000, pll_bypass};
+	    //8'h08 : fdata = {6'b000000, pll_dco_ena, pll_ena};
+	    //8'h09 : fdata = {7'b0000000, pll_bypass};
 	    8'h0a : fdata = {7'b0000000, irq_spi};
 	    8'h0b : fdata = {7'b0000000, reset};
 	    8'h0c : fdata = {7'b0000000, trap};		// CPU trap state
-	    8'h0d : fdata = pll_trim[7:0];
-	    8'h0e : fdata = pll_trim[15:8];
-	    8'h0f : fdata = pll_trim[23:16];
-	    8'h10 : fdata = {6'b000000, pll_trim[25:24]};
-	    8'h11 : fdata = {2'b00, pll90_sel, pll_sel};
-	    8'h12 : fdata = {3'b000, pll_div};
+	    //8'h0d : fdata = pll_trim[7:0];
+	    //8'h0e : fdata = pll_trim[15:8];
+	    //8'h0f : fdata = pll_trim[23:16];
+	    //8'h10 : fdata = {6'b000000, pll_trim[25:24]};
+	    //8'h11 : fdata = {2'b00, pll90_sel, pll_sel};
+	    //8'h12 : fdata = {3'b000, pll_div};
 
 	    // GPIO Control (bit bang and automatic)
 	    // NOTE: "serial_busy" is the read-back signal occupying the same
@@ -373,6 +375,8 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
 	    8'h13 : fdata = {1'b0, serial_data_2, serial_data_1, serial_bb_clock,
 				serial_bb_load, serial_bb_resetn, serial_bb_enable,
 				serial_busy};
+		
+		default: fdata = 8'h00;
 
 `ifdef USE_SRAM_RO_INTERFACE
 	    /* Optional:  SRAM read-only port (registers 14 to 19) */
@@ -482,7 +486,6 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
 	    // Housekeeping SPI system disable
 	    8'h6f : fdata = {7'b0000000, hkspi_disable};
 
-	    default: fdata = 8'h00;
 	endcase
 	end
     endfunction
@@ -754,7 +757,7 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     // Instantiate the SPI interface protocol module
 
     housekeeping_spi hkspi (
-	.reset(~porb),
+		.reset(~porb),
     	.SCK(mgmt_gpio_in[4]),
     	.SDI(mgmt_gpio_in[2]),
     	.CSB((spi_is_enabled) ? mgmt_gpio_in[3] : 1'b1),
@@ -808,7 +811,7 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     assign mgmt_gpio_out_9_prebuff = (pass_thru_user) ? mgmt_gpio_in[4]
 			: mgmt_gpio_data[9];
 
-(* keep *) sky130_fd_sc_hd__clkbuf_8 mgmt_gpio_9_buff_inst (
+(* keep *) clkbuffer mgmt_gpio_9_buff_inst (
 `ifdef USE_POWER_PINS
         .VPWR(VPWR),
         .VGND(VGND),
@@ -859,7 +862,7 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     assign mgmt_gpio_out_15_prebuff = (clk2_output_dest == 1'b1) ? user_clock
 		: mgmt_gpio_data[15];
 
-(* keep *) sky130_fd_sc_hd__clkbuf_8 mgmt_gpio_15_buff_inst (
+(* keep *) clkbuffer mgmt_gpio_15_buff_inst (
 `ifdef USE_POWER_PINS
         .VPWR(VPWR),
         .VGND(VGND),
@@ -872,7 +875,7 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     assign mgmt_gpio_out_14_prebuff = (clk1_output_dest == 1'b1) ? wb_clk_i
 		: mgmt_gpio_data[14];
 
-(* keep *) sky130_fd_sc_hd__clkbuf_8 mgmt_gpio_14_buff_inst (
+(* keep *) clkbuffer mgmt_gpio_14_buff_inst (
 `ifdef USE_POWER_PINS
         .VPWR(VPWR),
         .VGND(VGND),
@@ -1028,32 +1031,13 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
     wire tmp_hkspi_clk;
     assign tmp_hkspi_clk = (spi_is_active) ? mgmt_gpio_in[4] : 1'b0;
     //assign csclk = (wbbd_busy) ? wbbd_sck : tmp_hkspi_clk;
-    `ifdef USE_EDK32
-    (* dont_touch = "true" *) MUX21X2_RVT csclk_MUX_dont_touch(
-        .A1(tmp_hkspi_clk),
-        .A2(wbbd_sck),
-        .S0(wbbd_busy),
-        .Y(csclk)
-    );
-    `endif //USE_EDK32
-
-    `ifdef USE_SAED14
-    (* dont_touch = "true" *) SAEDRVT14_MUX2_1_func csclk_MUX_dont_touch(
-        .D0(tmp_hkspi_clk),
-        .D1(wbbd_sck),
-        .S(wbbd_busy),
-        .X(csclk)
-    );
-    `endif //USE_SAED14
-
-    `ifdef USE_PDK18
-    (* dont_touch = "true" *) MX2X2 csclk_MUX_dont_touch(
+   
+	clkmux csclk_MUX_dont_touch (
         .A(tmp_hkspi_clk),
         .B(wbbd_sck),
         .S0(wbbd_busy),
         .Y(csclk)
-    );
-    `endif //USE_PDK18
+	);
 
     assign cdata = (wbbd_busy) ? wbbd_data : idata;
     assign cwstb = (wbbd_busy) ? wbbd_write : wrstb;
@@ -1068,13 +1052,16 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
 	if (porb == 1'b0) begin
             // Set trim for PLL at (almost) slowest rate (~90MHz).  However,
             // pll_trim[12] must be set to zero for proper startup.
-            pll_trim <= 26'b11111111111110111111111111;
-            pll_sel <= 3'b010;		// Default output divider divide-by-2
-            pll90_sel <= 3'b010;	// Default secondary output divider divide-by-2
-            pll_div <= 5'b00100;	// Default feedback divider divide-by-8
-            pll_dco_ena <= 1'b1;	// Default free-running PLL
-            pll_ena <= 1'b0;		// Default PLL turned off
-            pll_bypass <= 1'b1;		// Default bypass mode (don't use PLL)
+			///////////////////////////////////////////////////////////////////////
+			// [Vic]: Remove PLL signals
+            // pll_trim <= 26'b11111111111110111111111111;
+            // pll_sel <= 3'b010;		// Default output divider divide-by-2
+            // pll90_sel <= 3'b010;	// Default secondary output divider divide-by-2
+            // pll_div <= 5'b00100;	// Default feedback divider divide-by-8
+            // pll_dco_ena <= 1'b1;	// Default free-running PLL
+            // pll_ena <= 1'b0;		// Default PLL turned off
+            // pll_bypass <= 1'b1;		// Default bypass mode (don't use PLL)
+			///////////////////////////////////////////////////////////////////////
             irq_spi <= 1'b0;
             reset_reg <= 1'b0;
 
@@ -1130,13 +1117,15 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
                 case (caddr)
 	    	    /* Register 8'h00 is reserved for future use */
 	    	    /* Registers 8'h01 to 8'h07 are read-only and cannot be written */
-            	    8'h08: begin
-                	pll_ena <= cdata[0];
-                	pll_dco_ena <= cdata[1];
-            	    end
-            	    8'h09: begin
-                	pll_bypass <= cdata[0];
-            	    end
+			///////////////////////////////////////////////////////////////////////
+			// [Vic]: Remove PLL signals
+            	    // 8'h08: begin
+                	// pll_ena <= cdata[0];
+                	// pll_dco_ena <= cdata[1];
+            	    // end
+            	    // 8'h09: begin
+                	// pll_bypass <= cdata[0];
+            	    // end
             	    8'h0a: begin
                 	irq_spi <= cdata[0];
             	    end
@@ -1146,25 +1135,26 @@ wire mgmt_gpio_out_9_prebuff, mgmt_gpio_out_14_prebuff, mgmt_gpio_out_15_prebuff
 
 		    /* Register 0c (trap state) is read-only */
 
-            	    8'h0d: begin
-                	pll_trim[7:0] <= cdata;
-            	    end
-            	    8'h0e: begin
-                	pll_trim[15:8] <= cdata;
-            	    end
-            	    8'h0f: begin
-                	pll_trim[23:16] <= cdata;
-            	    end
-            	    8'h10: begin
-                	pll_trim[25:24] <= cdata[1:0];
-            	    end
-            	    8'h11: begin
-                	pll90_sel <= cdata[5:3];
-                	pll_sel <= cdata[2:0];
-            	    end
-            	    8'h12: begin
-                	pll_div <= cdata[4:0];
-            	    end
+            	    // 8'h0d: begin
+                	// pll_trim[7:0] <= cdata;
+            	    // end
+            	    // 8'h0e: begin
+                	// pll_trim[15:8] <= cdata;
+            	    // end
+            	    // 8'h0f: begin
+                	// pll_trim[23:16] <= cdata;
+            	    // end
+            	    // 8'h10: begin
+                	// pll_trim[25:24] <= cdata[1:0];
+            	    // end
+            	    // 8'h11: begin
+                	// pll90_sel <= cdata[5:3];
+                	// pll_sel <= cdata[2:0];
+            	    // end
+            	    // 8'h12: begin
+                	// pll_div <= cdata[4:0];
+            	    // end
+			///////////////////////////////////////////////////////////////////////
 	    	    8'h13: begin
 			serial_bb_data_2 <= cdata[6];
 			serial_bb_data_1 <= cdata[5];

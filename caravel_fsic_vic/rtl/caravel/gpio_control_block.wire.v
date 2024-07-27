@@ -1,3 +1,8 @@
+//===========================================================
+// Modified by Vic Chen
+// July 26, 2024
+//===========================================================
+
 // SPDX-FileCopyrightText: 2020 Efabless Corporation
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,55 +58,51 @@
 module gpio_control_block #(
     parameter PAD_CTRL_BITS = 13
 ) (
-    `ifdef USE_POWER_PINS
-inout wire vccd,
-inout wire vssd,
-inout wire vccd1,
-inout wire vssd1,
-    `endif
+    inout wire vccd,
+    inout wire vssd,
 
     // Power-on defaults
-input wire [PAD_CTRL_BITS-1:0] gpio_defaults,
+    input wire [PAD_CTRL_BITS-1:0] gpio_defaults,
 
     // Management Soc-facing signals
-input wire resetn,
-output wire resetn_out,
-input wire serial_clock,
-output wire serial_clock_out,
-input wire serial_load,
-output wire serial_load_out,
-
-output wire mgmt_gpio_in,
-input wire mgmt_gpio_out,
-input wire mgmt_gpio_oeb,
+    input wire resetn,
+    output wire resetn_out,
+    input wire serial_clock,
+    output wire serial_clock_out,
+    input wire serial_load,
+    output wire serial_load_out,
+    
+    output wire mgmt_gpio_in,
+    input wire mgmt_gpio_out,
+    input wire mgmt_gpio_oeb,
 
     // Serial data chain for pad configuration
-input wire serial_data_in,
+    input wire serial_data_in,
     output reg   serial_data_out,
 
     // User-facing signals
-input wire user_gpio_out,
-input wire user_gpio_oeb,
-output wire user_gpio_in,
-
+    input wire user_gpio_out,
+    input wire user_gpio_oeb,
+    output wire user_gpio_in,
+    
     // Pad-facing signals (Pad GPIOv2)
-output wire pad_gpio_holdover,
-output wire pad_gpio_slow_sel,
-output wire pad_gpio_vtrip_sel,
-output wire pad_gpio_inenb,
-output wire pad_gpio_ib_mode_sel,
-output wire pad_gpio_ana_en,
-output wire pad_gpio_ana_sel,
-output wire pad_gpio_ana_pol,
-output wire [2:0] pad_gpio_dm,
-output wire pad_gpio_outenb,
-output wire pad_gpio_out,
-input wire pad_gpio_in,
+    output wire pad_gpio_holdover,
+    output wire pad_gpio_slow_sel,
+    output wire pad_gpio_vtrip_sel,
+    output wire pad_gpio_inenb,
+    output wire pad_gpio_ib_mode_sel,
+    output wire pad_gpio_ana_en,
+    output wire pad_gpio_ana_sel,
+    output wire pad_gpio_ana_pol,
+    output wire [2:0] pad_gpio_dm,
+    output wire pad_gpio_outenb,
+    output wire pad_gpio_out,
+    input wire pad_gpio_in,
 
     // to provide a way to automatically disable/enable output
     // from the outside with needing a conb cell
-output wire one,
-output wire zero
+    output wire one,
+    output wire zero
 );
 
     /* Parameters defining the bit offset of each function in the chain */
@@ -150,13 +151,11 @@ output wire zero
 
     /* Propagate the clock and reset signals so that they aren't wired	*/
     /* all over the chip, but are just wired between the blocks.	*/
-    (* keep *) sky130_fd_sc_hd__clkbuf_8 BUF[2:0] (
-    `ifdef USE_POWER_PINS
-            .VPWR(vccd),
-            .VGND(vssd),
-            .VPB(vccd),
-            .VNB(vssd),
-    `endif
+    (* keep *) clkbuffer BUF[2:0] (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
         .A({serial_clock, resetn, serial_load}),
         .X({serial_clock_out, resetn_out, serial_load_out})
     );
@@ -174,17 +173,17 @@ output wire zero
     always @(posedge serial_load or negedge resetn) begin
 	if (resetn == 1'b0) begin
 	    /* Initial state on reset depends on applied defaults */
-	    mgmt_ena <= gpio_defaults[MGMT_EN];
-	    gpio_holdover <= gpio_defaults[HLDH];
-	    gpio_slow_sel <= gpio_defaults[SLOW];
-	    gpio_vtrip_sel <= gpio_defaults[TRIP];
-            gpio_ib_mode_sel <= gpio_defaults[MOD_SEL];
-	    gpio_inenb <= gpio_defaults[INP_DIS];
-	    gpio_outenb <= gpio_defaults[OEB];
-	    gpio_dm <= gpio_defaults[DM+2:DM];
-	    gpio_ana_en <= gpio_defaults[AN_EN];
-	    gpio_ana_sel <= gpio_defaults[AN_SEL];
-	    gpio_ana_pol <= gpio_defaults[AN_POL];
+	    mgmt_ena         <= gpio_defaults[MGMT_EN];
+	    gpio_holdover    <= gpio_defaults[HLDH];
+	    gpio_slow_sel    <= gpio_defaults[SLOW];
+	    gpio_vtrip_sel   <= gpio_defaults[TRIP];
+        gpio_ib_mode_sel <= gpio_defaults[MOD_SEL];
+	    gpio_inenb       <= gpio_defaults[INP_DIS];
+	    gpio_outenb      <= gpio_defaults[OEB];
+	    gpio_dm          <= gpio_defaults[DM+2:DM];
+	    gpio_ana_en      <= gpio_defaults[AN_EN];
+	    gpio_ana_sel     <= gpio_defaults[AN_SEL];
+	    gpio_ana_pol     <= gpio_defaults[AN_POL];
 	end else begin
 	    /* Load data */
 	    mgmt_ena 	     <= shift_register[MGMT_EN];
@@ -203,7 +202,7 @@ output wire zero
     end
 
     /* These pad configuration signals are static and do not change	*/
-    /* after setup.							*/
+    /* after setup.                                                 */
 
     assign pad_gpio_holdover 	= gpio_holdover;
     assign pad_gpio_slow_sel 	= gpio_slow_sel;
@@ -239,37 +238,21 @@ output wire zero
     /* Buffer user_gpio_in with an enable that is set by the user domain vccd */
 
     gpio_logic_high gpio_logic_high (
-`ifdef USE_POWER_PINS
-            .vccd1(vccd1),
-            .vssd1(vssd1),
-`endif
-            .gpio_logic1(gpio_logic1)
+        .vccd(vccd),
+        .vssd(vssd),
+        .gpio_logic1(gpio_logic1)
     );
 
     /* If user project area is powered down, zero the pad input value	*/
     /* going to the user project.					*/
     assign user_gpio_in = pad_gpio_in & gpio_logic1;
 
-`ifndef REMOVE_sky130_fd_sc_hd__macro_sparecell //tony_debug
-    (* keep *)
-    sky130_fd_sc_hd__macro_sparecell spare_cell (
-`ifdef USE_POWER_PINS
-            .VPWR (vccd),
-            .VGND (vssd),
-            .VPB  (vccd),
-            .VNB  (vssd),
-`endif
-            .LO   (    )   // O
-    );
-`endif //REMOVE_sky130_fd_sc_hd__macro_sparecell //tony_debug
 
-    sky130_fd_sc_hd__conb_1 const_source (
-`ifdef USE_POWER_PINS
+    conb_1 const_source (
             .VPWR(vccd),
             .VGND(vssd),
             .VPB(vccd),
             .VNB(vssd),
-`endif
             .HI(one_unbuf),
             .LO(zero_unbuf)
     );

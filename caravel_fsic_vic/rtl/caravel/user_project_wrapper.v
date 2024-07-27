@@ -31,16 +31,8 @@
 
 module user_project_wrapper #(parameter BITS = 32)
 (
-`ifdef USE_POWER_PINS
-    inout vdda1,	// User area 1 3.3V supply
-    inout vdda2,	// User area 2 3.3V supply
-    inout vssa1,	// User area 1 analog ground
-    inout vssa2,	// User area 2 analog ground
-    inout vccd1,	// User area 1 1.8V supply
-    inout vccd2,	// User area 2 1.8v supply
-    inout vssd1,	// User area 1 digital ground
-    inout vssd2,	// User area 2 digital ground
-`endif
+    inout vccd,	// 1.8v supply
+    inout vssd,	// digital ground
 
     // Wishbone Slave ports (WB MI A)
     input wb_clk_i,
@@ -88,13 +80,9 @@ assign io_oeb      = 38'd0;
 assign user_irq    = 3'd0;
 */
 FSIC #(.BITS( BITS )) u_fsic  (
-
-                      `ifdef USE_POWER_PINS
-                      .vccd1       (vccd1),                   // I
-                      .vccd2       (vccd2),                   // I
-                      .vssd1       (vssd1),                   // I
-                      .vssd2       (vssd2),                   // I
-                      `endif // USE_POWER_PINS
+                      // [Vic]: Use power pin
+ 	                    .vccd(vccd),
+	                    .vssd(vssd),
 
                       // MGMT SoC Wishbone Slave
                       .wb_rst      (wb_rst_i),                // I

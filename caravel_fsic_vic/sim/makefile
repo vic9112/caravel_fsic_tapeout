@@ -48,7 +48,7 @@ dir_post:
 		cp  $(SIM_DIR)_$$dir/compile.log $(SIM_DIR)_$$dir/compile.log.post; \
 	done
 
-pre_sim: dir_rtl dir_post #run_edge youwei comment delete edge part
+pre_sim: dir_post #run_edge youwei comment delete edge part
 
 SED_CMD = sed -e 's/^\/\/`define\s*SYSTEM_$$dir\s*1/`define SYSTEM_$$dir 1/' testbench/top_bench.sv 
 

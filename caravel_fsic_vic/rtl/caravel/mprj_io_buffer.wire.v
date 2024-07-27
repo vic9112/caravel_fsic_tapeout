@@ -14,10 +14,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 module mprj_io_buffer (
-`ifdef USE_POWER_PINS
 input wire VPWR,
 input wire VGND,
-`endif
 input wire [(`MPRJ_IO_PADS_1-1):0] mgmt_gpio_in,
 output wire [(`MPRJ_IO_PADS_1-1):0] mgmt_gpio_in_buf,
 input wire [2:0] mgmt_gpio_oeb,
@@ -27,15 +25,13 @@ output wire [(`MPRJ_IO_PADS_1-1):0] mgmt_gpio_out_buf
 );
 
 
-sky130_fd_sc_hd__clkbuf_8 BUF[(`MPRJ_IO_PADS_2*2+3)-1:0] (
-    `ifdef USE_POWER_PINS
-            .VPWR(VPWR),
-            .VGND(VGND),
-            .VPB(VPWR),
-            .VNB(VGND),
-    `endif
-		.A({mgmt_gpio_in, mgmt_gpio_oeb, mgmt_gpio_out}), 
-		.X({mgmt_gpio_in_buf, mgmt_gpio_oeb_buf, mgmt_gpio_out_buf})
+clkbuffer BUF[(`MPRJ_IO_PADS_2*2+3)-1:0] (
+    .VPWR(VPWR),
+    .VGND(VGND),
+    .VPB(VPWR),
+    .VNB(VGND),
+    .A({mgmt_gpio_in, mgmt_gpio_oeb, mgmt_gpio_out}), 
+    .X({mgmt_gpio_in_buf, mgmt_gpio_oeb_buf, mgmt_gpio_out_buf})
 ); 
 
 endmodule

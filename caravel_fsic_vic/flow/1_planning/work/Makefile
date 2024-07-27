@@ -6,8 +6,8 @@ LOGS_DIR = ./LOG
 console:
 	$(ICC2_EXEC)
 setup: #[Vic] Using generated ndm libraries
-	cp -r ../../ndm_libs ./
-	mv ndm_libs CLIBs
+	cp -r ../../ndm_lib ./
+	mv ndm_lib CLIBs
 	test -d $(LOGS_DIR) || mkdir $(LOGS_DIR)	
 	date > setup
 step1_data_setup: setup
@@ -25,3 +25,7 @@ all: setup step3_powerplan
 clean:
 	ls | grep -v "Makefile" | xargs rm -rf
 	rm -rf ../../../results/caravel_top
+ 
+# [Vic]: Open GUI for debugging
+debug: setup
+	$(ICC2_EXEC) -gui

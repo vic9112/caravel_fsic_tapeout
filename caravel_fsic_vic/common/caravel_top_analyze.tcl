@@ -4,8 +4,8 @@ $VERILOG_DIR/top/synthesis_defines.v \
 $VERILOG_DIR/top/defines.v \
 $VERILOG_DIR/top/user_defines.v \
 $VERILOG_DIR/top/pads.wire.v \
-$VERILOG_DIR/top/fsic_iopad.v \
-$VERILOG_DIR/top/sky130_fd_sc.v \
+$VERILOG_DIR/top/padframe.v \
+$VERILOG_DIR/top/powerpad.v \
 $VERILOG_DIR/top/RAM256.v \
 $VERILOG_DIR/top/RAM128.v \
 $VERILOG_DIR/top/spram.wire.v \

@@ -1,17 +1,7 @@
-// SPDX-FileCopyrightText: 2022 Efabless Corporation
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//	http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
+//===========================================================
+// Modified by Vic Chen
+// July 26, 2024
+//===========================================================
 
 /*
  * gpio_signal_buffering ---
@@ -83,10 +73,8 @@
  */
 
 module gpio_signal_buffering (
-`ifdef USE_POWER_PINS
 	vccd,
 	vssd,
-`endif
     mgmt_io_in_unbuf,
     mgmt_io_out_unbuf,
     mgmt_io_oeb_buf,
@@ -95,35 +83,31 @@ module gpio_signal_buffering (
     mgmt_io_oeb_unbuf
 );
 
-`ifdef USE_POWER_PINS
-input wire vccd;
-input wire vssd;
-`endif
+    input wire vccd;
+    input wire vssd;
 
     /* NOTE:  To match the indices of the same signals in the
      * top level, add 35 to all OEB lines and add 7 to all in and out lines
      */
-input wire [30:0] mgmt_io_in_unbuf;
-input wire [30:0] mgmt_io_out_unbuf;
-input wire [2:0] mgmt_io_oeb_unbuf;
-output wire [2:0] mgmt_io_oeb_buf;
-output wire [30:0] mgmt_io_in_buf;
-output wire [30:0] mgmt_io_out_buf;
+    input wire [30:0] mgmt_io_in_unbuf;
+    input wire [30:0] mgmt_io_out_unbuf;
+    input wire [2:0] mgmt_io_oeb_unbuf;
+    output wire [2:0] mgmt_io_oeb_buf;
+    output wire [30:0] mgmt_io_in_buf;
+    output wire [30:0] mgmt_io_out_buf;
 
     /* Instantiate 95 + 95 + 6 = 196 buffers of size 8 */
 
     wire [195:0] buf_in;
     wire [195:0] buf_out;
 
-    sky130_fd_sc_hd__buf_8 signal_buffers [195:0] (
-	`ifdef USE_POWER_PINS
+    buf_8 signal_buffers [195:0] (
 	    .VPWR(vccd),
 	    .VGND(vssd),
 	    .VPB(vccd),
 	    .VNB(vssd),
-	`endif
-	.A(buf_in),
-	.X(buf_out)
+	    .A(buf_in),
+	    .X(buf_out)
     );
 
     /* Now chain them all together */
@@ -473,16 +457,5 @@ output wire [30:0] mgmt_io_out_buf;
     assign buf_in[194] = mgmt_io_oeb_unbuf[2];
     assign buf_in[195] = buf_out[194];
     assign mgmt_io_oeb_buf[2] = buf_out[195];
-
-`ifndef REMOVE_sky130_ef_sc_hd__decap_12 //tony_debug
-  sky130_ef_sc_hd__decap_12 sigbuf_decaps [100:0] (
-	`ifdef USE_POWER_PINS
-	    .VPWR(vccd),
-	    .VGND(vssd),
-	    .VPB(vccd),
-	    .VNB(vssd)
-	`endif
-  );
-`endif //REMOVE_sky130_ef_sc_hd__decap_12 //tony_debug
 
 endmodule

@@ -1,3 +1,8 @@
+################################################################################
+# Date: 7/26/2024            
+# Name: Vic Chen             
+################################################################################
+
 
 # PERIOD 100ns for 10Mhz
 # set PERIOD  100
@@ -16,8 +21,7 @@
 
 
 ### Caravel new Signoff SDC
-### Rev 1
-### Date: 12/2/2023
+### Date: 7/22/2024
 
 # IO 4 mode is either SCK or GPIO (hkspi)
 set io_4_mode SCK
@@ -78,12 +82,21 @@ if {$io_4_mode == "SCK"} {
 
     ## GENERATED CLOCKS
     # NOTE: change the clock pins whenever the synthesis receipe changes 
-    set wbbd_sck_pin [get_pins -of_objects housekeeping/wbbd_sck -filter lib_pin_name==Q]
-
+    
 ##################################################################################
-#    create_generated_clock -name wbbd_sck -source [get_ports {housekeeping/wb_clk_i} ] -divide_by 2 $wbbd_sck_pin
-#    create_generated_clock -name hkspi_clk_to_csclk_mux -source [get_ports {mprj_io[4]}] -add -divide_by 1 housekeeping/csclk_MUX_dont_touch/Y
-#    create_generated_clock -name wbbd_sck_to_csclk_mux -source  [get_ports clock] -divide_by 2 housekeeping/csclk_MUX_dont_touch/Y
+   # [Vic]: create generated clocks
+    set wbbd_sck_pin [get_pins -of_objects housekeeping/wbbd_sck]
+    create_generated_clock -name wbbd_sck \
+                           -source [get_pins {housekeeping/wb_clk_i} ] \
+                           -divide_by 2 $wbbd_sck_pin
+   # [Vic]: csclk is the clock signal from  the output of MUX, 
+   #        which decides signal between A1 and A2
+    create_generated_clock -name hkspi_clk_to_csclk_mux \
+                           -source [get_ports {mprj_io[4]}] \
+                           -divide_by 1 [get_pins {housekeeping/csclk_MUX_dont_touch/A}]
+    create_generated_clock -name wbbd_sck_to_csclk_mux \
+                           -source [get_ports {clock}] \
+                           -divide_by 2 [get_pins {housekeeping/csclk_MUX_dont_touch/B}]
 ##################################################################################
     # paths between wb_clk_i and sck shouldn't be timed
     # set_clock_groups -logically_exclusive -group clk -group hkspi_clk
@@ -108,13 +121,13 @@ if {$io_4_mode == "SCK"} {
    set_clock_groups \
    -name clock_group \
    -logically_exclusive \
-   -group [get_clocks {clk wbbd_sck_to_csclk_mux}]\
+   -group [get_clocks {clk }]\
    -group [get_clocks {ioclk_in rxclk}]\
    -group [get_clocks {hk_serial_clk}]\
    -group [get_clocks {hk_serial_load}]\
-   -group [get_clocks {hkspi_clk hkspi_clk_to_csclk_mux}]
-#   -group [get_clocks {clk_to_csclk_mux}]\
-#   -group [get_clocks {hkspi_clk_to_csclk_mux}]\
+   -group [get_clocks {hkspi_clk }]
+#   -group [get_generated_clock {wbbd_sck_to_csclk_mux}] \
+#   -group [get_generated_clock {hkspi_clk_to_csclk_mux}]
 
 } elseif {$io_4_mode == "GPIO"} {
    # assert hkspi_disable

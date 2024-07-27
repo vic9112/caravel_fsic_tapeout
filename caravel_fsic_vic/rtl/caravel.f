@@ -2,8 +2,8 @@ top_bench.sv
 ../../rtl/top/defines.v 
 ../../rtl/top/user_defines.v 
 ../../rtl/top/pads.wire.v 
-../../rtl/top/fsic_iopad.v 
-../../rtl/top/sky130_fd_sc.v 
+../../rtl/top/padframe.v 
+../../rtl/top/powerpad.v 
 ../../rtl/top/RAM256.v 
 ../../rtl/top/RAM128.v 
 ../../rtl/top/spram.wire.v 

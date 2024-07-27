@@ -13,18 +13,13 @@
 // limitations under the License.
 // SPDX-License-Identifier: Apache-2.0
 
-//tony_debug `default_nettype none
-// This routine synchronizes the 
-
 module caravel_clocking(
-`ifdef USE_POWER_PINS
-input wire VPWR,
-input wire VGND,
-`endif
-input wire resetb,
-input wire ext_clk,
-input wire ext_reset,
-output wire resetb_sync //  Output propagated and buffered reset
+    input wire VPWR,
+    input wire VGND,
+    input wire resetb,
+    input wire ext_clk,
+    input wire ext_reset,
+    output wire resetb_sync //  Output propagated and buffered reset
 );
 
     // Reset assignment.  "reset" comes from POR, while "ext_reset"
@@ -34,7 +29,7 @@ output wire resetb_sync //  Output propagated and buffered reset
     // Staged-delay reset
     reg [2:0] reset_delay;
 
-    // Vic: remove assigning core_clk here, change core_clk to ext_clk
+    // [Vic]: remove assigning core_clk here, change core_clk to ext_clk
     always @(negedge ext_clk or negedge resetb) begin
         if (resetb == 1'b0) begin
         reset_delay <= 3'b111;

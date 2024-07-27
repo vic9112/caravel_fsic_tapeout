@@ -495,26 +495,10 @@ module top_bench #( parameter BITS=32,
   assign soc_coreclk = clock;
 
   caravel_top uut (
-  `ifdef USE_POWER_PINS
-                .vddio     (VDD3V3),
-               .vddio_2   (VDD3V3),
+               .vddio     (VDD3V3),
                .vssio     (VSS),
-               .vssio_2   (VSS),
-               .vdda      (VDD3V3),
-               .vssa      (VSS),
                .vccd      (VDD1V8),
                .vssd      (VSS),
-               .vdda1     (VDD3V3),
-               .vdda1_2   (VDD3V3),
-               .vdda2     (VDD3V3),
-               .vssa1     (VSS),
-               .vssa1_2   (VSS),
-               .vssa2     (VSS),
-               .vccd1     (VDD1V8),
-               .vccd2     (VDD1V8),
-               .vssd1     (VSS),
-               .vssd2     (VSS),
-  `endif //USE_POWER_PINS
                .clock     (soc_coreclk),
                .gpio      (gpio),
                .mprj_io   (mprj_io),

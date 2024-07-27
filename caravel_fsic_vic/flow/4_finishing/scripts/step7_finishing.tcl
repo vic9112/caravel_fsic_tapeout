@@ -14,7 +14,7 @@ open_block temp_route_ends
 add_redundant_vias
 
 ################################################################################Insert_Filler
-set pnr_std_fillers "SAEDRVT14_FILL*"
+set pnr_std_fillers "SAEDRVT32_FILL*"
 set std_fillers ""
 foreach filler $pnr_std_fillers { lappend std_fillers "*/${filler}" }
 create_stdcell_fillers \

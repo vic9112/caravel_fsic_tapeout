@@ -11,10 +11,10 @@ setup:
 step4_place: setup
 	$(ICC2_EXEC) -f ./../scripts/step4_place.tcl | tee -i $(LOGS_DIR)/step4_place.log
 	date > step4_place
-step5_clock_tree_syntesis: step4_place
-	$(ICC2_EXEC) -f ./../scripts/step5_clock_tree_syntesis.tcl | tee -i $(LOGS_DIR)/step5_clock_tree_syntesis.log
-	date > step5_clock_tree_syntesis
-step6_route: step5_clock_tree_syntesis
+step5_clock_tree_synthesis: step4_place
+	$(ICC2_EXEC) -f ./../scripts/step5_clock_tree_synthesis.tcl | tee -i $(LOGS_DIR)/step5_clock_tree_synthesis.log
+	date > step5_clock_tree_synthesis
+step6_route: step5_clock_tree_synthesis
 	$(ICC2_EXEC) -f ./../scripts/step6_route.tcl | tee -i $(LOGS_DIR)/step6_route.log
 	date > step6_route
 all: step6_route

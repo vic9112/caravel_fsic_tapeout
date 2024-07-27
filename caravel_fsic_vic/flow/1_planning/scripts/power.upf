@@ -1,0 +1,70 @@
+#=================================== UPF ======================================#
+# Create Power Supply Nets
+create_supply_net VDDIO
+create_supply_net VSSIO
+create_supply_net VCCD
+create_supply_net VSSD
+
+create_supply_set ss_high    \
+    -function {power  VDDIO} -function {ground VSSIO} \
+    -function {power  VCCD}  -function {ground VSSD}
+
+create_power_domain -include_scope PD_TOP -supply {primary ss_high}
+
+create_supply_port VDDIO -domain PD_TOP -direction in
+create_supply_port VSSIO -domain PD_TOP -direction in
+create_supply_port VCCD  -domain PD_TOP -direction in
+create_supply_port VSSD  -domain PD_TOP -direction in
+
+# IO PAD Planning
+#create_io_ring -name ring33
+#create_io_ring -name ring18
+create_io_ring -name ring1
+
+create_io_corner_cell -reference_cell CORNER {ring1.left   ring1.bottom}
+create_io_corner_cell -reference_cell CORNER {ring1.bottom ring1.right}
+create_io_corner_cell -reference_cell CORNER {ring1.right  ring1.top}
+create_io_corner_cell -reference_cell CORNER {ring1.top    ring1.left}
+
+# 1st placement for IO
+place_io
+
+# Add VDD, VSS cells
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.bottom ring1.top"] {
+	{reference: VDD_NS}
+	{ratio: 10}
+	{prefix: pg_vdd}}
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.left ring1.right"] {
+	{reference: VDD_EW}
+	{ratio: 14}
+	{prefix: pg_vdd}}
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.bottom ring1.top"] {
+	{reference: VSS_NS}
+	{ratio: 10}
+	{prefix: pg_vss}}
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.left ring1.right"] {
+	{reference: VSS_EW}
+	{ratio: 14}
+	{prefix: pg_vss}}
+
+# Incrementally add IOVDD and IOVSS IO cells
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.bottom ring1.top"] {
+	{reference: IOVDD_NS}
+	{ratio: 19}
+	{prefix: pg_iovdd}}
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.left ring1.right"] {
+	{reference: IOVDD_EW}
+	{ratio: 19}
+	{prefix: pg_iovdd}}
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.bottom ring1.top"] {
+	{reference: IOVSS_NS}
+	{ratio: 19}
+	{prefix: pg_iovss}}
+set_power_io_constraints -io_guide_object [get_io_guides "ring1.left ring1.right"] {
+	{reference: IOVSS_EW}
+	{ratio: 19}
+	{prefix: pg_iovss}}
+
+# 2nd placement for IO
+place_io
+#==============================================================================#
