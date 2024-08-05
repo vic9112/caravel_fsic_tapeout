@@ -1,88 +1,502 @@
 //===========================================================
 // Modified by Vic Chen
-// July 26, 2024
+// July 28, 2024
 //===========================================================
 `default_nettype wire
 
-module padframe (
+//========== only support below mode for DM[2:0] ==========//
+// 3'b001 input (output disable), no pullup or pulldown
+// 3'b010 input (output disable), with pullup
+// 3'b011 input (output disable), with pulldown
+// 3'b110 output enable
+// others, set to default mode = 3'b001
+//=========================================================//
+`define IOPAD_MPRJ(n)                                             \
+    module iopad_mprj``n (                                        \
+        inout VDDIO,                                              \
+        inout VSSIO,                                              \
+        inout VCCD,                                               \
+        inout VSSD,                                               \
+        inout PAD,                                                \
+        input [2:0] DM,                                           \
+        input  OUT,                                               \
+        output IN                                                 \
+        );                                                        \
+        reg oe;                                                   \
+        reg PAD_pullup;                                           \
+        reg PAD_pulldown;                                         \
+        always @(*) begin                                         \
+            case( DM[2:0] )                                       \
+                3'b001: begin                                     \
+                    oe = 0;                                       \
+                    PAD_pullup = 0;                               \
+                    PAD_pulldown = 0;                             \
+                end                                               \
+                3'b010: begin                                     \
+                    oe = 0;                                       \
+                    PAD_pullup = 1;                               \
+                    PAD_pulldown = 0;                             \
+                end                                               \
+                3'b011: begin                                     \
+                    oe = 0;                                       \
+                    PAD_pullup = 0;                               \
+                    PAD_pulldown = 1;                             \
+                end                                               \
+                3'b110: begin                                     \
+                    oe = 1;                                       \
+                    PAD_pullup = 0;                               \
+                    PAD_pulldown = 0;                             \
+                end                                               \
+                default: begin                                    \
+                    oe = 0;                                       \
+                    PAD_pullup = 0;                               \
+                    PAD_pulldown = 0;                             \
+                end                                               \
+            endcase                                               \
+        end                                                       \
+        `ifdef USE_EDK_IO                                         \
+          B16I1025_EW iopad_MPRJ``n(                              \
+        	.VDDIO(VDDIO),                                        \
+        	.VSSIO(VSSIO),                                        \
+        	.VDD(VCCD),                                           \
+        	.VSS(VSSD),                                           \
+            .DIN(OUT),                                            \
+            .DOUT(IN),                                            \
+            .EN(oe),                                              \
+            .PADIO(PAD),                                          \
+            .PULL_DOWN(PAD_pulldown),                             \
+            .PULL_UP(PAD_pullup),                                 \
+            .R_EN(~oe)                                            \
+          );                                                      \
+        `endif                                                    \
+        `ifdef USE_PDK18_IO                                       \
+          PDUW24DGZ iopad_MPRJ``n(                                \
+            .I(OUT),                                              \
+            .C(IN),                                               \
+            .OEN(~oe),                                            \
+            .PAD(PAD),                                            \
+            .REN(~PAD_pullup)                                     \
+            );                                                    \
+        `endif                                                    \
+    endmodule
+
+`IOPAD_MPRJ(0);`IOPAD_MPRJ(10);`IOPAD_MPRJ(20);`IOPAD_MPRJ(30);
+`IOPAD_MPRJ(1);`IOPAD_MPRJ(11);`IOPAD_MPRJ(21);`IOPAD_MPRJ(31);
+`IOPAD_MPRJ(2);`IOPAD_MPRJ(12);`IOPAD_MPRJ(22);`IOPAD_MPRJ(32);
+`IOPAD_MPRJ(3);`IOPAD_MPRJ(13);`IOPAD_MPRJ(23);`IOPAD_MPRJ(33);
+`IOPAD_MPRJ(4);`IOPAD_MPRJ(14);`IOPAD_MPRJ(24);`IOPAD_MPRJ(34);
+`IOPAD_MPRJ(5);`IOPAD_MPRJ(15);`IOPAD_MPRJ(25);`IOPAD_MPRJ(35);
+`IOPAD_MPRJ(6);`IOPAD_MPRJ(16);`IOPAD_MPRJ(26);`IOPAD_MPRJ(36);
+`IOPAD_MPRJ(7);`IOPAD_MPRJ(17);`IOPAD_MPRJ(27);`IOPAD_MPRJ(37);
+`IOPAD_MPRJ(8);`IOPAD_MPRJ(18);`IOPAD_MPRJ(28);
+`IOPAD_MPRJ(9);`IOPAD_MPRJ(19);`IOPAD_MPRJ(29);
+
+module iopad_clk (
     inout VDDIO, 
     inout VSSIO, 
     inout VCCD, 
     inout VSSD, 
     inout PAD, 
     input [2:0] DM,  
-
     input  OUT,
     output IN
     );
+    reg oe;
+    reg PAD_pullup;
+    reg PAD_pulldown;
+    always @(*) begin
+        case( DM[2:0] )
+            3'b001: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            3'b010: begin
+                oe = 0;
+                PAD_pullup = 1;
+                PAD_pulldown = 0;
+              end
+            3'b011: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 1;
+              end
+            3'b110: begin
+                oe = 1;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            default: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+        endcase
+     end   
+    `ifdef USE_EDK_IO
+      B16I1025_EW iopad_CLK(
+    	.VDDIO(VDDIO), 
+    	.VSSIO(VSSIO), 
+    	.VDD(VCCD), 
+    	.VSS(VSSD), 
+        .DIN(OUT),
+        .DOUT(IN),
+        .EN(oe),
+        .PADIO(PAD),
+        .PULL_DOWN(PAD_pulldown),
+        .PULL_UP(PAD_pullup),
+        .R_EN(~oe)    
+      );
+    `endif //USE_EDK_IO
+    `ifdef USE_PDK18_IO
+      PDUW24DGZ iopad_CLK(
+        .I(OUT),
+        .C(IN),
+        .OEN(~oe),
+        .PAD(PAD),
+        .REN(~PAD_pullup)
+        );
+    `endif //USE_PDK18_IO
+endmodule
 
-//only support below mode for DM[2:0]
-// 3'b001 input (output disable), no pullup or pulldown
-// 3'b010 input (output disable), with pullup
-// 3'b011 input (output disable), with pulldown
-// 3'b110 output enable
-// others, set to default mode = 3'b001
-
-  reg oe;
-  reg PAD_pullup;
-  reg PAD_pulldown;
-
-  always @(*) begin
-    case( DM[2:0] )
-      3'b001: begin
-          oe = 0;
-          PAD_pullup = 0;
-          PAD_pulldown = 0;
-        end
-      3'b010: begin
-          oe = 0;
-          PAD_pullup = 1;
-          PAD_pulldown = 0;
-        end
-      3'b011: begin
-          oe = 0;
-          PAD_pullup = 0;
-          PAD_pulldown = 1;
-        end
-      3'b110: begin
-          oe = 1;
-          PAD_pullup = 0;
-          PAD_pulldown = 0;
-        end
-      default: begin
-          oe = 0;
-          PAD_pullup = 0;
-          PAD_pulldown = 0;
-        end
-    endcase
- end   
-
-`ifdef USE_EDK_IO
-  B16I1025_EW gpiov2_pad(
-	.VDDIO(VDDIO), 
-	.VSSIO(VSSIO), 
-	.VDD(VCCD), 
-	.VSS(VSSD), 
-    .DIN(OUT),
-    .DOUT(IN),
-    .EN(oe),
-    .PADIO(PAD),
-    .PULL_DOWN(PAD_pulldown),
-    .PULL_UP(PAD_pullup),
-    .R_EN(~oe)    
-  );
-`endif //USE_EDK_IO
-
-`ifdef USE_PDK18_IO
-  PDUW24DGZ gpiov2_pad(
-    .I(OUT),
-    .C(IN),
-    .OEN(~oe),
-    .PAD(PAD),
-    .REN(~PAD_pullup)
+module iopad_gpio (
+    inout VDDIO, 
+    inout VSSIO, 
+    inout VCCD, 
+    inout VSSD, 
+    inout PAD, 
+    input [2:0] DM,  
+    input  OUT,
+    output IN
     );
-`endif //USE_PDK18_IO
+    reg oe;
+    reg PAD_pullup;
+    reg PAD_pulldown;
+    always @(*) begin
+        case( DM[2:0] )
+            3'b001: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            3'b010: begin
+                oe = 0;
+                PAD_pullup = 1;
+                PAD_pulldown = 0;
+              end
+            3'b011: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 1;
+              end
+            3'b110: begin
+                oe = 1;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            default: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+        endcase
+     end   
+    `ifdef USE_EDK_IO
+      B16I1025_EW iopad_GPIO(
+    	.VDDIO(VDDIO), 
+    	.VSSIO(VSSIO), 
+    	.VDD(VCCD), 
+    	.VSS(VSSD), 
+        .DIN(OUT),
+        .DOUT(IN),
+        .EN(oe),
+        .PADIO(PAD),
+        .PULL_DOWN(PAD_pulldown),
+        .PULL_UP(PAD_pullup),
+        .R_EN(~oe)    
+      );
+    `endif //USE_EDK_IO
+    `ifdef USE_PDK18_IO
+      PDUW24DGZ iopad_GPIO(
+        .I(OUT),
+        .C(IN),
+        .OEN(~oe),
+        .PAD(PAD),
+        .REN(~PAD_pullup)
+        );
+    `endif //USE_PDK18_IO
+endmodule
 
+module iopad_flash_io0 (
+    inout VDDIO, 
+    inout VSSIO, 
+    inout VCCD, 
+    inout VSSD, 
+    inout PAD, 
+    input [2:0] DM,  
+    input  OUT,
+    output IN
+    );
+    reg oe;
+    reg PAD_pullup;
+    reg PAD_pulldown;
+    always @(*) begin
+        case( DM[2:0] )
+            3'b001: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            3'b010: begin
+                oe = 0;
+                PAD_pullup = 1;
+                PAD_pulldown = 0;
+              end
+            3'b011: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 1;
+              end
+            3'b110: begin
+                oe = 1;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            default: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+        endcase
+     end   
+    `ifdef USE_EDK_IO
+      B16I1025_EW iopad_FIO0(
+    	.VDDIO(VDDIO), 
+    	.VSSIO(VSSIO), 
+    	.VDD(VCCD), 
+    	.VSS(VSSD), 
+        .DIN(OUT),
+        .DOUT(IN),
+        .EN(oe),
+        .PADIO(PAD),
+        .PULL_DOWN(PAD_pulldown),
+        .PULL_UP(PAD_pullup),
+        .R_EN(~oe)    
+      );
+    `endif //USE_EDK_IO
+    `ifdef USE_PDK18_IO
+      PDUW24DGZ iopad_FIO0(
+        .I(OUT),
+        .C(IN),
+        .OEN(~oe),
+        .PAD(PAD),
+        .REN(~PAD_pullup)
+        );
+    `endif //USE_PDK18_IO
+endmodule
+
+module iopad_flash_io1 (
+    inout VDDIO, 
+    inout VSSIO, 
+    inout VCCD, 
+    inout VSSD, 
+    inout PAD, 
+    input [2:0] DM,  
+    input  OUT,
+    output IN
+    );
+    reg oe;
+    reg PAD_pullup;
+    reg PAD_pulldown;
+    always @(*) begin
+        case( DM[2:0] )
+            3'b001: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            3'b010: begin
+                oe = 0;
+                PAD_pullup = 1;
+                PAD_pulldown = 0;
+              end
+            3'b011: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 1;
+              end
+            3'b110: begin
+                oe = 1;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            default: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+        endcase
+     end   
+    `ifdef USE_EDK_IO
+      B16I1025_EW iopad_FIO1(
+    	.VDDIO(VDDIO), 
+    	.VSSIO(VSSIO), 
+    	.VDD(VCCD), 
+    	.VSS(VSSD), 
+        .DIN(OUT),
+        .DOUT(IN),
+        .EN(oe),
+        .PADIO(PAD),
+        .PULL_DOWN(PAD_pulldown),
+        .PULL_UP(PAD_pullup),
+        .R_EN(~oe)    
+      );
+    `endif //USE_EDK_IO
+    `ifdef USE_PDK18_IO
+      PDUW24DGZ iopad_FIO1(
+        .I(OUT),
+        .C(IN),
+        .OEN(~oe),
+        .PAD(PAD),
+        .REN(~PAD_pullup)
+        );
+    `endif //USE_PDK18_IO
+endmodule
+
+module iopad_flash_csb (
+    inout VDDIO, 
+    inout VSSIO, 
+    inout VCCD, 
+    inout VSSD, 
+    inout PAD, 
+    input [2:0] DM,  
+    input  OUT,
+    output IN
+    );
+    reg oe;
+    reg PAD_pullup;
+    reg PAD_pulldown;
+    always @(*) begin
+        case( DM[2:0] )
+            3'b001: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            3'b010: begin
+                oe = 0;
+                PAD_pullup = 1;
+                PAD_pulldown = 0;
+              end
+            3'b011: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 1;
+              end
+            3'b110: begin
+                oe = 1;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            default: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+        endcase
+     end   
+    `ifdef USE_EDK_IO
+      B16I1025_EW iopad_FCSB(
+    	.VDDIO(VDDIO), 
+    	.VSSIO(VSSIO), 
+    	.VDD(VCCD), 
+    	.VSS(VSSD), 
+        .DIN(OUT),
+        .DOUT(IN),
+        .EN(oe),
+        .PADIO(PAD),
+        .PULL_DOWN(PAD_pulldown),
+        .PULL_UP(PAD_pullup),
+        .R_EN(~oe)    
+      );
+    `endif //USE_EDK_IO
+    `ifdef USE_PDK18_IO
+      PDUW24DGZ iopad_FCSB(
+        .I(OUT),
+        .C(IN),
+        .OEN(~oe),
+        .PAD(PAD),
+        .REN(~PAD_pullup)
+        );
+    `endif //USE_PDK18_IO
+endmodule
+
+module iopad_flash_clk (
+    inout VDDIO, 
+    inout VSSIO, 
+    inout VCCD, 
+    inout VSSD, 
+    inout PAD, 
+    input [2:0] DM,  
+    input  OUT,
+    output IN
+    );
+    reg oe;
+    reg PAD_pullup;
+    reg PAD_pulldown;
+    always @(*) begin
+        case( DM[2:0] )
+            3'b001: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            3'b010: begin
+                oe = 0;
+                PAD_pullup = 1;
+                PAD_pulldown = 0;
+              end
+            3'b011: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 1;
+              end
+            3'b110: begin
+                oe = 1;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+            default: begin
+                oe = 0;
+                PAD_pullup = 0;
+                PAD_pulldown = 0;
+              end
+        endcase
+     end   
+    `ifdef USE_EDK_IO
+      B16I1025_EW iopad_FCLK(
+    	.VDDIO(VDDIO), 
+    	.VSSIO(VSSIO), 
+    	.VDD(VCCD), 
+    	.VSS(VSSD), 
+        .DIN(OUT),
+        .DOUT(IN),
+        .EN(oe),
+        .PADIO(PAD),
+        .PULL_DOWN(PAD_pulldown),
+        .PULL_UP(PAD_pullup),
+        .R_EN(~oe)    
+      );
+    `endif //USE_EDK_IO
+    `ifdef USE_PDK18_IO
+      PDUW24DGZ iopad_FCLK(
+        .I(OUT),
+        .C(IN),
+        .OEN(~oe),
+        .PAD(PAD),
+        .REN(~PAD_pullup)
+        );
+    `endif //USE_PDK18_IO
 endmodule
 
 module rstpad (
@@ -91,7 +505,7 @@ module rstpad (
     );
 
 `ifdef  USE_EDK_IO
-    ISH1025_EW reset_pad(
+    ISH1025_EW iopad_RST(
         .DOUT(rst_pad),
         .R_EN(1'b1),
         .PADIO(PAD)
@@ -99,7 +513,7 @@ module rstpad (
 `endif //USE_EDK_IO
 
 `ifdef USE_PDK18_IO
-    PDDSDGZ reset_pad(    
+    PDDSDGZ iopad_RST(    
         .C(rst_pad),
         .PAD(PAD)
     );

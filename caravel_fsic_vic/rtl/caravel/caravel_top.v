@@ -69,16 +69,6 @@ module caravel_top (
     /*
      *--------------------------------------------------------------------
      *
-     * These pins are overlaid on mprj_io space.  They have the function
-     * below when the management processor is in reset, or in the default
-     * configuration.  They are assigned to uses in the user space by the
-     * configuration program running off of the SPI flash.  Note that even
-     * when the user has taken control of these pins, they can be restored
-     * to the original use by setting the resetb pin low.  The SPI pins and
-     * UART pins can be connected directly to an FTDI chip as long as the
-     * FTDI chip sets these lines to high impedence (input function) at
-     * all times except when holding the chip in reset.
-     *
      * JTAG       = mprj_io[0]		(inout)
      * SDO 	  	  = mprj_io[1]		(output)
      * SDI 	  	  = mprj_io[2]		(input)
@@ -88,25 +78,15 @@ module caravel_top (
      * ser_tx     = mprj_io[6]		(output)
      * irq 	      = mprj_io[7]		(input)
      *
-     * spi_sck    = mprj_io[32]		(output)
-     * spi_csb    = mprj_io[33]		(output)
-     * spi_sdi    = mprj_io[34]		(input)
-     * spi_sdo    = mprj_io[35]		(output)
-     * flash_io2  = mprj_io[36]		(inout) 
+     * RXD        = mprj_io[20:8]   (input)
+	 * RX_CLK     = mprj_io[21]     (input)
+	 *
+	 * TXD        = mprj_io[34:22]  (output)
+	 * TX_CLK     = mprj_io[35]     (output)
+	 *
+	 * IO_CLK     = mprj_io[36]     (input) // From FPGA
+	 *
      * flash_io3  = mprj_io[37]		(inout) 
-     *
-     * These pins are reserved for any project that wants to incorporate
-     * its own processor and flash controller.  While a user project can
-     * technically use any available I/O pins for the purpose, these
-     * four pins connect to a pass-through mode from the SPI slave (pins
-     * 1-4 above) so that any SPI flash connected to these specific pins
-     * can be accessed through the SPI slave even when the processor is in
-     * reset.
-     *
-     * user_flash_csb = mprj_io[8]
-     * user_flash_sck = mprj_io[9]
-     * user_flash_io0 = mprj_io[10]
-     * user_flash_io1 = mprj_io[11]
      *
      *--------------------------------------------------------------------
      */
