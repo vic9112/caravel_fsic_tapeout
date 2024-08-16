@@ -279,7 +279,7 @@ always @(posedge axis_clk or negedge axi_reset_n)  begin
 	    cnt <= 3'b000;
 	end
 	else begin
-		if ( grant!=3'b000 & (grant&hi_req)==3'b000 ) begin		//when axi_awvalid_in=1 and axi_wvalid_in=1 means axi_awready_out=1 and axi_wready_out=1
+		if ( grant!=3'b000 & (grant&hi_req)==3'b000 ) begin	// when grant is not in the hi_req state, after trransfer cnt+1.	
             if(as_is_tvalid & is_as_tready)  cnt<=cnt+1;
             else cnt<=cnt;      
 		end
@@ -294,7 +294,7 @@ arbiter #(.PORTS(3)) arbiter
         .axi_reset_n(axi_reset_n),
         .req(req),
         .hi_req(hi_req),
-        .ack((as_is_tvalid & is_as_tready & as_is_tlast)|cnt==3'b111),
+	    .ack((as_is_tvalid & is_as_tready & as_is_tlast)|cnt==3'b111), // tlast or cnt=3'b111 would go to the change state.
         .grant(grant)
     );
 
