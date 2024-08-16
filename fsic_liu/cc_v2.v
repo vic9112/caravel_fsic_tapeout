@@ -434,5 +434,4 @@ module CFG_CTRL #( parameter pADDR_WIDTH   = 12,
 	end	
 
 endmodule
-cc_new.v
-16 KB
+
