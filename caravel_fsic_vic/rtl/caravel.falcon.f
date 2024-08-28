@@ -1,4 +1,4 @@
-top_bench.sv
+top_bench.falcon.sv
 ../../rtl/top/defines.v 
 ../../rtl/top/user_defines.v
 ../../rtl/top/padframe.v 
@@ -48,6 +48,9 @@ top_bench.sv
 ../../rtl/fsic/axil_slav.v 
 ../../rtl/fsic/axis_mstr.v 
 ../../rtl/fsic/axis_slav.v 
+../../rtl/fsic/arbiter.v 
+../../rtl/fsic/priority_encoder.v 
+../../rtl/fsic/fifo.v 
 ../../rtl/user_project/user_id_programming.wire.v 
 ../../rtl/user_project/user_id_textblock.wire.v 
 ../../rtl/user_project/user_subsys.v 
@@ -56,3 +59,5 @@ top_bench.sv
 ../../rtl/user_project/user_prj2.v 
 ../../rtl/user_project/user_prj3.v 
 ../../rtl/user_project/concat_EdgeDetect_Top_fsic.v 
+../../rtl/user_project/falcon_In_copy.v 
+../../rtl/user_project/falcon_stage.v 

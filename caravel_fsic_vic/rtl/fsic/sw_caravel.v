@@ -1,49 +1,4 @@
-/*--------------------------------------------------------------------------------*/
-/* MIT License                                                                    */
-/*                                                                                */
-/* Copyright (c) 2023 VIA NEXT Technologies, Inc - <Hurry Lin>                    */
-/*                                                                                */
-/* Permission is hereby granted, free of charge, to any person obtaining a copy   */
-/* of this software and associated documentation files (the "Software"), to deal  */
-/* in the Software without restriction, including without limitation the rights   */
-/* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      */
-/* copies of the Software, and to permit persons to whom the Software is          */
-/* furnished to do so, subject to the following conditions:                       */
-/*                                                                                */
-/* The above copyright notice and this permission notice shall be included in all */
-/* copies or substantial portions of the Software.                                */
-/*                                                                                */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     */
-/* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       */
-/* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    */
-/* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         */
-/* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  */
-/* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  */
-/* SOFTWARE.                                                                      */
-/*--------------------------------------------------------------------------------*/
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/06/14 10:28:55
-// Design Name: 
-// Module Name: AXIS_SW
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-//`define DEBUG_SYNTHESIS
-
 module AXIS_SW #(
 				parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
 				parameter pADDR_WIDTH   = 10,
@@ -53,21 +8,6 @@ module AXIS_SW #(
     input  wire                             axi_reset_n,    
     input  wire                             axis_clk,
     input  wire                             axis_rst_n,
-
-`ifdef DEBUG_SYNTHESIS    
-    //tony_debug
-    output wire [3:0] TH_reg_debug,
-    output wire [4:0] wr_ptr_reg_debug,
-    output wire [4:0] rd_ptr_reg_debug,
-    output wire above_th_debug,
-    output wire [4:0] current_fifo_size_debug,
-    output wire as_aa_tvalid_out_debug,
-    output wire as_up_tvalid_out_debug,
-    output wire as_aa_tvalid_debug,
-    output wire [1:0]m_axis_tid_debug,
-    output wire m_axis_tid_00_debug,
-    output wire m_axis_tid_01_debug,
-`endif //DEBUG_SYNTHESIS    
  
     //axi_lite slave interface
     //write addr channel
@@ -189,6 +129,11 @@ localparam LAST_OFFSET  = KEEP_OFFSET + pDATA_WIDTH/8;
 localparam TID_OFFSET   = LAST_OFFSET + 1;
 localparam USER_OFFSET  = TID_OFFSET  + TID_WIDTH;
 localparam WIDTH        = USER_OFFSET + USER_WIDTH;
+
+
+/////////////////////////////////////////////////////for axi_lite/////////////////////////////////////////
+//write addr channel
+
 //axi_lite reg
 //FIFO threshold setting
 reg [ADDR_WIDTH-1:0] TH_reg; //offset0, bit3:0
@@ -196,47 +141,7 @@ wire axi_awvalid_in;
 wire axi_wvalid_in;
 wire axi_awready_out;
 wire axi_wready_out;
-//For Arbiter
-wire [N-1:0]                req, hi_req;
-reg  [N-1:0]                shift_req, shift_hi_req;
-reg  [$clog2(N)-1:0]        base_ptr;   
-reg  [N-1:0]                grant_reg, grant_next, shift_grant, shift_hi_grant;
-reg                         frame_start_reg, frame_start_next;   
-reg [N-1:0]                 hi_req_flag;
-reg [pDATA_WIDTH-1:0]       m_axis_tdata_reg;
-`ifdef USER_PROJECT_SIDEBAND_SUPPORT
-	reg [pUSER_PROJECT_SIDEBAND_WIDTH-1:0]     m_axis_tupsb_reg;
-`endif
-reg [pDATA_WIDTH/8-1:0]     m_axis_tstrb_reg;
-reg [pDATA_WIDTH/8-1:0]     m_axis_tkeep_reg; 
-reg                         m_axis_tlast_reg;        
-reg                         m_axis_tvalid_reg;
-reg [USER_WIDTH-1:0]        m_axis_tuser_reg;     
-reg [TID_WIDTH-1:0]         m_axis_tid_reg;
-//for Demux
-//FIFO control pointer
-reg [ADDR_WIDTH:0] wr_ptr_reg;
-reg [ADDR_WIDTH:0] rd_ptr_reg;
-(* ramstyle = "no_rw_check" *)
-reg [WIDTH-1:0] mem[(2**ADDR_WIDTH)-1:0];
-wire above_th = ((wr_ptr_reg - rd_ptr_reg) > TH_reg );
-reg as_is_tready_reg;   
-wire [WIDTH-1:0] s_axis;
-generate
-    assign s_axis[pDATA_WIDTH-1:0]                  = is_as_tdata;
-	`ifdef USER_PROJECT_SIDEBAND_SUPPORT
-		assign s_axis[UPSB_OFFSET +: pUSER_PROJECT_SIDEBAND_WIDTH]     = is_as_tupsb;
-	`endif
-    assign s_axis[STRB_OFFSET +: pDATA_WIDTH/8]     = is_as_tstrb;
-    assign s_axis[KEEP_OFFSET +: pDATA_WIDTH/8]     = is_as_tkeep;
-    assign s_axis[LAST_OFFSET]                      = is_as_tlast;
-    assign s_axis[TID_OFFSET   +: TID_WIDTH]        = is_as_tid;
-    assign s_axis[USER_OFFSET +: USER_WIDTH]        = is_as_tuser;
-endgenerate
-wire [WIDTH-1:0] m_axis = mem[rd_ptr_reg[ADDR_WIDTH-1:0]];    
-assign as_is_tready = as_is_tready_reg;     
-//for axi_lite
-//write addr channel
+
 assign axi_awvalid_in = axi_awvalid && cc_as_enable;
 assign axi_awready = axi_awready_out;
 //write data channel
@@ -267,6 +172,34 @@ assign axi_arready = 1;
 // axis_switch  always output axi_rvalid = 1 and axi_rdata =  { 28'b0, TH_reg}
 assign axi_rvalid = 1;
 assign axi_rdata =  { 28'b0, TH_reg };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////Upstream///////////////////////////////////////////
+//For Arbiter
+wire [N-1:0]                req, hi_req;
+wire  [N-1:0]                grant;
+
+
+reg [pDATA_WIDTH-1:0]       m_axis_tdata_reg;
+`ifdef USER_PROJECT_SIDEBAND_SUPPORT
+	reg [pUSER_PROJECT_SIDEBAND_WIDTH-1:0]     m_axis_tupsb_reg;
+`endif
+reg [pDATA_WIDTH/8-1:0]     m_axis_tstrb_reg;
+reg [pDATA_WIDTH/8-1:0]     m_axis_tkeep_reg; 
+reg                         m_axis_tlast_reg;        
+reg                         m_axis_tvalid_reg;
+reg [USER_WIDTH-1:0]        m_axis_tuser_reg;     
+reg [TID_WIDTH-1:0]         m_axis_tid_reg;
+
+
+
+
+
+
 //for Abiter
 assign  req[0] = up_as_tvalid & req_mask[0];
 assign  req[1] = aa_as_tvalid & req_mask[1];
@@ -284,219 +217,111 @@ assign  as_is_tlast     = m_axis_tlast_reg;
 assign  as_is_tvalid    = m_axis_tvalid_reg;
 assign  as_is_tuser     = m_axis_tuser_reg;   
 assign  as_is_tid       = m_axis_tid_reg;
-assign as_up_tready = grant_reg[0] && is_as_tready;    
-assign as_aa_tready = grant_reg[1] && is_as_tready;
-assign as_la_tready = grant_reg[2] && is_as_tready;    
-always @* begin
-    shift_req = 0;
-    shift_hi_req = 0;
-    if(frame_start_reg == 1'b0) begin 
-        if(hi_req) begin
-            case (base_ptr)
-                2'b00: shift_hi_req = hi_req;
-                2'b01: shift_hi_req = {hi_req[0], hi_req[2:1]};
-                2'b10: shift_hi_req = {hi_req[1:0], hi_req[2]};
-                2'b11: shift_hi_req = hi_req;
-            endcase 
-        end else begin          
-            case (base_ptr) 
-                2'b00: shift_req = req;
-                2'b01: shift_req = {req[0], req[2:1]};
-                2'b10: shift_req = {req[1:0], req[2]};
-                2'b11: shift_req = req;
-            endcase                 
-        end
-    end       
-end
-always @* begin
-    shift_grant[2:0] = 3'b000;
-    shift_hi_grant[2:0] = 3'b000;    
-    if(frame_start_reg == 1'b0) begin 
-        if(hi_req) begin
-            if (shift_hi_req[0])       shift_hi_grant[0] = 1'b1;
-            else if (shift_hi_req[1])  shift_hi_grant[1] = 1'b1; 
-            else if (shift_hi_req[2])  shift_hi_grant[2] = 1'b1;           
-        end else begin
-            if (shift_req[0])       shift_grant[0] = 1'b1;
-            else if (shift_req[1])  shift_grant[1] = 1'b1; 
-            else if (shift_req[2])  shift_grant[2] = 1'b1; 
-        end
-    end    
-end            
-always @* begin
-    if(frame_start_reg == 1'b0) begin
-        if(hi_req) begin
-            case (base_ptr)
-                2'b00: grant_next = shift_hi_grant;
-                2'b01: grant_next = {shift_hi_grant[1:0], shift_hi_grant[2]};
-                2'b10: grant_next = {shift_hi_grant[0], shift_hi_grant[2:1]};
-                2'b11: grant_next = shift_hi_grant;
-            endcase  
-        end else begin
-            case (base_ptr) 
-                2'b00: grant_next = shift_grant;
-                2'b01: grant_next = {shift_grant[1:0], shift_grant[2]};
-                2'b10: grant_next = {shift_grant[0], shift_grant[2:1]};
-                2'b11: grant_next = shift_grant;
-            endcase
-        end
-        if(grant_next != 0) frame_start_next = 1'b1;
-        else frame_start_next = 1'b0; 
-    end else begin
-        grant_next = grant_reg; 
-        if ((grant_reg == 3'b001)||(grant_reg == 3'b010)||(grant_reg == 3'b100)) begin
-            if (m_axis_tlast_reg == 1'b1)  //meet end condition                            
-                frame_start_next = 1'b0;
-            else
-                frame_start_next = 1'b1;                 
-        end else begin
-            frame_start_next = 1'b0;
-        end
-        if(frame_start_next == 1'b0) grant_next = 1'b0;              
-    end
-end
-always @(posedge axis_clk or negedge axi_reset_n) begin
-    if (!axi_reset_n) begin
-        base_ptr <= {($clog2(N)){1'b0}};
-        hi_req_flag <= {(N){1'b0}}; 
-        grant_reg <= 0;
-        frame_start_reg <= 0;   
-        m_axis_tdata_reg <= 0;
+assign  as_up_tready = grant[0] && is_as_tready;    
+assign  as_aa_tready = grant[1] && is_as_tready;
+assign  as_la_tready = grant[2] && is_as_tready;    
+
+ 
+
+always @(*) begin
+  case (grant)
+    3'b001: begin   					// For UP 
+        m_axis_tdata_reg  = up_as_tdata;
 `ifdef USER_PROJECT_SIDEBAND_SUPPORT
-		m_axis_tupsb_reg <= 0;
+        m_axis_tupsb_reg  = up_as_tupsb;
 `endif
-        m_axis_tstrb_reg <= 0;
-        m_axis_tkeep_reg <= 0;
-        m_axis_tlast_reg <= 0;
-        m_axis_tvalid_reg <= 0;
-        m_axis_tuser_reg <= 0;
-        m_axis_tid_reg <= 2'b00;             
-    end else begin
-        grant_reg <= grant_next;
-        frame_start_reg <= frame_start_next;
-        if((grant_reg != 0)) begin          
-            if(grant_reg[0]) begin
-                base_ptr <= 2'd1;
-            end else if(grant_reg[1]) begin
-                base_ptr <= 2'd2;
-            end else if(grant_reg[2]) begin
-                base_ptr <= 2'd0;
-            end
-        end else begin
-            base_ptr <= base_ptr;
-        end
-       case (grant_reg)
-            3'b001: begin
-                m_axis_tdata_reg <= up_as_tdata;
-				`ifdef USER_PROJECT_SIDEBAND_SUPPORT
-					m_axis_tupsb_reg <= up_as_tupsb;
-				`endif
-                m_axis_tstrb_reg <= up_as_tstrb;
-                m_axis_tkeep_reg <= up_as_tkeep;
-                if((up_hpri_req || hi_req_flag[0]) && (!last_support[0])) begin 
-                    if(up_hpri_req && !hi_req_flag[0]) begin
-                        hi_req_flag[0] <= 1;
-                    end
-                    if(!up_hpri_req && hi_req_flag[0]) begin
-                        m_axis_tlast_reg <= 1;
-                    end     
-                    if(as_is_tvalid && is_as_tready && m_axis_tlast_reg) begin
-                        hi_req_flag[0] <= 0;
-                        m_axis_tlast_reg <= 0;
-                    end
-                end else begin
-                //for  normal req
-                    m_axis_tlast_reg <= up_as_tlast;
-                end 
-                m_axis_tvalid_reg <= up_as_tvalid; 
-                m_axis_tuser_reg <= up_as_tuser;
-                m_axis_tid_reg <= 2'b00;        
-            end
-            3'b010: begin
-                m_axis_tdata_reg <= aa_as_tdata;
-                m_axis_tstrb_reg <= aa_as_tstrb;
-                m_axis_tkeep_reg <= aa_as_tkeep;
-                m_axis_tlast_reg <= aa_as_tlast;
-                m_axis_tvalid_reg <= aa_as_tvalid;   
-                m_axis_tuser_reg <= aa_as_tuser;
-                m_axis_tid_reg <= 2'b01;               
-            end
-            3'b100: begin
-                m_axis_tdata_reg <= la_as_tdata;
-                m_axis_tstrb_reg <= la_as_tstrb;
-                m_axis_tkeep_reg <= la_as_tkeep;
-                if((la_hpri_req || hi_req_flag[2]) && (!last_support[2])) begin            
-                    if(la_hpri_req && !hi_req_flag[2]) begin    
-                        hi_req_flag[2] <= 1;
-                    end
-                    if(!la_hpri_req && hi_req_flag[2]) begin                
-                        m_axis_tlast_reg <= 1;
-                    end     
-                    if(as_is_tvalid && is_as_tready && as_is_tlast) begin
-                        hi_req_flag[2] <= 0;
-                        m_axis_tlast_reg <= 0;
-                    end
-                end else begin
-                //for  normal req
-                    m_axis_tlast_reg <= la_as_tlast;
-                end                
-                m_axis_tvalid_reg <= la_as_tvalid; 
-                m_axis_tuser_reg <= la_as_tuser;
-                m_axis_tid_reg <= 2'b10;                
-            end
-            default: begin
-                m_axis_tdata_reg <= 0;
-				`ifdef USER_PROJECT_SIDEBAND_SUPPORT
-					m_axis_tupsb_reg <= 0;
-				`endif
-                m_axis_tstrb_reg <= 0;
-                m_axis_tkeep_reg <= 0;
-                m_axis_tlast_reg <= 0;
-                m_axis_tvalid_reg <= 0;
-                m_axis_tuser_reg <= 0;
-                m_axis_tid_reg <= 2'b00;            
-            end
-        endcase     
+        m_axis_tstrb_reg  = up_as_tstrb;
+        m_axis_tkeep_reg  = up_as_tkeep;
+        m_axis_tvalid_reg = up_as_tvalid; 
+        m_axis_tuser_reg  = up_as_tuser;
+        m_axis_tid_reg    = 2'b00;  
+        m_axis_tlast_reg  = up_as_tlast;  
     end
-end
-//for Dexmux
-// Write logic
-always @(posedge axis_clk or negedge axi_reset_n) begin
-    if (!axi_reset_n) begin
-        wr_ptr_reg <= {ADDR_WIDTH+1{1'b0}};
-    end else begin
-	    if (is_as_tvalid) begin // for the current Io_serdes design
-	        mem[wr_ptr_reg[ADDR_WIDTH-1:0]] <= s_axis;
-	        wr_ptr_reg <= wr_ptr_reg + 1;
-	    end
-    end	    
-end
-// Read logic
-wire empty = (wr_ptr_reg == rd_ptr_reg);    
-wire as_up_tvalid_out = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) && !empty; 
-wire as_aa_tvalid_out = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) && !empty;
-wire as_up_data_transfer = (as_up_tvalid_out && up_as_tready);    
-wire as_aa_data_transfer = (as_aa_tvalid_out && aa_as_tready);
-always @(posedge axis_clk or negedge axi_reset_n) begin
-    if (!axi_reset_n) begin
-        as_is_tready_reg <= 0;
-        rd_ptr_reg <= {ADDR_WIDTH+1{1'b0}};
-    end else begin
-	    as_is_tready_reg <= !above_th;  
-	    if (!empty) begin  
-	        if(m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) begin
-	            if(as_up_data_transfer) begin
-	                rd_ptr_reg <= rd_ptr_reg + 1;
-				end	
-	        end else if(m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) begin  
-	            if(as_aa_data_transfer) begin
-					rd_ptr_reg <= rd_ptr_reg + 1;
-				end			   
-	        end
-	    end       
+    3'b010: begin  						// For AA 
+        m_axis_tdata_reg  = aa_as_tdata;
+        m_axis_tstrb_reg  = aa_as_tstrb;
+        m_axis_tkeep_reg  = aa_as_tkeep;
+        m_axis_tvalid_reg = aa_as_tvalid;   
+        m_axis_tuser_reg  = aa_as_tuser;
+        m_axis_tid_reg    = 2'b01; 
+        m_axis_tlast_reg  = aa_as_tlast;              
+    end	
+    3'b100: begin  						// For LA 
+        m_axis_tdata_reg  = la_as_tdata;
+        m_axis_tstrb_reg  = la_as_tstrb;
+        m_axis_tkeep_reg  = la_as_tkeep;	
+        m_axis_tvalid_reg = la_as_tvalid; 
+        m_axis_tuser_reg  = la_as_tuser;
+        m_axis_tid_reg    = 2'b10; 
+        m_axis_tlast_reg  = la_as_tlast;    
     end
+    default: begin
+        m_axis_tdata_reg  = 32'h0000_0000;
+`ifdef USER_PROJECT_SIDEBAND_SUPPORT
+        m_axis_tupsb_reg  = 5'b0000_0;
+`endif
+        m_axis_tstrb_reg  = 4'b0000;
+        m_axis_tkeep_reg  = 4'b0000;
+        m_axis_tvalid_reg = 1'b0;
+        m_axis_tuser_reg  = 2'b00;
+        m_axis_tid_reg    = 2'b00; 
+        m_axis_tlast_reg  = 0;           
+    end
+  endcase  
 end
-assign as_up_tvalid = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? as_up_tvalid_out: 0;  
+
+
+reg [2:0] cnt;
+//////////  counter for arbiter ack ///////////
+
+always @(posedge axis_clk or negedge axi_reset_n)  begin
+	if ( !axi_reset_n ) begin
+	    cnt <= 3'b000;
+	end
+	else begin
+		if ( grant!=3'b000 & (grant&hi_req)==3'b000 ) begin	// when grant is not in the hi_req state, after trransfer cnt+1.	
+            if(as_is_tvalid & is_as_tready)  cnt<=cnt+1;
+            else cnt<=cnt;      
+		end
+        else 
+        cnt <= 3'b000;
+	end
+end
+// scalable arb
+arbiter #(.PORTS(3)) arbiter
+    (
+        .axis_clk(axis_clk),
+        .axi_reset_n(axi_reset_n),
+        .req(req),
+        .hi_req(hi_req),
+	    .ack((as_is_tvalid & is_as_tready & as_is_tlast)|cnt==3'b111), // tlast or cnt=3'b111 would go to the change state.
+        .grant(grant)
+    );
+
+
+/////////////////////////////////// Downstream//////////////////////////////////////////////////
+wire D_m_axis_tvalid; // Downstream master axis tvalid
+wire D_m_axis_tready; // Downstream master axis tready
+wire [WIDTH-1:0] s_axis; // slave from is.
+wire [WIDTH-1:0] m_axis;
+generate
+    assign s_axis[pDATA_WIDTH-1:0]                  = is_as_tdata;
+	`ifdef USER_PROJECT_SIDEBAND_SUPPORT
+		assign s_axis[UPSB_OFFSET +: pUSER_PROJECT_SIDEBAND_WIDTH]     = is_as_tupsb;
+	`endif
+    assign s_axis[STRB_OFFSET +: pDATA_WIDTH/8]     = is_as_tstrb;
+    assign s_axis[KEEP_OFFSET +: pDATA_WIDTH/8]     = is_as_tkeep;
+    assign s_axis[LAST_OFFSET]                      = is_as_tlast;
+    assign s_axis[TID_OFFSET   +: TID_WIDTH]        = is_as_tid;
+    assign s_axis[USER_OFFSET +: USER_WIDTH]        = is_as_tuser;
+endgenerate
+
+
+
+
+assign D_m_axis_tready=(as_up_tvalid && up_as_tready) | (as_aa_tvalid && aa_as_tready);
+
+assign as_up_tvalid =(m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) && D_m_axis_tvalid; 
 assign as_up_tdata = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? m_axis[pDATA_WIDTH - 1:0]: 0;
 `ifdef USER_PROJECT_SIDEBAND_SUPPORT
 assign as_up_tupsb = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? m_axis[UPSB_OFFSET +: pUSER_PROJECT_SIDEBAND_WIDTH]: 0;
@@ -505,27 +330,57 @@ assign as_up_tstrb = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? m_axis[STRB_OFFS
 assign as_up_tkeep = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? m_axis[KEEP_OFFSET +: pDATA_WIDTH/8]: 0;
 assign as_up_tlast = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? m_axis[LAST_OFFSET]: 0;
 assign as_up_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00) ? m_axis[USER_OFFSET +: USER_WIDTH]: 0;
-assign as_aa_tvalid =  (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? as_aa_tvalid_out: 0; 
+
+
+assign as_aa_tvalid =(m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) && D_m_axis_tvalid;
 assign as_aa_tdata = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[pDATA_WIDTH-1:0]: 0;
 assign as_aa_tstrb = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[STRB_OFFSET +: pDATA_WIDTH/8]: 0;
 assign as_aa_tkeep = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[KEEP_OFFSET +: pDATA_WIDTH/8]: 0;
 assign as_aa_tlast = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[LAST_OFFSET]: 0;
 assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFSET +: USER_WIDTH]: 0;
 
+    localparam fifo_depth=16;
+    localparam sram_datawidth=100;
+    wire sram_we;
+    wire [$clog2(fifo_depth)-1:0] sram_addr;
+    wire [sram_datawidth-1:0]sram_din;
+    wire [sram_datawidth-1:0] sram_dout;
 
-`ifdef DEBUG_SYNTHESIS    
-assign TH_reg_debug = TH_reg;
-assign wr_ptr_reg_debug = wr_ptr_reg;
-assign rd_ptr_reg_debug = rd_ptr_reg;
-assign above_th_debug = above_th;
-reg [ADDR_WIDTH:0] current_fifo_size ;
-assign current_fifo_size = wr_ptr_reg - rd_ptr_reg;
-assign current_fifo_size_debug = current_fifo_size ;
-assign as_aa_tvalid_out_debug = as_aa_tvalid_out;
-assign as_up_tvalid_out_debug = as_up_tvalid_out;
-assign as_aa_tvalid_debug = as_aa_tvalid;
-assign m_axis_tid_debug = m_axis[TID_OFFSET +: TID_WIDTH];
-assign m_axis_tid_00_debug =  (m_axis[TID_OFFSET +: TID_WIDTH]==2'b00);
-assign m_axis_tid_01_debug =  (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01);
-`endif //DEBUG_SYNTHESIS    
+    fifo #(.WIDTH(WIDTH),.depth(fifo_depth),.sram_datawidth(sram_datawidth)) fifo
+    (
+        .axis_clk(axis_clk),
+        .axi_reset_n(axi_reset_n),
+        .w_vld(is_as_tvalid),
+        .w_rdy(as_is_tready),
+        .data_in(s_axis),
+        .r_vld(D_m_axis_tvalid),
+        .r_rdy(D_m_axis_tready),
+        .data_out(m_axis),
+        .TH_reg({4'd0,TH_reg}),
+        .sram_we(sram_we),
+        .sram_addr(sram_addr),
+        .sram_din(sram_din),
+        .sram_dout(sram_dout)
+    );
+    /*
+    SRAM1RW64x128 SRAM1RW64x128(
+        .CE(axis_clk),
+        .WEB(~sram_we),// WEB =1 is read WEB=0 is w_vldite
+        .OEB(1'b0),
+        .CSB(1'b0),
+        .A(sram_addr),
+        .I(sram_din),
+        .O(sram_dout)
+    );
+    */
+    ra1shd16x100m4h3v2 SRAM16x100(
+        .CLK(axis_clk),
+        .WEN(~sram_we),
+        .OEN(1'b0),
+        .CEN(1'b0),
+        .A(sram_addr),
+        .D(sram_din),
+        .Q(sram_dout)
+    );
+
 endmodule

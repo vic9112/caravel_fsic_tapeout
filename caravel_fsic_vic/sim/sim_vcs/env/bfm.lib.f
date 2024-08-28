@@ -9,9 +9,9 @@
 //-v lib/io_std/verilog/saed14nm_stdio_wb.v
 //-v lib/sram/verilog/saed14sram.v
 
--v /home/course/ee5252/SAED32_EDK/lib/stdcell_rvt/verilog/saed32nm.v
--v /home/course/ee5252/SAED32_EDK/lib/io_std/verilog/saed32nm_io_wb.v
--v /home/course/ee5252/SAED32_EDK/lib/sram/verilog/saed32sram.v
+-v ../../../SAED32_EDK/lib/stdcell_rvt/verilog/saed32nm.v
+-v ../../../SAED32_EDK/lib/io_std/verilog/saed32nm_io_wb.v
+-v ../../../SAED32_EDK/lib/sram/verilog/saed32sram.v
 
 //-v /cad/CBDK/CBDK_TSMC018_Arm_v4.0/CIC/Verilog/tsmc18.v
 //-v /cad/CBDK/CBDK_TSMC018_Arm_v4.0/CIC/Verilog/tpz973gv.v

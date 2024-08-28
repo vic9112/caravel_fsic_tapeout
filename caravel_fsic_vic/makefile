@@ -26,14 +26,14 @@ t18_cleanall: setup_t18
 	$(MAKE) clean -C    ./sim
 	$(MAKE) setup -C    ./sim
 	$(MAKE) cleanall -C ./flow/0_synthesis/work
-	$(MAKE) pre_sim -C  ./sim TARGET_PROCESS=T18 | tee make_t18_all.log
+	$(MAKE) all -C  ./sim TARGET_PROCESS=T18 | tee make_t18_all.log
 
 .PHONY: saed32_cleanall
 saed32_cleanall: setup_saed32
 	$(MAKE) clean -C    ./sim
 	$(MAKE) setup -C    ./sim
 	$(MAKE) cleanall -C ./flow/0_synthesis/work
-	$(MAKE) pre_sim -C  ./sim TARGET_PROCESS=SAED32 | tee make_saed32_all.log
+	$(MAKE) all -C  ./sim TARGET_PROCESS=SAED32 | tee make_saed32_all.log
 
 
 .PHONY: t18

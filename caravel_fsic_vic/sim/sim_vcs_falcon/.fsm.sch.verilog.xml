@@ -1,0 +1,101 @@
+<Command name="schRTLInfo"  delimiter="."  >
+<RTLBlock >
+<RTLInfo   name="state_var_0"  type="2"  fileName="../../common/caravel_project/rtl/verilog/falcon_In_copy.v"  >
+    <Seg beginLine="84"  endLine="121"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_USER_SUBSYS0.U_USRPRJ1.In_copy.In_copy_run_inst.In_copy_run_run_fsm_inst"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="litespiphy_state_1"  type="2"  fileName="../../common/caravel_project/rtl/verilog/mgmt_core.patrick.remove.v"  >
+    <Seg beginLine="1913"  endLine="1935"  />
+  </RTLInfo>
+<RTLInfo   name="litespi_state_2"  type="2"  fileName="../../common/caravel_project/rtl/verilog/mgmt_core.patrick.remove.v"  >
+    <Seg beginLine="2399"  endLine="2451"  />
+  </RTLInfo>
+<RTLInfo   name="spimaster_state_3"  type="2"  fileName="../../common/caravel_project/rtl/verilog/mgmt_core.patrick.remove.v"  >
+    <Seg beginLine="2902"  endLine="2924"  />
+  </RTLInfo>
+<RTLInfo   name="uartwishbonebridge_state_4"  type="2"  fileName="../../common/caravel_project/rtl/verilog/mgmt_core.patrick.remove.v"  >
+    <Seg beginLine="3666"  endLine="3723"  />
+  </RTLInfo>
+<RTLInfo   name="grant_5"  type="2"  fileName="../../common/caravel_project/rtl/verilog/mgmt_core.patrick.remove.v"  >
+    <Seg beginLine="7155"  endLine="7169"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.soc.core"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="ss_lm_fsm_6"  type="2"  fileName="../../common/caravel_project/rtl/verilog/axil_axis.v"  >
+    <Seg beginLine="640"  endLine="675"  />
+  </RTLInfo>
+<RTLInfo   name="ls_sm_fsm_7"  type="2"  fileName="../../common/caravel_project/rtl/verilog/axil_axis.v"  >
+    <Seg beginLine="484"  endLine="523"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_AXIL_AXIS0"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_var_8"  type="2"  fileName="../../common/caravel_project/rtl/verilog/concat_EdgeDetect_Top_fsic.v"  >
+    <Seg beginLine="1230"  endLine="1250"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_USER_SUBSYS0.U_USRPRJ0.U_EdgeDetect.EdgeDetect_Top_struct_inst.HorDer_inst.EdgeDetect_HorDer_run_inst.EdgeDetect_HorDer_run_run_fsm_inst"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_9"  type="2"  fileName="../../common/caravel_project/rtl/verilog/AS/fifo.v"  >
+    <Seg beginLine="49"  endLine="74"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.AXIS_SW0.fifo"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_var_10"  type="2"  fileName="../../common/caravel_project/rtl/verilog/concat_EdgeDetect_Top_fsic.v"  >
+    <Seg beginLine="1463"  endLine="1483"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_USER_SUBSYS0.U_USRPRJ0.U_EdgeDetect.EdgeDetect_Top_struct_inst.MagAng_inst.EdgeDetect_MagAng_run_inst.EdgeDetect_MagAng_run_run_fsm_inst"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_11"  type="2"  fileName="../../common/caravel_project/rtl/verilog/LogicAnalyzer.v"  >
+    <Seg beginLine="273"  endLine="298"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_LOGIC_ANLZ0.fifo_inst"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_12"  type="2"  fileName="../../common/caravel_project/rtl/verilog/user_prj1.v"  >
+    <Seg beginLine="306"  endLine="326"  />
+  </RTLInfo>
+<RTLInfo   name="Out_state_13"  type="2"  fileName="../../common/caravel_project/rtl/verilog/user_prj1.v"  >
+    <Seg beginLine="352"  endLine="372"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_USER_SUBSYS0.U_USRPRJ1"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_14"  type="2"  fileName="../../common/caravel_project/rtl/verilog/housekeeping_spi.v"  >
+    <Seg beginLine="178"  endLine="221"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.housekeeping.hkspi"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="switch_Fetcher_l362_15"  type="2"  fileName="../../common/caravel_project/rtl/verilog/VexRiscv_MinDebug.v"  >
+    <Seg beginLine="3544"  endLine="3766"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.soc.core.VexRiscv"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_var_16"  type="2"  fileName="../../common/caravel_project/rtl/verilog/concat_EdgeDetect_Top_fsic.v"  >
+    <Seg beginLine="894"  endLine="914"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_USER_SUBSYS0.U_USRPRJ0.U_EdgeDetect.EdgeDetect_Top_struct_inst.VerDer_inst.EdgeDetect_VerDer_run_inst.EdgeDetect_VerDer_run_run_fsm_inst"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_var_17"  type="2"  fileName="../../common/caravel_project/rtl/verilog/falcon_stage.v"  >
+    <Seg beginLine="18988"  endLine="19246"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.mprj.u_fsic.U_USER_SUBSYS0.U_USRPRJ1.fiFFNTT.stage_struct_inst.stage_run_inst.stage_run_run_fsm_inst"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="wbbd_state_18"  type="2"  fileName="../../common/caravel_project/rtl/verilog/housekeeping.wire.v"  >
+    <Seg beginLine="648"  endLine="741"  />
+  </RTLInfo>
+<RTLInfo   name="xfer_state_19"  type="2"  fileName="../../common/caravel_project/rtl/verilog/housekeeping.wire.v"  >
+    <Seg beginLine="924"  endLine="972"  />
+  </RTLInfo>
+<Instance name="top_bench.uut.housekeeping"  />
+</RTLBlock>
+</Command>

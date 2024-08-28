@@ -91,485 +91,240 @@ module CFG_CTRL #( parameter pADDR_WIDTH   = 12,
 	input  wire          uck2_rst_n
 );
 
-	////////////////////////////
-	// Internal Signals begin //
-	////////////////////////////	
-	reg wb_fsm_reg;
-	reg wb_axi_request;
-	reg wb_axi_request_rw;
-	reg [3:0] wb_axi_wstrb;
-	reg wb_axi_request_done;
-	reg [31:0] wb_axi_request_add;
-	reg [31:0] wb_axi_wdata;
-	reg [31:0] wb_axi_rdata;
-	
-	reg [2:0] f_axi_fsm_reg;
-	reg f_axi_request;
-	reg f_axi_request_rw;
-	reg [3:0] f_axi_wstrb;
-	reg f_axi_request_done;
-	reg [31:0] f_axi_request_add;
-	reg [31:0] f_axi_wdata;
-	reg [31:0] f_axi_rdata;
-	
-	reg [2:0] m_axi_fsm_reg;
-	
-	reg axi_grant_o_reg;
-	wire m_axi_request;
-	wire m_axi_request_rw;
-	wire [3:0] m_axi_wstrb;
-	wire m_axi_request_done;
-	wire [31:0] m_axi_request_add;
-	wire [31:0] m_axi_wdata;
-	
-	wire m_axi_awready;
-	wire m_axi_wready;
-	wire m_axi_arready;
-	wire [31:0] m_axi_rdata;
-	wire m_axi_rvalid;
-	
-	reg cc_enable;
-	reg cc_sub_enable;
 
-	wire cc_axi_awvalid;
-	wire cc_axi_wvalid;
+////////////////////////////for outputsignal/////////////////////
+wire cc_aa_enable_w;
+wire cc_as_enable_w;
+wire cc_is_enable_w;
+wire cc_la_enable_w;
+wire cc_up_enable_w;
 
-	reg [2:0] cc_s_fsm_reg;	
-	reg [11:0] cc_s_addr;
-	reg [31:0] cc_s_wdata;
-	reg [31:0] cc_s_rdata;
-	
-	wire axi_awready5;
-	wire axi_wready5;
-	wire axi_arready5;
-	wire [31: 0] axi_rdata5;
-	wire axi_rvalid5;
-	
-	//////////////////////////////////////
-	// Internal signals for Ports begin //
-	//////////////////////////////////////
-	reg [31:0] aa_cfg_rdata_o;
-	reg aa_cfg_rvalid_o;
-	reg aa_cfg_awready_o;
-	reg aa_cfg_wready_o;
-	reg aa_cfg_arready_o;
-	
-	reg axi_awvalid_o;
-	reg [14:0] axi_awaddr_o;
-	reg axi_wvalid_o;
-	reg [31:0] axi_wdata_o;
-	reg [3:0] axi_wstrb_o;
-	reg axi_arvalid_o;
-	reg [14:0] axi_araddr_o;
-	reg axi_rready_o;
+wire cc_aa_enable_r;
+wire cc_as_enable_r;
+wire cc_is_enable_r;
+wire cc_la_enable_r;
+wire cc_up_enable_r;
 
-	reg cc_aa_enable_o;
-	reg cc_as_enable_o;
-	reg cc_is_enable_o;
-	reg cc_la_enable_o;
-	reg cc_up_enable_o;
+assign cc_aa_enable=cc_aa_enable_w|cc_aa_enable_r;
+assign cc_as_enable=cc_as_enable_w|cc_as_enable_r;
+assign cc_is_enable=cc_is_enable_w|cc_is_enable_r;
+assign cc_la_enable=cc_la_enable_w|cc_la_enable_r;
+assign cc_up_enable=cc_up_enable_w|cc_up_enable_r;
 
-	reg [4: 0] user_prj_sel_o;
-	
-	reg wbs_ack_o;
-	reg [31: 0] wbs_rdata_o;
-	
-	///////////////////////////////////
-	// Assignment for Internal begin //
-	///////////////////////////////////
-	assign m_axi_request = axi_grant_o_reg ? f_axi_request : wb_axi_request;
-	assign m_axi_request_rw = axi_grant_o_reg ? f_axi_request_rw : wb_axi_request_rw;
-	assign m_axi_wstrb = axi_grant_o_reg ? f_axi_wstrb : wb_axi_wstrb;
-	assign m_axi_request_done = axi_grant_o_reg ? f_axi_request_done : wb_axi_request_done;
-	assign m_axi_request_add = axi_grant_o_reg ? f_axi_request_add : wb_axi_request_add;
-	assign m_axi_wdata = axi_grant_o_reg ? f_axi_wdata : wb_axi_wdata;
+reg [4:0]user_prj_sel_o;
+assign user_prj_sel=user_prj_sel_o;
 
-	/*
-	In case of cc_sub_enable, read always return 0xFFFFFFFF, write always complete.
-	({1{cc_sub_enable}} & axi_awvalid))
-	({1{cc_sub_enable}} & axi_wvalid))
-	({1{cc_sub_enable}} & axi_arvalid))
-	({32{cc_sub_enable}} & 32'hFFFFFFFF))
-	({1{cc_sub_enable}} & axi_arvalid))
-	*/
-	assign m_axi_awready = ((((((({1{cc_up_enable}} & axi_awready2) | ({1{cc_la_enable}} & axi_awready0)) | ({1{cc_aa_enable}} & axi_awready1)) | ({1{cc_is_enable}} & axi_awready3)) | ({1{cc_as_enable}} & axi_awready4)) | ({1{cc_enable}} & axi_awready5)) | ({1{cc_sub_enable}} & axi_awvalid));
-	assign m_axi_wready = ((((((({1{cc_up_enable}} & axi_wready2) | ({1{cc_la_enable}} & axi_wready0)) | ({1{cc_aa_enable}} & axi_wready1)) | ({1{cc_is_enable}} & axi_wready3)) | ({1{cc_as_enable}} & axi_wready4)) | ({1{cc_enable}} & axi_wready5)) | ({1{cc_sub_enable}} & axi_wvalid));
-	assign m_axi_arready = ((((((({1{cc_up_enable}} & axi_arready2) | ({1{cc_la_enable}} & axi_arready0)) | ({1{cc_aa_enable}} & axi_arready1)) | ({1{cc_is_enable}} & axi_arready3)) | ({1{cc_as_enable}} & axi_arready4)) | ({1{cc_enable}} & axi_arready5)) | ({1{cc_sub_enable}} & axi_arvalid));
-	assign m_axi_rdata = ((((((({32{cc_up_enable}} & axi_rdata2) | ({32{cc_la_enable}} & axi_rdata0)) | ({32{cc_aa_enable}} & axi_rdata1)) | ({32{cc_is_enable}} & axi_rdata3)) | ({32{cc_as_enable}} & axi_rdata4)) | ({32{cc_enable}} & axi_rdata5)) | ({32{cc_sub_enable}} & 32'hFFFFFFFF));
-	assign m_axi_rvalid = ((((((({1{cc_up_enable}} & axi_rvalid2) | ({1{cc_la_enable}} & axi_rvalid0)) | ({1{cc_aa_enable}} & axi_rvalid1)) | ({1{cc_is_enable}} & axi_rvalid3)) | ({1{cc_as_enable}} & axi_rvalid4)) | ({1{cc_enable}} & axi_rvalid5)) | ({1{cc_sub_enable}} & axi_arvalid));
-	
-	
-	assign cc_axi_awvalid = axi_awvalid && cc_enable;
-	assign cc_axi_wvalid = axi_wvalid && cc_enable;
+reg          m_arvalid;
+reg  [31: 0] m_araddr;
+reg          m_rready;
+reg          m_awvalid;
+reg  [31: 0] m_awaddr;
+reg          m_wvalid;
+reg  [31: 0] m_wdata;
+reg   [3: 0] m_wstrb;
 
-	////////////////////////////////
-	// Assignment for Ports begin //
-	////////////////////////////////
-	assign aa_cfg_rdata = aa_cfg_rdata_o;
-	assign aa_cfg_rvalid = aa_cfg_rvalid_o;
-	assign aa_cfg_awready = aa_cfg_awready_o;
-	assign aa_cfg_wready = aa_cfg_wready_o;
-	assign aa_cfg_arready = aa_cfg_arready_o;
+assign axi_awvalid=m_awvalid;
+assign axi_awaddr=m_awaddr[14:0];
+assign axi_wvalid=m_wvalid;
+assign axi_wdata=m_wdata;
+assign axi_wstrb=m_wstrb;
+assign axi_arvalid=m_arvalid;
+assign axi_araddr=m_araddr[14:0];
+assign axi_rready=m_rready;
 
-	assign axi_awvalid = axi_awvalid_o;
-	assign axi_awaddr = axi_awaddr_o;
-	assign axi_wvalid = axi_wvalid_o;
-	assign axi_wdata = axi_wdata_o;
-	assign axi_wstrb = axi_wstrb_o;
-	assign axi_arvalid = axi_arvalid_o;
-	assign axi_araddr = axi_araddr_o;
-	assign axi_rready = axi_rready_o;
 
-	assign cc_aa_enable = cc_aa_enable_o;
-	assign cc_as_enable = cc_as_enable_o;
-	assign cc_is_enable = cc_is_enable_o;
-	assign cc_la_enable = cc_la_enable_o;
-	assign cc_up_enable = cc_up_enable_o;
 
-	assign user_prj_sel = user_prj_sel_o;
 
-	assign wbs_ack = wbs_ack_o;
-	assign wbs_rdata = wbs_rdata_o;
 
-	assign axi_awready5 = cc_axi_awvalid ? 1 : 0;
-	assign axi_wready5 = cc_axi_wvalid ? 1 : 0;
-	assign axi_arready5 = 1'b1;
-	assign axi_rdata5 = { 27'b0, user_prj_sel_o };
-	assign axi_rvalid5 = 1'b1;
+///////////////// wb2axi////////////////////////////// 
+wire          wb_cfg_awvalid;
+wire  [31: 0] wb_cfg_awaddr;
+wire          wb_cfg_wvalid;
+wire  [31: 0] wb_cfg_wdata;
+wire   [3: 0] wb_cfg_wstrb;
+wire          wb_cfg_arvalid;
+wire  [31: 0] wb_cfg_araddr;
+wire          wb_cfg_rready;
+wire  [31: 0] wb_cfg_rdata;
+wire          wb_cfg_rvalid;
+wire          wb_cfg_awready;
+wire          wb_cfg_wready;
+wire          wb_cfg_arready;
 
-	//////////////////////////// 
-	// Local paramaters begin //
-	////////////////////////////
-	localparam wb_fsm_idle = 1'b0;
-	localparam wb_fsm_inprogress = 1'b1;
+wire w_en;
+wire r_en;
+assign  w_en=wbs_cyc & wbs_stb & wbs_we;
+assign  r_en=wbs_cyc & wbs_stb & ~wbs_we;
+assign wb_cfg_awvalid = w_en;
+assign wb_cfg_wvalid  = w_en;
 
-	localparam axi_fsm_idle = 3'b000;
-	localparam axi_fsm_read_data = 3'b001;
-	localparam axi_fsm_read_complete = 3'b010;
-	localparam axi_fsm_write_data = 3'b011;
-	localparam axi_fsm_write_complete = 3'b100;
-	
-	/////////////////////////////////
-	// Always for Target Selection //
-	/////////////////////////////////
-	always @ ( posedge axi_clk or negedge axi_reset_n)
-	begin
-		if ( !axi_reset_n )
-		begin
-			cc_aa_enable_o <= 1'b0;
-			cc_as_enable_o <= 1'b0;
-			cc_is_enable_o <= 1'b0;
-			cc_la_enable_o <= 1'b0;
-			cc_up_enable_o <= 1'b0;
-			cc_enable <= 1'b0;
-			cc_sub_enable <= 1'b0;
-		end else
-		begin
-			cc_aa_enable_o <= ( m_axi_request_add[31:12] == 20'h30002 )? 1'b1 : 1'b0;
-			cc_as_enable_o <= ( m_axi_request_add[31:12] == 20'h30004 )? 1'b1 : 1'b0;
-			cc_is_enable_o <= ( m_axi_request_add[31:12] == 20'h30003 )? 1'b1 : 1'b0;
-			cc_la_enable_o <= ( m_axi_request_add[31:12] == 20'h30001 )? 1'b1 : 1'b0;
-			cc_up_enable_o <= ( m_axi_request_add[31:12] == 20'h30000 )? 1'b1 : 1'b0;
-			cc_enable <= ( m_axi_request_add[31:12] == 20'h30005 )? 1'b1 : 1'b0;
-			cc_sub_enable <= ( (m_axi_request_add[31:12] >= 20'h30006) && (m_axi_request_add[31:12] <= 20'h3FFFF ) )? 1'b1 : 1'b0;
-		end
-	end	
-	////////////////////////////////////////////
-	// Always for Wishbone Interface handling //
-	////////////////////////////////////////////
-	always @ ( posedge wb_clk or posedge wb_rst)
-	begin
-		if ( wb_rst ) 
-		begin
-			wb_fsm_reg <= wb_fsm_idle;
-			wb_axi_request <= 1'b0;
-			wb_axi_request_rw <= 1'b0;
-			wb_axi_wstrb <= 4'b0;
-			wb_axi_request_add <= 32'b0;
-			wb_axi_wdata <= 32'b0;
-			
-			wbs_ack_o <= 1'b0;
-			wbs_rdata_o <= 32'b0;						
-		end else
-		begin
-			case (wb_fsm_reg) 
-				wb_fsm_idle:
-				begin
-					wbs_ack_o <= 1'b0;
-					wbs_rdata_o <= 32'h0;
-					if ( !wbs_ack_o ) begin
-						if ( wbs_cyc && wbs_stb ) begin
-							wb_axi_request <= 1'b1;
-							wb_axi_request_rw <= wbs_we;
-							wb_axi_request_add <= wbs_adr;	//Latch wbs_adr
-							if ( wbs_we ) begin
-								wb_axi_wdata <= wbs_wdata;	//Latch wbs_wdata;
-								wb_axi_wstrb <= wbs_sel;
-							end
-							wb_fsm_reg <= wb_fsm_inprogress;
-						end
-					end
-				end
-				wb_fsm_inprogress:
-				begin
-					if ( wb_axi_request_done )
-					begin
-						wbs_ack_o <= 1'b1;	
-						if ( !wb_axi_request_rw )
-							wbs_rdata_o <= wb_axi_rdata;	//Output wbs_rdata_o
-						else
-							wb_axi_wdata <= 32'h0;
-						wb_axi_request <= 1'b0;
-						wb_axi_request_add <= 32'b0;
-						wb_fsm_reg <= wb_fsm_idle;						
-					end
-				end
-			endcase
-		end
-	end	
+assign wb_cfg_arvalid = r_en;
+assign wb_cfg_rready  = r_en;
 
-	/////////////////////////////////////////////////
-	// Always for FPGA-AXI-Lite Interface handling //
-	/////////////////////////////////////////////////	
-	always @ ( posedge axi_clk or negedge axi_reset_n)
-	begin
-		if ( !axi_reset_n )
-		begin
-			f_axi_fsm_reg <= axi_fsm_idle;
-			f_axi_request <= 1'b0;
-			f_axi_request_rw <= 1'b0;
-			f_axi_wstrb <= 4'b0;
-			f_axi_request_add <= 32'b0;
-			f_axi_wdata <= 32'b0;
-			
-			aa_cfg_rdata_o <= 32'b0;
-			aa_cfg_rvalid_o <= 1'b0;
-			aa_cfg_awready_o <= 1'b0;
-			aa_cfg_wready_o <= 1'b0;
-			aa_cfg_arready_o <= 1'b0;			
-		end else
-		begin
-			case ( f_axi_fsm_reg )
-				axi_fsm_idle:
-				begin			
-					aa_cfg_wready_o <= 1'b0;
-					if ( aa_cfg_awvalid ) begin
-						aa_cfg_awready_o <= 1'b1;
-						f_axi_request_add <= aa_cfg_awaddr;		//Latch awaddr
-						f_axi_fsm_reg <= axi_fsm_write_data;
-					end else if ( aa_cfg_arvalid ) begin
-						aa_cfg_arready_o <= 1'b1;
-						f_axi_request_add <= aa_cfg_araddr;		//Latch araddr
-						f_axi_request_rw <= 1'b0;
-						f_axi_request <= 1'b1;						
-						f_axi_fsm_reg <= axi_fsm_read_data;
-					end
-				end
-				axi_fsm_read_data:
-				begin
-					aa_cfg_arready_o <= 1'b0;
-					if ( aa_cfg_rready && f_axi_request_done ) begin
-						aa_cfg_rdata_o <= f_axi_rdata;			//Output aa_cfg_rdata_o
-						aa_cfg_rvalid_o <= 1'b1;
-						f_axi_request <= 1'b0;	
-						f_axi_request_add <= 32'b0;
-						f_axi_fsm_reg <= axi_fsm_read_complete;						
-					end
-				end
-				axi_fsm_read_complete:
-				begin
-					if ( aa_cfg_rready ) begin
-						aa_cfg_rdata_o <= 32'b0;
-						aa_cfg_rvalid_o <= 1'b0;
-						f_axi_fsm_reg <= axi_fsm_idle;		
-					end					
-				end
-				axi_fsm_write_data:
-				begin
-					aa_cfg_awready_o <= 1'b0;
-					if ( aa_cfg_wvalid ) begin
-						f_axi_request <= 1'b1;
-						f_axi_request_rw <= 1'b1;	
-						f_axi_wdata <= aa_cfg_wdata;			//Latch wdata
-						f_axi_wstrb <= aa_cfg_wstrb;						
-						f_axi_fsm_reg <= axi_fsm_write_complete;		
-					end
-				end
-				axi_fsm_write_complete:
-				begin
-					if ( f_axi_request_done ) begin
-						aa_cfg_wready_o <= 1'b1;
-						f_axi_request <= 1'b0;		
-						f_axi_request_add <= 32'b0;
-						f_axi_fsm_reg <= axi_fsm_idle;								
-					end
-				end
-			endcase			
-		end
-	end
-	
-	/////////////////////////////////////////////////
-	// Always for requests grant - axi_grant_o_reg //
-	/////////////////////////////////////////////////
-	always @( posedge wb_clk or posedge wb_rst )
-	begin
-		if ( wb_rst ) begin
-			axi_grant_o_reg <= 1'b0;
-		end else begin
-			case (axi_grant_o_reg)
-				1'b0: begin
-					if ((~wb_axi_request)) begin
-						if (f_axi_request) begin
-							axi_grant_o_reg <= 1'b1;
-						end
-					end
-				end
-				1'b1: begin
-					if ((~f_axi_request)) begin
-						if (wb_axi_request) begin
-							axi_grant_o_reg <= 1'b0;
-						end
-					end
-				end			
-			endcase
-		end
-	end		
+assign wb_cfg_awaddr=wbs_adr;
+assign wb_cfg_araddr=wbs_adr;
 
-	///////////////////////////////////////////////////
-	// Always for AXI-Lite Master Interface handling //
-	///////////////////////////////////////////////////
-	always @ ( posedge axi_clk or negedge axi_reset_n )
-	begin
-		if ( !axi_reset_n ) begin
-			wb_axi_rdata <= 32'b0;
-			wb_axi_request_done <= 1'b0;
-			
-			f_axi_rdata <= 32'b0;
-			f_axi_request_done <= 1'b0;
-			
-			axi_awvalid_o <= 1'b0;
-			axi_awaddr_o <= 15'b0;
-			axi_wvalid_o <= 1'b0;
-			axi_wdata_o <= 32'b0;
-			axi_wstrb_o <= 4'b0;
-			axi_arvalid_o <= 1'b0;
-			axi_araddr_o <= 15'b0;
-			axi_rready_o <= 1'b0;			
+assign wb_cfg_wdata=wbs_wdata;
+assign wbs_rdata=wb_cfg_rdata;
+assign wb_cfg_wstrb=wbs_sel;
 
-			m_axi_fsm_reg <= axi_fsm_idle;
-		end else begin
-			case ( m_axi_fsm_reg )
-				axi_fsm_idle:
-				begin
-					wb_axi_request_done <= 1'b0;
-					f_axi_request_done <= 1'b0;			
-					if ( m_axi_request && !m_axi_request_done ) begin
-						if ( m_axi_request_rw ) begin
-							axi_awvalid_o <= 1'b1;
-							axi_awaddr_o <= m_axi_request_add[14:0];							
-							axi_wvalid_o <= 1'b1;
-							axi_wdata_o <= m_axi_wdata;
-							axi_wstrb_o <= m_axi_wstrb;
-							m_axi_fsm_reg <= axi_fsm_write_data;
-						end else begin
-							axi_arvalid_o <= 1'b1;							
-							axi_araddr_o <= m_axi_request_add[14:0];
-							axi_rready_o <= 1'b1;
-							m_axi_fsm_reg <= axi_fsm_read_data;
-						end
-					end
-				end
-				axi_fsm_read_data:
-				begin
-					if ( m_axi_arready && m_axi_rvalid) begin
-						axi_arvalid_o <= 1'b0;
-						axi_araddr_o <= 15'b0;
-						axi_rready_o <= 1'b0;
-						if ( axi_grant_o_reg )
-							f_axi_rdata <= m_axi_rdata;
-						else 
-							wb_axi_rdata <= m_axi_rdata;
-						if ( axi_grant_o_reg )
-							f_axi_request_done <= 1'b1;
-						else 
-							wb_axi_request_done <= 1'b1;
-						m_axi_fsm_reg <= axi_fsm_idle;												
-					end else if ( m_axi_arready ) begin
-						axi_araddr_o <= 15'b0;
-						axi_arvalid_o <= 1'b0;
-						m_axi_fsm_reg <= axi_fsm_read_complete;	
-					end
-				end
-				axi_fsm_read_complete:
-				begin
-					if ( m_axi_rvalid ) begin
-						axi_rready_o <= 1'b0;
-						if ( axi_grant_o_reg )
-							f_axi_rdata <= m_axi_rdata;
-						else 
-							wb_axi_rdata <= m_axi_rdata;
-						if ( axi_grant_o_reg )
-							f_axi_request_done <= 1'b1;
-						else 
-							wb_axi_request_done <= 1'b1;
-						m_axi_fsm_reg <= axi_fsm_idle;						
-					end
-				end
-				axi_fsm_write_data:
-				begin
-					if ( m_axi_awready && m_axi_wready) begin
-						axi_awvalid_o <= 1'b0;
-						axi_awaddr_o <= 15'b0;
-						axi_wvalid_o <= 1'b0;
-						axi_wdata_o <= 32'b0;
-						axi_wstrb_o <= 4'b0;
-						if ( axi_grant_o_reg )
-							f_axi_request_done <= 1'b1;
-						else 
-							wb_axi_request_done <= 1'b1;						
-						m_axi_fsm_reg <= axi_fsm_idle;	
-					end	else begin
-						if ( m_axi_awready ) begin
-							axi_awaddr_o <= 15'b0;
-							axi_awvalid_o <= 1'b0;
-							m_axi_fsm_reg <= axi_fsm_write_complete;								
-						end
-					end
-				end
-				axi_fsm_write_complete:
-				begin
-					if ( m_axi_wready) begin
-						axi_wvalid_o <= 1'b0;
-						axi_wdata_o <= 32'b0;
-						axi_wstrb_o <= 4'b0;
-						if ( axi_grant_o_reg )
-							f_axi_request_done <= 1'b1;
-						else 
-							wb_axi_request_done <= 1'b1;					
-						m_axi_fsm_reg <= axi_fsm_idle;	
-					end
-				end
-			endcase
-		end
-	end
+assign wbs_ack=(w_en & wb_cfg_awready & wb_cfg_wready )| (r_en & wb_cfg_rvalid );
 
-	///////////////////////////////////////////
-	// Always for AXI-Lite CC Slave response //
-	///////////////////////////////////////////	
+
+////////////////////  write protocol /////////////////////////////////////////
+
+wire          m_awready;
+wire          m_wready;
+wire [1:0] w_grant;
+wire cc_enable_w;
+wire cc_sub_enable_w;
+
+assign cc_aa_enable_w = ( m_awaddr[31:12] == 20'h30002 )? 1'b1 : 1'b0;
+assign cc_as_enable_w = ( m_awaddr[31:12] == 20'h30004 )? 1'b1 : 1'b0;
+assign cc_is_enable_w = ( m_awaddr[31:12] == 20'h30003 )? 1'b1 : 1'b0;
+assign cc_la_enable_w = ( m_awaddr[31:12] == 20'h30001 )? 1'b1 : 1'b0;
+assign cc_up_enable_w = (m_awaddr[31:12] == 20'h30000 )? 1'b1 : 1'b0;
+assign cc_enable_w = ( m_awaddr[31:12] == 20'h30005 )? 1'b1 : 1'b0;
+assign cc_sub_enable_w = ( (m_awaddr[31:12] >= 20'h30006) && (m_awaddr[31:12] <= 20'h3FFFF ) )? 1'b1 : 1'b0;
+
+assign m_awready = ((((((({1{cc_up_enable_w}} & axi_awready2) | ({1{cc_la_enable_w}} & axi_awready0)) | ({1{cc_aa_enable_w}} & axi_awready1)) | ({1{cc_is_enable_w}} & axi_awready3)) | ({1{cc_as_enable_w}} & axi_awready4)) | ({1{cc_enable_w}} & 1'b1)) | ({1{cc_sub_enable_w}} & 1'b1));
+assign m_wready = ((((((({1{cc_up_enable_w}} & axi_wready2) | ({1{cc_la_enable_w}} & axi_wready0)) | ({1{cc_aa_enable_w}} & axi_wready1)) | ({1{cc_is_enable_w}} & axi_wready3)) | ({1{cc_as_enable_w}} & axi_wready4)) | ({1{cc_enable_w}} & 1'b1)) | ({1{cc_sub_enable_w}} & 1'b1));
+
+assign wb_cfg_wready=(w_grant==2'b01)?m_wready:0;
+assign aa_cfg_wready=(w_grant==2'b10)?m_wready:0;
+
+assign wb_cfg_awready=(w_grant==2'b01)? m_awready:0;
+assign aa_cfg_awready=(w_grant==2'b10)? m_awready:0;
+
+
+wire [1:0]	w_req;
+assign w_req[0]=wb_cfg_awvalid & wb_cfg_wvalid;
+assign w_req[1]=aa_cfg_awvalid & aa_cfg_wvalid;
+
+
+
+always @(*) begin
+  case (w_grant)
+    2'b01: begin   				
+		m_awvalid=wb_cfg_awvalid;
+		m_awaddr=wb_cfg_awaddr;
+		m_wvalid=wb_cfg_wvalid;
+		m_wdata=wb_cfg_wdata;
+		m_wstrb=wb_cfg_wstrb;
+    end
+    2'b10: begin  				
+   		m_awvalid=aa_cfg_awvalid;
+		m_awaddr=aa_cfg_awaddr;
+		m_wvalid=aa_cfg_wvalid;
+		m_wdata=aa_cfg_wdata;
+		m_wstrb=aa_cfg_wstrb;         
+    end	
+    default: begin
+    	m_awvalid=0;
+		m_awaddr=0;
+		m_wvalid=0;
+		m_wdata=0;
+		m_wstrb=0;   
+    end
+  endcase  
+end
+
+
+	arbiter #(.PORTS(2)) w_arbiter
+    (
+        .axis_clk(axi_clk),
+        .axi_reset_n(axi_reset_n),
+        .req(w_req),
+        .hi_req(2'b00), // no high req in this arb
+        .ack(m_wready & m_awready), // should change 
+        .grant(w_grant)
+    );
+
+//////////////////////////////////////  read protocol //////////////////////////////////////////////
+
+
+wire  [31: 0] m_rdata;
+wire          m_rvalid;
+wire          m_arready;
+wire [1:0]	r_req;
+wire [1:0] r_grant;
+assign r_req[0]=wb_cfg_arvalid & wb_cfg_rready;
+assign r_req[1]=aa_cfg_arvalid & aa_cfg_rready;
+
+
+wire cc_enable_r;
+wire cc_sub_enable_r;
+
+assign cc_aa_enable_r = ( m_araddr[31:12] == 20'h30002 )? 1'b1 : 1'b0;
+assign cc_as_enable_r = ( m_araddr[31:12] == 20'h30004 )? 1'b1 : 1'b0;
+assign cc_is_enable_r = ( m_araddr[31:12] == 20'h30003 )? 1'b1 : 1'b0;
+assign cc_la_enable_r = ( m_araddr[31:12] == 20'h30001 )? 1'b1 : 1'b0;
+assign cc_up_enable_r = (m_araddr[31:12] == 20'h30000 )? 1'b1 : 1'b0;
+assign cc_enable_r = ( m_araddr[31:12] == 20'h30005 )? 1'b1 : 1'b0;
+assign cc_sub_enable_r = ( (m_araddr[31:12] >= 20'h30006) && (m_araddr[31:12] <= 20'h3FFFF ) )? 1'b1 : 1'b0;
+
+assign m_arready = ((((((({1{cc_up_enable_r}} & axi_arready2) | ({1{cc_la_enable_r}} & axi_arready0)) | ({1{cc_aa_enable_r}} & axi_arready1)) | ({1{cc_is_enable_r}} & axi_arready3)) | ({1{cc_as_enable_r}} & axi_arready4)) | ({1{cc_enable_r}} & 1'b1)) | ({1{cc_sub_enable_r}} & 1'b1));
+assign m_rdata = ((((((({32{cc_up_enable_r}} & axi_rdata2) | ({32{cc_la_enable_r}} & axi_rdata0)) | ({32{cc_aa_enable_r}} & axi_rdata1)) | ({32{cc_is_enable_r}} & axi_rdata3)) | ({32{cc_as_enable_r}} & axi_rdata4)) | ({32{cc_enable_r}} & { 27'b0, user_prj_sel_o } )) | ({32{cc_sub_enable_r}} & 32'hFFFFFFFF));
+assign m_rvalid = ((((((({1{cc_up_enable_r}} & axi_rvalid2) | ({1{cc_la_enable_r}} & axi_rvalid0)) | ({1{cc_aa_enable_r}} & axi_rvalid1)) | ({1{cc_is_enable_r}} & axi_rvalid3)) | ({1{cc_as_enable_r}} & axi_rvalid4)) | ({1{cc_enable_r}} & 1'b1)) | ({1{cc_sub_enable_r}} & 1'b1));
+
+
+assign wb_cfg_arready=(r_grant==2'b01)?m_arready:0;
+assign aa_cfg_arready=(r_grant==2'b10)?m_arready:0;
+assign wb_cfg_rvalid=(r_grant==2'b01)?m_rvalid:0;
+assign aa_cfg_rvalid=(r_grant==2'b10)?m_rvalid:0;
+
+assign wb_cfg_rdata=m_rdata;
+assign aa_cfg_rdata=m_rdata;
+
+
+
+always @(*) begin
+  case (r_grant)
+    2'b01: begin   				
+		m_arvalid=wb_cfg_arvalid;
+		m_araddr=wb_cfg_araddr;
+		m_rready=wb_cfg_rready;
+    end
+    2'b10: begin  				
+		m_arvalid=aa_cfg_arvalid;
+		m_araddr=aa_cfg_araddr;
+		m_rready=aa_cfg_rready;    
+    end	
+    default: begin
+		m_arvalid=0;
+		m_araddr=0;
+		m_rready=0;    
+    end
+  endcase  
+end
+
+	arbiter #(.PORTS(2)) r_arbiter
+    (
+        .axis_clk(axi_clk),
+        .axi_reset_n(axi_reset_n),
+        .req(r_req),
+        .hi_req(2'b00), // no high req in this arbiter
+        .ack(m_rvalid), // check rvalid come behind arready
+        .grant(r_grant)
+    );
+/////////////////////////////////////  config register////////////////////////////////////
+
 	always @ ( posedge axi_clk or negedge axi_reset_n ) 
 	begin	
 		if ( !axi_reset_n ) begin
 			user_prj_sel_o <= 5'b0;
 		end else begin
-			if ( cc_axi_awvalid && cc_axi_wvalid ) begin
-				if (axi_awaddr[11:0] == 12'h000 && (axi_wstrb[0] == 1) ) begin //offset 0
-					user_prj_sel_o <= axi_wdata[4:0];
+			if ( m_awvalid && m_wvalid && cc_enable_w ) begin
+				if (m_awaddr[11:0] == 12'h000 && (m_wstrb[0] == 1) ) begin //offset 0
+					user_prj_sel_o <= m_wdata[4:0];
 				end
 				else begin
 					user_prj_sel_o <= user_prj_sel_o;
 				end
 			end
+			else user_prj_sel_o <= user_prj_sel_o;
 		end
 	end	
-
 endmodule
+
+

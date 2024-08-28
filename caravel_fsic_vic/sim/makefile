@@ -1,16 +1,31 @@
 
-#.PHONY: run_edge_rtl
-#run_edge_rtl:
-#	$(MAKE) rtlcom -C sim_vcs_edge
-#	cp sim_vcs_edge/compile.log sim_vcs_edge/compile.log.rtl
+.PHONY: run_edge_rtl
+run_edge_rtl:
+	$(MAKE) rtlcom -C sim_vcs_edge
+	cp sim_vcs_edge/compile.log sim_vcs_edge/compile.log.rtl
 	
-#.PHONY: run_edge_post
-#run_edge_post:
-#	$(MAKE) postcom -C sim_vcs_edge
-#	cp sim_vcs_edge/compile.log sim_vcs_edge/compile.log.post
+.PHONY: run_edge_post
+run_edge_post:
+	$(MAKE) postcom -C sim_vcs_edge
+	cp sim_vcs_edge/compile.log sim_vcs_edge/compile.log.post
 	
-#.PHONY: run_edge
-#run_edge: run_edge_rtl run_edge_post
+.PHONY: run_edge
+run_edge: run_edge_rtl run_edge_post
+
+
+.PHONY: run_falcon_rtl
+run_falcon_rtl:
+	$(MAKE) rtlcom -C sim_vcs_falcon
+	cp sim_vcs_falcon/compile.log sim_vcs_falcon/compile.log.rtl
+	
+.PHONY: run_falcon_post
+run_falcon_post:
+	$(MAKE) postcom -C sim_vcs_falcon
+	cp sim_vcs_falcon/compile.log sim_vcs_falcon/compile.log.post
+	
+.PHONY: run_falcon
+run_falcon: run_falcon_rtl run_falcon_post
+
 
 .PHONY: clean
 clean:
@@ -26,7 +41,9 @@ clean:
 
 	rm -rf sim_vcs_system_test114
 
-# $(MAKE) clean -C sim_vcs_edge
+	$(MAKE) clean -C sim_vcs_edge
+
+	$(MAKE) clean -C sim_vcs_falcon
 
 TARGETS = test111 test112 test113 test114 test103 test104
 
@@ -48,15 +65,17 @@ dir_post:
 		cp  $(SIM_DIR)_$$dir/compile.log $(SIM_DIR)_$$dir/compile.log.post; \
 	done
 
-pre_sim: dir_rtl dir_post #run_edge youwei comment delete edge part
+run_rtl: dir_rtl dir_post
 
-SED_CMD = sed -e 's/^\/\/`define\s*SYSTEM_$$dir\s*1/`define SYSTEM_$$dir 1/' testbench/top_bench.sv 
+all: run_rtl run_edge run_falcon 
+
+SED_CMD = sed -e 's/^\/\/`define\s*SYSTEM_$$dir\s*1/`define SYSTEM_$$dir 1/' testbench/top_bench.rtl.sv 
 
 .PHONY: setup_sed
 setup_sed:
 
 	for dir in $(TARGETS); do \
-		$(SED_CMD) > $(SIM_DIR)_$$dir/top_bench.sv; \
+		$(SED_CMD) > $(SIM_DIR)_$$dir/top_bench.rtl.sv; \
 	done
 
 .PHONY: setup_new
@@ -65,7 +84,7 @@ setup_new:
 	for dir in $(TARGETS); do \
 		rm -rf $(SIM_DIR)_$$dir; \
 		cp -r system $(SIM_DIR)_$$dir; \
-		sed -e 's/^\/\/`define\s*SYSTEM_$$dir\s*1/`define SYSTEM_$$dir 1/' testbench/top_bench.sv > $(SIM_DIR)_$$dir/top_bench.sv; \
+		sed -e 's/^\/\/`define\s*SYSTEM_$$dir\s*1/`define SYSTEM_$$dir 1/' testbench/top_bench.rtl.sv > $(SIM_DIR)_$$dir/top_bench.rtl.sv; \
 		cp system/hex/system_$$dir.hex $(SIM_DIR)_$$dir/riscv.hex; \
 	done
 
@@ -73,32 +92,32 @@ setup_new:
 setup:
 	rm -rf sim_vcs_system_test111
 	cp -r system sim_vcs_system_test111
-	sed -e 's/^\/\/`define\s*SYSTEM_test111\s*1/`define SYSTEM_test111 1/' testbench/top_bench.sv > sim_vcs_system_test111/top_bench.sv
+	sed -e 's/^\/\/`define\s*SYSTEM_test111\s*1/`define SYSTEM_test111 1/' testbench/top_bench.rtl.sv > sim_vcs_system_test111/top_bench.rtl.sv
 	cp system/hex/system_test111.hex sim_vcs_system_test111/riscv.hex
 
 	rm -rf sim_vcs_system_test112
 	cp -r system sim_vcs_system_test112
-	sed -e 's/^\/\/`define\s*SYSTEM_test112\s*1/`define SYSTEM_test112 1/' testbench/top_bench.sv > sim_vcs_system_test112/top_bench.sv
+	sed -e 's/^\/\/`define\s*SYSTEM_test112\s*1/`define SYSTEM_test112 1/' testbench/top_bench.rtl.sv > sim_vcs_system_test112/top_bench.rtl.sv
 	cp system/hex/system_test112.hex sim_vcs_system_test112/riscv.hex
 
 	rm -rf sim_vcs_system_test103
 	cp -r system sim_vcs_system_test103
-	sed -e 's/^\/\/`define\s*SYSTEM_test103\s*1/`define SYSTEM_test103 1/' testbench/top_bench.sv > sim_vcs_system_test103/top_bench.sv
+	sed -e 's/^\/\/`define\s*SYSTEM_test103\s*1/`define SYSTEM_test103 1/' testbench/top_bench.rtl.sv > sim_vcs_system_test103/top_bench.rtl.sv
 	cp system/hex/system_test103.hex sim_vcs_system_test103/riscv.hex
 
 	rm -rf sim_vcs_system_test104
 	cp -r system sim_vcs_system_test104
-	sed -e 's/^\/\/`define\s*SYSTEM_test104\s*1/`define SYSTEM_test104 1/' testbench/top_bench.sv > sim_vcs_system_test104/top_bench.sv
+	sed -e 's/^\/\/`define\s*SYSTEM_test104\s*1/`define SYSTEM_test104 1/' testbench/top_bench.rtl.sv > sim_vcs_system_test104/top_bench.rtl.sv
 	cp system/hex/system_test104.hex sim_vcs_system_test104/riscv.hex
 
 	rm -rf sim_vcs_system_test113
 	cp -r system sim_vcs_system_test113
-	sed -e 's/^\/\/`define\s*SYSTEM_test113\s*1/`define SYSTEM_test113 1/' testbench/top_bench.sv > sim_vcs_system_test113/top_bench.sv
+	sed -e 's/^\/\/`define\s*SYSTEM_test113\s*1/`define SYSTEM_test113 1/' testbench/top_bench.rtl.sv > sim_vcs_system_test113/top_bench.rtl.sv
 	cp system/hex/system_test113.hex sim_vcs_system_test113/riscv.hex
 
 	rm -rf sim_vcs_system_test114
 	cp -r system sim_vcs_system_test114
-	sed -e 's/^\/\/`define\s*SYSTEM_test114\s*1/`define SYSTEM_test114 1/' testbench/top_bench.sv > sim_vcs_system_test114/top_bench.sv
+	sed -e 's/^\/\/`define\s*SYSTEM_test114\s*1/`define SYSTEM_test114 1/' testbench/top_bench.rtl.sv > sim_vcs_system_test114/top_bench.rtl.sv
 	cp system/hex/system_test114.hex sim_vcs_system_test114/riscv.hex
 
 

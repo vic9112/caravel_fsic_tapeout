@@ -59,32 +59,32 @@ endmodule
 //
 //------------------------------------------------------------------------------
 
+// same as falcon
+// module ccs_in_wait_v1 (idat, rdy, ivld, dat, irdy, vld);
 
-module ccs_in_wait_v1 (idat, rdy, ivld, dat, irdy, vld);
+//   parameter integer rscid = 1;
+//   parameter integer width = 8;
 
-  parameter integer rscid = 1;
-  parameter integer width = 8;
+//   output [width-1:0] idat;
+//   output             rdy;
+//   output             ivld;
+//   input  [width-1:0] dat;
+//   input              irdy;
+//   input              vld;
 
-  output [width-1:0] idat;
-  output             rdy;
-  output             ivld;
-  input  [width-1:0] dat;
-  input              irdy;
-  input              vld;
+//   wire   [width-1:0] idat;
+//   wire               rdy;
+//   wire               ivld;
 
-  wire   [width-1:0] idat;
-  wire               rdy;
-  wire               ivld;
+//   localparam stallOff = 0; 
+//   wire                  stall_ctrl;
+//   assign stall_ctrl = stallOff;
 
-  localparam stallOff = 0; 
-  wire                  stall_ctrl;
-  assign stall_ctrl = stallOff;
+//   assign idat = dat;
+//   assign rdy = irdy && !stall_ctrl;
+//   assign ivld = vld && !stall_ctrl;
 
-  assign idat = dat;
-  assign rdy = irdy && !stall_ctrl;
-  assign ivld = vld && !stall_ctrl;
-
-endmodule
+// endmodule
 
 
 //------> /home/raid7_4/raid1_1/linux/mentor/Catapult/2023.2/Mgc_home/pkgs/siflibs/ccs_out_wait_v1.v 
@@ -105,32 +105,32 @@ endmodule
 //
 //------------------------------------------------------------------------------
 
+// same as falcon
+// module ccs_out_wait_v1 (dat, irdy, vld, idat, rdy, ivld);
 
-module ccs_out_wait_v1 (dat, irdy, vld, idat, rdy, ivld);
+//   parameter integer rscid = 1;
+//   parameter integer width = 8;
 
-  parameter integer rscid = 1;
-  parameter integer width = 8;
+//   output [width-1:0] dat;
+//   output             irdy;
+//   output             vld;
+//   input  [width-1:0] idat;
+//   input              rdy;
+//   input              ivld;
 
-  output [width-1:0] dat;
-  output             irdy;
-  output             vld;
-  input  [width-1:0] idat;
-  input              rdy;
-  input              ivld;
+//   wire   [width-1:0] dat;
+//   wire               irdy;
+//   wire               vld;
 
-  wire   [width-1:0] dat;
-  wire               irdy;
-  wire               vld;
+//   localparam stallOff = 0; 
+//   wire stall_ctrl;
+//   assign stall_ctrl = stallOff;
 
-  localparam stallOff = 0; 
-  wire stall_ctrl;
-  assign stall_ctrl = stallOff;
+//   assign dat = idat;
+//   assign irdy = rdy && !stall_ctrl;
+//   assign vld = ivld && !stall_ctrl;
 
-  assign dat = idat;
-  assign irdy = rdy && !stall_ctrl;
-  assign vld = ivld && !stall_ctrl;
-
-endmodule
+// endmodule
 
 
 
@@ -152,18 +152,18 @@ endmodule
 //
 //------------------------------------------------------------------------------
 
+// same as falcon
+// module mgc_io_sync_v2 (ld, lz);
+//     parameter valid = 0;
 
-module mgc_io_sync_v2 (ld, lz);
-    parameter valid = 0;
+//     input  ld;
+//     output lz;
 
-    input  ld;
-    output lz;
+//     wire   lz;
 
-    wire   lz;
+//     assign lz = ld;
 
-    assign lz = ld;
-
-endmodule
+// endmodule
 
 
 //------> /home/raid7_4/raid1_1/linux/mentor/Catapult/2023.2/Mgc_home/pkgs/siflibs/ccs_out_v1.v 

@@ -16,6 +16,8 @@ VERILOG_DEFINE += +define+USE_EDGEDETECT_IP
 TOP_BENTCH_DEFINE = +define+USER_PROJ_IRQ0_EN
 # only edge_detect need to use TOP_BENCH_USE_EDGEDETECT_IP
 #TOP_BENTCH_DEFINE = +define+TOP_BENCH_USE_EDGEDETECT_IP
+TOP_BENTCH_DEFINE = +define+TOP_BENCH_USE_FALCON_IP
+
 
 #for SAED32 EDK
 SAED32_TARGET_DEFINE = +define+USE_EDK32
@@ -62,26 +64,26 @@ HOST_NAME = iclab
 #compile command 
 ifeq ($(HOST_NAME),iclab)
     VCS_EXE = vcs
-		DVE_EXE = /usr/cadtool/cad/synopsys/vcs/2020.12-sp2/gui/dve/bin/dve
+        DVE_EXE = /usr/cadtool/cad/synopsys/vcs/2020.12-sp2/gui/dve/bin/dve // Change the original path to this
 else
     VCS_EXE = Rvcs
-		DVE_EXE = Rdve
+        DVE_EXE = Rdve
 endif
 
-vcs_encrypt = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns \
-	+autoprotect.vp                                      \
+vcs_encrypt = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns              \
+	+autoprotect.vp \
 	+nospecify                                           \
  	+vcs+flush+all                                       \
-	-full64                                              \
-	-R                                                   \
-	-debug_access+all                                    \
+	-full64												\
+	-R													\
+	-debug_access+all									\
  	+nontimingcheck                                      \
 	+incdir+../../rtl/top                                \
 	+incdir+../../rtl/caravel                            \
 	+incdir+../../rtl/fsic                               \
 	+incdir+../../rtl/user_project                       \
-	+incdir+./env	                                     \
-	+lint=TFIPC-L	                                     \
+	+incdir+../system/env	\
+	+lint=TFIPC-L	\
  	$(CM)                                                \
  	$(CM_NAME)                                           \
  	$(CM_DIR)                                            \
@@ -90,19 +92,19 @@ vcs_encrypt = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns \
  	-o $(OUTPUT)                                         \
  	-l compile.log
 
-vcs_RTL = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns   \
+vcs_RTL = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns              \
 	+nospecify                                           \
  	+vcs+flush+all                                       \
-	-full64                                              \
-	-R                                                   \
-	-debug_access+all                                    \
+	-full64												\
+	-R													\
+	-debug_access+all									\
  	+nontimingcheck                                      \
 	+incdir+../../rtl/top                                \
 	+incdir+../../rtl/caravel                            \
 	+incdir+../../rtl/fsic                               \
 	+incdir+../../rtl/user_project                       \
-	+incdir+./env                                        \
-	+lint=TFIPC-L                                        \
+	+incdir+../system/env	\
+	+lint=TFIPC-L	\
  	$(CM)                                                \
  	$(CM_NAME)                                           \
  	$(CM_DIR)                                            \
@@ -111,41 +113,41 @@ vcs_RTL = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns   \
  	-o $(OUTPUT)                                         \
  	-l compile.log
 
-vcs_POST = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns  \
+vcs_POST = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns              \
 	+nospecify                                           \
  	+vcs+flush+all                                       \
-	-full64                                              \
-	-R                                                   \
-	-debug_access+all                                    \
+	-full64												\
+	-R													\
+	-debug_access+all									\
  	+nontimingcheck                                      \
 	+incdir+../../rtl/top                                \
 	+incdir+../../rtl/caravel                            \
 	+incdir+../../rtl/fsic                               \
 	+incdir+../../rtl/user_project                       \
-	+incdir+./env                                        \
-	+lint=TFIPC-L                                        \
+	+incdir+../system/env	\
+	+lint=TFIPC-L	\
  	$(CM)                                                \
  	$(CM_NAME)                                           \
  	$(CM_DIR)                                            \
- 	$(POST_DEFINE)                                       \
+ 	$(POST_DEFINE)                                        \
  	$(VPD_NAME)                                          \
  	-o $(OUTPUT)                                         \
  	-l compile.log
 
-vcs_RTL_gui = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns \
+vcs_RTL_gui = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns              \
 	+nospecify                                           \
  	+vcs+flush+all                                       \
-	-full64                                              \
-	-R                                                   \
-	-gui -kdb                                            \
-	-debug_access+all                                    \
+	-full64												\
+	-R													\
+	-gui -kdb	\
+	-debug_access+all									\
  	+nontimingcheck                                      \
 	+incdir+../../rtl/top                                \
 	+incdir+../../rtl/caravel                            \
 	+incdir+../../rtl/fsic                               \
 	+incdir+../../rtl/user_project                       \
-	+incdir+./env                                        \
-	+lint=TFIPC-L                                        \
+	+incdir+../system/env	\
+	+lint=TFIPC-L	\
  	$(CM)                                                \
  	$(CM_NAME)                                           \
  	$(CM_DIR)                                            \
@@ -154,29 +156,29 @@ vcs_RTL_gui = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns \
  	-o $(OUTPUT)                                         \
  	-l compile.log
 
-vcs_POST_gui = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns \
+vcs_POST_gui = $(VCS_EXE) -sverilog +v2k -timescale=1ns/1ns              \
 	+nospecify                                           \
  	+vcs+flush+all                                       \
-	-full64                                              \
-	-R                                                   \
-	-gui -kdb                                            \
-	-debug_access+all                                    \
+	-full64												\
+	-R													\
+	-gui -kdb	\
+	-debug_access+all									\
  	+nontimingcheck                                      \
 	+incdir+../../rtl/top                                \
 	+incdir+../../rtl/caravel                            \
 	+incdir+../../rtl/fsic                               \
 	+incdir+../../rtl/user_project                       \
-	+incdir+./env                                        \
-	+lint=TFIPC-L                                        \
+	+incdir+../system/env	\
+	+lint=TFIPC-L	\
  	$(CM)                                                \
  	$(CM_NAME)                                           \
  	$(CM_DIR)                                            \
- 	$(POST_DEFINE)                                       \
+ 	$(POST_DEFINE)                                        \
  	$(VPD_NAME)                                          \
  	-o $(OUTPUT)                                         \
  	-l compile.log
 
-	#-debug_all                                          \
+	#-debug_all                                           \
 
 #simulation command
 SIM = ./$(OUTPUT)                \
@@ -186,35 +188,34 @@ SIM = ./$(OUTPUT)                \
 
 # start compile
 rtlencrypt: 	
-	$(vcs_encrypt) -f ../../rtl/caravel.f \
-	-f ./env/bfm.sys.f \
-	-f ./env/bfm.lib.f 
+	$(vcs_encrypt) -f ../../rtl/caravel.falcon.f \
+	-f ../system/env/bfm.sys.f \
+	-f ../system/env/bfm.lib.f 
 
 rtlcom: 	
-	$(vcs_RTL) -f ../../rtl/caravel.f \
-	-f ./env/bfm.sys.f \
-	-f ./env/bfm.lib.f 
+	$(vcs_RTL) -f ../../rtl/caravel.falcon.f \
+	-f ../system/env/bfm.sys.f \
+	-f ../system/env/bfm.lib.f 
 
 postcom: 	
-	$(vcs_POST) -f ../../rtl/caravel_post.f \
-	-f ./env/bfm.sys.f \
-	-f ./env/bfm.lib.f 
+	$(vcs_POST) -f ../../rtl/caravel_post.falcon.f \
+	-f ../system/env/bfm.sys.f \
+	-f ../system/env/bfm.lib.f 
 
 rtlgui: 	
-	$(vcs_RTL_gui) -f ../../rtl/caravel.f \
-	-f ./env/bfm.sys.f \
-	-f ./env/bfm.lib.f 
+	$(vcs_RTL_gui) -f ../../rtl/caravel.falcon.f \
+	-f ../system/env/bfm.sys.f \
+	-f ../system/env/bfm.lib.f 
 
 postgui: 	
-	$(vcs_POST_gui) -f ../../rtl/caravel_post.f \
-	-f ./env/bfm.sys.f \
-	-f ./env/bfm.lib.f 
+	$(vcs_POST_gui) -f ../../rtl/caravel_post.falcon.f \
+	-f ../system/env/bfm.sys.f \
+	-f ../system/env/bfm.lib.f 
 
 
 #start simulation
 sim:
 	$(SIM)
-
 
 # show the coverage
 cov:
@@ -227,3 +228,4 @@ debug:
 
 clean:
 	rm -rf ./csrc *.daidir ./csrc *.log *.vdb *.vdb simv* *.key *.vcd *.fsdb novas.*
+	rm -rf compile.log.rtl compile.log.post

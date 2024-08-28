@@ -1,0 +1,2 @@
+#rm top_bench.vcd.fsdb
+nWave top_bench.fsdb &
