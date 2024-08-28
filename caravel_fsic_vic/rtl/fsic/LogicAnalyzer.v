@@ -402,7 +402,7 @@ module la_fifo
         end
     end
 
-
+`ifdef USE_PDK_SRAM
     ra1shd16x64m4h3v2 SRAM16x64(
         .CLK(axis_clk),
         .WEN(~sram_we),
@@ -412,8 +412,7 @@ module la_fifo
         .D(sram_din),
         .Q(sram_dout)
     );
-
-    /*
+`else
     SRAM1RW64x128 la_SRAM1RW64x128(
         .CE(axis_clk),
         .WEB(~sram_we),// WEB =1 is read WEB=0 is w_vldite
@@ -423,7 +422,7 @@ module la_fifo
         .I(sram_din),
         .O(sram_dout)
     );
-    */
+`endif
 
 endmodule
 

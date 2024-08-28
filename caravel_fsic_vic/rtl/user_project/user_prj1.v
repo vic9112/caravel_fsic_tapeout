@@ -473,6 +473,7 @@ assign ram1_d   	= (mux_state) ? out_ramf_d   : {48'b0,out_ramu_d};
 assign out_ramu_q = ram1_q[15:0];
 assign out_ramf_q = ram1_q;
 
+`ifdef USE_PDK_SRAM
 ra1shd1024x64m4h3v2 SRAM0 (
   .CLK(axi_clk),
   .WEN(~ram0_we),
@@ -494,7 +495,7 @@ ra1shd1024x64m4h3v2 SRAM1 (
   .D(ram1_d),
   .Q(ram1_q)
 );
-/*
+`else
 SRAM1RW1024x8 S1(
 .CE(axi_clk),
 .WEB(~ram0_we),
@@ -582,10 +583,8 @@ SRAM1RW1024x8 S8(
 .I(ram0_d[63:56]),
 .O(ram0_q[63:56])
 );
-*/
 
 
-/*
 SRAM1RW1024x8 S11(
 .CE(axi_clk),
 .WEB(~ram1_we),
@@ -673,7 +672,7 @@ SRAM1RW1024x8 S18(
 .I(ram1_d[63:56]),
 .O(ram1_q[63:56])
 );
-*/
+`endif
 
 // //SRAM
 // SPRAM #(.data_width(64),.addr_width(10),.depth(1024)) U_SPRAM_0(

@@ -362,17 +362,8 @@ assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFS
         .sram_din(sram_din),
         .sram_dout(sram_dout)
     );
-    /*
-    SRAM1RW64x128 SRAM1RW64x128(
-        .CE(axis_clk),
-        .WEB(~sram_we),// WEB =1 is read WEB=0 is w_vldite
-        .OEB(1'b0),
-        .CSB(1'b0),
-        .A(sram_addr),
-        .I(sram_din),
-        .O(sram_dout)
-    );
-    */
+
+`ifdef USE_PDK_SRAM
     ra1shd16x100m4h3v2 SRAM16x100(
         .CLK(axis_clk),
         .WEN(~sram_we),
@@ -382,5 +373,16 @@ assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFS
         .D(sram_din),
         .Q(sram_dout)
     );
+`else
+    SRAM1RW64x128 SRAM1RW64x128(
+        .CE(axis_clk),
+        .WEB(~sram_we),// WEB =1 is read WEB=0 is w_vldite
+        .OEB(1'b0),
+        .CSB(1'b0),
+        .A(sram_addr),
+        .I(sram_din),
+        .O(sram_dout)
+    );
+`endif
 
 endmodule

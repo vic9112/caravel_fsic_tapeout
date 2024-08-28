@@ -29,5 +29,9 @@ module RAM128 #(parameter USE_LATCH = 1,
          
         end
     endgenerate
+
+    /*
+    ra1shd128x32m4h3v2 RAM128x32 ( .CLK(CLK), .CEN(~EN0), .WEN(~WE0[i]), .OEN(1'b0), .D(Di0), .Q(Do0), .A(A0[6:0]) );
+    */
                                                                                                                                           
 endmodule
