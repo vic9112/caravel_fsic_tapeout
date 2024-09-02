@@ -43,6 +43,8 @@
 /*----------------------------------------------------------------------*/
 
 module mgmt_protect (
+    inout wire vccd,
+    inout wire vssd,
     
     input wire caravel_clk,
     input wire caravel_clk2,
@@ -127,6 +129,10 @@ module mgmt_protect (
 	assign la_data_in_enable = la_iena_mprj & mprj_logic1[457:330];
 
 	nand2_4 user_to_mprj_in_gates [127:0] (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
 		.Y(la_data_in_mprj_bar),
 		.A(la_data_out_core),		// may be floating
 		.B(la_data_in_enable)
@@ -139,6 +145,10 @@ module mgmt_protect (
 	assign user_irq_enable = user_irq_ena & mprj_logic1[460:458];
 
 	nand2_4 user_irq_gates [2:0] (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
 		.Y(user_irq_bar),
 		.A(user_irq_core),		// may be floating
 		.B(user_irq_enable)
@@ -152,6 +162,10 @@ module mgmt_protect (
 	assign wb_in_enable = mprj_iena_wb & mprj_logic1[462];
 
 	nand2_4 user_wb_dat_gates [31:0] (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
 		.Y(mprj_dat_i_core_bar),
 		.A(mprj_dat_i_user),		// may be floating
 		.B(wb_in_enable)
@@ -160,6 +174,10 @@ module mgmt_protect (
 	assign mprj_dat_i_core = ~mprj_dat_i_core_bar;
 
 	nand2_4 user_wb_ack_gate (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
 		.Y(mprj_ack_i_core_bar),
 		.A(mprj_ack_i_user),		// may be floating
 		.B(wb_in_enable)

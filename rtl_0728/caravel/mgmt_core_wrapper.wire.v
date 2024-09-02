@@ -36,6 +36,8 @@
 /* with the Caravel harness chip. */    
 
 module mgmt_core_wrapper (
+    inout wire VPWR,
+    inout wire VGND,
     // Clock and reset
     input wire core_clk,
     input wire core_rstn,
@@ -144,6 +146,8 @@ module mgmt_core_wrapper (
     /* Implement the PicoSoC core */
 
     mgmt_core core (
+        .VPWR(VPWR),        /* 1.8V domain */
+        .VGND(VGND),
         .core_clk(core_clk),
         .core_rstn(core_rstn),
         // Pass-thru signals

@@ -31,6 +31,9 @@
 
 module user_project_wrapper #(parameter BITS = 32)
 (
+    inout vccd,	// 1.8v supply
+    inout vssd,	// digital ground
+
     // Wishbone Slave ports (WB MI A)
     input wb_clk_i,
     input wb_rst_i,
@@ -77,6 +80,9 @@ assign io_oeb      = 38'd0;
 assign user_irq    = 3'd0;
 */
 FSIC #(.BITS( BITS )) u_fsic  (
+                      // [Vic]: Use power pin
+ 	                    .vccd(vccd),
+	                    .vssd(vssd),
 
                       // MGMT SoC Wishbone Slave
                       .wb_rst      (wb_rst_i),                // I

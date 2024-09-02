@@ -14,6 +14,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 module caravel_clocking(
+    input wire VPWR,
+    input wire VGND,
     input wire resetb,
     input wire ext_clk,
     input wire ext_reset,

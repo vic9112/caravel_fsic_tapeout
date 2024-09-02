@@ -19,6 +19,8 @@ module gpio_defaults_block #(
     // definitions.
     parameter GPIO_CONFIG_INIT = 13'h0402
 ) (
+    inout wire VPWR,
+    inout wire VGND,
     output wire [12:0] gpio_defaults
 );
     wire [12:0] gpio_defaults_high;
@@ -27,6 +29,10 @@ module gpio_defaults_block #(
     // For the mask revision input, use an array of digital constant logic cells
 
     conb_1 gpio_default_value [12:0] (
+        .VPWR(VPWR),
+        .VPB(VPWR),
+        .VNB(VGND),
+        .VGND(VGND),
         .HI(gpio_defaults_high),
         .LO(gpio_defaults_low)
     );

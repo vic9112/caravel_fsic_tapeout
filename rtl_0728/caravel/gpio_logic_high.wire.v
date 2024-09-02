@@ -11,6 +11,10 @@ module gpio_logic_high(
 );
 
     conb_1 gpio_logic_high (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
         .HI(gpio_logic1),
         .LO()
     );

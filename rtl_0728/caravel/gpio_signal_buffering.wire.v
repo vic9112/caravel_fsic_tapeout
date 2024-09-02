@@ -73,6 +73,8 @@
  */
 
 module gpio_signal_buffering (
+	vccd,
+	vssd,
     mgmt_io_in_unbuf,
     mgmt_io_out_unbuf,
     mgmt_io_oeb_buf,
@@ -81,6 +83,8 @@ module gpio_signal_buffering (
     mgmt_io_oeb_unbuf
 );
 
+    input wire vccd;
+    input wire vssd;
 
     /* NOTE:  To match the indices of the same signals in the
      * top level, add 35 to all OEB lines and add 7 to all in and out lines
@@ -98,6 +102,10 @@ module gpio_signal_buffering (
     wire [195:0] buf_out;
 
     buf_8 signal_buffers [195:0] (
+	    .VPWR(vccd),
+	    .VGND(vssd),
+	    .VPB(vccd),
+	    .VNB(vssd),
 	    .A(buf_in),
 	    .X(buf_out)
     );

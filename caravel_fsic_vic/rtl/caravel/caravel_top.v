@@ -216,8 +216,6 @@ module caravel_top (
 	// the root of CTS - signal "clock_core_buf"
 	//==========================================
 	buff_flash_clkrst flash_clkrst_buffers (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.in_n({
 		caravel_clk,
 		caravel_rstn,
@@ -261,8 +259,6 @@ module caravel_top (
 	// make core_clk and user_clk the same clk
 	//==========================================
     caravel_clocking clock_ctrl (
-		.VPWR(vccd),
-		.VGND(vssd),
         .resetb(rstb_l_buf),
         .ext_clk(clock_core_buf),
         .ext_reset(ext_reset),  // From housekeeping SPI
@@ -288,8 +284,6 @@ module caravel_top (
 		assign mgmt_io_oeb[34:0] = mgmt_io_oeb_hk[34:0];
 
 		gpio_signal_buffering sigbuf (
-			.vccd(vccd),
-			.vssd(vssd),
 			.mgmt_io_in_unbuf(mgmt_io_in[37:7]),
 			.mgmt_io_out_unbuf(mgmt_io_out_hk[37:7]),
 			.mgmt_io_oeb_unbuf(mgmt_io_oeb_hk[37:35]),
@@ -300,13 +294,6 @@ module caravel_top (
 	`endif
 
 	chip_io padframe(
-	`ifndef TOP_ROUTING
-		// [Vic]: Using powerpad
-		.vddio (vddio),
-		.vssio (vssio),
-		.vccd  (vccd),
-		.vssd  (vssd),
-	`endif
 		// Core Side Pins
 		.gpio(gpio),
 		.mprj_io(mprj_io),
@@ -433,9 +420,6 @@ module caravel_top (
 //	wire porb_h_out_nc;
 
     mgmt_core_wrapper soc (
-	    .VPWR(vccd),
-	    .VGND(vssd),
-
 	    // SoC pass through buffered signals
 	    .serial_clock_in(mprj_io_loader_clock),
 	    .serial_clock_out(mprj_io_loader_clock_buf),
@@ -552,9 +536,6 @@ module caravel_top (
     /* the vccd1 domain.						*/
 
     mgmt_protect mgmt_buffers (
- 	    .vccd(vccd),
-	    .vssd(vssd),
-	
     	.caravel_clk(clk_passthru),
     	.caravel_clk2(caravel_clk2),
     	.caravel_rstn(resetn_passthru),
@@ -600,8 +581,6 @@ module caravel_top (
     /*--------------------------------------------------*/
 
     user_project_wrapper mprj ( 
- 	    .vccd(vccd),
-	    .vssd(vssd),
 
     	.wb_clk_i(mprj_clock),
     	.wb_rst_i(mprj_reset),
@@ -683,8 +662,6 @@ module caravel_top (
     // Housekeeping interface
 
     housekeeping housekeeping (
-		.VPWR(vccd),
-		.VGND(vssd),
 
         .wb_clk_i(caravel_clk),
         .wb_rstn_i(caravel_rstn),
@@ -796,24 +773,18 @@ module caravel_top (
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(13'h1803)
     ) gpio_defaults_block_0 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[12:0])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(13'h1803)
     ) gpio_defaults_block_1 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[25:13])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(13'h0403)
     ) gpio_defaults_block_2 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[38:26])
     );
 
@@ -821,16 +792,12 @@ module caravel_top (
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(13'h0801)
     ) gpio_defaults_block_3 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[51:39])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(13'h0403)
     ) gpio_defaults_block_4 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[64:52])
     );
 
@@ -839,264 +806,198 @@ module caravel_top (
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_5_INIT)
     ) gpio_defaults_block_5 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[77:65])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_6_INIT)
     ) gpio_defaults_block_6 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[90:78])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_7_INIT)
     ) gpio_defaults_block_7 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[103:91])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_8_INIT)
     ) gpio_defaults_block_8 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[116:104])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_9_INIT)
     ) gpio_defaults_block_9 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[129:117])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_10_INIT)
     ) gpio_defaults_block_10 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[142:130])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_11_INIT)
     ) gpio_defaults_block_11 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[155:143])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_12_INIT)
     ) gpio_defaults_block_12 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[168:156])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_13_INIT)
     ) gpio_defaults_block_13 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[181:169])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_14_INIT)
     ) gpio_defaults_block_14 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[194:182])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_15_INIT)
     ) gpio_defaults_block_15 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[207:195])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_16_INIT)
     ) gpio_defaults_block_16 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[220:208])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_17_INIT)
     ) gpio_defaults_block_17 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[233:221])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_18_INIT)
     ) gpio_defaults_block_18 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[246:234])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_19_INIT)
     ) gpio_defaults_block_19 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[259:247])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_20_INIT)
     ) gpio_defaults_block_20 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[272:260])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_21_INIT)
     ) gpio_defaults_block_21 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[285:273])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_22_INIT)
     ) gpio_defaults_block_22 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[298:286])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_23_INIT)
     ) gpio_defaults_block_23 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[311:299])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_24_INIT)
     ) gpio_defaults_block_24 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[324:312])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_25_INIT)
     ) gpio_defaults_block_25 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[337:325])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_26_INIT)
     ) gpio_defaults_block_26 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[350:338])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_27_INIT)
     ) gpio_defaults_block_27 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[363:351])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_28_INIT)
     ) gpio_defaults_block_28 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[376:364])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_29_INIT)
     ) gpio_defaults_block_29 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[389:377])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_30_INIT)
     ) gpio_defaults_block_30 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[402:390])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_31_INIT)
     ) gpio_defaults_block_31 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[415:403])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_32_INIT)
     ) gpio_defaults_block_32 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[428:416])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_33_INIT)
     ) gpio_defaults_block_33 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[441:429])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_34_INIT)
     ) gpio_defaults_block_34 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[454:442])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_35_INIT)
     ) gpio_defaults_block_35 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[467:455])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_36_INIT)
     ) gpio_defaults_block_36 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[480:468])
     );
 
     gpio_defaults_block #(
 	.GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_37_INIT)
     ) gpio_defaults_block_37 (
-	    .VPWR(vccd),
-	    .VGND(vssd),
 	.gpio_defaults(gpio_defaults[493:481])
     );
 
@@ -1117,8 +1018,6 @@ module caravel_top (
     /* First two GPIOs (JTAG and SDO) */
 
     gpio_control_block gpio_control_bidir_1 [1:0] (
-	    .vccd(vccd),
-	    .vssd(vssd),
 
 	.gpio_defaults(gpio_defaults[25:0]),
 
@@ -1166,8 +1065,6 @@ module caravel_top (
     /* Section 1 GPIOs (GPIO 2 to 7) that start up under management control */
 
     gpio_control_block gpio_control_in_1a [5:0] (
-        .vccd(vccd),
-	    .vssd(vssd),
 
 	.gpio_defaults(gpio_defaults[103:26]),
 
@@ -1215,8 +1112,6 @@ module caravel_top (
     /* Section 1 GPIOs (GPIO 8 to 18) */
 
     gpio_control_block gpio_control_in_1 [`MPRJ_IO_PADS_1-9:0] (
-        .vccd(vccd),
-	    .vssd(vssd),
 
 	.gpio_defaults(gpio_defaults[(`MPRJ_IO_PADS_1*13-1):104]),
 
@@ -1264,8 +1159,6 @@ module caravel_top (
     /* Last three GPIOs (spi_sdo, flash_io2, and flash_io3) */
 
     gpio_control_block gpio_control_bidir_2 [2:0] (
-	    .vccd(vccd),
-	    .vssd(vssd),
 
 	.gpio_defaults(gpio_defaults[(`MPRJ_IO_PADS*13-1):(`MPRJ_IO_PADS*13-39)]),
 
@@ -1313,8 +1206,6 @@ module caravel_top (
     /* Section 2 GPIOs (GPIO 19 to 34) */
 
     gpio_control_block gpio_control_in_2 [`MPRJ_IO_PADS_2-4:0] (
-        .vccd(vccd),
-	    .vssd(vssd),
 
 	.gpio_defaults(gpio_defaults[(`MPRJ_IO_PADS*13-40):(`MPRJ_IO_PADS_1*13)]),
 
@@ -1362,13 +1253,10 @@ module caravel_top (
     user_id_programming #(
 	.USER_PROJECT_ID(USER_PROJECT_ID)
     ) user_id_value (
-		.VPWR(vccd),
-		.VGND(vssd),
 	.mask_rev(mask_rev)
     );
 
     reset_as_por por (
-    //TODO USE_POWER_PINS need update it
         .clk(clock),
         .PAD(resetb),
 		.rstb_h(rstb_h),

@@ -22,6 +22,10 @@ module constant_block (
     wire	zero_unbuf;
 
     conb_1 const_source (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
         .HI(one_unbuf),
         .LO(zero_unbuf)
     );
@@ -33,11 +37,19 @@ module constant_block (
     /* requirements, without buffering.					*/
 
     buf_16 const_one_buf (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
         .A(one_unbuf),
         .X(one)
     );
 
     buf_16 const_zero_buf (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
         .A(zero_unbuf),
         .X(zero)
     );

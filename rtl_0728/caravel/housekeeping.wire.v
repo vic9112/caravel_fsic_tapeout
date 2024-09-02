@@ -65,6 +65,8 @@ module housekeeping #(
     parameter SYS_BASE_ADR = 32'h2620_0000,
     parameter IO_CTRL_BITS = 13
 ) (
+    inout wire VPWR,
+    inout wire VGND,
 
     // Wishbone interface to management SoC
     input wire wb_clk_i,
@@ -277,6 +279,10 @@ module housekeeping #(
     assign spimemio_flash_io1_di = (pass_thru_mgmt) ? 1'b0 : pad_flash_io1_di;
 
 (* keep *) clkbuffer pad_flashh_clk_buff_inst (
+    .VPWR(VPWR),
+    .VGND(VGND),
+    .VPB(VPWR),
+    .VNB(VGND),
 	.A(pad_flash_clk_prebuff),
     .X(pad_flash_clk));
 
@@ -806,6 +812,12 @@ module housekeeping #(
 			: mgmt_gpio_data[9];
 
 (* keep *) clkbuffer mgmt_gpio_9_buff_inst (
+`ifdef USE_POWER_PINS
+        .VPWR(VPWR),
+        .VGND(VGND),
+        .VPB(VPWR),
+        .VNB(VGND),
+`endif
 	.A(mgmt_gpio_out_9_prebuff),
     .X(mgmt_gpio_out[9]));
 
@@ -851,6 +863,12 @@ module housekeeping #(
 		: mgmt_gpio_data[15];
 
 (* keep *) clkbuffer mgmt_gpio_15_buff_inst (
+`ifdef USE_POWER_PINS
+        .VPWR(VPWR),
+        .VGND(VGND),
+        .VPB(VPWR),
+        .VNB(VGND),
+`endif
 	.A(mgmt_gpio_out_15_prebuff),
     .X(mgmt_gpio_out[15]));
 
@@ -858,6 +876,12 @@ module housekeeping #(
 		: mgmt_gpio_data[14];
 
 (* keep *) clkbuffer mgmt_gpio_14_buff_inst (
+`ifdef USE_POWER_PINS
+        .VPWR(VPWR),
+        .VGND(VGND),
+        .VPB(VPWR),
+        .VNB(VGND),
+`endif
 	.A(mgmt_gpio_out_14_prebuff),
     .X(mgmt_gpio_out[14]));
 

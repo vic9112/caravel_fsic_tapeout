@@ -58,6 +58,8 @@
 module gpio_control_block #(
     parameter PAD_CTRL_BITS = 13
 ) (
+    inout wire vccd,
+    inout wire vssd,
 
     // Power-on defaults
     input wire [PAD_CTRL_BITS-1:0] gpio_defaults,
@@ -150,6 +152,10 @@ module gpio_control_block #(
     /* Propagate the clock and reset signals so that they aren't wired	*/
     /* all over the chip, but are just wired between the blocks.	*/
     (* keep *) clkbuffer BUF[2:0] (
+        .VPWR(vccd),
+        .VGND(vssd),
+        .VPB(vccd),
+        .VNB(vssd),
         .A({serial_clock, resetn, serial_load}),
         .X({serial_clock_out, resetn_out, serial_load_out})
     );
@@ -232,6 +238,8 @@ module gpio_control_block #(
     /* Buffer user_gpio_in with an enable that is set by the user domain vccd */
 
     gpio_logic_high gpio_logic_high (
+        .vccd(vccd),
+        .vssd(vssd),
         .gpio_logic1(gpio_logic1)
     );
 
@@ -241,6 +249,10 @@ module gpio_control_block #(
 
 
     conb_1 const_source (
+            .VPWR(vccd),
+            .VGND(vssd),
+            .VPB(vccd),
+            .VNB(vssd),
             .HI(one_unbuf),
             .LO(zero_unbuf)
     );

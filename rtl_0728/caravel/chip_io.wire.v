@@ -5,6 +5,12 @@
 
 // `default_nettype none
 module chip_io(
+	// Core side (power pad defined at back_end)
+    inout wire vddio,
+    inout wire vssio,
+    inout wire vccd,
+    inout wire vssd,
+    
     inout wire gpio,
     input wire clock,
     `ifndef NO_POR_PAD //tony_debug
@@ -93,50 +99,92 @@ module chip_io(
     wire [6:0] vssd_const_zero;	// Constant value for management pins
 
     constant_block constant_value_inst [6:0] (
+	    .vccd(vccd),
+	    .vssd(vssd),
 	    .one (vccd_const_one),
 	    .zero(vssd_const_zero)
     );
 
 	// Management clock input pad
     iopad_clk pad_clock (
-		.PAD  (clock),
-		.OUT  (),
+        `ifndef	TOP_ROUTING
+		    .PAD(clock),
+	    `endif
+		.VDDIO(vddio),
+		.VSSIO(vssio),
+		.VCCD (vccd),
+		.VSSD (vssd),
+		.OUT  (vssd_const_zero[0]),
 		.DM   ({vssd_const_zero[0], vssd_const_zero[0], vccd_const_one[0]}),
 		.IN   (clock_core));
 
     // Management GPIO pad
     iopad_gpio pad_gpio (
-		.PAD  (gpio),
+        `ifndef	TOP_ROUTING
+		    .PAD(gpio),
+	    `endif
+		.VDDIO(vddio),
+		.VSSIO(vssio),
+		.VCCD (vccd),
+		.VSSD (vssd),
 		.OUT  (gpio_out_core),
 		.DM   (dm_all),
 		.IN   (gpio_in_core));
     
 	// Management Flash SPI pads
     iopad_flash_io0 pad_flash_io0 (
-		.PAD  (flash_io0),
+        `ifndef	TOP_ROUTING
+		    .PAD(flash_io0),
+	    `endif
+		.VDDIO(vddio),
+		.VSSIO(vssio),
+		.VCCD (vccd),
+		.VSSD (vssd),
 		.OUT  (flash_io0_do_core),
 		.DM   (flash_io0_mode),
 		.IN   (flash_io0_di_core));
 	
     iopad_flash_io1 pad_flash_io1 (
-		.PAD  (flash_io1),
+        `ifndef	TOP_ROUTING
+		    .PAD(flash_io1),
+	    `endif
+		.VDDIO(vddio),
+		.VSSIO(vssio),
+		.VCCD (vccd),
+		.VSSD (vssd),
 		.OUT  (flash_io1_do_core),
 		.DM   (flash_io1_mode),
 		.IN   (flash_io1_di_core));
 
     iopad_flash_csb pad_flash_csb (
-		.PAD  (flash_csb),
+        `ifndef	TOP_ROUTING
+		    .PAD(flash_csb),
+	    `endif
+		.VDDIO(vddio),
+		.VSSIO(vssio),
+		.VCCD (vccd),
+		.VSSD (vssd),
 		.OUT  (flash_csb_core),
 		.DM   ({vccd_const_one[4], vccd_const_one[4], vssd_const_zero[4]}),
 		.IN   ());
 
     iopad_flash_clk pad_flash_clk (
-		.PAD  (flash_clk),
+        `ifndef	TOP_ROUTING
+		    .PAD(flash_clk),
+	    `endif
+		.VDDIO(vddio),
+		.VSSIO(vssio),
+		.VCCD (vccd),
+		.VSSD (vssd),
 		.OUT  (flash_clk_core),
 		.DM   ({vccd_const_one[5], vccd_const_one[5], vssd_const_zero[5]}),
 		.IN   ());
 
 	mprj_io mprj_pads(
+		.vddio(vddio),
+		.vssio(vssio),
+		.vccd(vccd),
+		.vssd(vssd),
 		.porb_h(porb_h),
 		.vccd_conb(mprj_io_one),
 		.io(mprj_io),

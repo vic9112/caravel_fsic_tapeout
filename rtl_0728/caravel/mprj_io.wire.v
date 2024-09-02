@@ -18,6 +18,10 @@
 	`ifndef	TOP_ROUTING        \
 	    .PAD(io[n]),           \
 	`endif                     \
+		.VDDIO(vddio),         \
+		.VSSIO(vssio),         \
+		.VCCD (vccd),          \
+		.VSSD (vssd),          \
 	    .OUT  (io_out[n]),     \
 	    .DM   (dm[n*3+2:n*3]), \
 	    .IN   (io_in[n]) );
@@ -26,6 +30,10 @@ module mprj_io #(
     parameter AREA1PADS = `MPRJ_IO_PADS_1,
     parameter TOTAL_PADS = `MPRJ_IO_PADS
     ) (
+    inout wire vddio,
+    inout wire vssio,
+    inout wire vccd,
+    inout wire vssd,
     
     input wire porb_h,
     input wire [TOTAL_PADS-1:0] vccd_conb,
