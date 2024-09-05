@@ -1,7 +1,8 @@
 module fifo
 #( parameter WIDTH = 45,
-   parameter depth= 16,
-   parameter sram_datawidth= 100
+   parameter depth= 64,
+   parameter sram_datawidth= 128,
+   parameter mode=1 // mode 1 is for as, 0 is for la
 )
 (
     input axis_clk ,
@@ -78,12 +79,15 @@ module fifo
     end 
 
     /////////////////////////// ptr part ///////////////////////////////////////////////////////////////////////////
+
+    wire w_rdy_mode;
+    assign w_rdy_mode=mode|w_rdy;
     always @(posedge axis_clk or negedge axi_reset_n) begin
         if (!axi_reset_n)begin 
             w_ptr<=0;
         end
         else begin
-            if(w_vld)w_ptr<=w_ptr_next;
+            if(w_vld & w_rdy_mode )w_ptr<=w_ptr_next;
             else  w_ptr<=w_ptr;
         end
     end 
@@ -100,7 +104,7 @@ module fifo
 ///////////////////////////////// Write part ////////////////////////////////////////////////////////////////
 //the MSB is different while the other bits are the same, it indicates that w_ptr has already completed one full cycle ahead of r_ptr, meaning it is full.  
 // above th can remove if you not use 
-    assign w_rdy=~above_TH;  // not use full and empty 
+    assign w_rdy= (mode==1)? ~above_TH : ~((w_ptr[ptr_width-1]==~r_ptr[ptr_width-1])&(w_ptr[ptr_width-2:0]==r_ptr[ptr_width-2:0]));  // not use full and empty 
     reg [WIDTH-1:0]data_in_l;
 
     always @(posedge axis_clk or negedge axi_reset_n) begin
@@ -108,7 +112,7 @@ module fifo
             data_in_l<=0;
         end
         else begin
-            if(w_vld)
+            if(w_vld & w_rdy_mode)
             data_in_l<=data_in;
             else 
             data_in_l<=data_in_l;
@@ -116,6 +120,15 @@ module fifo
     end 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    reg sram_read_flag;
+    wire sram_read_flag_next;
+    assign sram_read_flag_next=((state==WAIT_SRAM_READ)&(~sram_we))|((state==NORMAL) & ~(~r_ptr[0] & r_vld &r_rdy) & (~sram_we & !(r_ptr_next[ptr_width-2:1]==w_ptr[ptr_width-2:1])));
+    always @(posedge axis_clk or negedge axi_reset_n) begin
+        if (!axi_reset_n)
+            sram_read_flag<=0;
+        else 
+            sram_read_flag<=sram_read_flag_next;
+    end 
 
 
     assign sram_we= w_vld & w_ptr[0]; // only write in sram in w_ptr[0]==1 mean even times.
@@ -135,16 +148,44 @@ module fifo
 
 
     reg [WIDTH-1:0] data_out_odd;
-
+    reg [WIDTH-1:0] data_out_even;
+       
     always @(posedge axis_clk or negedge axi_reset_n) begin
         if (!axi_reset_n)begin 
             data_out_odd<=0;
         end
         else begin
-            if(~r_ptr[0])
+            if(sram_read_flag)
             data_out_odd<=sram_out_odd;
             else 
             data_out_odd<=data_out_odd;
+        end
+    end 
+    always @(posedge axis_clk or negedge axi_reset_n) begin
+        if (!axi_reset_n)begin 
+            data_out_even<=0;
+        end
+        else begin
+            if(sram_read_flag)
+            data_out_even<=sram_out_even;
+            else 
+            data_out_even<=data_out_even;
+        end
+    end 
+    reg [WIDTH-1:0] data_out_odd_l;
+    always @(posedge axis_clk or negedge axi_reset_n) begin
+        if (!axi_reset_n)begin 
+            data_out_odd_l<=0;
+        end
+        else begin
+            if(~r_ptr[0])begin
+                if(sram_read_flag)
+                data_out_odd_l<=sram_out_odd;
+                else 
+                data_out_odd_l<=data_out_odd;
+            end
+            else 
+            data_out_odd_l<=data_out_odd_l;
         end
     end 
 
@@ -154,7 +195,7 @@ module fifo
 
     // there are three conidtion :1. when r_ptr_next=w_ptr is always 1 becuase data is from data_l. and 2. state if is normal can divide into two condition read even or odd times to decide.and contion isn't normal only when state==WAIT fifo read can be 1.
     assign r_vld=((r_ptr_next==w_ptr)?1'b1:(state==NORMAL)?((r_ptr[0])?1'b1:r_vld_even):state==WAIT_FIFO_READ)& !empty;
-    assign data_out=(r_ptr_next==w_ptr)?data_in_l: (state==NORMAL)?((r_ptr[0])?data_out_odd:sram_out_even):sram_out_odd;  
+    assign data_out=(r_ptr_next==w_ptr)?data_in_l: (state==NORMAL)?((r_ptr[0])?data_out_odd_l:(sram_read_flag)?sram_out_even:data_out_even):(sram_read_flag)?sram_out_odd:data_out_odd;  
 
   
 
