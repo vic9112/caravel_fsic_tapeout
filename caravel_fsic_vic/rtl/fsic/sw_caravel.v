@@ -239,6 +239,9 @@ always @(*) begin
     end
     3'b010: begin  						// For AA 
         m_axis_tdata_reg  = aa_as_tdata;
+`ifdef USER_PROJECT_SIDEBAND_SUPPORT
+        m_axis_tupsb_reg  = 5'b0000_0;
+`endif
         m_axis_tstrb_reg  = aa_as_tstrb;
         m_axis_tkeep_reg  = aa_as_tkeep;
         m_axis_tvalid_reg = aa_as_tvalid;   
@@ -248,6 +251,9 @@ always @(*) begin
     end	
     3'b100: begin  						// For LA 
         m_axis_tdata_reg  = la_as_tdata;
+`ifdef USER_PROJECT_SIDEBAND_SUPPORT
+        m_axis_tupsb_reg  = 5'b0000_0;
+`endif
         m_axis_tstrb_reg  = la_as_tstrb;
         m_axis_tkeep_reg  = la_as_tkeep;	
         m_axis_tvalid_reg = la_as_tvalid; 
@@ -287,16 +293,71 @@ always @(posedge axis_clk or negedge axi_reset_n)  begin
         cnt <= 3'b000;
 	end
 end
-// scalable arb
-arbiter #(.PORTS(3)) arbiter
-    (
-        .axis_clk(axis_clk),
-        .axi_reset_n(axi_reset_n),
-        .req(req),
-        .hi_req(hi_req),
-	    .ack((as_is_tvalid & is_as_tready & as_is_tlast)|cnt==3'b111), // tlast or cnt=3'b111 would go to the change state.
-        .grant(grant)
-    );
+
+wire last;
+assign last=(as_is_tvalid & is_as_tready & as_is_tlast)|cnt==3'b111;
+reg [N:0]grant_next;
+reg [N:0]grant_reg;
+localparam WAIT_0 = 4'b0001, WAIT_1 = 4'b0010, WAIT_2 = 4'b0100, GRANT_0=4'b1001, GRANT_1=4'b1010, GRANT_2=4'b1100;
+
+assign grant=(grant_reg[3])?grant_reg[2:0]:0;
+always @* begin
+    case(grant_reg)
+    WAIT_0:begin 
+        if(hi_req[1]) grant_next=GRANT_1;
+        else if (hi_req[2]) grant_next=GRANT_2;
+        else if (hi_req[0]) grant_next=GRANT_0;
+        else if (req[1])grant_next=GRANT_1;
+        else if (req[2])grant_next=GRANT_2;
+        else if (req[0])grant_next=GRANT_0;
+        else grant_next=grant_reg;
+    end
+
+    WAIT_1:begin 
+        if(hi_req[2]) grant_next=GRANT_2;
+        else if (hi_req[0]) grant_next=GRANT_0;
+        else if (hi_req[1]) grant_next=GRANT_1;
+        else if (req[2])grant_next=GRANT_2;
+        else if (req[0])grant_next=GRANT_0;
+        else if (req[1])grant_next=GRANT_1;
+        else grant_next=grant_reg;
+    end
+
+    WAIT_2:begin 
+        if(hi_req[0]) grant_next=GRANT_0;
+        else if (hi_req[1]) grant_next=GRANT_1;
+        else if (hi_req[2]) grant_next=GRANT_2;
+        else if (req[0])grant_next=GRANT_0;
+        else if (req[1])grant_next=GRANT_1;
+        else if (req[2])grant_next=GRANT_2;
+        else grant_next=grant_reg;
+    end
+
+    GRANT_0:begin
+        if(last) grant_next=WAIT_0;
+        else grant_next=grant_reg;
+    end
+
+    GRANT_1:begin
+        if(last) grant_next=WAIT_1;
+        else grant_next=grant_reg;
+    end
+    GRANT_2:begin
+        if(last) grant_next=WAIT_2;
+        else grant_next=grant_reg;
+    end
+    endcase
+end
+
+always @(posedge axis_clk or negedge axi_reset_n) begin
+    if (!axi_reset_n)begin 
+        grant_reg<=WAIT_0;
+    end
+    else begin
+        grant_reg<=grant_next;
+    end
+end 
+
 
 
 /////////////////////////////////// Downstream//////////////////////////////////////////////////
@@ -339,14 +400,20 @@ assign as_aa_tkeep = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[KEEP_OFFS
 assign as_aa_tlast = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[LAST_OFFSET]: 0;
 assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFSET +: USER_WIDTH]: 0;
 
+
+`ifdef USE_PDK_SRAM
+    localparam fifo_depth=64;
+    localparam sram_datawidth=128;
+`else
     localparam fifo_depth=16;
     localparam sram_datawidth=100;
+`endif
     wire sram_we;
     wire [$clog2(fifo_depth)-1:0] sram_addr;
     wire [sram_datawidth-1:0]sram_din;
     wire [sram_datawidth-1:0] sram_dout;
 
-    fifo #(.WIDTH(WIDTH),.depth(fifo_depth),.sram_datawidth(sram_datawidth)) fifo
+    fifo #(.WIDTH(WIDTH),.depth(fifo_depth),.sram_datawidth(sram_datawidth),.mode(1)) as_fifo
     (
         .axis_clk(axis_clk),
         .axi_reset_n(axi_reset_n),
@@ -362,9 +429,8 @@ assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFS
         .sram_din(sram_din),
         .sram_dout(sram_dout)
     );
-
 `ifdef USE_PDK_SRAM
-    ra1shd16x100m4h3v2 SRAM16x100(
+    ra1shd16x100m4h3v2 AS_SRAM16x100(
         .CLK(axis_clk),
         .WEN(~sram_we),
         .OEN(1'b0),
