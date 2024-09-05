@@ -22746,6 +22746,22 @@ module stage_run (
       .dat(mode1_rsc_dat),
       .idat(mode1_rsci_idat)
     );
+  
+
+`ifdef USE_PDK_ROM
+wire [56:0] O_1_out_57;
+wire [56:0] O_1_out_1_57;
+ROM_1024x142 ROM_1024x142(
+.CLK(clk),
+.CEN(1'b1),//not sure
+.I(z_out_7),
+.O({U_ROM_1i10_1o14_out_2,U_ROM_1i10_1o14_out_3,O_1_out_57,O_1_out_1_57})
+);
+
+assign O_1_out={z_out_7[0],1'b0,{5{O_1_out_57[56]}},O_1_out_57};
+assign O_1_out_1={{5{O_1_out_1_57[56]}},O_1_out_1_57};
+
+`else
   ROM_1i10_1o14_64308806abd59d677de1cc2043c30c27bd  U_ROM_1i10_1o14_486610990d9cceb357c747b53d9fad3232_rg
       (
       .I_1(z_out_7),
@@ -22766,6 +22782,8 @@ module stage_run (
       .I_1(z_out_7),
       .O_1(O_1_out_1)
     );
+`endif
+    
   mgc_shift_l_v5 #(.width_a(32'sd57),
   .signd_a(32'sd0),
   .width_s(32'sd6),
