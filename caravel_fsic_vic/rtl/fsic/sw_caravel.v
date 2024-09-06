@@ -402,11 +402,11 @@ assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFS
 
 
 `ifdef USE_PDK_SRAM
-    localparam fifo_depth=64;
-    localparam sram_datawidth=128;
-`else
     localparam fifo_depth=16;
     localparam sram_datawidth=100;
+`else
+    localparam fifo_depth=64;
+    localparam sram_datawidth=128;
 `endif
     wire sram_we;
     wire [$clog2(fifo_depth)-1:0] sram_addr;
