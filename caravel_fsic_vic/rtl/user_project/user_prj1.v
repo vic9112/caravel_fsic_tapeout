@@ -278,12 +278,12 @@ always @(posedge axi_clk or negedge axi_reset_n)  begin
     reg_mode1_in <= 16'b0;
   end
   else begin
-     if(state==Command)begin
-        reg_mode1_in <= {14'b0,ss_tdata[1:0]};
-     end
-     else begin
-        reg_mode1_in <=reg_mode1_in;
-     end
+    if(state==Command)begin
+      reg_mode1_in <= {14'b0,ss_tdata[1:0]};
+    end
+    else begin
+      reg_mode1_in <=reg_mode1_in;
+    end
   end
 end
 
@@ -332,18 +332,20 @@ always @(posedge axi_clk or negedge axi_reset_n)  begin
 		regy_data <= 32'b0;
   end
   else begin
-  	if(Out_state==F_WAIT1&&Out_vld)begin
+  	if(Out_state==F_WAIT1 && Out_vld)begin
 			regx_data <= Out_data[31:0];
 			regy_data <= Out_data[63:32];
- 	end
- 	else begin
- 	end
+ 	  end
+ 	  else begin
+      regx_data <= regx_data;
+			regy_data <= regy_data;
+ 	  end
   end
 end
 
 /********** sm_tlast ***********/
 
-reg [12:0] last_cnt;
+reg [11:0] last_cnt;
 always @(posedge axi_clk or negedge axi_reset_n)  begin
   if ( !axi_reset_n ) begin
 		last_cnt <= 12'b0;
@@ -360,7 +362,7 @@ end
 
 
 
-assign sm_tlast  = (reg_mode1_in[1])  ? ((last_cnt==11'd1023) ? 1 : 0) : ((last_cnt==11'd2047) ? 1 : 0);
+assign sm_tlast  = (reg_mode1_in[1])  ? ((last_cnt==12'd1023) ? 1 : 0) : ((last_cnt==12'd2047) ? 1 : 0);
 assign sm_tvalid = (Out_state==U_OUT) ? Out_vld : (Out_state==F_OUT1||Out_state==F_OUT2);
 assign sm_tdata  = (Out_state==U_OUT) ? {16'b0,Out_data[79:64]} : ((Out_state==F_OUT1)?regx_data:regy_data);
 assign Out_rdy   = (Out_state==U_OUT||Out_state==F_OUT2) ? sm_tready : 0;
@@ -430,8 +432,28 @@ assign ram1_adr 	= (mux_state) ? out_ramf_adr : out_ramu_adr;
 assign ram1_d   	= (mux_state) ? out_ramf_d   : {48'b0,out_ramu_d};
 assign out_ramu_q = ram1_q[15:0];
 assign out_ramf_q = ram1_q;
+`ifdef USE_PDK_SRAM
+ralshd1024x64m4h3v2 SRAM0(
+  .CLK(axi_clk),
+  .WEN(~ram0_we),
+  .OEN(1'b0),
+  .CEN(~ram0_en),
+  .A(ram0_adr),
+  .D(ram0_d),
+  .Q(ram0_q)
+);
 
+ralshd1024x64m4h3v2 SRAM1(
+  .CLK(axi_clk),
+  .WEN(~ram1_we),
+  .OEN(1'b0),
+  .CEN(~ram1_en),
+  .A(ram1_adr),
+  .D(ram1_d),
+  .Q(ram1_q)
+);
 
+`else
 SRAM1RW1024x8 S1(
 .CE(axi_clk),
 .WEB(~ram0_we),
@@ -609,31 +631,8 @@ SRAM1RW1024x8 S18(
 .I(ram1_d[63:56]),
 .O(ram1_q[63:56])
 );
-
-
-// //SRAM
-// SPRAM #(.data_width(64),.addr_width(10),.depth(1024)) U_SPRAM_0(
-// .adr (ram0_adr ), 
-// .d   (ram0_d   ), 
-// .en  (ram0_en  ), 
-// .we  (ram0_we  ), 
-// .clk (axi_clk  ), //user_clock2 ? 
-// .q   (ram0_q   )
-// );
-
-// SPRAM #(.data_width(64),.addr_width(10),.depth(1024)) U_SPRAM_1(
-// .adr (ram1_adr ), 
-// .d   (ram1_d   ), 
-// .en  (ram1_en  ), 
-// .we  (ram1_we  ), 
-// .clk (axi_clk  ), //user_clock2 ? 
-// .q   (ram1_q   )
-// );
-
-
-
-
-endmodule // USER_PRJ2
+`endif
+endmodule 
 
 
 `define numAddr 10
