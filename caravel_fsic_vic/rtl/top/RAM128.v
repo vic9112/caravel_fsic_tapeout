@@ -30,7 +30,7 @@ module RAM128 #(parameter USE_LATCH = 1,
 
 `ifdef USE_PDK_SRAM
     wire we;
-    assign we = (WE0[3] && WE0[2] && WE0[1] && WE[0]);
+  assign we = (WE0[3] && WE0[2] && WE0[1] && WE0[0]);
     ra1shd128x32m4h3v2 RAM128x32 ( .CLK(CLK), .CEN(~EN0), .WEN(~we), .OEN(1'b0), .D(Di0), .Q(Do0), .A(A0[6:0]) );
 `endif
   
