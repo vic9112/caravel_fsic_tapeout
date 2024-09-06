@@ -69,7 +69,7 @@ module LOGIC_ANLZ #( parameter pADDR_WIDTH   = 15,
     input  wire           uck2_rst_n,
     input  wire           axis_rst_n
 );
-    localparam FIFO_DEPTH               = 64;  
+    localparam FIFO_DEPTH               = 32;  
     localparam AXIS_PKT_LEN             = 8; 
     localparam H_THRESH_DEFAULT         = 7'h40;
     localparam L_THRESH_DEFAULT         = 7'b10; 	
