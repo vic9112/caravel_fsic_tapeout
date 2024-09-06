@@ -47,11 +47,6 @@ module USER_PRJ1 #( parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
   input  wire                        uck2_rst_n
 );
 
-
-
-
-
-
 ////////////////////////// axi- lite part
 
 
@@ -156,11 +151,6 @@ always @* begin
 end
 
 
-
-
-
-
-
 assign sm_tid        = 3'b0;
 `ifdef USER_PROJECT_SIDEBAND_SUPPORT
   assign sm_tupsb      = 5'b0;
@@ -171,8 +161,6 @@ assign sm_tkeep      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
-
-
 
 
 wire        in_ramf_en;
@@ -199,9 +187,6 @@ wire        out_ramu_we;
 wire [15:0] out_ramu_d;
 wire [9:0]  out_ramu_adr;
 
-
-
-
 wire        ram0_en;
 wire [63:0] ram0_q;
 wire        ram0_we;
@@ -213,12 +198,6 @@ wire [63:0] ram1_q;
 wire        ram1_we;
 wire [63:0] ram1_d;
 wire [9:0]  ram1_adr;
-
-
-
-
-
-
 
 wire [63:0] In_data;
 wire In_vld;
@@ -258,57 +237,17 @@ In_copy In_copy (
   .mode_rsc_dat(reg_mode1_in==2||reg_mode1_in==3)
 );
 
-
-
 wire ap_done_vld;     
 wire ap_done_rdy;     
 
-/***** counter of sm_tlast *****/
 wire Out_vld;
-reg [10:0] tlast_counter, tlast_counter_n;
-
-always @(*) begin
-	if (reg_mode1_in[1]==0) begin // mode = FFT/iFFT
-		if (sm_tready && (Out_state==F_OUT1||Out_state==F_OUT2)) begin
-			if (tlast_counter==11'd2047) begin
-				tlast_counter_n = 0;
-			end
-			else begin
-				tlast_counter_n = tlast_counter + 1;
-			end
-		end
-		else begin
-			tlast_counter_n = tlast_counter;
-		end
-	end
-	else if (reg_mode1_in[1]==1) begin // mode = NTT/iNTT
-		if (sm_tready&& Out_vld)  begin
-			if (tlast_counter==11'd1023) begin
-				tlast_counter_n = 0;
-			end
-			else begin
-				tlast_counter_n = tlast_counter + 1;
-			end
-		end
-		else begin
-			tlast_counter_n = tlast_counter;
-		end
-	end
-	else begin
-		tlast_counter_n = tlast_counter;
-	end
-end
-
-/*******************************/
 
 always @(posedge axi_clk or negedge axi_reset_n)  begin
   if ( !axi_reset_n ) begin
     state <= 4'b0;
-    tlast_counter <= 11'b0;
   end
   else begin
     state <= next_state;
-    tlast_counter <= tlast_counter_n;
   end
 end
 
@@ -321,7 +260,7 @@ always@(*)begin
    		else next_state = Command;
     IN_COPY:   
     	if(In_copy_done) next_state = OUT_COPY;
-   		else next_state = IN_COPY;// should change
+   		else next_state = IN_COPY;
     OUT_COPY:  
     	if(Out_copy_done) next_state=RESET;
    		else next_state=OUT_COPY;
@@ -343,6 +282,7 @@ always @(posedge axi_clk or negedge axi_reset_n)  begin
         reg_mode1_in <= {14'b0,ss_tdata[1:0]};
      end
      else begin
+        reg_mode1_in <=reg_mode1_in;
      end
   end
 end
@@ -402,7 +342,25 @@ always @(posedge axi_clk or negedge axi_reset_n)  begin
 end
 
 /********** sm_tlast ***********/
-assign sm_tlast  = (reg_mode1_in[1])  ? ((tlast_counter==11'd1023&&sm_tready&&Out_vld) ? 1 : 0) : ((tlast_counter==11'd2047&&sm_tready&&Out_state==F_OUT2) ? 1 : 0);
+
+reg [12:0] last_cnt;
+always @(posedge axi_clk or negedge axi_reset_n)  begin
+  if ( !axi_reset_n ) begin
+		last_cnt <= 12'b0;
+  end
+  else begin
+    if(state==RESET) last_cnt <= 12'b0;
+    else begin
+      if(((Out_state==U_OUT) ? Out_vld : (Out_state==F_OUT1||Out_state==F_OUT2))&sm_tready) last_cnt<=last_cnt+12'b1;
+      else last_cnt<=last_cnt;
+ 	  end
+  end
+end
+
+
+
+
+assign sm_tlast  = (reg_mode1_in[1])  ? ((last_cnt==11'd1023) ? 1 : 0) : ((last_cnt==11'd2047) ? 1 : 0);
 assign sm_tvalid = (Out_state==U_OUT) ? Out_vld : (Out_state==F_OUT1||Out_state==F_OUT2);
 assign sm_tdata  = (Out_state==U_OUT) ? {16'b0,Out_data[79:64]} : ((Out_state==F_OUT1)?regx_data:regy_data);
 assign Out_rdy   = (Out_state==U_OUT||Out_state==F_OUT2) ? sm_tready : 0;
@@ -473,29 +431,7 @@ assign ram1_d   	= (mux_state) ? out_ramf_d   : {48'b0,out_ramu_d};
 assign out_ramu_q = ram1_q[15:0];
 assign out_ramf_q = ram1_q;
 
-`ifdef USE_PDK_SRAM
-ra1shd1024x64m4h3v2 SRAM0 (
-  .CLK(axi_clk),
-  .WEN(~ram0_we),
-  .OEN(1'b0),
-  .CEN(~ram0_en),
 
-  .A(ram0_adr),
-  .D(ram0_d),
-  .Q(ram0_q)
-);
-
-ra1shd1024x64m4h3v2 SRAM1 (
-  .CLK(axi_clk),
-  .WEN(~ram1_we),
-  .OEN(1'b0),
-  .CEN(~ram1_en),
-
-  .A(ram1_adr),
-  .D(ram1_d),
-  .Q(ram1_q)
-);
-`else
 SRAM1RW1024x8 S1(
 .CE(axi_clk),
 .WEB(~ram0_we),
@@ -585,6 +521,7 @@ SRAM1RW1024x8 S8(
 );
 
 
+
 SRAM1RW1024x8 S11(
 .CE(axi_clk),
 .WEB(~ram1_we),
@@ -672,7 +609,7 @@ SRAM1RW1024x8 S18(
 .I(ram1_d[63:56]),
 .O(ram1_q[63:56])
 );
-`endif
+
 
 // //SRAM
 // SPRAM #(.data_width(64),.addr_width(10),.depth(1024)) U_SPRAM_0(
@@ -693,9 +630,12 @@ SRAM1RW1024x8 S18(
 // .q   (ram1_q   )
 // );
 
+
+
+
 endmodule // USER_PRJ2
 
-/*
+
 `define numAddr 10
 `define numWords 1024
 `define wordLength 8
@@ -712,8 +652,8 @@ input 	[`numAddr-1:0] 		A;
 input 	[`wordLength-1:0] 	I;
 output 	[`wordLength-1:0] 	O;
 
-///*reg   [`wordLength-1:0]   	memory[`numWords-1:0];
-///*reg  	[`wordLength-1:0]	data_out;
+/*reg   [`wordLength-1:0]   	memory[`numWords-1:0];*/
+/*reg  	[`wordLength-1:0]	data_out;*/
 wire 	[`wordLength-1:0] 	O;
 
 wire 				RE;
@@ -770,4 +710,3 @@ always @ (data_out or OEB_i)
 
 
 endmodule
-*/
