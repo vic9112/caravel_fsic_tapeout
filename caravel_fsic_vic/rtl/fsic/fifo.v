@@ -1,3 +1,48 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: nthuyouwei
+// 
+// Create Date: 09/06/2024 10:00:00 AM
+// Design Name: 
+// Module Name: fifo
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+/*****************  how to use this fifo
+This is a FIFO designed using a single port. Due to the nature of the single port, we cannot read and write simultaneously. 
+To address this, I used double data width to solve the problem by reading two data entries at once, aiming to maintain the latency the same as a normal FIFO under ideal conditions (i.e., 1T delay for reading). 
+In the worst case, if write/read commands arrive simultaneously, we will first check if writing is possible before reading, which could cause a maximum delay of 3T for reads.
+
+Additionally, this design has two modes:
+
+- mode = 1: The read protocol uses the AXI-stream protocol, and the write protocol operates such that when `w_rdy` is 1, it indicates that the FIFO has at least the threshold space available for writing. 
+When the other end receives `w_rdy` as 1, it can send `w_vld`, as the FIFO will write directly upon receiving `w_vld`.
+
+- mode = 0: Both read and write protocols use the AXI-stream protocol. Note: `w_rdy` = !full.
+***********************/
+
+
+/********************setting
+WIDTH is datawidth.
+depth is fifo depth.
+sram_datawidth is usually double of WIDTH(sram_datawidth>=2*WIDTH).
+mode is 1/0
+*******************/
+
+
 module fifo
 #( parameter WIDTH = 45,
    parameter depth= 64,
