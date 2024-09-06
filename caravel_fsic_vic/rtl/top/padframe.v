@@ -12,7 +12,7 @@
         input  OUT,                                               \
         output IN                                                 \
         );                                                        \
-        PDUW24DGZ iopad_MPRJ``n(                                  \
+        PDDDGZ iopad_MPRJ``n(                                     \
           .C(IN),                                                 \
           .PAD(PAD)                                               \
           );                                                      \
@@ -203,6 +203,7 @@ module iopad_flash_io0 (
     input  OUT,
     output IN
     );
+    /*
     reg oe;
     reg PAD_pullup;
     reg PAD_pulldown;
@@ -242,6 +243,11 @@ module iopad_flash_io0 (
       .PAD(PAD),
       .REN(~PAD_pullup)
       );
+    */
+    PDO04CDG iopad_FIO0(
+        .I(OUT),
+        .PAD(PAD)
+    );
 endmodule
 
 module iopad_flash_io1 (
@@ -250,6 +256,7 @@ module iopad_flash_io1 (
     input  OUT,
     output IN
     );
+    /*
     reg oe;
     reg PAD_pullup;
     reg PAD_pulldown;
@@ -289,6 +296,11 @@ module iopad_flash_io1 (
       .PAD(PAD),
       .REN(~PAD_pullup)
       );
+    */
+    PDDDGZ iopad_FIO1(
+        .C(IN),
+        .PAD(PAD)
+    );
 endmodule
 
 module iopad_flash_csb (
