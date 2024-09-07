@@ -22,8 +22,8 @@
 
 
 /*****************  how to use this fifo
-This is a FIFO designed using a single port. Due to the nature of the single port, we cannot read and write simultaneously. 
-To address this, I used double data width to solve the problem by reading two data entries at once, aiming to maintain the latency the same as a normal FIFO under ideal conditions (i.e., 1T delay for reading). 
+This is a FIFO designed using a single port sram. Due to the nature of the single port sram, we cannot read and write simultaneously. 
+To solve this prob, I used double data width to solve the problem by reading two data entries at once, aiming to maintain the latency the same as a normal FIFO under ideal conditions (i.e., 1T delay for reading). 
 In the worst case, if write/read commands arrive simultaneously, we will first check if writing is possible before reading, which could cause a maximum delay of 3T for reads.
 
 Additionally, this design has two modes:
