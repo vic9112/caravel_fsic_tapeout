@@ -105,7 +105,6 @@
 module iopad_clk (
     inout PAD, 
     input REN,  
-    input OUT,
     output IN
     );
     PDDWDGZ iopad_CLK(
