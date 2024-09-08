@@ -1,6 +1,7 @@
 //===========================================================
-// Modified by Vic Chen
-// August 10, 2024
+// Author: Vic Chen
+// Email: s179038@gmail.com
+// Date: Sep 8, 2024
 //===========================================================
 `default_nettype wire
 
@@ -8,13 +9,15 @@
 `define INPAD_MPRJ(n)                                             \
     module iopad_mprj``n (                                        \
         inout PAD,                                                \
-        input [2:0] DM,                                           \
-        input  OUT,                                               \
+        input REN                                                 \
+        input OEN                                                 \
+        input OUT,                                                \
         output IN                                                 \
         );                                                        \
-        PDDDGZ iopad_MPRJ``n(                                     \
+        PDDWDGZ iopad_MPRJ``n(                                    \
           .C(IN),                                                 \
-          .PAD(PAD)                                               \
+          .PAD(PAD),                                              \
+          .REN(REN)                                               \
           );                                                      \
     endmodule
 
@@ -32,72 +35,37 @@
           );                                                      \
     endmodule
 
-//========== only support below mode for DM[2:0] ==========//
-// 3'b001 input (output disable), no pullup or pulldown
-// 3'b010 input (output disable), with pullup
-// 3'b011 input (output disable), with pulldown
-// 3'b110 output enable
-// others, set to default mode = 3'b001
+//===================== IO Configurate ====================//
+// Input:  OEN = 1, REN = 0 during reset operation
+//         OEN = 1, REN = 1 during normal operation
+//---------------------------------------------------------//
+// Output: OEN = 1, REN = 0 during reset operation
+//         OEN = 0, REN = 1 during normal operation
 //=========================================================//
 `define IOPAD_MPRJ(n)                                             \
     module iopad_mprj``n (                                        \
-        inout VDDIO,                                              \
-        inout VSSIO,                                              \
-        inout VCCD,                                               \
-        inout VSSD,                                               \
         inout PAD,                                                \
-        input [2:0] DM,                                           \
-        input  OUT,                                               \
+        input REN                                                 \
+        input OEN                                                 \
+        input OUT,                                                \
         output IN                                                 \
         );                                                        \
-        reg oe;                                                   \
-        reg PAD_pullup;                                           \
-        reg PAD_pulldown;                                         \
-        always @(*) begin                                         \
-            case( DM[2:0] )                                       \
-                3'b001: begin                                     \
-                    oe = 0;                                       \
-                    PAD_pullup = 0;                               \
-                    PAD_pulldown = 0;                             \
-                end                                               \
-                3'b010: begin                                     \
-                    oe = 0;                                       \
-                    PAD_pullup = 1;                               \
-                    PAD_pulldown = 0;                             \
-                end                                               \
-                3'b011: begin                                     \
-                    oe = 0;                                       \
-                    PAD_pullup = 0;                               \
-                    PAD_pulldown = 1;                             \
-                end                                               \
-                3'b110: begin                                     \
-                    oe = 1;                                       \
-                    PAD_pullup = 0;                               \
-                    PAD_pulldown = 0;                             \
-                end                                               \
-                default: begin                                    \
-                    oe = 0;                                       \
-                    PAD_pullup = 0;                               \
-                    PAD_pulldown = 0;                             \
-                end                                               \
-            endcase                                               \
-        end                                                       \
         PDUW04DGZ iopad_MPRJ``n(                                  \
           .I(OUT),                                                \
           .C(IN),                                                 \
-          .OEN(~oe),                                              \
+          .OEN(OEN),                                              \
           .PAD(PAD),                                              \
-          .REN(~PAD_pullup)                                       \
+          .REN(REN)                                               \
           );                                                      \
     endmodule
 
 `IOPAD_MPRJ(0);    // JTAG
-`OUTPAD_MPRJ(1);   // SDO
-`INPAD_MPRJ(2);    // SDI
-`INPAD_MPRJ(3);    // CSB
-`INPAD_MPRJ(4);    // SCK
-`INPAD_MPRJ(5);    // ser_rx
-`OUTPAD_MPRJ(6);   // set_tx
+`IOPAD_MPRJ(1);   // SDO
+`IOPAD_MPRJ(2);    // SDI
+`IOPAD_MPRJ(3);    // CSB
+`IOPAD_MPRJ(4);    // SCK
+`IOPAD_MPRJ(5);    // ser_rx
+`IOPAD_MPRJ(6);   // set_tx
 `INPAD_MPRJ(7);    // irq
 
 `INPAD_MPRJ(8);    // RXD[0]
@@ -115,20 +83,20 @@
 `INPAD_MPRJ(20);   // RXD[12]
 `INPAD_MPRJ(21);   // RXCLK 
 
-`OUTPAD_MPRJ(22);  // TXD[0]
-`OUTPAD_MPRJ(23);  // TXD[1]
-`OUTPAD_MPRJ(24);  // TXD[2]
-`OUTPAD_MPRJ(25);  // TXD[3]
-`OUTPAD_MPRJ(26);  // TXD[4]
-`OUTPAD_MPRJ(27);  // TXD[5]
-`OUTPAD_MPRJ(28);  // TXD[6]
-`OUTPAD_MPRJ(29);  // TXD[7]
-`OUTPAD_MPRJ(30);  // TXD[8]
-`OUTPAD_MPRJ(31);  // TXD[9]
-`OUTPAD_MPRJ(32);  // TXD[10]
-`OUTPAD_MPRJ(33);  // TXD[11]
-`OUTPAD_MPRJ(34);  // TXD[12]
-`OUTPAD_MPRJ(35);  // TXCLK
+`IOPAD_MPRJ(22);  // TXD[0]
+`IOPAD_MPRJ(23);  // TXD[1]
+`IOPAD_MPRJ(24);  // TXD[2]
+`IOPAD_MPRJ(25);  // TXD[3]
+`IOPAD_MPRJ(26);  // TXD[4]
+`IOPAD_MPRJ(27);  // TXD[5]
+`IOPAD_MPRJ(28);  // TXD[6]
+`IOPAD_MPRJ(29);  // TXD[7]
+`IOPAD_MPRJ(30);  // TXD[8]
+`IOPAD_MPRJ(31);  // TXD[9]
+`IOPAD_MPRJ(32);  // TXD[10]
+`IOPAD_MPRJ(33);  // TXD[11]
+`IOPAD_MPRJ(34);  // TXD[12]
+`IOPAD_MPRJ(35);  // TXCLK
 
 `INPAD_MPRJ(36);   // IOCLK
 `IOPAD_MPRJ(37);
@@ -140,190 +108,90 @@ module iopad_clk (
     input  OUT,
     output IN
     );
-    PDDDGZ iopad_CLK(
+    PDDWDGZ iopad_CLK(
       .C(IN),
-      .PAD(PAD)
+      .PAD(PAD),
+      .REN(REN)
       );
 endmodule
 
 module iopad_gpio (
-    inout VDDIO, 
-    inout VSSIO, 
-    inout VCCD, 
-    inout VSSD, 
     inout PAD, 
-    input [2:0] DM,  
-    input  OUT,
+    input REN,
+    input OEN,
+    input OUT,
     output IN
     );
-    reg oe;
-    reg PAD_pullup;
-    reg PAD_pulldown;
-    always @(*) begin
-        case( DM[2:0] )
-            3'b001: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-            3'b010: begin
-                oe = 0;
-                PAD_pullup = 1;
-                PAD_pulldown = 0;
-              end
-            3'b011: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 1;
-              end
-            3'b110: begin
-                oe = 1;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-            default: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-        endcase
-    end   
     PDUW04DGZ iopad_GPIO(
       .I(OUT),
       .C(IN),
-      .OEN(~oe),
+      .OEN(OEN),
       .PAD(PAD),
-      .REN(~PAD_pullup)
+      .REN(REN)
       );
 endmodule
 
 module iopad_flash_io0 (
     inout PAD, 
-    input [2:0] DM,  
-    input  OUT,
+    input REN,
+    input OEN,
+    input OUT,
     output IN
     );
-    /*
-    reg oe;
-    reg PAD_pullup;
-    reg PAD_pulldown;
-    always @(*) begin
-        case( DM[2:0] )
-            3'b001: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-            3'b010: begin
-                oe = 0;
-                PAD_pullup = 1;
-                PAD_pulldown = 0;
-              end
-            3'b011: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 1;
-              end
-            3'b110: begin
-                oe = 1;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-            default: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-        endcase
-    end 
     PDUW04DGZ iopad_FIO0(
       .I(OUT),
       .C(IN),
-      .OEN(~oe),
+      .OEN(OEN),
       .PAD(PAD),
-      .REN(~PAD_pullup)
+      .REN(REN)
       );
-    */
-    PDO04CDG iopad_FIO0(
-        .I(OUT),
-        .PAD(PAD)
-    );
 endmodule
 
 module iopad_flash_io1 (
     inout PAD, 
-    input [2:0] DM,  
-    input  OUT,
+    input REN,
+    input OEN,
+    input OUT,
     output IN
     );
-    /*
-    reg oe;
-    reg PAD_pullup;
-    reg PAD_pulldown;
-    always @(*) begin
-        case( DM[2:0] )
-            3'b001: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-            3'b010: begin
-                oe = 0;
-                PAD_pullup = 1;
-                PAD_pulldown = 0;
-              end
-            3'b011: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 1;
-              end
-            3'b110: begin
-                oe = 1;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-            default: begin
-                oe = 0;
-                PAD_pullup = 0;
-                PAD_pulldown = 0;
-              end
-        endcase
-    end   
     PDUW04DGZ iopad_FIO1(
       .I(OUT),
       .C(IN),
-      .OEN(~oe),
+      .OEN(OEN),
       .PAD(PAD),
-      .REN(~PAD_pullup)
+      .REN(REN)
       );
-    */
-    PDDDGZ iopad_FIO1(
-        .C(IN),
-        .PAD(PAD)
-    );
 endmodule
 
 module iopad_flash_csb (
     inout PAD, 
-    input [2:0] DM,  
-    input  OUT,
+    input REN,
+    input OEN,
+    input OUT,
     output IN
     );
-    PDO04CDG iopad_FCSB(
+    PDUW04DGZ iopad_FCSB(
       .I(OUT),
-      .PAD(PAD)
+      .C(IN),
+      .OEN(OEN),
+      .PAD(PAD),
+      .REN(REN)
       );
 endmodule
 
 module iopad_flash_clk (
     inout PAD, 
-    input [2:0] DM,  
-    input  OUT,
+    input REN,
+    input OEN,
+    input OUT,
     output IN
     );
-    PDO04CDG iopad_FCLK(
+    PDUW04DGZ iopad_FCLK(
       .I(OUT),
-      .PAD(PAD)
+      .C(IN),
+      .OEN(OEN),
+      .PAD(PAD),
+      .REN(REN)
       );
 endmodule
 
@@ -331,7 +199,7 @@ module rstpad (
     output rst_pad,
     input  PAD
     );
-    PDDSDGZ iopad_RST(    
+    PDISDGZ iopad_RST(    
         .C(rst_pad),
         .PAD(PAD)
     );
