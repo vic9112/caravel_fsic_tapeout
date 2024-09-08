@@ -1,8 +1,11 @@
 //===========================================================
 // Modified by Vic Chen
-// July 26, 2024
+// Sep 8, 2024
 //===========================================================
- 
+// Update:
+// 9/8: Module reset_as_por use `clock_core` instead of `clock`
+//===========================================================
+
  `ifdef SIM
  `default_nettype wire
  `endif
@@ -1257,12 +1260,12 @@ module caravel_top (
     );
 
     reset_as_por por (
-        .clk(clock),
+	.clk(clock_core),
         .PAD(resetb),
-		.rstb_h(rstb_h),
-		.porb_h(porb_h),
-		.porb_l(porb_l),
-		.por_l(por_l)
+	.rstb_h(rstb_h),
+	.porb_h(porb_h),
+	.porb_l(porb_l),
+	.por_l(por_l)
     );
 
     /* Spare logic for metal mask fixes */
