@@ -1,15 +1,18 @@
 //===========================================================
 // Modified by Vic Chen
-// July 28, 2024
+// Sep 8, 2024
 //===========================================================
+// Update:
+// 9/8: Add module `pads_config`
+//      Add port REN, OEN on module `mprj_io.wire`
+//===========================================================
+
 
 // `default_nettype none
 module chip_io(
     inout wire gpio,
     input wire clock,
-    `ifndef NO_POR_PAD //tony_debug
     input wire resetb,
-    `endif //NO_POR_PAD //tony_debug
     output wire flash_csb,
     output wire flash_clk,
     inout wire flash_io0,
@@ -61,24 +64,32 @@ module chip_io(
 );
 
     //=========================================================//
-    // [Vic]: Using Power PADs for ESD protection and clamping //
+	// [Vic]: PAD IOs should also be flexible              //
     //=========================================================//
-/*
-    powerpad POWERPAD(
-        .VDDIO     (vddio),
-        .VSSIO     (vssio),
-        .VCCD      (vccd),
-        .VSSD      (vssd),
-        .VDDIO_PAD (vddio_core),
-        .VSSIO_PAD (vssio_core),
-        .VCCD_PAD  (vccd_core),
-        .VSSD_PAD  (vssd_core)
-    );
-*/
-    // To be considered:  Master hold signal on all user pads (?)
-    // For now, set holdh_n to 1 internally (NOTE:  This is in the
-    // VDDIO 3.3V domain)
-    // and setting enh to porb_h.
+    wire [43:0] REN;
+    wire [43:0] OEN;
+    reg  [43:0] cnfg_io;
+    reg  [43:0] cnfg_en;
+	pads_config PAD_IO_CNFG(
+		.clk(clock_core),
+		.resetb(resetb),
+		.cnfg_io(cnfg_io),
+		.cnfg_en(cnfg_en),
+		.re(REN),
+		.oe(OEN)
+	);
+
+	// TMP: set cnfg signals to 0
+	always @(posedge clock_core or negedge resetb) begin
+		if (~resetb) begin
+			cnfg_io <= 44'd0;
+			cnfg_en <= 44'd0;
+		end else begin
+			cnfg_io <= 44'd0;
+			cnfg_en <= 44'd0;
+		end
+	end
+    //=========================================================//
 
     wire [`MPRJ_IO_PADS-1:0] mprj_io_enh;
 
@@ -100,43 +111,49 @@ module chip_io(
 	// Management clock input pad
     iopad_clk pad_clock (
 		.PAD  (clock),
-		.OUT  (),
-		.DM   ({vssd_const_zero[0], vssd_const_zero[0], vccd_const_one[0]}),
+	        .REN  (REN[38]),
 		.IN   (clock_core));
-
-    // Management GPIO pad
-    iopad_gpio pad_gpio (
-		.PAD  (gpio),
-		.OUT  (gpio_out_core),
-		.DM   (dm_all),
-		.IN   (gpio_in_core));
-    
-	// Management Flash SPI pads
-    iopad_flash_io0 pad_flash_io0 (
-		.PAD  (flash_io0),
-		.OUT  (flash_io0_do_core),
-		.DM   (flash_io0_mode),
-		.IN   (flash_io0_di_core));
-	
-    iopad_flash_io1 pad_flash_io1 (
-		.PAD  (flash_io1),
-		.OUT  (flash_io1_do_core),
-		.DM   (flash_io1_mode),
-		.IN   (flash_io1_di_core));
 
     iopad_flash_csb pad_flash_csb (
 		.PAD  (flash_csb),
 		.OUT  (flash_csb_core),
-		.DM   ({vccd_const_one[4], vccd_const_one[4], vssd_const_zero[4]}),
+	        .REN  (REN[39]),
+	        .OEN  (OEN[39]),
 		.IN   ());
 
     iopad_flash_clk pad_flash_clk (
 		.PAD  (flash_clk),
 		.OUT  (flash_clk_core),
-		.DM   ({vccd_const_one[5], vccd_const_one[5], vssd_const_zero[5]}),
+	        .REN  (REN[40]),
+	        .OEN  (OEN[40]),
 		.IN   ());
+    
+	// Management Flash SPI pads
+    iopad_flash_io0 pad_flash_io0 (
+		.PAD  (flash_io0),
+		.OUT  (flash_io0_do_core),
+	        .REN  (REN[41]),
+	        .OEN  (OEN[41]),
+		.IN   (flash_io0_di_core));
+	
+    iopad_flash_io1 pad_flash_io1 (
+		.PAD  (flash_io1),
+		.OUT  (flash_io1_do_core),
+	        .REN  (REN[42]),
+	        .OEN  (OEN[42]),
+		.IN   (flash_io1_di_core));
 
+    // Management GPIO pad
+    iopad_gpio pad_gpio (
+		.PAD  (gpio),
+	        .OUT  (gpio_out_core),
+	        .REN  (REN[43]),
+	        .OEN  (OEN[43]),
+		.IN   (gpio_in_core));
+	
 	mprj_io mprj_pads(
+		.REN(REN),
+		.OEN(OEN),
 		.porb_h(porb_h),
 		.vccd_conb(mprj_io_one),
 		.io(mprj_io),
