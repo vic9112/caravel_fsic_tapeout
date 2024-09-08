@@ -1,6 +1,9 @@
 //===========================================================
 // Modified by Vic Chen
-// July 26, 2024
+// Sep 8, 2024
+//===========================================================
+// Update:
+// 9/8: Add signal REN, OEN for IOPAD configuration
 //===========================================================
 
 // `default_nettype none
@@ -15,18 +18,18 @@
 
 `define inst_pad(n)            \
     iopad_mprj``n pad``n (     \
-	`ifndef	TOP_ROUTING        \
-	    .PAD(io[n]),           \
-	`endif                     \
-	    .OUT  (io_out[n]),     \
-	    .DM   (dm[n*3+2:n*3]), \
+	    .PAD(io[n]),       \
+	    .OUT  (io_out[n]), \
+	    .REN  (REN[n])     \
+	    .OEN  (OEN[n])     \
 	    .IN   (io_in[n]) );
 
 module mprj_io #(
     parameter AREA1PADS = `MPRJ_IO_PADS_1,
     parameter TOTAL_PADS = `MPRJ_IO_PADS
     ) (
-    
+    input wire [43:0] REN,
+    input wire [43:0] OEN,
     input wire porb_h,
     input wire [TOTAL_PADS-1:0] vccd_conb,
     inout wire [TOTAL_PADS-1:0] io,
@@ -83,34 +86,6 @@ module mprj_io #(
     `inst_pad(35);
     `inst_pad(36);
     `inst_pad(37);
-
-/*
-    padframe area1_io_pad [AREA1PADS - 1:0] (
-	`ifndef	TOP_ROUTING
-	    .PAD(io[AREA1PADS - 1:0]),
-	`endif
-		.VDDIO(vddio), 
-		.VSSIO(vssio), 
-		.VCCD(vccd), 
-		.VSSD(vssd), 
-	    .OUT(io_out[AREA1PADS - 1:0]),
-	    .DM(dm[AREA1PADS*3 - 1:0]),
-	    .IN(io_in[AREA1PADS - 1:0])
-    );
-
-    padframe area2_io_pad [TOTAL_PADS - AREA1PADS - 1:0] (
-	`ifndef	TOP_ROUTING
-	    .PAD(io[TOTAL_PADS - 1:AREA1PADS]),
-	`endif
-		.VDDIO(vddio), 
-		.VSSIO(vssio), 
-		.VCCD(vccd), 
-		.VSSD(vssd), 
-	    .OUT(io_out[TOTAL_PADS - 1:AREA1PADS]),
-	    .DM(dm[TOTAL_PADS*3 - 1:AREA1PADS*3]),
-	    .IN(io_in[TOTAL_PADS - 1:AREA1PADS])
-    );
-*/
-
+	
 endmodule
 // `default_nettype wire
