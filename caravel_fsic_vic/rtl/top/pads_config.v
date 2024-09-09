@@ -56,7 +56,7 @@ module pads_config (
     end
   endgenerate
 
-  // Given the initial state when reset (I/O)
+  // Given the initial state
   always @(posedge clk or negedge resetb) begin
     if (~resetb) begin
       r_OEN[0]     <=   {{1'b1}};  // JTAG
