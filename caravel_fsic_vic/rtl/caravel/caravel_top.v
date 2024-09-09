@@ -4,6 +4,8 @@
 //===========================================================
 // Update:
 // 9/8: Module reset_as_por use `clock_core` instead of `clock`
+// 9/9: Module chip_io use `rst_pad` instead of `resetb`,
+//      add port `rst_pad` on module `reset_as_por`
 //===========================================================
 
  `ifdef SIM
@@ -302,7 +304,7 @@ module caravel_top (
 		.mprj_io(mprj_io),
 		.clock(clock),
     	`ifndef NO_POR_PAD //tony_debug
-		.resetb(resetb),
+		.resetb(rst_pad),
     	`endif //NO_POR_PAD //tony_debug
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
@@ -1265,7 +1267,8 @@ module caravel_top (
 	.rstb_h(rstb_h),
 	.porb_h(porb_h),
 	.porb_l(porb_l),
-	.por_l(por_l)
+	.por_l(por_l),
+	.rst_pad(rst_pad)
     );
 
     /* Spare logic for metal mask fixes */
