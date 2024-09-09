@@ -1,10 +1,20 @@
+//===========================================================
+// Modified by Vic Chen
+// Sep 9, 2024
+//===========================================================
+// Update:
+// 9/9: add port `rst_pad`
+//===========================================================
+
+
 module reset_as_por(
     input clk,
     input PAD,
     output wire rstb_h,
     output wire porb_h,
     output wire porb_l,
-    output wire por_l
+    output wire por_l,
+    output wire rst_pad
   );
 
   wire rst_pad;
