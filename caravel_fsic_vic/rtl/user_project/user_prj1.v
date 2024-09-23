@@ -67,6 +67,15 @@ assign wready = wready_out;
 assign awready_out = (awvalid_in && wvalid_in) ? 1 : 0;
 assign wready_out = (awvalid_in && wvalid_in) ? 1 : 0;
 
+wire ss_tready_out
+assign ss_tready=ss_tready_out;
+
+
+wire sm_tvalid_out;
+assign sm_tvalid = sm_tvalid_out;
+
+wire [31:0] sm_tdata_out;
+assign sm_tdata  = sm_tdata_out;
 
 //write register   // to let RESET State go back to Command state
 /*always @(posedge axi_clk or negedge axi_reset_n)  begin
@@ -104,7 +113,7 @@ assign rdata =  rdata_tmp;
 reg rd_state;
 reg rd_next_state;
 reg [pADDR_WIDTH-1:0] rd_addr;
-
+reg [3:0] Out_state,next_Out_state;
 ////
 always @(posedge axi_clk or negedge axi_reset_n)  begin
   if ( !axi_reset_n ) 
@@ -130,7 +139,7 @@ end
 always @(posedge axi_clk or negedge axi_reset_n)  begin
   if ( !axi_reset_n ) begin
         rd_addr <= 0;
-	rvalid_out <= 0;
+	      rvalid_out <= 0;
   end	
   else begin
     if (rd_state == RD_IDLE )
@@ -157,11 +166,16 @@ assign sm_tid        = 3'b0;
 `endif
 assign sm_tstrb      = 4'b0;
 assign sm_tkeep      = 1'b0;
-//assign sm_tlast      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
-assign la_data_o     = 24'b0;
 
+// 24 bit 
+// [23:16] for axi-lite interface; [15:12] for axi-stream interface; [11:8] for state; [7:4] for Out_state; [3:0] for data;
+assign la_data_o[23:16] = {awvalid,awready_out,wvalid,wready_out,arvalid,1'b1,rready,rvalid_out};
+assign la_data_o[15:12] = {ss_tvalid,ss_tready_out,sm_tvalid_out,sm_tready};
+assign la_data_o[11:8]=state;
+assign la_data_o[7:4]=Out_state;
+assign la_data_o=[3:0]={wdata[0],ss_tdata[0],sm_tdata_out[0],1'b0};
 
 wire        in_ramf_en;
 wire [63:0] in_ramf_q;
@@ -207,12 +221,11 @@ wire [63:0] Inram_d;
 wire Inram_we;
 reg reg_rst_incpopy;
 reg reg_rst_out_stage;
-reg [3:0] Out_state,next_Out_state;
 reg [31:0]regx_data;
 reg [31:0]regy_data;
 reg [15:0]reg_mode1_in;
 
-assign ss_tready=(state==Command)?1'b1:(state==IN_COPY)?In_rdy:1'b0;
+assign ss_tready_out=(state==Command)?1'b1:(state==IN_COPY)?In_rdy:1'b0;
 assign In_vld=(state==IN_COPY)?ss_tvalid:1'b0;
 
 In_copy In_copy (
@@ -363,8 +376,8 @@ end
 
 
 assign sm_tlast  = (reg_mode1_in[1])  ? ((last_cnt==12'd1023) ? 1 : 0) : ((last_cnt==12'd2047) ? 1 : 0);
-assign sm_tvalid = (Out_state==U_OUT) ? Out_vld : (Out_state==F_OUT1||Out_state==F_OUT2);
-assign sm_tdata  = (Out_state==U_OUT) ? {16'b0,Out_data[79:64]} : ((Out_state==F_OUT1)?regx_data:regy_data);
+assign sm_tvalid_out=(Out_state==U_OUT) ? Out_vld : (Out_state==F_OUT1||Out_state==F_OUT2);
+assign sm_tdata_out=(Out_state==U_OUT) ? {16'b0,Out_data[79:64]} : ((Out_state==F_OUT1)?regx_data:regy_data);
 assign Out_rdy   = (Out_state==U_OUT||Out_state==F_OUT2) ? sm_tready : 0;
 
 
