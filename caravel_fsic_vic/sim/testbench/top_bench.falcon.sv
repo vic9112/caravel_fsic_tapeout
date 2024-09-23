@@ -854,13 +854,12 @@ module top_bench #( parameter BITS=32,
 
 		begin
 			for (i=0;i<CoreClkPhaseLoop;i=i+1) begin
-				$display("run_falcon_test002: fpga_axis_req - loop %02d", i);
 
         		$readmemh("pattern/NTT_in.hex",        falcon_NTT_in_buf        );
        			$readmemh("pattern/NTT_out.hex",       falcon_NTT_out_buf       );
         		$readmemh("pattern/FFT_in.hex",        falcon_FFT_in_buf        );
        			$readmemh("pattern/FFT_out.hex",       falcon_FFT_out_buf       );
-				$readmemh("pattern/iNTT_in.hex",        falcon_iNTT_in_buf        );
+			$readmemh("pattern/iNTT_in.hex",        falcon_iNTT_in_buf        );
        			$readmemh("pattern/iNTT_out.hex",       falcon_iNTT_out_buf       );
         		$readmemh("pattern/iFFT_in.hex",        falcon_iFFT_in_buf        );
        			$readmemh("pattern/iFFT_out.hex",       falcon_iFFT_out_buf       );
@@ -880,7 +879,7 @@ module top_bench #( parameter BITS=32,
 					else if (falcon_cnt==3) begin
 					run_falcon_test002_fpga_axis_req_iFFT();
 					end			
-          			$display($time, "=> wait for soc_to_fpga_axis_event");
+          			//$display($time, "=> wait for soc_to_fpga_axis_event");
           			//@(soc_to_fpga_axis_event);
 					
 					checkfalconDone();
@@ -920,44 +919,44 @@ module top_bench #( parameter BITS=32,
 						for(falcon_idx3=0; falcon_idx3<1024; falcon_idx3=falcon_idx3+1)begin
 							check_cnt = check_cnt + 1;
 							if ({0, 0, 0, (falcon_idx3==1023), falcon_NTT_out_buf[falcon_idx3]} != soc_to_fpga_axis_captured[falcon_idx3] ) begin
-							$display($time, "=> run_falcon_test002 [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_NTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_NTT [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_NTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 							error_cnt = error_cnt + 1;
 							end
 							else
-							$display($time, "=> run_falcon_test002 [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_NTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_NTT [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_NTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 						end
 					end
 					else if (falcon_cnt==1) begin
 						for(falcon_idx3=0; falcon_idx3<2048; falcon_idx3=falcon_idx3+1)begin
 							check_cnt = check_cnt + 1;
 							if ({0, 0, 0, (falcon_idx3==2047), falcon_FFT_out_buf[falcon_idx3]} != soc_to_fpga_axis_captured[falcon_idx3] ) begin
-							$display($time, "=> run_falcon_test002 [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_FFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_FFT [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_FFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 							error_cnt = error_cnt + 1;
 							end
 							else
-							$display($time, "=> run_falcon_test002 [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_FFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_FFT [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_FFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 						end
 					end
 					else if(falcon_cnt==2) begin
 						for(falcon_idx3=0; falcon_idx3<1024; falcon_idx3=falcon_idx3+1)begin
 							check_cnt = check_cnt + 1;
 							if ({0, 0, 0, (falcon_idx3==1023), falcon_iNTT_out_buf[falcon_idx3]} != soc_to_fpga_axis_captured[falcon_idx3] ) begin
-							$display($time, "=> run_falcon_test002 [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_iNTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_iNTT [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_iNTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 							error_cnt = error_cnt + 1;
 							end
 							else
-							$display($time, "=> run_falcon_test002 [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_iNTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_iNTT [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==1023), falcon_iNTT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 						end
 					end
 					else if (falcon_cnt==3) begin
 						for(falcon_idx3=0; falcon_idx3<2048; falcon_idx3=falcon_idx3+1)begin
 							check_cnt = check_cnt + 1;
 							if ({0, 0, 0, (falcon_idx3==2047), falcon_iFFT_out_buf[falcon_idx3]} != soc_to_fpga_axis_captured[falcon_idx3] ) begin
-							$display($time, "=> run_falcon_test002 [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_iFFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_iFFT [ERROR] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_iFFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 							error_cnt = error_cnt + 1;
 							end
 							else
-							$display($time, "=> run_falcon_test002 [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_iFFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
+								$display($time, "=> run_falcon_iFFT [PASS] falcon_idx3=%d, soc_to_fpga_axis_expect_value[%d] = %x, soc_to_fpga_axis_captured[%d]  = %x", falcon_idx3, falcon_idx3, {0, 0, 0, (falcon_idx3==2047), falcon_iFFT_out_buf[falcon_idx3]}, falcon_idx3, soc_to_fpga_axis_captured[falcon_idx3]);
 						end
 					end
 					soc_to_fpga_axis_captured_count = 0;		//reset soc_to_fpga_axis_captured_count for next loop
