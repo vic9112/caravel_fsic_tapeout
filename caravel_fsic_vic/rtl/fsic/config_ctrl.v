@@ -7,34 +7,28 @@ module CFG_CTRL #( parameter pADDR_WIDTH   = 12,
 	//////////////////////////////////////
 	// FPGA AXI-Lite, from Axis-Axilite //
 	//////////////////////////////////////
-
-	//FPGA AXI-Lite介面（輸入）(8個)
-	input  wire          aa_cfg_awvalid,	//AXI-Lite寫地址有效信號
-	input  wire  [31: 0] aa_cfg_awaddr,		//AXI-Lite寫地址
-	input  wire          aa_cfg_wvalid,		//AXI-Lite寫數據有效信號
-	input  wire  [31: 0] aa_cfg_wdata,		//AXI-Lite寫數據
-	input  wire   [3: 0] aa_cfg_wstrb,		//AXI-Lite寫字節選擇信號
-	input  wire          aa_cfg_arvalid,	//AXI-Lite讀地址有效信號
-	input  wire  [31: 0] aa_cfg_araddr,		//AXI-Lite讀地址
-	input  wire          aa_cfg_rready,		//AXI-Lite讀數據準備好信號
-
-	//FPGA AXI-Lite介面（輸出）(5個)
-	output wire  [31: 0] aa_cfg_rdata,		//AXI-Lite讀數據
-	output wire          aa_cfg_rvalid,		//AXI-Lite讀數據有效信號
-
-	output wire          aa_cfg_awready,	//AXI-Lite寫地址準備好信號
-	output wire          aa_cfg_wready,		//AXI-Lite寫數據準備好信號
-	output wire          aa_cfg_arready,	//AXI-Lite讀地址準備好信號
+	input  wire          aa_cfg_awvalid,
+	input  wire  [31: 0] aa_cfg_awaddr,
+	input  wire          aa_cfg_wvalid,
+	input  wire  [31: 0] aa_cfg_wdata,
+	input  wire   [3: 0] aa_cfg_wstrb,
+	input  wire          aa_cfg_arvalid,
+	input  wire  [31: 0] aa_cfg_araddr,
+	input  wire          aa_cfg_rready,
+	output wire  [31: 0] aa_cfg_rdata,
+	output wire          aa_cfg_rvalid,
+	output wire          aa_cfg_awready,
+	output wire          aa_cfg_wready,
+	output wire          aa_cfg_arready,
 	
 	/////////////////////
 	// AXI-Lite Master //
 	/////////////////////
-	//AXI-Lite Master介面（輸入）(5個*5)
-	input  wire          axi_wready1,		//for AXIL_AXIS		//各個AXI-Lite寫數據準備好信號
-	input  wire          axi_awready1,							//各個AXI-Lite寫地址準備好信號
-	input  wire          axi_arready1,							//各個AXI-Lite讀地址準備好信號
-	input  wire  [31: 0] axi_rdata1,							//各個AXI-Lite讀數據
-	input  wire          axi_rvalid1,							//各個AXI-Lite讀數據有效信號
+	input  wire          axi_wready1,		//for AXIL_AXIS
+	input  wire          axi_awready1,
+	input  wire          axi_arready1,
+	input  wire  [31: 0] axi_rdata1,
+	input  wire          axi_rvalid1,
 	input  wire          axi_awready4,		//for AXIL_SWITCH
 	input  wire          axi_wready4,
 	input  wire          axi_arready4,
@@ -55,142 +49,155 @@ module CFG_CTRL #( parameter pADDR_WIDTH   = 12,
 	input  wire          axi_arready2,
 	input  wire  [31: 0] axi_rdata2,
 	input  wire          axi_rvalid2,
-
-	//AXI-Lite Master介面（輸出）(8個)
-	output wire          axi_awvalid,		//AXI-Lite寫地址有效信號
-	output wire  [14: 0] axi_awaddr,		//AXI-Lite寫地址
-	output wire          axi_wvalid,		//AXI-Lite寫數據有效信號
-	output wire  [31: 0] axi_wdata,			//AXI-Lite寫數據
-	output wire   [3: 0] axi_wstrb,			//AXI-Lite寫字節選擇信號
-	output wire          axi_arvalid,		//AXI-Lite讀地址有效信號
-	output wire  [14: 0] axi_araddr,		//AXI-Lite讀地址
-	output wire          axi_rready,		//AXI-Lite讀數據準備好信號
+	output wire          axi_awvalid,
+	output wire  [14: 0] axi_awaddr,
+	output wire          axi_wvalid,
+	output wire  [31: 0] axi_wdata,
+	output wire   [3: 0] axi_wstrb,
+	output wire          axi_arvalid,
+	output wire  [14: 0] axi_araddr,
+	output wire          axi_rready,	
 	
 	//////////////////////
 	// Target Selection //
 	//////////////////////
-	//目標選擇（輸出）
 	output wire          cc_aa_enable,
 	output wire          cc_as_enable,
 	output wire          cc_is_enable,
 	output wire          cc_la_enable,
 	output wire          cc_up_enable,
-	output wire   [4: 0] user_prj_sel,  // -- Jiin extend with parameterized
+	output wire   [4: 0] user_prj_sel,
 	
 	////////////////////////
 	// Wishbone interface //
-	////////////////////////
-	//Wishbone介面(輸入)(8個)
-	input  wire          wb_rst,		//Wishbone重置信號
-	input  wire          wb_clk,		//Wishbone時鐘信號
-	input  wire  [31: 0] wbs_adr,		//Wishbone從屬地址
-	input  wire  [31: 0] wbs_wdata,		//Wishbone寫數據
-	input  wire   [3: 0] wbs_sel,		//Wishbone字節選擇信號
-	input  wire          wbs_cyc,		//Wishbone週期信號
-	input  wire          wbs_stb,		//Wishbone選擇信號
-	input  wire          wbs_we,		//Wishbone寫使能信號
-	//(輸出)(2個)
-	output wire          wbs_ack,		//Wishbone應答信號
-	output wire  [31: 0] wbs_rdata,		//Wishbone讀數據
+	////////////////////////	
+	input  wire          wb_rst,
+	input  wire          wb_clk,
+	input  wire  [31: 0] wbs_adr,
+	input  wire  [31: 0] wbs_wdata,
+	input  wire   [3: 0] wbs_sel,
+	input  wire          wbs_cyc,
+	input  wire          wbs_stb,
+	input  wire          wbs_we,
+	output wire          wbs_ack,
+	output wire  [31: 0] wbs_rdata,
 	
 	//////////////////////////
 	// Top AXI-Lite Signals //
 	//////////////////////////
-	//上層AXI-Lite信號
-	input  wire          axi_clk,		//AXI時鐘
-	input  wire          axi_reset_n,	//AXI復位信號（低有效）
-
-	input  wire          user_clock2,	//用戶時鐘2(無用)
-	input  wire          uck2_rst_n		//用戶時鐘2復位信號（低有效）
-
-	/*
-	output wire wb_axi_request_t,
-	output wire wb_axi_request_done_t,
-	output wire f_axi_request_t,
-	output wire f_axi_request_done_t,
-
-	output wire m_axi_request_t,
-	output wire m_axi_request_done_t,
-
-	output wire [31:0] a,
-	output wire [31:0] b
-	*/
-
+	input  wire          user_clock2,
+	input  wire          axi_clk,
+	input  wire          axi_reset_n,
+	input  wire          uck2_rst_n
 );
-	/*
-	assign wb_axi_request_t	= wb_axi_request;
-	assign wb_axi_request_done_t = wb_axi_request_done;
-	assign f_axi_request_t = f_axi_request;
-	assign f_axi_request_done_t = f_axi_request_done;
-	assign m_axi_request_t = m_axi_request;
-	assign m_axi_request_done_t = m_axi_request_done;
-
-	assign a = f_axi_rdata;
-	assign b = wb_axi_rdata;
-	*/
 
 	////////////////////////////
 	// Internal Signals begin //
 	////////////////////////////	
-	//reg wb_fsm_reg;					//Wishbone狀態機寄存器
-	wire wb_axi_request;				//Wishbone AXI請求信號
-	reg wb_axi_request_rw;				//Wishbone AXI請求讀寫信號
-	wire [31:0] wb_axi_request_add;
-	wire [3:0] wb_axi_wstrb;			//Wishbone AXI寫字節選擇信號			
-	wire wb_axi_request_done;			//Wishbone AXI請求完成信號
-	wire [31:0] wb_axi_rdata;
+	reg wb_fsm_reg;
+	reg wb_axi_request;
+	reg wb_axi_request_rw;
+	reg [3:0] wb_axi_wstrb;
+	reg wb_axi_request_done;
+	reg [31:0] wb_axi_request_add;
+	reg [31:0] wb_axi_wdata;
+	reg [31:0] wb_axi_rdata;
+	
+	reg [2:0] f_axi_fsm_reg;
+	reg f_axi_request;
+	reg f_axi_request_rw;
+	reg [3:0] f_axi_wstrb;
+	reg f_axi_request_done;
+	reg [31:0] f_axi_request_add;
+	reg [31:0] f_axi_wdata;
+	reg [31:0] f_axi_rdata;
+	
+	reg [2:0] m_axi_fsm_reg;
+	
+	reg axi_grant_o_reg = 1'b0;
+	wire m_axi_request;
+	wire m_axi_request_rw;
+	wire [3:0] m_axi_wstrb;
+	wire m_axi_request_done;
+	wire [31:0] m_axi_request_add;
+	wire [31:0] m_axi_wdata;
+	
+	wire m_axi_awready;
+	wire m_axi_wready;
+	wire m_axi_arready;
+	wire [31:0] m_axi_rdata;
+	wire m_axi_rvalid;
+	
+	reg cc_enable;
+	reg cc_sub_enable;
 
-	wire f_axi_request;					//AXI請求信號
-	reg f_axi_request_rw;				//AXI請求讀寫信號
-	wire [3:0] f_axi_wstrb;				//AXI寫字節選擇信號
-	wire f_axi_request_done;			//AXI請求完成信號
-	wire [31:0] f_axi_request_add;		//AXI請求地址
-	wire [31:0] f_axi_wdata;
-	wire [31:0] f_axi_rdata;
-	
-	
-	reg axi_grant_o_reg;				//AXI許可寄存器
-	wire m_axi_request;					//主AXI請求信號
-	wire m_axi_request_rw;				//主AXI請求讀寫信號
-	wire [3:0] m_axi_wstrb;				//主AXI寫字節選擇信號
-	wire m_axi_request_done;			//主AXI請求完成信號
-	wire [31:0] m_axi_request_add;		//主AXI請求地址
-	wire [31:0] m_axi_wdata;			//主AXI寫數據
-	
-	wire m_axi_awready;					//主AXI寫地址準備好信號
-	wire m_axi_wready;					//主AXI寫數據準備好信號
-	wire m_axi_arready;					//主AXI讀地址準備好信號
-	wire [31:0] m_axi_rdata;			//主AXI讀數據
-	wire m_axi_rvalid;					//主AXI讀數據有效信號
-	
-	wire cc_enable;						//目標啟用信號
-	wire cc_sub_enable;					//子目標啟用信號
-	wire cc_axi_awvalid;				//控制信號AXI寫地址有效
-	wire cc_axi_wvalid;					//控制信號AXI寫數據有效
+	wire cc_axi_awvalid;
+	wire cc_axi_wvalid;
 
+	reg [2:0] cc_s_fsm_reg;	
+	reg [11:0] cc_s_addr;
+	reg [31:0] cc_s_wdata;
+	reg [31:0] cc_s_rdata;
+	
+	wire axi_awready5;
+	wire axi_wready5;
+	wire axi_arready5;
+	wire [31: 0] axi_rdata5;
+	wire axi_rvalid5;
 	
 	//////////////////////////////////////
 	// Internal signals for Ports begin //
 	//////////////////////////////////////
+	reg [31: 0] aa_cfg_rdata_o = 32'b0;
+	reg aa_cfg_rvalid_o = 1'b0;
+	reg aa_cfg_awready_o = 1'b0;
+	reg aa_cfg_wready_o = 1'b0;
+	reg aa_cfg_arready_o = 1'b0;
+	
+	reg axi_awvalid_o = 1'b0;
+	reg [14: 0] axi_awaddr_o = 15'b0;
+	reg axi_wvalid_o = 1'b0;
+	reg [31: 0] axi_wdata_o = 32'b0;
+	reg [3: 0] axi_wstrb_o = 4'b0;
+	reg axi_arvalid_o = 1'b0;
+	reg [14: 0] axi_araddr_o = 15'b0;
+	reg axi_rready_o = 1'b0;
+
+	reg cc_aa_enable_o;
+	reg cc_as_enable_o;
+	reg cc_is_enable_o;
+	reg cc_la_enable_o;
+	reg cc_up_enable_o;
 
 	reg [4: 0] user_prj_sel_o;
+	
+	reg wbs_ack_o;
+	reg [31: 0] wbs_rdata_o;
 	
 	///////////////////////////////////
 	// Assignment for Internal begin //
 	///////////////////////////////////
 	assign m_axi_request = axi_grant_o_reg ? f_axi_request : wb_axi_request;
-	assign m_axi_request_done = axi_grant_o_reg ? f_axi_request_done : wb_axi_request_done;
 	assign m_axi_request_rw = axi_grant_o_reg ? f_axi_request_rw : wb_axi_request_rw;
 	assign m_axi_wstrb = axi_grant_o_reg ? f_axi_wstrb : wb_axi_wstrb;
+	assign m_axi_request_done = axi_grant_o_reg ? f_axi_request_done : wb_axi_request_done;
 	assign m_axi_request_add = axi_grant_o_reg ? f_axi_request_add : wb_axi_request_add;
-	assign m_axi_wdata = axi_grant_o_reg ? aa_cfg_wdata : wbs_wdata;
+	assign m_axi_wdata = axi_grant_o_reg ? f_axi_wdata : wb_axi_wdata;
 
-
-	assign m_axi_awready = ((((((({1{cc_up_enable}} & axi_awready2) | ({1{cc_la_enable}} & axi_awready0)) | ({1{cc_aa_enable}} & axi_awready1)) | ({1{cc_is_enable}} & axi_awready3)) | ({1{cc_as_enable}} & axi_awready4)) | ({1{cc_enable}} & cc_axi_awvalid/*axi_awready5*/)) | ({1{cc_sub_enable}} & axi_awvalid));
-	assign m_axi_wready = ((((((({1{cc_up_enable}} & axi_wready2) | ({1{cc_la_enable}} & axi_wready0)) | ({1{cc_aa_enable}} & axi_wready1)) | ({1{cc_is_enable}} & axi_wready3)) | ({1{cc_as_enable}} & axi_wready4)) | ({1{cc_enable}} & cc_axi_wvalid/*axi_wready5*/)) | ({1{cc_sub_enable}} & axi_wvalid));
-	assign m_axi_arready = ((((((({1{cc_up_enable}} & axi_arready2) | ({1{cc_la_enable}} & axi_arready0)) | ({1{cc_aa_enable}} & axi_arready1)) | ({1{cc_is_enable}} & axi_arready3)) | ({1{cc_as_enable}} & axi_arready4)) | ({1{cc_enable}} & 1/*axi_arready5*/)) | ({1{cc_sub_enable}} & axi_arvalid));
-	assign m_axi_rdata = ((((((({32{cc_up_enable}} & axi_rdata2) | ({32{cc_la_enable}} & axi_rdata0)) | ({32{cc_aa_enable}} & axi_rdata1)) | ({32{cc_is_enable}} & axi_rdata3)) | ({32{cc_as_enable}} & axi_rdata4)) | ({32{cc_enable}} & {27'b0, user_prj_sel_o}/*axi_rdata5*/)) | ({32{cc_sub_enable}} & 32'hFFFFFFFF));
-	assign m_axi_rvalid = ((((((({1{cc_up_enable}} & axi_rvalid2) | ({1{cc_la_enable}} & axi_rvalid0)) | ({1{cc_aa_enable}} & axi_rvalid1)) | ({1{cc_is_enable}} & axi_rvalid3)) | ({1{cc_as_enable}} & axi_rvalid4)) | ({1{cc_enable}} & 1/*axi_rvalid5*/)) | ({1{cc_sub_enable}} & axi_arvalid));
+	/*
+	In case of cc_sub_enable, read always return 0xFFFFFFFF, write always complete.
+	({1{cc_sub_enable}} & axi_awvalid))
+	({1{cc_sub_enable}} & axi_wvalid))
+	({1{cc_sub_enable}} & axi_arvalid))
+	({32{cc_sub_enable}} & 32'hFFFFFFFF))
+	({1{cc_sub_enable}} & axi_arvalid))
+	*/
+	assign m_axi_awready = ((((((({1{cc_up_enable}} & axi_awready2) | ({1{cc_la_enable}} & axi_awready0)) | ({1{cc_aa_enable}} & axi_awready1)) | ({1{cc_is_enable}} & axi_awready3)) | ({1{cc_as_enable}} & axi_awready4)) | ({1{cc_enable}} & axi_awready5)) | ({1{cc_sub_enable}} & axi_awvalid));
+	assign m_axi_wready = ((((((({1{cc_up_enable}} & axi_wready2) | ({1{cc_la_enable}} & axi_wready0)) | ({1{cc_aa_enable}} & axi_wready1)) | ({1{cc_is_enable}} & axi_wready3)) | ({1{cc_as_enable}} & axi_wready4)) | ({1{cc_enable}} & axi_wready5)) | ({1{cc_sub_enable}} & axi_wvalid));
+	assign m_axi_arready = ((((((({1{cc_up_enable}} & axi_arready2) | ({1{cc_la_enable}} & axi_arready0)) | ({1{cc_aa_enable}} & axi_arready1)) | ({1{cc_is_enable}} & axi_arready3)) | ({1{cc_as_enable}} & axi_arready4)) | ({1{cc_enable}} & axi_arready5)) | ({1{cc_sub_enable}} & axi_arvalid));
+	assign m_axi_rdata = ((((((({32{cc_up_enable}} & axi_rdata2) | ({32{cc_la_enable}} & axi_rdata0)) | ({32{cc_aa_enable}} & axi_rdata1)) | ({32{cc_is_enable}} & axi_rdata3)) | ({32{cc_as_enable}} & axi_rdata4)) | ({32{cc_enable}} & axi_rdata5)) | ({32{cc_sub_enable}} & 32'hFFFFFFFF));
+	assign m_axi_rvalid = ((((((({1{cc_up_enable}} & axi_rvalid2) | ({1{cc_la_enable}} & axi_rvalid0)) | ({1{cc_aa_enable}} & axi_rvalid1)) | ({1{cc_is_enable}} & axi_rvalid3)) | ({1{cc_as_enable}} & axi_rvalid4)) | ({1{cc_enable}} & axi_rvalid5)) | ({1{cc_sub_enable}} & axi_arvalid));
+	
 	
 	assign cc_axi_awvalid = axi_awvalid && cc_enable;
 	assign cc_axi_wvalid = axi_wvalid && cc_enable;
@@ -198,174 +205,209 @@ module CFG_CTRL #( parameter pADDR_WIDTH   = 12,
 	////////////////////////////////
 	// Assignment for Ports begin //
 	////////////////////////////////
-	//assign aa_cfg_rdata = aa_cfg_rdata_o;
-	reg down2;
-	assign aa_cfg_rdata = (down2 && aa_cfg_rready) ? f_axi_rdata : 0;
-	assign aa_cfg_rvalid = (down2 && aa_cfg_rready) ? 1 : 0;
-	assign aa_cfg_awready = aa_cfg_awvalid ? 1 : 0;
-	assign aa_cfg_wready = (down2 && aa_cfg_wvalid) ? 1 : 0;
-	assign aa_cfg_arready = aa_cfg_arvalid ? 1 : 0;
+	assign aa_cfg_rdata = aa_cfg_rdata_o;
+	assign aa_cfg_rvalid = aa_cfg_rvalid_o;
+	assign aa_cfg_awready = aa_cfg_awready_o;
+	assign aa_cfg_wready = aa_cfg_wready_o;
+	assign aa_cfg_arready = aa_cfg_arready_o;
 
+	assign axi_awvalid = axi_awvalid_o;
+	assign axi_awaddr = axi_awaddr_o;
+	assign axi_wvalid = axi_wvalid_o;
+	assign axi_wdata = axi_wdata_o;
+	assign axi_wstrb = axi_wstrb_o;
+	assign axi_arvalid = axi_arvalid_o;
+	assign axi_araddr = axi_araddr_o;
+	assign axi_rready = axi_rready_o;
 
-	reg axi_out;
-	always @ ( posedge axi_clk or negedge axi_reset_n )
-	begin
-		if ( !axi_reset_n ) begin
-			axi_out <= 0;
-		end else 
-		begin
-			if(m_axi_request) begin
-				axi_out <= 1;
-			end
-			if(m_axi_request_done) begin
-				axi_out <= 0;
-			end
-		end
-	end
-	
-
-	assign axi_awvalid = axi_out && m_axi_request_rw;
-	assign axi_awaddr = axi_awvalid ? m_axi_request_add[14:0] : 0;
-	assign axi_wvalid = axi_awvalid;
-	assign axi_wdata = axi_awvalid ? m_axi_wdata : 0;
-	assign axi_wstrb = axi_awvalid ? m_axi_wstrb : 0;
-	assign axi_arvalid = axi_out && !m_axi_request_rw;
-	assign axi_araddr = axi_arvalid ? m_axi_request_add[14:0] : 0;
-	assign axi_rready = axi_out && !m_axi_request_rw;
+	assign cc_aa_enable = cc_aa_enable_o;
+	assign cc_as_enable = cc_as_enable_o;
+	assign cc_is_enable = cc_is_enable_o;
+	assign cc_la_enable = cc_la_enable_o;
+	assign cc_up_enable = cc_up_enable_o;
 
 	assign user_prj_sel = user_prj_sel_o;
 
+	assign wbs_ack = wbs_ack_o;
+	assign wbs_rdata = wbs_rdata_o;
+
+	assign axi_awready5 = cc_axi_awvalid ? 1 : 0;
+	assign axi_wready5 = cc_axi_wvalid ? 1 : 0;
+	assign axi_arready5 = 1'b1;
+	assign axi_rdata5 = { 27'b0, user_prj_sel_o };
+	assign axi_rvalid5 = 1'b1;
+
+	//////////////////////////// 
+	// Local paramaters begin //
+	////////////////////////////
+	localparam wb_fsm_idle = 1'b0;
+	localparam wb_fsm_inprogress = 1'b1;
+
+	localparam axi_fsm_idle = 3'b000;
+	localparam axi_fsm_read_data = 3'b001;
+	localparam axi_fsm_read_complete = 3'b010;
+	localparam axi_fsm_write_data = 3'b011;
+	localparam axi_fsm_write_complete = 3'b100;
+	
 	/////////////////////////////////
 	// Always for Target Selection //
-	/////////////////////////////////	
-
-	reg [3:0] target_sel;
+	/////////////////////////////////
 	always @ ( posedge axi_clk or negedge axi_reset_n)
 	begin
-    	if ( !axi_reset_n )
-    	begin
-        	target_sel <= 4'b0000;
-    	end else
-    	begin
-        	case (m_axi_request_add[31:12])
-            	20'h30002: target_sel <= 4'b0001;
-            	20'h30004: target_sel <= 4'b0010;
-            	20'h30003: target_sel <= 4'b0011;
-            	20'h30001: target_sel <= 4'b0100;
-            	20'h30000: target_sel <= 4'b0101;
-            	20'h30005: target_sel <= 4'b0110;
-            	default: target_sel <= 4'b0000;
-        	endcase
-    	end
-	end
-
-	assign cc_aa_enable = (target_sel == 4'b0001);
-	assign cc_as_enable = (target_sel == 4'b0010);
-	assign cc_is_enable = (target_sel == 4'b0011);
-	assign cc_la_enable = (target_sel == 4'b0100);
-	assign cc_up_enable = (target_sel == 4'b0101);
-	assign cc_enable = (target_sel == 4'b0110);
-	assign cc_sub_enable = (m_axi_request_add[31:12] >= 20'h30006) && (m_axi_request_add[31:12] <= 20'h3FFFF);
-	
-
+		if ( !axi_reset_n )
+		begin
+			cc_aa_enable_o <= 1'b0;
+			cc_as_enable_o <= 1'b0;
+			cc_is_enable_o <= 1'b0;
+			cc_la_enable_o <= 1'b0;
+			cc_up_enable_o <= 1'b0;
+			cc_enable <= 1'b0;
+			cc_sub_enable <= 1'b0;
+		end else
+		begin
+			cc_aa_enable_o <= ( m_axi_request_add[31:12] == 20'h30002 )? 1'b1 : 1'b0;
+			cc_as_enable_o <= ( m_axi_request_add[31:12] == 20'h30004 )? 1'b1 : 1'b0;
+			cc_is_enable_o <= ( m_axi_request_add[31:12] == 20'h30003 )? 1'b1 : 1'b0;
+			cc_la_enable_o <= ( m_axi_request_add[31:12] == 20'h30001 )? 1'b1 : 1'b0;
+			cc_up_enable_o <= ( m_axi_request_add[31:12] == 20'h30000 )? 1'b1 : 1'b0;
+			cc_enable <= ( m_axi_request_add[31:12] == 20'h30005 )? 1'b1 : 1'b0;
+			cc_sub_enable <= ( (m_axi_request_add[31:12] >= 20'h30006) && (m_axi_request_add[31:12] <= 20'h3FFFF ) )? 1'b1 : 1'b0;
+		end
+	end	
 	////////////////////////////////////////////
 	// Always for Wishbone Interface handling //
 	////////////////////////////////////////////
-
-	// --WB--
-	assign wb_axi_request = !wb_rst && wbs_cyc && wbs_stb;
-	assign wb_axi_request_done = (wbs_we==1)? (!axi_grant_o_reg && (m_axi_awready && m_axi_wready) && wbs_cyc): (!axi_grant_o_reg && (m_axi_rvalid) && wbs_cyc);
-	assign wb_axi_request_add = wbs_adr;
-
-	assign wbs_ack = wb_axi_request_done;
-	assign wb_axi_wstrb = (wb_axi_request && wbs_we) ? wbs_sel : wb_axi_wstrb ;
-
-	assign wbs_rdata = (wb_axi_request_done && !wb_axi_request_rw)?  wb_axi_rdata : 0;
-
-	//wb_axi_request_rw
 	always @ ( posedge wb_clk or posedge wb_rst)
 	begin
 		if ( wb_rst ) 
 		begin
-			wb_axi_request_rw = 0;			
+			wb_fsm_reg <= wb_fsm_idle;
+			wb_axi_request <= 1'b0;
+			wb_axi_request_rw <= 1'b0;
+			wb_axi_wstrb <= 4'b0;
+			wb_axi_request_add <= 32'b0;
+			wb_axi_wdata <= 32'b0;
+			
+			wbs_ack_o <= 1'b0;
+			wbs_rdata_o <= 32'b0;						
 		end else
 		begin
-			if(wbs_cyc)begin
-				if(wbs_we)
-					wb_axi_request_rw = 1;
-				else
-					wb_axi_request_rw = 0;
-			end
+			case (wb_fsm_reg) 
+				wb_fsm_idle:
+				begin
+					wbs_ack_o <= 1'b0;
+					wbs_rdata_o <= 32'h0;
+					if ( !wbs_ack_o ) begin
+						if ( wbs_cyc && wbs_stb ) begin
+							wb_axi_request <= 1'b1;
+							wb_axi_request_rw <= wbs_we;
+							wb_axi_request_add <= wbs_adr;	//Latch wbs_adr
+							if ( wbs_we ) begin
+								wb_axi_wdata <= wbs_wdata;	//Latch wbs_wdata;
+								wb_axi_wstrb <= wbs_sel;
+							end
+							wb_fsm_reg <= wb_fsm_inprogress;
+						end
+					end
+				end
+				wb_fsm_inprogress:
+				begin
+					if ( wb_axi_request_done )
+					begin
+						wbs_ack_o <= 1'b1;	
+						if ( !wb_axi_request_rw )
+							wbs_rdata_o <= wb_axi_rdata;	//Output wbs_rdata_o
+						else
+							wb_axi_wdata <= 32'h0;
+						wb_axi_request <= 1'b0;
+						wb_axi_request_add <= 32'b0;
+						wb_fsm_reg <= wb_fsm_idle;						
+					end
+				end
+			endcase
 		end
-	end
+	end	
 
 	/////////////////////////////////////////////////
 	// Always for FPGA-AXI-Lite Interface handling //
-	////////////////////////////////////////////////
-
-	assign f_axi_wstrb = aa_cfg_wvalid ? aa_cfg_wstrb : 0;
-
-	//f_axi_request_rw
+	/////////////////////////////////////////////////	
 	always @ ( posedge axi_clk or negedge axi_reset_n)
 	begin
 		if ( !axi_reset_n )
 		begin
-			f_axi_request_rw = 0;
-		end else
-		begin
-			if(aa_cfg_wvalid)
-				f_axi_request_rw = 1;
+			f_axi_fsm_reg <= axi_fsm_idle;
+			f_axi_request <= 1'b0;
+			f_axi_request_rw <= 1'b0;
+			f_axi_wstrb <= 4'b0;
+			f_axi_request_add <= 32'b0;
+			f_axi_wdata <= 32'b0;
 			
-			if( aa_cfg_arvalid)
-				f_axi_request_rw = 0;
-		end
-	end
-
-
-	reg aa_w;
-	wire [31:0] f_axi_add1;
-	wire [31:0] f_axi_add2;
-	assign f_axi_add1 = aa_w ? aa_cfg_awaddr : aa_cfg_araddr;
-	assign f_axi_add2 = (aa_cfg_awvalid || aa_cfg_arvalid || !axi_reset_n) ? f_axi_add1 : f_axi_add2;
-	assign f_axi_request_add = f_axi_request ? f_axi_add2 : 0;
-
-	always @ ( posedge axi_clk or negedge axi_reset_n)
-	begin
-		if ( !axi_reset_n )
-		begin
-			aa_w <= 0;
+			aa_cfg_rdata_o <= 32'b0;
+			aa_cfg_rvalid_o <= 1'b0;
+			aa_cfg_awready_o <= 1'b0;
+			aa_cfg_wready_o <= 1'b0;
+			aa_cfg_arready_o <= 1'b0;			
 		end else
 		begin
-			if(aa_cfg_awvalid) 
-				aa_w <= 1;
-		
-			if(aa_cfg_arvalid) 
-				aa_w <= 0;
+			case ( f_axi_fsm_reg )
+				axi_fsm_idle:
+				begin			
+					aa_cfg_wready_o <= 1'b0;
+					if ( aa_cfg_awvalid ) begin
+						aa_cfg_awready_o <= 1'b1;
+						f_axi_request_add <= aa_cfg_awaddr;		//Latch awaddr
+						f_axi_fsm_reg <= axi_fsm_write_data;
+					end else if ( aa_cfg_arvalid ) begin
+						aa_cfg_arready_o <= 1'b1;
+						f_axi_request_add <= aa_cfg_araddr;		//Latch araddr
+						f_axi_request_rw <= 1'b0;
+						f_axi_request <= 1'b1;						
+						f_axi_fsm_reg <= axi_fsm_read_data;
+					end
+				end
+				axi_fsm_read_data:
+				begin
+					aa_cfg_arready_o <= 1'b0;
+					if ( aa_cfg_rready && f_axi_request_done ) begin
+						aa_cfg_rdata_o <= f_axi_rdata;			//Output aa_cfg_rdata_o
+						aa_cfg_rvalid_o <= 1'b1;
+						f_axi_request <= 1'b0;	
+						f_axi_request_add <= 32'b0;
+						f_axi_fsm_reg <= axi_fsm_read_complete;						
+					end
+				end
+				axi_fsm_read_complete:
+				begin
+					if ( aa_cfg_rready ) begin
+						aa_cfg_rdata_o <= 32'b0;
+						aa_cfg_rvalid_o <= 1'b0;
+						f_axi_fsm_reg <= axi_fsm_idle;		
+					end					
+				end
+				axi_fsm_write_data:
+				begin
+					aa_cfg_awready_o <= 1'b0;
+					if ( aa_cfg_wvalid ) begin
+						f_axi_request <= 1'b1;
+						f_axi_request_rw <= 1'b1;	
+						f_axi_wdata <= aa_cfg_wdata;			//Latch wdata
+						f_axi_wstrb <= aa_cfg_wstrb;						
+						f_axi_fsm_reg <= axi_fsm_write_complete;		
+					end
+				end
+				axi_fsm_write_complete:
+				begin
+					if ( f_axi_request_done ) begin
+						aa_cfg_wready_o <= 1'b1;
+						f_axi_request <= 1'b0;		
+						f_axi_request_add <= 32'b0;
+						f_axi_fsm_reg <= axi_fsm_idle;								
+					end
+				end
+			endcase			
 		end
 	end
-
-	// --f_axi_request_add
-	/*
-	always @ ( posedge axi_clk or negedge axi_reset_n)
-	begin
-		if ( !axi_reset_n )
-		begin
-			f_axi_request_add <= 0;
-		end else
-		begin
-			if(f_axi_request && !f_axi_request_done)
-			begin
-				if(aa_cfg_awvalid)
-					f_axi_request_add <= aa_cfg_awaddr;
-				if(aa_cfg_arvalid)
-					f_axi_request_add <= aa_cfg_araddr;
-			end else
-			begin
-				f_axi_request_add <= 0;
-			end
-		end
-	end
-	*/
+	
 	/////////////////////////////////////////////////
 	// Always for requests grant - axi_grant_o_reg //
 	/////////////////////////////////////////////////
@@ -396,81 +438,124 @@ module CFG_CTRL #( parameter pADDR_WIDTH   = 12,
 	///////////////////////////////////////////////////
 	// Always for AXI-Lite Master Interface handling //
 	///////////////////////////////////////////////////
-	
-	// ---f_axi_request_done ---////////////////////////////////////////////////////////////////////
-	wire axi_r;
-	wire axi_w;
-	reg axi_r_end;
-	reg axi_w_end;
-	reg down;
-	
-	
-	assign axi_w = (axi_grant_o_reg && (m_axi_awready && m_axi_wready) && !axi_w_end);
-	assign axi_r = (axi_grant_o_reg && m_axi_rvalid && !axi_r_end);
-	// ---f_axi_request_done
-	assign f_axi_request_done = (axi_r && aa_cfg_rready) || (axi_w && aa_cfg_wvalid);
-
-	//f_axi_request
-	assign f_axi_request = (aa_cfg_rready && !axi_r_end) || (aa_cfg_wvalid && !axi_w_end);
-	
 	always @ ( posedge axi_clk or negedge axi_reset_n )
 	begin
 		if ( !axi_reset_n ) begin
-			axi_r_end <= 0;
-			axi_w_end <= 0;
+			wb_axi_rdata <= 32'b0;
+			wb_axi_request_done <= 1'b0;
+			
+			f_axi_rdata <= 32'b0;
+			f_axi_request_done <= 1'b0;
+			
+			axi_awvalid_o <= 1'b0;
+			axi_awaddr_o <= 15'b0;
+			axi_wvalid_o <= 1'b0;
+			axi_wdata_o <= 32'b0;
+			axi_wstrb_o <= 4'b0;
+			axi_arvalid_o <= 1'b0;
+			axi_araddr_o <= 15'b0;
+			axi_rready_o <= 1'b0;			
+
+			m_axi_fsm_reg <= axi_fsm_idle;
 		end else begin
-			if(axi_r) 
-				axi_r_end <= 1;
-			else
-				axi_r_end <= 0;
-
-			if(axi_w)
-				axi_w_end <= 1;
-			else	
-				axi_w_end <= 0;
-
-			if(f_axi_request_done)
-				down2 <= 1;
-			else
-				down2 <= 0;	
+			case ( m_axi_fsm_reg )
+				axi_fsm_idle:
+				begin
+					wb_axi_request_done <= 1'b0;
+					f_axi_request_done <= 1'b0;			
+					if ( m_axi_request && !m_axi_request_done ) begin
+						if ( m_axi_request_rw ) begin
+							axi_awvalid_o <= 1'b1;
+							axi_awaddr_o <= m_axi_request_add[14:0];							
+							axi_wvalid_o <= 1'b1;
+							axi_wdata_o <= m_axi_wdata;
+							axi_wstrb_o <= m_axi_wstrb;
+							m_axi_fsm_reg <= axi_fsm_write_data;
+						end else begin
+							axi_arvalid_o <= 1'b1;							
+							axi_araddr_o <= m_axi_request_add[14:0];
+							axi_rready_o <= 1'b1;
+							m_axi_fsm_reg <= axi_fsm_read_data;
+						end
+					end
+				end
+				axi_fsm_read_data:
+				begin
+					if ( m_axi_arready && m_axi_rvalid) begin
+						axi_arvalid_o <= 1'b0;
+						axi_araddr_o <= 15'b0;
+						axi_rready_o <= 1'b0;
+						if ( axi_grant_o_reg )
+							f_axi_rdata <= m_axi_rdata;
+						else 
+							wb_axi_rdata <= m_axi_rdata;
+						if ( axi_grant_o_reg )
+							f_axi_request_done <= 1'b1;
+						else 
+							wb_axi_request_done <= 1'b1;
+						m_axi_fsm_reg <= axi_fsm_idle;												
+					end else if ( m_axi_arready ) begin
+						axi_araddr_o <= 15'b0;
+						axi_arvalid_o <= 1'b0;
+						m_axi_fsm_reg <= axi_fsm_read_complete;	
+					end
+				end
+				axi_fsm_read_complete:
+				begin
+					if ( m_axi_rvalid ) begin
+						axi_rready_o <= 1'b0;
+						if ( axi_grant_o_reg )
+							f_axi_rdata <= m_axi_rdata;
+						else 
+							wb_axi_rdata <= m_axi_rdata;
+						if ( axi_grant_o_reg )
+							f_axi_request_done <= 1'b1;
+						else 
+							wb_axi_request_done <= 1'b1;
+						m_axi_fsm_reg <= axi_fsm_idle;						
+					end
+				end
+				axi_fsm_write_data:
+				begin
+					if ( m_axi_awready && m_axi_wready) begin
+						axi_awvalid_o <= 1'b0;
+						axi_awaddr_o <= 15'b0;
+						axi_wvalid_o <= 1'b0;
+						axi_wdata_o <= 32'b0;
+						axi_wstrb_o <= 4'b0;
+						if ( axi_grant_o_reg )
+							f_axi_request_done <= 1'b1;
+						else 
+							wb_axi_request_done <= 1'b1;						
+						m_axi_fsm_reg <= axi_fsm_idle;	
+					end	else begin
+						if ( m_axi_awready ) begin
+							axi_awaddr_o <= 15'b0;
+							axi_awvalid_o <= 1'b0;
+							m_axi_fsm_reg <= axi_fsm_write_complete;								
+						end
+					end
+				end
+				axi_fsm_write_complete:
+				begin
+					if ( m_axi_wready) begin
+						axi_wvalid_o <= 1'b0;
+						axi_wdata_o <= 32'b0;
+						axi_wstrb_o <= 4'b0;
+						if ( axi_grant_o_reg )
+							f_axi_request_done <= 1'b1;
+						else 
+							wb_axi_request_done <= 1'b1;					
+						m_axi_fsm_reg <= axi_fsm_idle;	
+					end
+				end
+			endcase
 		end
 	end
 
-	assign f_axi_rdata = (f_axi_request_done) ? m_axi_rdata : f_axi_rdata;
-	assign wb_axi_rdata = (wb_axi_request_done) ? m_axi_rdata : wb_axi_rdata;
-	/*
-	always @ ( posedge axi_clk or negedge axi_reset_n)
-	begin
-		if ( !axi_reset_n )
-		begin
-			f_axi_rdata <= 0;
-		end else
-		begin
-			if(f_axi_request_done) 
-				f_axi_rdata <= m_axi_rdata;
-			else
-				f_axi_rdata <= f_axi_rdata;	
-		end
-	end
-
-	always @ ( posedge axi_clk or negedge axi_reset_n)
-	begin
-		if ( !axi_reset_n )
-		begin
-			wb_axi_rdata <= 0;
-		end else
-		begin
-			if(wb_axi_request_done) 
-				wb_axi_rdata <= m_axi_rdata;
-			else
-				wb_axi_rdata <= wb_axi_rdata;	
-		end
-	end
-	*/
 	///////////////////////////////////////////
 	// Always for AXI-Lite CC Slave response //
 	///////////////////////////////////////////	
-
 	always @ ( posedge axi_clk or negedge axi_reset_n ) 
 	begin	
 		if ( !axi_reset_n ) begin
