@@ -71,7 +71,7 @@ module pads_config (
       r_OEN[41:39] <=  {3{1'b0}};  // flash_csb, flash_clk, flash_io0
       r_OEN[43:42] <=  {2{1'b1}};  // flash_io1, gpio
     end else begin
-      integer I;
+      integer i;
       for (i = 0; i < 44; i = i + 1) begin
         if (cnfg_en[i]) r_OEN[i] <= cnfg_io[i];
       end
