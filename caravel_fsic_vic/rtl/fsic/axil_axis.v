@@ -335,13 +335,16 @@ end
 //  set by ss write to mbox
 //  reset by ls write to status with 1  (write one to clear)
 // 
+wire s_rvalid_out;
+
 always @(posedge axis_clk or negedge axis_rst_n) begin
     if( !axis_rst_n ) begin
         intr_status <= 0;
     end else begin
-
         // intr_staus
-        if(s_wready & ls_aa_reg_lw & s_awaddr[2] & s_wdata[0] & & s_wstrb[0]) //local write one to clear
+        if(s_rvalid_out & (ls_aa_mbox_lr|ls_aa_mbox)) //local read aa_mbox_lr to clear (youwei change)
+            intr_status <= 1'b0;
+        else if(s_wready & ls_aa_reg_lw & s_awaddr[2] & s_wdata[0] & & s_wstrb[0]) //local write one to clear
             intr_status <= 1'b0;    // write-one-to clear 
         else if( r_ss_t2  & ss_aa_mbox_latch & (|r_ss_wstrb) ) //Remote write any mbox register to set
             intr_status <= 1'b1;    // mbox write set status
@@ -441,7 +444,8 @@ wire   ls_rd_ss_wait_rs = (ls_sm_fsm == `LS_RD_SS_WAIT_RS);
 assign s_awready = ls_cyc & ls_wr & ls_done;
 assign s_wready  = s_awready;
 assign s_arready  = (ls_sm_fsm == `LS_RD);
-assign s_rvalid = ls_cyc & !ls_wr & ls_done;
+assign s_rvalid_out=ls_cyc & !ls_wr & ls_done;
+assign s_rvalid = s_rvalid_out;
 
 // interface signals  - axis master
 assign aa_as_tvalid = sm_tvalid;                           //sm_tvalid = ss_sm_cyc | ls_sm_tvalid_cyc
