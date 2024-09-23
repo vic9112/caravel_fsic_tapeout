@@ -58,7 +58,8 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
 
   localparam	RD_IDLE = 1'b0;
   localparam	RD_ADDR_DONE = 1'b1;
-
+   wire sm_tvalid_out;
+   assign sm_tvalid=sm_tvalid_out;
   //[TODO] does tlast from FPGA to SOC need send to UP? or use upsb as UP's tlast?
   `ifdef USER_PROJECT_SIDEBAND_SUPPORT
     localparam	FIFO_WIDTH = (pUSER_PROJECT_SIDEBAND_WIDTH + 4 + 4 + 1 + pDATA_WIDTH);		//upsb, tstrb, tkeep, tlast, tdata  
@@ -253,7 +254,7 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
   .dat_in_rsc_vld          (ss_tvalid         ), //I
   .dat_in_rsc_rdy          (dat_in_rsc_rdy    ), //O
   .dat_out_rsc_dat         (dat_out_rsc_dat   ), //O
-  .dat_out_rsc_vld         (sm_tvalid         ), //O
+  .dat_out_rsc_vld         (sm_tvalid_out     ), //O
   .dat_out_rsc_rdy         (sm_tready         ), //I
   .line_buf0_rsc_en        (ram0_en           ), //O
   .line_buf0_rsc_q         (ram0_q            ), //I
@@ -338,6 +339,15 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
     .O   (ram1_q   )
     );
 `endif //USE_EDK_SRAM
+
+// 24 bit 
+// [23:16] for axi-lite interface; [15:12] for axi-stream interface;
+assign la_data_o[23:16] = {awvalid,awready_out,wvalid,wready_out,arvalid,1'b1,rready,rvalid_out};
+assign la_data_o[15:12] = {ss_tvalid,dat_in_rsc_rdy,sm_tvalid_out,sm_tready};
+assign la_data_o[11:8]=wdata[3:0];
+assign la_data_o[7:4]=ss_tdata[3:0];
+assign la_data_o=[3:0]=dat_out_rsc_dat[3:0];
+
 
 endmodule //USER_PRJ0
 
