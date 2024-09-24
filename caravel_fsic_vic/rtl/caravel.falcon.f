@@ -8,7 +8,7 @@ top_bench.falcon.sv
 ../../rtl/top/Sram.v 
 ../../rtl/top/sram_wrapper.v
 ../../rtl/top/buff_flash_clkrst.wire.v 
-../../rtl/caravel/caravel_top.v 
+../../rtl/top/caravel_top.v 
 ../../rtl/caravel/caravel_clocking.wire.v 
 ../../rtl/caravel/caravel_logo.wire.v 
 ../../rtl/caravel/caravel_motto.wire.v 
