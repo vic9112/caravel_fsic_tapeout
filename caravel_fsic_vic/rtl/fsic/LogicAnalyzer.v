@@ -91,8 +91,8 @@ reg [7:0] tx_count;         // count # of transfer
 reg la_hpri_req_o;
 
 
-assign axi_awready  = axi_awvalid & axi_wvalid & enable_la;
-assign axi_wready   = axi_awvalid & axi_wvalid & enable_la;
+assign axi_awready  = axi_awvalid & axi_wvalid;
+assign axi_wready   = axi_awvalid & axi_wvalid;
 
 // axilite read - axi_rdata can be available when axi_arvalid (axi_araddr) is valid
 
@@ -134,11 +134,14 @@ assign la_change = |(la_enable & ( up_la_data != r_la_data));
 // - signal waveform recovery
 //   - when receive null-packet -> generate a cycle of 'x' signals
 //   - generate signal waveforms with non-null packet with rc 
+
+
 always @ ( posedge axi_clk or negedge enable_la) begin  // note: cc_la_enable to reset
     if( !enable_la ) begin
         rc_count  <= 8'h01;
         r_la_data <= 24'b0;
-    end else begin
+    end 
+    else begin
         if( !la_change & rc_count != 8'hff)             // signal is not changed
             rc_count <= rc_count + 1;
         else begin
@@ -227,18 +230,20 @@ reg r_block_push;
 wire fifo_full_push;
 
 always @ ( posedge axi_clk or negedge enable_la )begin
-    if(!enable_la) begin
+      if(!enable_la) begin
         r_block_push <= 0;
-    end else if( trace_push_ok == 1'b0) r_block_push <= 1;
-        else if( la_hpri_req_o == 1'b0) r_block_push <= 0; // delay one cycle(from fifo_count < l_thresh) - JIANG
+      end 
+      else if( trace_push_ok == 1'b0) r_block_push <= 1;
+      else if( la_hpri_req_o == 1'b0) r_block_push <= 0; // delay one cycle(from fifo_count < l_thresh) - JIANG
     end
 
 assign fifo_full_push = ((r_block_push == 1'b1) & (la_hpri_req_o == 1'b0)); // (fifo_full_push == 1'b0 & (la_hpri_req_o == 1'b1) the end of r_block_push
-assign trace_push = (la_change | (rc_count == 8'hff)) & (!r_block_push | fifo_full_push); 
+assign trace_push = ((la_change | (rc_count == 8'hff)) & !r_block_push)  | fifo_full_push; 
+
 assign trace_packet = {32{!fifo_full_push}} & {rc_count, (r_la_data & la_enable)}; 
 
 assign la_hpri_req = la_hpri_req_o;
-always @ ( posedge axi_clk or negedge enable_la )
+  always @ ( posedge axi_clk or negedge enable_la ) begin
     if(!enable_la) begin
         fifo_count <= 8'b0;
         la_hpri_req_o <= 0; 
@@ -250,7 +255,7 @@ always @ ( posedge axi_clk or negedge enable_la )
         if( fifo_push & !fifo_pop) fifo_count <= fifo_count + 1;
         if(!fifo_push &  fifo_pop) fifo_count <= fifo_count - 1;
     end
-
+  end
 assign m_tuser = 2'b00;
 assign m_tstrb = 4'b1111;
 assign m_tkeep = 4'b1111;
@@ -263,14 +268,15 @@ assign m_tlast = (tx_count == pop_cond);
 // 3. fifo empty 
 // Check upstream Axi-switch will still transfer data when there is no tlast
 
-always @ ( posedge axi_clk or negedge enable_la )
+  always @ ( posedge axi_clk or negedge enable_la ) begin 
     if( !enable_la ) 
         tx_count <= 1;
-    else 
+       else begin 
         if(tx_count == pop_cond)
             tx_count <= 1;
         else if(fifo_pop)
             tx_count <= tx_count + 1;
-
+       end
+    end
 // ----    Jiin - comment out the following
 endmodule
