@@ -67,7 +67,7 @@ assign wready = wready_out;
 assign awready_out = (awvalid_in && wvalid_in) ? 1 : 0;
 assign wready_out = (awvalid_in && wvalid_in) ? 1 : 0;
 
-wire ss_tready_out
+wire ss_tready_out;
 assign ss_tready=ss_tready_out;
 
 
