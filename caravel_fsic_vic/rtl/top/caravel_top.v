@@ -283,13 +283,13 @@ module caravel_top (
     // Pass thru clock and reset
     wire 	clk_passthru;
     wire 	resetn_passthru;
-	// top-level buffers
-	//==========================================
-	// Vic: in module "buff_flash_clkrst" :
-	// - place a clock buffer and use it as 
-	// the root of CTS - signal "clock_core_buf"
-	//==========================================
-	buff_flash_clkrst flash_clkrst_buffers (
+    // top-level buffers
+    //==========================================
+    // Vic: in module "buff_flash_clkrst" :
+    // - place a clock buffer and use it as 
+    // the root of CTS - signal "clock_core_buf"
+    //==========================================
+    buff_flash_clkrst flash_clkrst_buffers (
 	.in_n({
 		caravel_clk,
 		caravel_rstn,
@@ -312,23 +312,23 @@ module caravel_top (
 		clock_core_buf,  // root of CTS
 		flash_io1_di_buf, 
 		flash_io0_di_buf })
-	);
-	//==========================================
+    );
+    //==========================================
 
 
-	//==========================================
-	// [Vic]: Remove PLL, 
-	// make core_clk and user_clk the same clk
-	//==========================================
-	caravel_clocking clock_ctrl (
+    //==========================================
+    // [Vic]: Remove PLL, 
+    // make core_clk and user_clk the same clk
+    //==========================================
+    caravel_clocking clock_ctrl (
         .resetb(rstb_l_buf),
         .ext_clk(clock_core_buf),
         .ext_reset(ext_reset),  // From housekeeping SPI
         .resetb_sync(caravel_rstn)
     );
-	assign caravel_clk  = clock_core_buf;
-	assign caravel_clk2 = clock_core_buf;
-	//==========================================
+    assign caravel_clk  = clock_core_buf;
+    assign caravel_clk2 = clock_core_buf;
+    //==========================================
 
 	`ifdef NO_TOP_LEVEL_BUFFERING
 		assign mgmt_io_in_hk = mgmt_io_in;
@@ -362,7 +362,7 @@ module caravel_top (
     // Output: OEN = 1, REN = 1 during reset operation
     //         OEN = 0, REN = 1 during normal operation
     //===================================================//
-	`define FPGA
+    `define FPGA
 
     wire [43:0] REN;
     wire [43:0] OEN;
@@ -378,7 +378,7 @@ module caravel_top (
     `define IOPAD_MPRJ(n)         \
         PDUW04DGZ iopad_MPRJ``n(  \
             .I(mprj_io_out[n]),   \
-	        .C(mprj_io_in[n]),    \
+            .C(mprj_io_in[n]),    \
             .OEN(OEN[n]),         \
             .PAD(mprj_io[n]),     \
             .REN(REN[n])          \
@@ -386,7 +386,7 @@ module caravel_top (
 
     // Clock / Resetb input pad
 `ifdef FPGA
-	assign clock_core = clock;
+    assign clock_core = clock;
     assign rst_pad = resetb;
 `else
     PDDWDGZ iopad_CLK(
@@ -402,9 +402,9 @@ module caravel_top (
 
 `ifdef FPGA
     assign flash_csb = flash_csb_frame_buf;
-	assign flash_clk = flash_clk_frame_buf;
-	assign flash_io0 = flash_io0_do_buf;
-	assign flash_io1_di = flash_io1;
+    assign flash_clk = flash_clk_frame_buf;
+    assign flash_io0 = flash_io0_do_buf;
+    assign flash_io1_di = flash_io1;
 `else
     PDUW04DGZ iopad_FCSB(
         .PAD(flash_csb), 
@@ -451,48 +451,47 @@ module caravel_top (
 
 `ifdef FPGA
     assign mprj_io_in[0] = mprj_io[0];
-	assign mprj_io[1] = mprj_io_out[1];
-	assign mprj_io_in[2] = mprj_io[2];
-	assign mprj_io[3] = mprj_io_out[3];
-	assign mprj_io[4] = mprj_io_out[4];
-	assign mprj_io_in[5] = mprj_io[5];
-	assign mprj_io[6] = mprj_io_out[6];
-	assign mprj_io_in[7] = mprj_io[7];
+    assign mprj_io[1] = mprj_io_out[1];
+    assign mprj_io_in[2] = mprj_io[2];
+    assign mprj_io[3] = mprj_io_out[3];
+    assign mprj_io[4] = mprj_io_out[4];
+    assign mprj_io_in[5] = mprj_io[5];
+    assign mprj_io[6] = mprj_io_out[6];
+    assign mprj_io_in[7] = mprj_io[7];
 	
-	
-	assign mprj_io_in[8]  = mprj_io[8];
-	assign mprj_io_in[9]  = mprj_io[9];
-	assign mprj_io_in[10] = mprj_io[10];
-	assign mprj_io_in[11] = mprj_io[11];
-	assign mprj_io_in[12] = mprj_io[12];
-	assign mprj_io_in[13] = mprj_io[13];
-	assign mprj_io_in[14] = mprj_io[14];
-	assign mprj_io_in[15] = mprj_io[15];
-	assign mprj_io_in[16] = mprj_io[16];
-	assign mprj_io_in[17] = mprj_io[17];
-	assign mprj_io_in[18] = mprj_io[18];
-	assign mprj_io_in[19] = mprj_io[19];
-	assign mprj_io_in[20] = mprj_io[20];
-	assign mprj_io_in[21] = mprj_io[21];
+    assign mprj_io_in[8]  = mprj_io[8];
+    assign mprj_io_in[9]  = mprj_io[9];
+    assign mprj_io_in[10] = mprj_io[10];
+    assign mprj_io_in[11] = mprj_io[11];
+    assign mprj_io_in[12] = mprj_io[12];
+    assign mprj_io_in[13] = mprj_io[13];
+    assign mprj_io_in[14] = mprj_io[14];
+    assign mprj_io_in[15] = mprj_io[15];
+    assign mprj_io_in[16] = mprj_io[16];
+    assign mprj_io_in[17] = mprj_io[17];
+    assign mprj_io_in[18] = mprj_io[18];
+    assign mprj_io_in[19] = mprj_io[19];
+    assign mprj_io_in[20] = mprj_io[20];
+    assign mprj_io_in[21] = mprj_io[21];
 
-	assign mprj_io[22] = mprj_io_out[22];
-	assign mprj_io[23] = mprj_io_out[23];
-	assign mprj_io[24] = mprj_io_out[24];
-	assign mprj_io[25] = mprj_io_out[25];
-	assign mprj_io[26] = mprj_io_out[26];
-	assign mprj_io[27] = mprj_io_out[27];
-	assign mprj_io[28] = mprj_io_out[28];
-	assign mprj_io[29] = mprj_io_out[29];
-	assign mprj_io[30] = mprj_io_out[30];
-	assign mprj_io[31] = mprj_io_out[31];
-	assign mprj_io[32] = mprj_io_out[32];
-	assign mprj_io[33] = mprj_io_out[33];
-	assign mprj_io[34] = mprj_io_out[34];
-	assign mprj_io[35] = mprj_io_out[35];
+    assign mprj_io[22] = mprj_io_out[22];
+    assign mprj_io[23] = mprj_io_out[23];
+    assign mprj_io[24] = mprj_io_out[24];
+    assign mprj_io[25] = mprj_io_out[25];
+    assign mprj_io[26] = mprj_io_out[26];
+    assign mprj_io[27] = mprj_io_out[27];
+    assign mprj_io[28] = mprj_io_out[28];
+    assign mprj_io[29] = mprj_io_out[29];
+    assign mprj_io[30] = mprj_io_out[30];
+    assign mprj_io[31] = mprj_io_out[31];
+    assign mprj_io[32] = mprj_io_out[32];
+    assign mprj_io[33] = mprj_io_out[33];
+    assign mprj_io[34] = mprj_io_out[34];
+    assign mprj_io[35] = mprj_io_out[35];
 
-	assign mprj_io_in[36] = mprj_io[36];
+    assign mprj_io_in[36] = mprj_io[36];
 
-	assign mprj_io[37] = mprj_io_out[37];
+    assign mprj_io[37] = mprj_io_out[37];
 `else
     // Instance 38 MPRJ Pads
     `IOPAD_MPRJ(0)   // JTAG
@@ -737,35 +736,34 @@ module caravel_top (
     /* End user project instantiation	        */
     /*------------------------------------------*/
 
-	//======================================================//
-	// [Vic]: PAD IOs should also be flexible
-	//======================================================//
-	wire        wb_mux;
-	wire        io_cnfg_ack;
-	wire [31:0] io_cnfg_dat;
+    //======================================================//
+    // [Vic]: PAD IOs should also be flexible
+    //======================================================//
+    wire        wb_mux;
+    wire        io_cnfg_ack;
+    wire [31:0] io_cnfg_dat;
 
-	pads_config PAD_IO_CNFG (
-		.clk(clock_core),
-		.resetb(rst_pad),
-		.wb_clk_i(mprj_clock),
-		.wbs_rst_i(mprj_reset),
-		.wbs_cyc_i(mprj_cyc_o_user),
-		.wbs_stb_i(mprj_stb_o_user),
-		.wbs_we_i(mprj_we_o_user),
-		.wbs_sel_i(mprj_sel_o_user),
-		.wbs_adr_i(mprj_adr_o_user),
-		.wbs_dat_i(mprj_dat_o_user),
-		.wbs_ack_o(io_cnfg_ack),
-		.wbs_dat_o(io_cnfg_dat),
-		.re(REN),
-		.oe(OEN)
-	);
-	// IO configuration area: 3F00_0000 ~ 3F00_0025
-	assign wb_mux = (mprj_adr_o_user[31:16] == 16'h3F00)? 1'b1 : 1'b0;
-	assign mprj_ack_i_user = (wb_mux)? io_cnfg_ack : uspj_ack;
-	assign mprj_dat_i_user = (wb_mux)? io_cnfg_dat : uspj_dat;
-	//======================================================//
-
+    pads_config PAD_IO_CNFG (
+  	.clk(clock_core),
+	.resetb(rst_pad),
+	.wb_clk_i(mprj_clock),
+	.wbs_rst_i(mprj_reset),
+	.wbs_cyc_i(mprj_cyc_o_user),
+	.wbs_stb_i(mprj_stb_o_user),
+	.wbs_we_i(mprj_we_o_user),
+	.wbs_sel_i(mprj_sel_o_user),
+	.wbs_adr_i(mprj_adr_o_user),
+	.wbs_dat_i(mprj_dat_o_user),
+	.wbs_ack_o(io_cnfg_ack),
+	.wbs_dat_o(io_cnfg_dat),
+	.re(REN),
+	.oe(OEN)
+    );
+    // IO configuration area: 3F00_0000 ~ 3F00_0025
+    assign wb_mux = (mprj_adr_o_user[31:16] == 16'h3F00)? 1'b1 : 1'b0;
+    assign mprj_ack_i_user = (wb_mux)? io_cnfg_ack : uspj_ack;
+    assign mprj_dat_i_user = (wb_mux)? io_cnfg_dat : uspj_dat;
+    //======================================================//
 	
     wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1_shifted;
     wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2_shifted;
