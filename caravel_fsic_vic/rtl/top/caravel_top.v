@@ -320,7 +320,7 @@ module caravel_top (
 	// [Vic]: Remove PLL, 
 	// make core_clk and user_clk the same clk
 	//==========================================
-    caravel_clocking clock_ctrl (
+	caravel_clocking clock_ctrl (
         .resetb(rstb_l_buf),
         .ext_clk(clock_core_buf),
         .ext_reset(ext_reset),  // From housekeeping SPI
