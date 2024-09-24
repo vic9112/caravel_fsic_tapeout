@@ -196,7 +196,7 @@ fifo #(.WIDTH(32),.depth(FIFO_DEPTH),.sram_datawidth(sram_datawidth),.mode(0)) l
         .OEN(1'b0),
         .CEN(1'b0),
         .A(sram_addr),
-        .I(sram_din),
+        .D(sram_din),
         .Q(sram_dout)
     );
 
