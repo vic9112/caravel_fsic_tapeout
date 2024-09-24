@@ -170,7 +170,7 @@ module mgmt_protect (
 	genvar k;
     	generate
 		for (k = 0; k < 32; k = k + 1) begin 
-			nand (mprj_dat_i_core_bar[k], mprj_dat_i_user[k], wb_in_enable[k]);
+			nand (mprj_dat_i_core_bar[k], mprj_dat_i_user[k], wb_in_enable);
         	end
     	endgenerate
 	`else
