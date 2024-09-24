@@ -175,7 +175,7 @@ assign la_data_o[23:16] = {awvalid,awready_out,wvalid,wready_out,arvalid,1'b1,rr
 assign la_data_o[15:12] = {ss_tvalid,ss_tready_out,sm_tvalid_out,sm_tready};
 assign la_data_o[11:8]=state;
 assign la_data_o[7:4]=Out_state;
-assign la_data_o=[3:0]={wdata[0],ss_tdata[0],sm_tdata_out[0],1'b0};
+assign la_data_o[3:0]={wdata[0],ss_tdata[0],sm_tdata_out[0],1'b0};
 
 wire        in_ramf_en;
 wire [63:0] in_ramf_q;
