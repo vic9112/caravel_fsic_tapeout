@@ -699,7 +699,8 @@ module caravel_top (
     /*--------------------------------------------------*/
     /* Wrapper module around the user project 		*/
     /*--------------------------------------------------*/
-
+	wire uspj_ack;
+	wire [31:0] uspj_dat;
     user_project_wrapper mprj ( 
 
     	.wb_clk_i(mprj_clock),
@@ -712,8 +713,8 @@ module caravel_top (
 	    .wbs_sel_i(mprj_sel_o_user),
 	    .wbs_adr_i(mprj_adr_o_user),
 	    .wbs_dat_i(mprj_dat_o_user),
-	    .wbs_ack_o(mprj_ack_i_user),
-	    .wbs_dat_o(mprj_dat_i_user),
+		.wbs_ack_o(uspj_ack), /////////// VIc modified
+		.wbs_dat_o(uspj_dat), /////////// Vic modified
 
 	    // GPIO pad 3-pin interface (plus analog)
 	    .io_in (user_io_in),
@@ -736,6 +737,36 @@ module caravel_top (
     /* End user project instantiation	        */
     /*------------------------------------------*/
 
+	//======================================================//
+	// [Vic]: PAD IOs should also be flexible
+	//======================================================//
+	wire        wb_mux;
+	wire        io_cnfg_ack;
+	wire [31:0] io_cnfg_dat;
+
+	pads_config PAD_IO_CNFG (
+		.clk(clock_core),
+		.resetb(rst_pad),
+		.wb_clk_i(mprj_clock),
+		.wbs_rst_i(mprj_reset),
+		.wbs_cyc_i(mprj_cyc_o_user),
+		.wbs_stb_i(mprj_stb_o_user),
+		.wbs_we_i(mprj_we_o_user),
+		.wbs_sel_i(mprj_sel_o_user),
+		.wbs_adr_i(mprj_adr_o_user),
+		.wbs_dat_i(mprj_dat_o_user),
+		.wbs_ack_o(io_cnfg_ack),
+		.wbs_dat_o(io_cnfg_dat),
+		.re(REN),
+		.oe(OEN)
+	);
+	// IO configuration area: 3F00_0000 ~ 3F00_0025
+	assign wb_mux = (mprj_adr_o_user[31:16] == 16'h3F00)? 1'b1 : 1'b0;
+	assign mprj_ack_i_user = (wb_mux)? io_cnfg_ack : uspj_ack;
+	assign mprj_dat_i_user = (wb_mux)? io_cnfg_dat : uspj_dat;
+	//======================================================//
+
+	
     wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1_shifted;
     wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2_shifted;
 
