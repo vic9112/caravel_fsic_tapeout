@@ -96,12 +96,14 @@ module gpio_signal_buffering (
 
     wire [195:0] buf_in;
     wire [195:0] buf_out;
-
+`ifdef FPGA
+ 	assign buf_out=buf_in;	
+`else
     buf_8 signal_buffers [195:0] (
 	    .A(buf_in),
 	    .X(buf_out)
     );
-
+`endif
     /* Now chain them all together */
 
     //----------------------------------------
