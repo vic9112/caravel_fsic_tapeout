@@ -9,15 +9,13 @@
 
 module reset_as_por(
     input clk,
-    input PAD,
+    input rst_pad,
     output wire rstb_h,
     output wire porb_h,
     output wire porb_l,
-    output wire por_l,
-    output wire rst_pad
+    output wire por_l
   );
 
-  wire rst_pad;
   reg [1:0] de_glitch;
 
   reg [2:0] cnt;
@@ -36,11 +34,6 @@ module reset_as_por(
       cnt[2] <= cnt[1];
     end
   end
-
-  rstpad pad (
-    .rst_pad(rst_pad),
-    .PAD(PAD)
-  );
 
 endmodule
 
