@@ -3,9 +3,12 @@
 // Sep 8, 2024
 //===========================================================
 // Update:
-// 9/8: Module reset_as_por use `clock_core` instead of `clock`
-// 9/9: Module chip_io use `rst_pad` instead of `resetb`,
-//      add port `rst_pad` on module `reset_as_por`
+// 9/8:  Module reset_as_por use `clock_core` instead of `clock`
+// 9/9:  Module chip_io use `rst_pad` instead of `resetb`,
+//       add port `rst_pad` on module `reset_as_por`
+// 9/23: Sync with the version on EDA Cloud
+//       Remove module "chip_top" and "mprj_io"
+//       Move all the PADs to the top-level
 //===========================================================
 
  `ifdef SIM
@@ -213,7 +216,73 @@ module caravel_top (
     wire caravel_clk;
     wire caravel_clk2;
     wire caravel_rstn;
+    // Logic analyzer signals
+    wire [127:0] la_data_in_user;  // From CPU to MPRJ
+    wire [127:0] la_data_in_mprj;  // From MPRJ to CPU
+    wire [127:0] la_data_out_mprj; // From CPU to MPRJ
+    wire [127:0] la_data_out_user; // From MPRJ to CPU
+    wire [127:0] la_oenb_user;     // From CPU to MPRJ
+    wire [127:0] la_oenb_mprj;     // From CPU to MPRJ
+    wire [127:0] la_iena_mprj;     // From CPU only
 
+    wire [2:0]   user_irq;	  // From MRPJ to CPU
+    wire [2:0]   user_irq_core;
+    wire [2:0]   user_irq_ena;
+    wire [2:0]	 irq_spi;	  // From SPI and external pins
+
+    // Exported Wishbone Bus (processor facing)
+    wire        mprj_iena_wb;
+    wire        mprj_cyc_o_core;
+    wire        mprj_stb_o_core;
+    wire        mprj_we_o_core;
+    wire [3:0]  mprj_sel_o_core;
+    wire [31:0] mprj_adr_o_core;
+    wire [31:0] mprj_dat_o_core;
+    wire        mprj_ack_i_core;
+    wire [31:0] mprj_dat_i_core;
+
+    wire [31:0] hk_dat_i;
+    wire        hk_ack_i;
+    wire        hk_stb_o;
+    wire        hk_cyc_o;
+
+    // Exported Wishbone Bus (user area facing)
+    wire 	    mprj_cyc_o_user;
+    wire 	    mprj_stb_o_user;
+    wire 	    mprj_we_o_user;
+    wire [3:0]  mprj_sel_o_user;
+    wire [31:0] mprj_adr_o_user;
+    wire [31:0] mprj_dat_o_user;
+    wire [31:0] mprj_dat_i_user;
+    wire	    mprj_ack_i_user;
+
+    // Mask revision
+    wire [31:0] mask_rev;
+
+    wire 	mprj_clock;
+    wire 	mprj_clock2;
+    wire 	mprj_reset;
+
+    // Power monitoring 
+    wire	mprj_vcc_pwrgood;
+    wire	mprj2_vcc_pwrgood;
+    wire	mprj_vdd_pwrgood;
+    wire	mprj2_vdd_pwrgood;
+
+`ifdef USE_SRAM_RO_INTERFACE
+    // SRAM read-only access from housekeeping
+    wire 	    hkspi_sram_clk;
+    wire 	    hkspi_sram_csb;
+    wire [7:0]	hkspi_sram_addr;
+    wire [31:0]	hkspi_sram_data;
+`endif
+
+    // Management processor (wrapper).  Any management core
+    // implementation must match this pinout.
+
+    // Pass thru clock and reset
+    wire 	clk_passthru;
+    wire 	resetn_passthru;
 	// top-level buffers
 	//==========================================
 	// Vic: in module "buff_flash_clkrst" :
@@ -285,132 +354,142 @@ module caravel_top (
 			.mgmt_io_oeb_buf(mgmt_io_oeb[37:35])
 		);
 	`endif
+    //================ Start of Padframe ================//
+    //================= IO Configure ====================//
+    // Input:  OEN = 1, REN = 0 during reset operation
+    //         OEN = 1, REN = 1 during normal operation
+    //---------------------------------------------------//
+    // Output: OEN = 1, REN = 1 during reset operation
+    //         OEN = 0, REN = 1 during normal operation
+    //===================================================//
+    wire [43:0] REN;
+    wire [43:0] OEN;
 
-	chip_io padframe(
-		// Core Side Pins
-		.gpio(gpio),
-		.mprj_io(mprj_io),
-		.clock(clock),
-    	`ifndef NO_POR_PAD //tony_debug
-		.resetb(rst_pad),
-    	`endif //NO_POR_PAD //tony_debug
-		.flash_csb(flash_csb),
-		.flash_clk(flash_clk),
-		.flash_io0(flash_io0),
-		.flash_io1(flash_io1),
-		// SoC Core Interface
-		.porb_h(porb_h),
-		.por(por_l), // original: por_1_buf, but just the assigned value of por_1
-    	`ifndef NO_POR_PAD //tony_debug
-		.resetb_core_h(rstb_h),
-    	`endif //NO_POR_PAD //tony_debug
-		.clock_core(clock_core),
-		.gpio_out_core(gpio_out_core),
-		.gpio_in_core(gpio_in_core),
-		.gpio_mode0_core(gpio_mode0_core),
-		.gpio_mode1_core(gpio_mode1_core),
-		.gpio_outenb_core(gpio_outenb_core),
-		.gpio_inenb_core(gpio_inenb_core),
-		.flash_csb_core(flash_csb_frame_buf),
-		.flash_clk_core(flash_clk_frame_buf),
-		.flash_csb_oeb_core(flash_csb_oeb_buf),
-		.flash_clk_oeb_core(flash_clk_oeb_buf),
-		.flash_io0_oeb_core(flash_io0_oeb_buf),
-		.flash_io1_oeb_core(flash_io1_oeb_buf),
-		.flash_io0_ieb_core(flash_io0_ieb_buf),
-		.flash_io1_ieb_core(flash_io1_ieb_buf),
-		.flash_io0_do_core(flash_io0_do_buf),
-		.flash_io1_do_core(flash_io1_do_buf),
-		.flash_io0_di_core(flash_io0_di),
-		.flash_io1_di_core(flash_io1_di),
-		.mprj_io_one(mprj_io_one),
-		.mprj_io_in(mprj_io_in),
-		.mprj_io_out(mprj_io_out),
-		.mprj_io_oeb(mprj_io_oeb),
-		.mprj_io_inp_dis(mprj_io_inp_dis),
-		.mprj_io_ib_mode_sel(mprj_io_ib_mode_sel),
-		.mprj_io_vtrip_sel(mprj_io_vtrip_sel),
-		.mprj_io_slow_sel(mprj_io_slow_sel),
-		.mprj_io_holdover(mprj_io_holdover),
-		.mprj_io_analog_en(mprj_io_analog_en),
-		.mprj_io_analog_sel(mprj_io_analog_sel),
-		.mprj_io_analog_pol(mprj_io_analog_pol),
-		.mprj_io_dm(mprj_io_dm)
-//		.mprj_analog_io(user_analog_io)
-    );
+    // Input Pad for MPRJ
+    `define INPUT_MPRJ(n) \
+        PDDWDGZ iopad_MPRJ``n(  \
+            .C(mprj_io_in[n]),  \
+            .PAD(mprj_io[n]),   \
+            .REN(REN[n])        \
+        );
+
+    `define IOPAD_MPRJ(n)         \
+        PDUW04DGZ iopad_MPRJ``n(  \
+            .I(mprj_io_out[n]),   \
+	        .C(mprj_io_in[n]),    \
+            .OEN(OEN[n]),         \
+            .PAD(mprj_io[n]),     \
+            .REN(REN[n])          \
+        );
+
+    // Management clock input pad
+    PDDWDGZ iopad_CLK(
+        .PAD(clock), 
+        .C(clock_core),
+    .REN(REN[38])
+);
+
+// assign clock_core = clock
+
+// Reset Pad
+PDISDGZ iopad_RST(
+    .C(rst_pad),
+    .PAD(resetb)
+);
+
+PDUW04DGZ iopad_FCSB(
+    .PAD(flash_csb), 
+    .I(flash_csb_frame_buf), 
+    .C(), 
+    .OEN(OEN[39]), 
+    .REN(REN[39])
+);
+//assign flash_csb=flash_csb_frame_buf;
+// Example: assign flash_csb = flash_csb_frame_buf since it’s output
+
+PDUW04DGZ iopad_FCLK(
+    .PAD(flash_clk), 
+    .I(flash_clk_frame_buf), 
+    .C(), 
+    .OEN(OEN[40]), 
+    .REN(REN[40])
+);
+// assign flash_clk=flash_clk_frame_buf;
+// Management Flash SPI pads
+PDUW04DGZ iopad_FIO0(
+    .PAD(flash_io0), 
+    .I(flash_io0_do_buf), 
+	.C(flash_io0_di), 
+    .OEN(OEN[41]), 
+    .REN(REN[41])
+);
+// assign flash_io0=flash_io0_do_buf;
+PDUW04DGZ iopad_FIO1(
+    .PAD(flash_io1), 
+    .I(flash_io1_do_buf), 
+	.C(flash_io1_di), 
+    .OEN(OEN[42]), 
+    .REN(REN[42])
+);
+// assign flash_io1_di=flash_io1;
+
+// Management GPIO pad
+PDUW04DGZ iopad_GPIO(
+    .PAD(gpio), 
+    .I(gpio_out_core), 
+    .C(gpio_in_core), 
+    .OEN(OEN[43]), 
+    .REN(REN[43])
+);
+// assign gpio_in_core=gpio;
+
+// Instance 38 MPRJ Pads
+`IOPAD_MPRJ(0)   // JTAG
+`IOPAD_MPRJ(1)   // SDO
+`IOPAD_MPRJ(2)   // SDI
+`IOPAD_MPRJ(3)   // CSB
+`IOPAD_MPRJ(4)   // SCK
+`IOPAD_MPRJ(5)   // ser_rx
+`IOPAD_MPRJ(6)   // ser_tx
+`INPAD_MPRJ(7)   // irq
+
+`INPAD_MPRJ(8)   // RXD[0]
+`INPAD_MPRJ(9)   // RXD[1]
+`INPAD_MPRJ(10)  // RXD[2]
+`INPAD_MPRJ(11)  // RXD[3]
+`INPAD_MPRJ(12)  // RXD[4]
+`INPAD_MPRJ(13)  // RXD[5]
+`INPAD_MPRJ(14)  // RXD[6]
+`INPAD_MPRJ(15)  // RXD[7]
+`INPAD_MPRJ(16)  // RXD[8]
+`INPAD_MPRJ(17)  // RXD[9]
+`INPAD_MPRJ(18)  // RXD[10]
+`INPAD_MPRJ(19)  // RXD[11]
+`INPAD_MPRJ(20)  // RXD[12]
+`INPAD_MPRJ(21)  // RXCLK
+
+`IOPAD_MPRJ(22)  // TXD[0]
+`IOPAD_MPRJ(23)  // TXD[1]
+`IOPAD_MPRJ(24)  // TXD[2]
+`IOPAD_MPRJ(25)  // TXD[3]
+`IOPAD_MPRJ(26)  // TXD[4]
+`IOPAD_MPRJ(27)  // TXD[5]
+`IOPAD_MPRJ(28)  // TXD[6]
+`IOPAD_MPRJ(29)  // TXD[7]
+`IOPAD_MPRJ(30)  // TXD[8]
+`IOPAD_MPRJ(31)  // TXD[9]
+`IOPAD_MPRJ(32)  // TXD[10]
+`IOPAD_MPRJ(33)  // TXD[11]
+`IOPAD_MPRJ(34)  // TXD[12]
+`IOPAD_MPRJ(35)  // TXCLK
+
+`INPAD_MPRJ(36)  // IOCLK
+`IOPAD_MPRJ(37)  // NOT USE
+
+    //================= End of Padframe ==================//
 
 
-    // Logic analyzer signals
-    wire [127:0] la_data_in_user;  // From CPU to MPRJ
-    wire [127:0] la_data_in_mprj;  // From MPRJ to CPU
-    wire [127:0] la_data_out_mprj; // From CPU to MPRJ
-    wire [127:0] la_data_out_user; // From MPRJ to CPU
-    wire [127:0] la_oenb_user;     // From CPU to MPRJ
-    wire [127:0] la_oenb_mprj;     // From CPU to MPRJ
-    wire [127:0] la_iena_mprj;     // From CPU only
 
-    wire [2:0]   user_irq;	  // From MRPJ to CPU
-    wire [2:0]   user_irq_core;
-    wire [2:0]   user_irq_ena;
-    wire [2:0]	 irq_spi;	  // From SPI and external pins
-
-    // Exported Wishbone Bus (processor facing)
-    wire        mprj_iena_wb;
-    wire        mprj_cyc_o_core;
-    wire        mprj_stb_o_core;
-    wire        mprj_we_o_core;
-    wire [3:0]  mprj_sel_o_core;
-    wire [31:0] mprj_adr_o_core;
-    wire [31:0] mprj_dat_o_core;
-    wire        mprj_ack_i_core;
-    wire [31:0] mprj_dat_i_core;
-
-    wire [31:0] hk_dat_i;
-    wire        hk_ack_i;
-    wire        hk_stb_o;
-    wire        hk_cyc_o;
-
-    // Exported Wishbone Bus (user area facing)
-    wire 	    mprj_cyc_o_user;
-    wire 	    mprj_stb_o_user;
-    wire 	    mprj_we_o_user;
-    wire [3:0]  mprj_sel_o_user;
-    wire [31:0] mprj_adr_o_user;
-    wire [31:0] mprj_dat_o_user;
-    wire [31:0] mprj_dat_i_user;
-    wire	    mprj_ack_i_user;
-
-    // Mask revision
-    wire [31:0] mask_rev;
-
-    wire 	mprj_clock;
-    wire 	mprj_clock2;
-    wire 	mprj_reset;
-
-    // Power monitoring 
-    wire	mprj_vcc_pwrgood;
-    wire	mprj2_vcc_pwrgood;
-    wire	mprj_vdd_pwrgood;
-    wire	mprj2_vdd_pwrgood;
-
-`ifdef USE_SRAM_RO_INTERFACE
-    // SRAM read-only access from housekeeping
-    wire 	    hkspi_sram_clk;
-    wire 	    hkspi_sram_csb;
-    wire [7:0]	hkspi_sram_addr;
-    wire [31:0]	hkspi_sram_data;
-`endif
-
-    // Management processor (wrapper).  Any management core
-    // implementation must match this pinout.
-
-    // Pass thru clock and reset
-    wire 	clk_passthru;
-    wire 	resetn_passthru;
-
-	// NC passthru signal porb_h 
-//	wire porb_h_in_nc;
-//	wire porb_h_out_nc;
 
     mgmt_core_wrapper soc (
 	    // SoC pass through buffered signals
