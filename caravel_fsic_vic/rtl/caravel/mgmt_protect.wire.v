@@ -126,7 +126,12 @@ module mgmt_protect (
 
 	assign la_data_in_enable = la_iena_mprj & mprj_logic1[457:330];
    `ifdef FPGA
-	nand (la_data_in_mprj_bar,la_data_out_core,la_data_in_enable);
+	genvar i;
+    	generate
+        	for (i = 0; i < 128; i = i + 1) begin 
+            		nand (la_data_in_mprj_bar[i], la_data_out_core[i], la_data_in_enable[i]);
+        	end
+    	endgenerate
     `else
 	nand2_4 user_to_mprj_in_gates [127:0] (
 		.Y(la_data_in_mprj_bar),
@@ -141,7 +146,12 @@ module mgmt_protect (
 
 	assign user_irq_enable = user_irq_ena & mprj_logic1[460:458];
         `ifdef FPGA
-	nand(user_irq_bar,user_irq_core,user_irq_enable);
+	genvar j;
+    	generate
+		for (j = 0; j < 3; j = j + 1) begin 
+			nand (user_irq_bar[j], user_irq_core[j], user_irq_enable[j]);
+        	end
+    	endgenerate
 	`else
 	nand2_4 user_irq_gates [2:0] (
 		.Y(user_irq_bar),
@@ -157,7 +167,12 @@ module mgmt_protect (
 
 	assign wb_in_enable = mprj_iena_wb & mprj_logic1[462];
 	`ifdef FPGA
-	nand(mprj_dat_i_core_bar,mprj_dat_i_user,wb_in_enable);
+	genvar k;
+    	generate
+		for (k = 0; k < 32; k = k + 1) begin 
+			nand (mprj_dat_i_core_bar[k], mprj_dat_i_user[k], wb_in_enable[k]);
+        	end
+    	endgenerate
 	`else
 	nand2_4 user_wb_dat_gates [31:0] (
 		.Y(mprj_dat_i_core_bar),
