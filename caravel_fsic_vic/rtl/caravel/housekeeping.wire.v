@@ -1008,12 +1008,16 @@ module housekeeping #(
     assign tmp_hkspi_clk = (spi_is_active) ? mgmt_gpio_in[4] : 1'b0;
     //assign csclk = (wbbd_busy) ? wbbd_sck : tmp_hkspi_clk;
    
-	clkmux csclk_MUX_dont_touch (
+`ifdef FPGA
+    assign csclk = (wbbd_busy) ? wbbd_sck : tmp_hkspi_clk;
+`else
+    clkmux csclk_MUX_dont_touch (
         .A(tmp_hkspi_clk),
         .B(wbbd_sck),
         .S0(wbbd_busy),
         .Y(csclk)
-	);
+    );
+`endif
 
     assign cdata = (wbbd_busy) ? wbbd_data : idata;
     assign cwstb = (wbbd_busy) ? wbbd_write : wrstb;
