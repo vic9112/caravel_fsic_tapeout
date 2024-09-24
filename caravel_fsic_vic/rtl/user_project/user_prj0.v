@@ -346,7 +346,7 @@ assign la_data_o[23:16] = {awvalid,awready_out,wvalid,wready_out,arvalid,1'b1,rr
 assign la_data_o[15:12] = {ss_tvalid,dat_in_rsc_rdy,sm_tvalid_out,sm_tready};
 assign la_data_o[11:8]=wdata[3:0];
 assign la_data_o[7:4]=ss_tdata[3:0];
-assign la_data_o=[3:0]=dat_out_rsc_dat[3:0];
+assign la_data_o[3:0]=dat_out_rsc_dat[3:0];
 
 
 endmodule //USER_PRJ0
