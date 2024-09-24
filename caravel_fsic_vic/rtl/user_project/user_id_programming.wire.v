@@ -23,10 +23,6 @@ module user_id_programming #(
     // For the mask revision input, use an array of digital constant logic cells
 
     conb_1 mask_rev_value [31:0] (
-        .VPWR(VPWR),
-        .VPB(VPWR),
-        .VNB(VGND),
-        .VGND(VGND),
         .HI(user_proj_id_high),
         .LO(user_proj_id_low)
     );
