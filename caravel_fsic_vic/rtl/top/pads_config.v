@@ -1,7 +1,7 @@
 //===========================================================
 // Author: Vic Chen
 // Email: s179038@gmail.com
-// Date: Sep 8, 2024
+// Date:  Sep 27, 2024
 //===========================================================
 `default_nettype wire
 
@@ -149,4 +149,46 @@ module pads_config (
     assign cnfg_en[36] = ((wbs_adr_i[7:0] == 8'h24) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
     assign cnfg_en[37] = ((wbs_adr_i[7:0] == 8'h25) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
 
+    // READ
+    assign wbs_dat_o = ((wbs_adr_i[7:0] == 8'h00) && (!wbs_we_i))? r_OEN[0] :
+                       ((wbs_adr_i[7:0] == 8'h01) && (!wbs_we_i))? r_OEN[1] :
+                       ((wbs_adr_i[7:0] == 8'h02) && (!wbs_we_i))? r_OEN[2] :
+                       ((wbs_adr_i[7:0] == 8'h03) && (!wbs_we_i))? r_OEN[3] :
+                       ((wbs_adr_i[7:0] == 8'h04) && (!wbs_we_i))? r_OEN[4] :
+                       ((wbs_adr_i[7:0] == 8'h05) && (!wbs_we_i))? r_OEN[5] :
+                       ((wbs_adr_i[7:0] == 8'h06) && (!wbs_we_i))? r_OEN[6] :
+                       ((wbs_adr_i[7:0] == 8'h07) && (!wbs_we_i))? r_OEN[7] :
+                       ((wbs_adr_i[7:0] == 8'h08) && (!wbs_we_i))? r_OEN[8] :
+                       ((wbs_adr_i[7:0] == 8'h09) && (!wbs_we_i))? r_OEN[9] :
+                       ((wbs_adr_i[7:0] == 8'h0a) && (!wbs_we_i))? r_OEN[10] :
+                       ((wbs_adr_i[7:0] == 8'h0b) && (!wbs_we_i))? r_OEN[11] :
+                       ((wbs_adr_i[7:0] == 8'h0c) && (!wbs_we_i))? r_OEN[12] :
+                       ((wbs_adr_i[7:0] == 8'h0d) && (!wbs_we_i))? r_OEN[13] :
+                       ((wbs_adr_i[7:0] == 8'h0e) && (!wbs_we_i))? r_OEN[14] :
+                       ((wbs_adr_i[7:0] == 8'h0f) && (!wbs_we_i))? r_OEN[15] :
+                       ((wbs_adr_i[7:0] == 8'h10) && (!wbs_we_i))? r_OEN[16] :
+                       ((wbs_adr_i[7:0] == 8'h11) && (!wbs_we_i))? r_OEN[17] :
+                       ((wbs_adr_i[7:0] == 8'h12) && (!wbs_we_i))? r_OEN[18] :
+                       ((wbs_adr_i[7:0] == 8'h13) && (!wbs_we_i))? r_OEN[19] :
+                       ((wbs_adr_i[7:0] == 8'h14) && (!wbs_we_i))? r_OEN[20] :
+                       ((wbs_adr_i[7:0] == 8'h15) && (!wbs_we_i))? r_OEN[21] :
+                       ((wbs_adr_i[7:0] == 8'h16) && (!wbs_we_i))? r_OEN[22] :
+                       ((wbs_adr_i[7:0] == 8'h17) && (!wbs_we_i))? r_OEN[23] :
+                       ((wbs_adr_i[7:0] == 8'h18) && (!wbs_we_i))? r_OEN[24] :
+                       ((wbs_adr_i[7:0] == 8'h19) && (!wbs_we_i))? r_OEN[25] :
+                       ((wbs_adr_i[7:0] == 8'h1a) && (!wbs_we_i))? r_OEN[26] :
+                       ((wbs_adr_i[7:0] == 8'h1b) && (!wbs_we_i))? r_OEN[27] :
+                       ((wbs_adr_i[7:0] == 8'h1c) && (!wbs_we_i))? r_OEN[28] :
+                       ((wbs_adr_i[7:0] == 8'h1d) && (!wbs_we_i))? r_OEN[29] :
+                       ((wbs_adr_i[7:0] == 8'h1e) && (!wbs_we_i))? r_OEN[30] :
+                       ((wbs_adr_i[7:0] == 8'h1f) && (!wbs_we_i))? r_OEN[31] :
+                       ((wbs_adr_i[7:0] == 8'h20) && (!wbs_we_i))? r_OEN[32] :
+                       ((wbs_adr_i[7:0] == 8'h21) && (!wbs_we_i))? r_OEN[33] :
+                       ((wbs_adr_i[7:0] == 8'h22) && (!wbs_we_i))? r_OEN[34] :
+                       ((wbs_adr_i[7:0] == 8'h23) && (!wbs_we_i))? r_OEN[35] :
+                       ((wbs_adr_i[7:0] == 8'h24) && (!wbs_we_i))? r_OEN[36] :
+                       ((wbs_adr_i[7:0] == 8'h25) && (!wbs_we_i))? r_OEN[37] :
+                                                                   32'd0;
+
+    
 endmodule
