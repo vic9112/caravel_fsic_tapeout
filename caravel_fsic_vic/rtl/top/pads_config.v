@@ -110,6 +110,43 @@ module pads_config (
     end
 
     // WRITE
-    assign cnfg_en[0]  = ((wbs_adt_i[7:0] == 8'h00_ && wbs_we_i & (cnfg_decode & cnfg_cld))? 1'b1 : 1'b0;
+    assign cnfg_en[0]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[1]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[2]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[3]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[4]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[5]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[6]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[7]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[8]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[9]  = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[10] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[11] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[12] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[13] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[14] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[15] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[16] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[17] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[18] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[19] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[20] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[21] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[22] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[23] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[24] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[25] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[26] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[27] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[28] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[29] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[30] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[31] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[32] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[33] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[34] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[35] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[36] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
+    assign cnfg_en[37] = ((wbs_adr_i[7:0] == 8'h00) && wbs_we_i & (cnfg_decode & cnfg_vld))? 1'b1 : 1'b0;
 
 endmodule
