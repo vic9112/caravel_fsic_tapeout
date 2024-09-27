@@ -35,47 +35,81 @@
 // 43: gpio -------------- I
 
 module pads_config (
-  input clk,
-  input resetb, // reset, active low
-  input [43:0] cnfg_io,
-  input [43:0] cnfg_en,
-  output [43:0] re,
-  output [43:0] oe
+    input         clk,
+    input         resetb, // reset, active low
+    // Wishbone Slave ports
+    input         wb_clk_i,
+    input         wb_rst_i,
+    input         wbs_stb_i,
+    input         wbs_cyc_i,
+    input         wbs_we_i,
+    input   [3:0] wbs_sel_i,
+    input  [31:0] wbs_dat_i,
+    input  [31:0] wbs_adr_i,
+    output        wbs_ack_o,
+    output [31:0] wbs_dat_o,
+    // Output REN/OEN
+    output [43:0] re_n,
+    output [43:0] oe_n
 );
 
-  reg [43:0] r_REN;
-  reg [43:0] r_OEN;
+    reg [43:0] r_OEN;
+    reg        ACK;
 
-  assign oe = r_OEN;
+    wire [37:0] cnfg_en; // Configure Enable
+    wire        cnfg_decode; // Check target address
+    wire        cnfg_vld;
+  
+    assign cnfg_decode = (wbs_adr_i[31:12] == 20'h3000_6)? 1'b1 : 1'b0;
+    assign cnfg_vld = wbs_cyc_i & wbs_stb_i;
 
-  // Reset period, force ren=0, i.e. enable pull-up/down resistors
-  generate
-    genvar i;
-    for (i = 0; i < 44; i = i + 1) begin : AND_RST
-      assign re[i] = r_REN[i] & resetb;
+    assign wbs_ack_o = ACK;
+
+    // Initially, set all ports to INPUT
+    // Pull-up/down Resistor Enable: 0: Enable, 1: Disable
+    // Reset period, force ren=0, i.e. enable pull-up/down resistors
+    generate
+        genvar i;
+        for (i = 0; i < 44; i = i + 1) begin : AND_RST_OEN
+            assign re_n[i] = 1'b1 & resetb;
+            assign oe_n[i] = r_OEN[i] | (~resetb);
+        end
+    endgenerate
+
+    // Caravel FSIC initial IO state when reset
+    always @(posedge clk or negedge resetb) begin
+        if (~resetb) begin
+            r_OEN[0]     <=   {{1'b1}};  // JTAG
+            r_OEN[1]     <=   {{1'b0}};  // SDO
+            r_OEN[5:2]   <=  {4{1'b1}};  // SDI, CSB, SCK, ser_rx
+            r_OEN[6]     <=   {{1'b0}};  // ser_tx
+            r_OEN[21:7]  <= {15{1'b1}};  // irq, RXD, RXCLK
+            r_OEN[35:22] <= {14{1'b0}};  // TXD, TXCLK
+            r_OEN[36]    <=   {{1'b1}};  // IOCLK
+            r_OEN[37]    <=   {{1'b1}};  // mprj[37
+            r_OEN[38]    <=   {{1'b1}};  // clock
+            r_OEN[41:39] <=  {3{1'b0}};  // flash_csb, flash_clk, flash_io0
+            r_OEN[43:42] <=  {2{1'b1}};  // flash_io1, gpio
+        end else begin
+            integer i;
+            for (i = 0; i < 44; i = i + 1) begin
+                if (cnfg_en[i]) r_OEN[i] <= wbs_dat_i;
+            end
+        end
     end
-  endgenerate
 
-  // Given the initial state
-  always @(posedge clk or negedge resetb) begin
-    if (~resetb) begin
-      r_OEN[0]     <=   {{1'b1}};  // JTAG
-      r_OEN[1]     <=   {{1'b0}};  // SDO
-      r_OEN[5:2]   <=  {4{1'b1}};  // SDI, CSB, SCK, ser_rx
-      r_OEN[6]     <=   {{1'b0}};  // ser_tx
-      r_OEN[21:7]  <= {15{1'b1}};  // irq, RXD, RXCLK
-      r_OEN[35:22] <= {14{1'b0}};  // TXD, TXCLK
-      r_OEN[36]    <=   {{1'b1}};  // IOCLK
-      r_OEN[37]    <=   {{1'b1}};  // mprj[37
-      r_OEN[38]    <=   {{1'b1}};  // clock
-      r_OEN[41:39] <=  {3{1'b0}};  // flash_csb, flash_clk, flash_io0
-      r_OEN[43:42] <=  {2{1'b1}};  // flash_io1, gpio
-    end else begin
-      integer i;
-      for (i = 0; i < 44; i = i + 1) begin
-        if (cnfg_en[i]) r_OEN[i] <= cnfg_io[i];
-      end
+    always @(posedge wb_clk_i or posedge wb_rst_i) begin
+        if (wbs_rst_i) begin
+            ACK <= 0;
+        end else begin
+            if (cnfg_decode & cnfg_vld)
+                ACK <= 1;
+            else
+                ACK <= 0;
+        end
     end
-  end
+
+    // WRITE
+    assign cnfg_en[0]  = ((wbs_adt_i[7:0] == 8'h00_ && wbs_we_i & (cnfg_decode & cnfg_cld))? 1'b1 : 1'b0;
 
 endmodule
