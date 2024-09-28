@@ -99,7 +99,7 @@ module pads_config (
     end
 
     always @(posedge wb_clk_i or posedge wb_rst_i) begin
-        if (wbs_rst_i) begin
+        if (wb_rst_i) begin
             ACK <= 0;
         end else begin
             if (cnfg_decode & cnfg_vld)

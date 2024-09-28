@@ -1,8 +1,3 @@
-//===========================================================
-// Modified by Vic Chen
-// July 26, 2024
-//===========================================================
-
 // SPDX-FileCopyrightText: 2020 Efabless Corporation
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +13,7 @@
 // limitations under the License.
 // SPDX-License-Identifier: Apache-2.0
 
-`default_nettype none
+//`default_nettype none
 
 //-----------------------------------------------------------
 // SPI controller for Caravel
@@ -83,42 +78,42 @@ module housekeeping_spi(reset, SCK, SDI, CSB, SDO,
 	pass_thru_user, pass_thru_user_delay,
 	pass_thru_mgmt_reset, pass_thru_user_reset);
 
-    input  wire reset;
-    input  wire SCK;
-    input  wire SDI;
-    input  wire CSB;
-    output wire SDO;
-    output reg  sdoenb;
-    input  wire [7:0] idata;
-    output wire [7:0] odata;
-    output wire [7:0] oaddr;
-    output reg        rdstb;
-    output reg        wrstb; 
-    output reg  pass_thru_mgmt;
-    output reg  pass_thru_mgmt_delay;
-    output reg  pass_thru_user;
-    output reg  pass_thru_user_delay;
-    output wire pass_thru_mgmt_reset;
-    output wire pass_thru_user_reset;
+    input reset;
+    input SCK;
+    input SDI;
+    input CSB;
+    output SDO;
+    output sdoenb;
+    input [7:0] idata;
+    output [7:0] odata;
+    output [7:0] oaddr;
+    output rdstb;
+    output wrstb; 
+    output pass_thru_mgmt;
+    output pass_thru_mgmt_delay;
+    output pass_thru_user;
+    output pass_thru_user_delay;
+    output pass_thru_mgmt_reset;
+    output pass_thru_user_reset;
 
     reg  [7:0]  addr;
- // reg		wrstb;
- // reg		rdstb;
- // reg		sdoenb;
+    reg		wrstb;
+    reg		rdstb;
+    reg		sdoenb;
     reg  [2:0]  state;
     reg  [2:0]  count;
     reg		writemode;
     reg		readmode;
     reg  [2:0]	fixed;
- // wire [7:0]  odata;
+    wire [7:0]  odata;
     reg  [6:0]  predata;
- // wire [7:0]  oaddr;
+    wire [7:0]  oaddr;
     reg  [7:0]  ldata;
- // reg		pass_thru_mgmt;
- // reg		pass_thru_mgmt_delay;
+    reg		pass_thru_mgmt;
+    reg		pass_thru_mgmt_delay;
     reg		pre_pass_thru_mgmt;
- // reg		pass_thru_user;
- // reg		pass_thru_user_delay;
+    reg		pass_thru_user;
+    reg		pass_thru_user_delay;
     reg		pre_pass_thru_user;
     wire	csb_reset;
 
@@ -258,4 +253,4 @@ module housekeeping_spi(reset, SCK, SDI, CSB, SDO,
     end			// always @ SCK
 
 endmodule // housekeeping_spi
-`default_nettype wire
+//`default_nettype wire

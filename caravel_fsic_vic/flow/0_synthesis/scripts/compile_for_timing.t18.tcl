@@ -105,9 +105,9 @@ compile -exact_map -map_effort high -area_effort medium -power_effort none
 
 report_clock
 
-report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"]
-report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group wbbd_sck_to_csclk_mux
-report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group hkspi_clk_to_csclk_mux
+#report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"]
+#report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group wbbd_sck_to_csclk_mux
+#report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group hkspi_clk_to_csclk_mux
 
 #create_generated_clock -name wbbd_sck_to_csclk_mux -source  [get_ports clock] -divide_by 2 [get_pins housekeeping/U4718/X]
 #create_generated_clock -name hkspi_clk_to_csclk_mux -source [get_ports {mprj_io[4]}] -add -divide_by 1 [get_pins housekeeping/U4718/X]
@@ -137,11 +137,11 @@ report_timing > ../../../reports/timing_${DESIGN_NAME}_timing_reports.log
 report_qor > ../../../reports/timing_${DESIGN_NAME}_qor_reports.log
 report_area -hierarchy  > ../../../reports/timing_${DESIGN_NAME}_area_reports.log
 report_power -hierarchy > ../../../reports/timing_${DESIGN_NAME}_power_reports.log
-report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"]
-report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group wbbd_sck_to_csclk_mux
-report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group hkspi_clk_to_csclk_mux
+#report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"]
+#report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group wbbd_sck_to_csclk_mux
+#report_timing -to [get_pins -of_objects housekeeping/pll_sel_reg[0] -filter "lib_pin_name==D"] -group hkspi_clk_to_csclk_mux
 
 change_names -rules verilog
-write_file -format verilog -hierarchy -pg -output ../../input/${DESIGN_NAME}.v
+write_file -format verilog -hierarchy -pg -output ../../../input/${DESIGN_NAME}.v
 
 quit

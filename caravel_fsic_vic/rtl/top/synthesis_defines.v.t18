@@ -2,6 +2,7 @@
 `define USER_PROJECT_SIDEBAND_SUPPORT 1
 //`define USE_EDK_SRAM 1
 `define USE_PDK_SRAM 1
+`define USE_PDK_ROM 1
 
 //`define USE_EDK32 1
 //`define USE_SAED14 1

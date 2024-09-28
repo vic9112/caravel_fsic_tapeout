@@ -293,7 +293,18 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
 `ifdef USE_PDK_SRAM
   //SRAM
   //SPRAM #(.data_width(64),.addr_width(7),.depth(80)) U_SPRAM_0(
+  /*
   PDK_SRAM1RW80x64 U_SPRAM_0(
+    .A   (ram0_adr ), 
+    .D   (ram0_d   ), 
+    .CEN (~ram0_en  ), 
+    .WEN (~ram0_we  ), 
+    .OEN (1'b0     ), 
+    .CLK (axi_clk  ), //user_clock2 ? 
+    .Q   (ram0_q   )
+    );
+  */
+  ra1shd80x64m4h3v2 U_SPRAM_0(
     .A   (ram0_adr ), 
     .D   (ram0_d   ), 
     .CEN (~ram0_en  ), 
@@ -304,7 +315,18 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
     );
 
   //SPRAM #(.data_width(64),.addr_width(7),.depth(80)) U_SPRAM_1(
+  /*
   PDK_SRAM1RW80x64 U_SPRAM_1(
+    .A   (ram1_adr ), 
+    .D   (ram1_d   ), 
+    .CEN (~ram1_en  ), 
+    .WEN (~ram1_we  ), 
+    .OEN (1'b0     ), 
+    .CLK (axi_clk  ), //user_clock2 ? 
+    .Q   (ram1_q   )
+    );
+  */
+  ra1shd80x64m4h3v2 U_SPRAM_1(
     .A   (ram1_adr ), 
     .D   (ram1_d   ), 
     .CEN (~ram1_en  ), 

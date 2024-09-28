@@ -446,7 +446,7 @@ assign ram1_d   	= (mux_state) ? out_ramf_d   : {48'b0,out_ramu_d};
 assign out_ramu_q = ram1_q[15:0];
 assign out_ramf_q = ram1_q;
 `ifdef USE_PDK_SRAM
-ralshd1024x64m4h3v2 SRAM0(
+ra1shd1024x64m4h3v2 SRAM0(
   .CLK(axi_clk),
   .WEN(~ram0_we),
   .OEN(1'b0),
@@ -456,7 +456,7 @@ ralshd1024x64m4h3v2 SRAM0(
   .Q(ram0_q)
 );
 
-ralshd1024x64m4h3v2 SRAM1(
+ra1shd1024x64m4h3v2 SRAM1(
   .CLK(axi_clk),
   .WEN(~ram1_we),
   .OEN(1'b0),
