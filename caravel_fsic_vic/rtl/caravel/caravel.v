@@ -653,112 +653,114 @@ module caravel_top (
 
     mgmt_core_wrapper soc (
 
- // SoC pass through buffered signals
- .serial_clock_in(mprj_io_loader_clock),
- .serial_clock_out(mprj_io_loader_clock_buf),
- .serial_load_in(mprj_io_loader_strobe),
- .serial_load_out(mprj_io_loader_strobe_buf),
- .serial_resetn_in(mprj_io_loader_resetn),
- .serial_resetn_out(mprj_io_loader_resetn_buf),
- .serial_data_2_in(mprj_io_loader_data_2),
- .serial_data_2_out(mprj_io_loader_data_2_buf),
- .rstb_l_in(rstb_l),
- .rstb_l_out(rstb_l_buf),
- .porb_h_in(porb_h_in_nc),
- .porb_h_out(porb_h_out_nc),
- .por_l_in(por_l),
- .por_l_out(por_l_buf),
+	    // SoC pass through buffered signals
+	    .serial_clock_in(mprj_io_loader_clock),
+	    .serial_clock_out(mprj_io_loader_clock_buf),
+	    .serial_load_in(mprj_io_loader_strobe),
+	    .serial_load_out(mprj_io_loader_strobe_buf),
+	    .serial_resetn_in(mprj_io_loader_resetn),
+	    .serial_resetn_out(mprj_io_loader_resetn_buf),
+	    .serial_data_2_in(mprj_io_loader_data_2),
+	    .serial_data_2_out(mprj_io_loader_data_2_buf),
+	    .rstb_l_in(rstb_l),
+	    .rstb_l_out(rstb_l_buf),
+//	    .porb_h_in(porb_h_in_nc),
+//	    .porb_h_out(porb_h_out_nc),
 
- // Clock and reset
- .core_clk(caravel_clk_buf),
- .core_rstn(caravel_rstn_buf),
+		// [Vic]: por_1_buf is just the assigned value of por_1
+	    //.por_l_in(por_l),
+	    //.por_l_out(por_l_buf),
+    
+	    // Clock and reset
+	    .core_clk(caravel_clk_buf),
+	    .core_rstn(caravel_rstn_buf),
+    
+        // Pass thru Clock and reset
+	    .clk_in(caravel_clk_buf),
+	    .resetn_in(caravel_rstn_buf),
+	    .clk_out(clk_passthru),
+	    .resetn_out(resetn_passthru),
+    
+	    // GPIO (1 pin)
+	    .gpio_out_pad(gpio_out_core),
+	    .gpio_in_pad(gpio_in_core),
+	    .gpio_mode0_pad(gpio_mode0_core),
+	    .gpio_mode1_pad(gpio_mode1_core),
+	    .gpio_outenb_pad(gpio_outenb_core),
+	    .gpio_inenb_pad(gpio_inenb_core),
+    
+	    // Primary SPI flash controller
+	    .flash_csb(flash_csb_core),
+	    .flash_clk(flash_clk_core),
+	    .flash_io0_oeb(flash_io0_oeb_core),
+	    .flash_io0_di(flash_io0_di_core),
+	    .flash_io0_do(flash_io0_do_core),
+	    .flash_io1_oeb(flash_io1_oeb_core),
+	    .flash_io1_di(flash_io1_di_core),
+	    .flash_io1_do(flash_io1_do_core),
+	    .flash_io2_oeb(flash_io2_oeb_core),
+	    .flash_io2_di(flash_io2_di_core),
+	    .flash_io2_do(flash_io2_do_core),
+	    .flash_io3_oeb(flash_io3_oeb_core),
+	    .flash_io3_di(flash_io3_di_core),
+	    .flash_io3_do(flash_io3_do_core),
+    
+	    // Exported Wishbone Bus
+	    .mprj_wb_iena(mprj_iena_wb),
+	    .mprj_cyc_o(mprj_cyc_o_core),
+	    .mprj_stb_o(mprj_stb_o_core),
+	    .mprj_we_o(mprj_we_o_core),
+	    .mprj_sel_o(mprj_sel_o_core),
+	    .mprj_adr_o(mprj_adr_o_core),
+	    .mprj_dat_o(mprj_dat_o_core),
+	    .mprj_ack_i(mprj_ack_i_core),
+	    .mprj_dat_i(mprj_dat_i_core),
+    
+	    .hk_stb_o(hk_stb_o),
+	    .hk_cyc_o(hk_cyc_o),
+	    .hk_dat_i(hk_dat_i),
+	    .hk_ack_i(hk_ack_i),
+    
+	    // IRQ
+	    .irq({irq_spi, user_irq}),
+	    .user_irq_ena(user_irq_ena),
+    
+	    // Module status (these may or may not be implemented)
+	    .qspi_enabled(qspi_enabled),
+	    .uart_enabled(uart_enabled),
+	    .spi_enabled(spi_enabled),
+	    .debug_mode(debug_mode),
+    
+	    // Module I/O (these may or may not be implemented)
+	    // UART
+	    .ser_tx(ser_tx),
+	    .ser_rx(ser_rx),
+	    // SPI master
+	    .spi_sdi(spi_sdi),
+	    .spi_csb(spi_csb),
+	    .spi_sck(spi_sck),
+	    .spi_sdo(spi_sdo),
+	    .spi_sdoenb(spi_sdoenb),
+	    // Debug
+	    .debug_in(debug_in),
+	    .debug_out(debug_out),
+	    .debug_oeb(debug_oeb),
+	    // Logic analyzer
+	    .la_input(la_data_in_mprj),
+	    .la_output(la_data_out_mprj),
+	    .la_oenb(la_oenb_mprj),
+	    .la_iena(la_iena_mprj),
 
-    // Pass thru Clock and reset
- .clk_in(caravel_clk_buf),
- .resetn_in(caravel_rstn_buf),
- .clk_out(clk_passthru),
- .resetn_out(resetn_passthru),
-
- // GPIO (1 pin)
- .gpio_out_pad(gpio_out_core),
- .gpio_in_pad(gpio_in_core),
- .gpio_mode0_pad(gpio_mode0_core),
- .gpio_mode1_pad(gpio_mode1_core),
- .gpio_outenb_pad(gpio_outenb_core),
- .gpio_inenb_pad(gpio_inenb_core),
-
- // Primary SPI flash controller
- .flash_csb(flash_csb_core),
- .flash_clk(flash_clk_core),
- .flash_io0_oeb(flash_io0_oeb_core),
- .flash_io0_di(flash_io0_di_core),
- .flash_io0_do(flash_io0_do_core),
- .flash_io1_oeb(flash_io1_oeb_core),
- .flash_io1_di(flash_io1_di_core),
- .flash_io1_do(flash_io1_do_core),
- .flash_io2_oeb(flash_io2_oeb_core),
- .flash_io2_di(flash_io2_di_core),
- .flash_io2_do(flash_io2_do_core),
- .flash_io3_oeb(flash_io3_oeb_core),
- .flash_io3_di(flash_io3_di_core),
- .flash_io3_do(flash_io3_do_core),
-
- // Exported Wishbone Bus
- .mprj_wb_iena(mprj_iena_wb),
- .mprj_cyc_o(mprj_cyc_o_core),
- .mprj_stb_o(mprj_stb_o_core),
- .mprj_we_o(mprj_we_o_core),
- .mprj_sel_o(mprj_sel_o_core),
- .mprj_adr_o(mprj_adr_o_core),
- .mprj_dat_o(mprj_dat_o_core),
- .mprj_ack_i(mprj_ack_i_core),
- .mprj_dat_i(mprj_dat_i_core),
-
- .hk_stb_o(hk_stb_o),
- .hk_cyc_o(hk_cyc_o),
- .hk_dat_i(hk_dat_i),
- .hk_ack_i(hk_ack_i),
-
- // IRQ
- .irq({irq_spi, user_irq}),
- .user_irq_ena(user_irq_ena),
-
- // Module status (these may or may not be implemented)
- .qspi_enabled(qspi_enabled),
- .uart_enabled(uart_enabled),
- .spi_enabled(spi_enabled),
- .debug_mode(debug_mode),
-
- // Module I/O (these may or may not be implemented)
- // UART
- .ser_tx(ser_tx),
- .ser_rx(ser_rx),
- // SPI master
- .spi_sdi(spi_sdi),
- .spi_csb(spi_csb),
- .spi_sck(spi_sck),
- .spi_sdo(spi_sdo),
- .spi_sdoenb(spi_sdoenb),
- // Debug
- .debug_in(debug_in),
- .debug_out(debug_out),
- .debug_oeb(debug_oeb),
- // Logic analyzer
- .la_input(la_data_in_mprj),
- .la_output(la_data_out_mprj),
- .la_oenb(la_oenb_mprj),
- .la_iena(la_iena_mprj),
-
-`ifdef USE_SRAM_RO_INTERFACE
- // SRAM Read-only access from housekeeping
- .sram_ro_clk(hkspi_sram_clk),
- .sram_ro_csb(hkspi_sram_csb),
- .sram_ro_addr(hkspi_sram_addr),
- .sram_ro_data(hkspi_sram_data),
-`endif
-
- // Trap status
- .trap(trap)
+    `ifdef USE_SRAM_RO_INTERFACE
+    	// SRAM Read-only access from housekeeping
+    	.sram_ro_clk(hkspi_sram_clk),
+    	.sram_ro_csb(hkspi_sram_csb),
+    	.sram_ro_addr(hkspi_sram_addr),
+    	.sram_ro_data(hkspi_sram_data),
+    `endif
+    
+    	// Trap status
+    	.trap(trap)
     );
 
     /* Clock and reset to user space are passed through a tristate	*/
