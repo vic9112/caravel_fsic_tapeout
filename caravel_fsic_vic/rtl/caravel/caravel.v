@@ -664,12 +664,12 @@ module caravel_top (
 	    .serial_data_2_out(mprj_io_loader_data_2_buf),
 	    .rstb_l_in(rstb_l),
 	    .rstb_l_out(rstb_l_buf),
-//	    .porb_h_in(porb_h_in_nc),
-//	    .porb_h_out(porb_h_out_nc),
+	    .porb_h_in(porb_h_in_nc),
+	    .porb_h_out(porb_h_out_nc),
 
-		// [Vic]: por_1_buf is just the assigned value of por_1
-	    //.por_l_in(por_l),
-	    //.por_l_out(por_l_buf),
+		  // [Vic]: Need to keep the POR here
+	    .por_l_in(por_l),
+	    .por_l_out(por_l_buf),
     
 	    // Clock and reset
 	    .core_clk(caravel_clk_buf),
@@ -818,7 +818,7 @@ module caravel_top (
       .io_in (user_io_in),
       .io_out(user_io_out),
       .io_oeb(user_io_oeb),
-      .analog_io(user_analog_io),
+      //.analog_io(user_analog_io),
 
       // Logic analyzer
       .la_data_in(la_data_in_user),

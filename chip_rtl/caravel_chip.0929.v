@@ -1082,12 +1082,12 @@ module caravel_top (
 	    .serial_data_2_out(mprj_io_loader_data_2_buf),
 	    .rstb_l_in(rstb_l),
 	    .rstb_l_out(rstb_l_buf),
-//	    .porb_h_in(porb_h_in_nc),
-//	    .porb_h_out(porb_h_out_nc),
+	    .porb_h_in(porb_h_in_nc),
+	    .porb_h_out(porb_h_out_nc),
 
-		// [Vic]: por_1_buf is just the assigned value of por_1
-	    //.por_l_in(por_l),
-	    //.por_l_out(por_l_buf),
+		  // [Vic]: Need to keep the POR here
+	    .por_l_in(por_l),
+	    .por_l_out(por_l_buf),
     
 	    // Clock and reset
 	    .core_clk(caravel_clk_buf),
@@ -1236,7 +1236,7 @@ module caravel_top (
       .io_in (user_io_in),
       .io_out(user_io_out),
       .io_oeb(user_io_oeb),
-      .analog_io(user_analog_io),
+      //.analog_io(user_analog_io),
 
       // Logic analyzer
       .la_data_in(la_data_in_user),
@@ -4396,12 +4396,12 @@ module mgmt_core(
     input wire serial_clock_in,
     output wire serial_clock_out,
     input wire rstb_l_in,
-    output wire rstb_l_out
-	// [Vic]: POR here is useless
-    // input wire por_l_in,
-    // output wire por_l_out,
-    // input wire porb_h_in,
-    // output wire porb_h_out
+    output wire rstb_l_out,
+	// [Vic]: Needs to keep POR here
+    input wire por_l_in,
+    output wire por_l_out,
+    input wire porb_h_in,
+    output wire porb_h_out
 );
 
 wire core_rst;
@@ -12855,16 +12855,16 @@ module mgmt_core_wrapper (
     input serial_resetn_in,
     input serial_clock_in,
     input rstb_l_in,
-    //input por_l_in,
-    //input porb_h_in,
+    input por_l_in,
+    input porb_h_in,
 
     output serial_load_out,
     output serial_data_2_out,
     output serial_resetn_out,
     output serial_clock_out,
     output rstb_l_out,
-    //output por_l_out,
-    //output porb_h_out,
+    output por_l_out,
+    output porb_h_out,
 
     // GPIO (one pin)
     output gpio_out_pad,    // Connect to out on gpio pad
@@ -22385,17 +22385,6 @@ endmodule
 
 module user_project_wrapper #(parameter BITS = 32)
 (
-`ifdef USE_POWER_PINS
-    inout vdda1,	// User area 1 3.3V supply
-    inout vdda2,	// User area 2 3.3V supply
-    inout vssa1,	// User area 1 analog ground
-    inout vssa2,	// User area 2 analog ground
-    inout vccd1,	// User area 1 1.8V supply
-    inout vccd2,	// User area 2 1.8v supply
-    inout vssd1,	// User area 1 digital ground
-    inout vssd2,	// User area 2 digital ground
-`endif
-
     // Wishbone Slave ports (WB MI A)
     input wb_clk_i,
     input wb_rst_i,
@@ -22422,7 +22411,9 @@ module user_project_wrapper #(parameter BITS = 32)
     // Note that analog I/O is not available on the 7 lowest-numbered
     // GPIO pads, and so the analog_io indexing is offset from the
     // GPIO indexing by 7 (also upper 2 GPIOs do not have analog_io).
-    inout [`MPRJ_IO_PADS-10:0] analog_io,
+    `ifdef USE_skywater_LIB
+      inout [`MPRJ_IO_PADS-10:0] analog_io,
+    `endif //USE_skywater_LIB
 
     // Independent clock (on independent integer divider)
     input   user_clock2,
@@ -22431,63 +22422,15 @@ module user_project_wrapper #(parameter BITS = 32)
     output [2:0] user_irq
 );
 
-/*--------------------------------------*/
-/* User project is instantiated  here   */
-/*--------------------------------------*/
-
-
 /*
-user_proj_example mprj (
-`ifdef USE_POWER_PINS
-	.vccd1(vccd1),	// User area 1 1.8V power
-	.vssd1(vssd1),	// User area 1 digital ground
-`endif
-
-    .wb_clk_i(wb_clk_i),
-    .wb_rst_i(wb_rst_i),
-
-    // MGMT SoC Wishbone Slave
-
-    .wbs_cyc_i(wbs_cyc_i),
-    .wbs_stb_i(wbs_stb_i),
-    .wbs_we_i(wbs_we_i),
-    .wbs_sel_i(wbs_sel_i),
-    .wbs_adr_i(wbs_adr_i),
-    .wbs_dat_i(wbs_dat_i),
-    .wbs_ack_o(wbs_ack_o),
-    .wbs_dat_o(wbs_dat_o),
-
-    // Logic Analyzer
-
-    .la_data_in(la_data_in),
-    .la_data_out(la_data_out),
-    .la_oenb (la_oenb),
-
-    // IO Pads
-
-    .io_in (io_in),
-    .io_out(io_out),
-    .io_oeb(io_oeb),
-
-    // IRQ
-    .irq(user_irq)
-);
+assign wbs_ack_o   = 1'b0;
+assign wbs_dat_o   = 32'd0;
+assign la_data_out = 128'd0;
+assign io_out      = 38'd0;
+assign io_oeb      = 38'd0;
+assign user_irq    = 3'd0;
 */
-
-FSIC #(.BITS( BITS ),
-       .pUSER_PROJECT_SIDEBAND_WIDTH( 5 ),
-       .pSERIALIO_WIDTH( 13 ),
-       .pADDR_WIDTH( 15 ),
-       .pDATA_WIDTH( 32 ),
-       .pRxFIFO_DEPTH( 5 ),
-       .pCLK_RATIO( 4 )) u_fsic  (
-
-                      `ifdef USE_POWER_PINS
-                      .vccd1       (vccd1),                   // I
-                      .vccd2       (vccd2),                   // I
-                      .vssd1       (vssd1),                   // I
-                      .vssd2       (vssd2),                   // I
-                      `endif // USE_POWER_PINS
+FSIC #(.BITS( BITS )) u_fsic  (
 
                       // MGMT SoC Wishbone Slave
                       .wb_rst      (wb_rst_i),                // I

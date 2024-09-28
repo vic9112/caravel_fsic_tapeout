@@ -51,16 +51,16 @@ module mgmt_core_wrapper (
     input serial_resetn_in,
     input serial_clock_in,
     input rstb_l_in,
-    //input por_l_in,
-    //input porb_h_in,
+    input por_l_in,
+    input porb_h_in,
 
     output serial_load_out,
     output serial_data_2_out,
     output serial_resetn_out,
     output serial_clock_out,
     output rstb_l_out,
-    //output por_l_out,
-    //output porb_h_out,
+    output por_l_out,
+    output porb_h_out,
 
     // GPIO (one pin)
     output gpio_out_pad,    // Connect to out on gpio pad
