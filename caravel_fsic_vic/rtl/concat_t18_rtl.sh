@@ -7,7 +7,7 @@ top/RAM128.v \
 caravel/caravel.v \
 caravel/gpio_defaults_block.v \
 caravel/gpio_control_block.v \
-caravel/housekeeping.v \
+caravel/housekeeping.vic.v \
 caravel/housekeeping_spi.v \
 caravel/mgmt_core.vic.v \
 caravel/mgmt_core_wrapper.v \

@@ -72,12 +72,12 @@ module mgmt_core(
     input wire serial_clock_in,
     output wire serial_clock_out,
     input wire rstb_l_in,
-    output wire rstb_l_out,
-	// [Vic]: Needs to keep POR here
-    input wire por_l_in,
-    output wire por_l_out,
-    input wire porb_h_in,
-    output wire porb_h_out
+    output wire rstb_l_out
+	// [Vic]: POR here is useless
+    //input wire por_l_in,
+    //output wire por_l_out,
+    //input wire porb_h_in,
+    //output wire porb_h_out
 );
 
 wire core_rst;
@@ -1821,7 +1821,7 @@ assign serial_resetn_out = serial_resetn_in;
 assign serial_clock_out = serial_clock_in;
 assign rstb_l_out = rstb_l_in;
 
-// [Vic]: POR here is useless
+// [Vic]: POR is useless here
 //assign por_l_out = por_l_in;
 //assign porb_h_out = porb_h_in;
 

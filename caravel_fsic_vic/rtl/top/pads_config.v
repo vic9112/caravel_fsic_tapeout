@@ -49,11 +49,11 @@ module pads_config (
     output        wbs_ack_o,
     output [31:0] wbs_dat_o,
     // Output REN/OEN
-    output [43:0] re_n,
-    output [43:0] oe_n
+    output        re_n,
+    output [37:0] oe_n
 );
 
-    reg [43:0] r_OEN;
+    reg [37:0] r_OEN;
     reg        ACK;
 
     wire [37:0] cnfg_en; // Configure Enable
@@ -68,10 +68,10 @@ module pads_config (
     // Initially, set all ports to INPUT
     // Pull-up/down Resistor Enable: 0: Enable, 1: Disable
     // Reset period, force ren=0, i.e. enable pull-up/down resistors
+    assign re_n = 1'b1 & resetb;
     generate
         genvar i;
-        for (i = 0; i < 44; i = i + 1) begin : AND_RST_OEN
-            assign re_n[i] = 1'b1 & resetb;
+        for (i = 0; i < 38; i = i + 1) begin : AND_RST_OEN
             assign oe_n[i] = r_OEN[i] | (~resetb);
         end
     endgenerate
@@ -86,14 +86,11 @@ module pads_config (
             r_OEN[21:7]  <= {15{1'b1}};  // irq, RXD, RXCLK
             r_OEN[35:22] <= {14{1'b0}};  // TXD, TXCLK
             r_OEN[36]    <=   {{1'b1}};  // IOCLK
-            r_OEN[37]    <=   {{1'b1}};  // mprj[37
-            r_OEN[38]    <=   {{1'b1}};  // clock
-            r_OEN[41:39] <=  {3{1'b0}};  // flash_csb, flash_clk, flash_io0
-            r_OEN[43:42] <=  {2{1'b1}};  // flash_io1, gpio
+            r_OEN[37]    <=   {{1'b1}};  // mprj[37]
         end else begin
             integer i;
-            for (i = 0; i < 44; i = i + 1) begin
-                if (cnfg_en[i]) r_OEN[i] <= wbs_dat_i;
+            for (i = 0; i < 38; i = i + 1) begin
+                if (cnfg_en[i]) r_OEN[i] <= wbs_dat_i[0];
             end
         end
     end

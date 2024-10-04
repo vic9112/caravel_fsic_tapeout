@@ -20,9 +20,6 @@
    License along with the GNU C Library; if not, see
    <https://www.gnu.org/licenses/>.  */
 
-
-
-
 /* This header is separate from features.h so that the compiler can
    include it implicitly at the start of every compilation.  It must
    not itself include <features.h> or any other header that includes
@@ -77,7 +74,6 @@
 /* the management SoC).						*/
 /*                                                          	*/
 /*--------------------------------------------------------------*/
- `default_nettype wire
 module caravel_top (
 
 `ifdef FPGA
@@ -310,8 +306,8 @@ module caravel_top (
    // Output: OEN = 1, REN = 1 during reset operation
    //         OEN = 0, REN = 1 during normal operation
    //===================================================//
-   wire [43:0] REN;
-   wire [43:0] OEN;
+   wire        REN;
+   wire [37:0] mprj_oen;
 
 `ifdef FPGA
     assign mprj_io_in[0] = mprj_io[0];
@@ -363,62 +359,70 @@ module caravel_top (
         PDDWDGZ iopad_MPRJ``n(  \
             .C(mprj_io_in[n]),  \
             .PAD(mprj_io[n]),   \
-            .REN(REN[n])        \
+            .REN(REN)           \
         );
 
     `define IOPAD_MPRJ(n)         \
         PDUW04DGZ iopad_MPRJ``n(  \
             .I(mprj_io_out[n]),   \
             .C(mprj_io_in[n]),    \
-            .OEN(OEN[n]),         \
+            .OEN(mprj_oen[n]),    \
             .PAD(mprj_io[n]),     \
-            .REN(REN[n])          \
+            .REN(REN)             \
         );
 
     PDDWDGZ iopad_CLK(
         .PAD(clock), 
         .C(clock_core),
-        .REN(REN[38])
+        .REN(REN)
     );
     PDISDGZ iopad_RST(
         .C(resetb_core),
         .PAD(resetb)
     );
+
+    wire fcsb_oen, fclk_oen, fio0_oen, fio1_oen;
+    assign fclk_oen = 1'b0 | (~resetb_core);
+    assign fcsb_oen = 1'b0 | (~resetb_core);
+    assign fio0_oen = 1'b0 | (~resetb_core);
+    assign fio1_oen = 1'b1 | (~resetb_core);
+    assign gpio_oen = 1'b1 | (~resetb_core);
+
     PDUW04DGZ iopad_FCSB(
         .PAD(flash_csb), 
         .I(flash_csb_frame_buf), 
         .C(), 
-        .OEN(OEN[39]), 
-        .REN(REN[39])
+        .OEN(fcsb_oen), 
+        .REN(REN)
     );
     PDUW04DGZ iopad_FCLK(
         .PAD(flash_clk), 
         .I(flash_clk_frame_buf), 
         .C(), 
-        .OEN(OEN[40]), 
-        .REN(REN[40])
+        .OEN(fclk_oen), 
+        .REN(REN)
     );
     PDUW04DGZ iopad_FIO0(
         .PAD(flash_io0), 
         .I(flash_io0_do_buf), 
     	  .C(flash_io0_di), 
-        .OEN(OEN[41]), 
-        .REN(REN[41])
+        .OEN(fio0_oen), 
+        .REN(REN)
     );
     PDUW04DGZ iopad_FIO1(
         .PAD(flash_io1), 
         .I(flash_io1_do_buf), 
     	  .C(flash_io1_di), 
-        .OEN(OEN[42]), 
-        .REN(REN[42])
+        .OEN(fio1_oen), 
+        .REN(REN)
     );
     // Management GPIO pad
     PDUW04DGZ iopad_GPIO(
         .PAD(gpio), 
         .I(gpio_out_core), 
         .C(gpio_in_core), 
-        .OEN(OEN[43]), 
-        .REN(REN[43])
+        .OEN(gpio_oen), 
+        .REN(REN)
     );
     // Instance 38 MPRJ Pads
     `IOPAD_MPRJ(0)   // JTAG
@@ -627,10 +631,6 @@ module caravel_top (
     wire mprj_reset;
 
     // Power monitoring 
-    wire mprj_vcc_pwrgood;
-    wire mprj2_vcc_pwrgood;
-    wire mprj_vdd_pwrgood;
-    wire mprj2_vdd_pwrgood;
 
 `ifdef USE_SRAM_RO_INTERFACE
     // SRAM read-only access from housekeeping
@@ -648,8 +648,8 @@ module caravel_top (
     wire resetn_passthru;
 
  // NC passthru signal porb_h 
- wire porb_h_in_nc;
- wire porb_h_out_nc;
+ //wire porb_h_in_nc;
+ //wire porb_h_out_nc;
 
     mgmt_core_wrapper soc (
 
@@ -664,12 +664,12 @@ module caravel_top (
 	    .serial_data_2_out(mprj_io_loader_data_2_buf),
 	    .rstb_l_in(rstb_l),
 	    .rstb_l_out(rstb_l_buf),
-	    .porb_h_in(porb_h_in_nc),
-	    .porb_h_out(porb_h_out_nc),
 
-		  // [Vic]: Need to keep the POR here
-	    .por_l_in(por_l),
-	    .por_l_out(por_l_buf),
+		 // [Vic]: POR is useless here
+	    //.porb_h_in(porb_h_in_nc),
+	    //.porb_h_out(porb_h_out_nc),
+	    //.por_l_in(por_l),
+	    //.por_l_out(por_l_buf),
     
 	    // Clock and reset
 	    .core_clk(caravel_clk_buf),
@@ -854,7 +854,7 @@ module caravel_top (
 	   .wbs_ack_o(io_cnfg_ack),
 	   .wbs_dat_o(io_cnfg_dat),
 	   .re_n(REN),
-	   .oe_n(OEN)
+	   .oe_n(mprj_oen)
    );
    // IO configuration area: 3000_6000 ~ 3000_6025
    assign wb_mux = (mprj_adr_o_user[31:12] == 20'h3000_6)? 1'b1 : 1'b0;
@@ -1015,10 +1015,10 @@ module caravel_top (
  .sram_ro_data(hkspi_sram_data),
 `endif
 
- .usr1_vcc_pwrgood(mprj_vcc_pwrgood),
- .usr2_vcc_pwrgood(mprj2_vcc_pwrgood),
- .usr1_vdd_pwrgood(mprj_vdd_pwrgood),
- .usr2_vdd_pwrgood(mprj2_vdd_pwrgood)
+ .usr1_vcc_pwrgood(user1_vcc_powergood),
+ .usr2_vcc_pwrgood(user2_vcc_powergood),
+ .usr1_vdd_pwrgood(user1_vdd_powergood),
+ .usr2_vdd_pwrgood(user2_vdd_powergood)
     );
 
     /* GPIO defaults (via programmed) */

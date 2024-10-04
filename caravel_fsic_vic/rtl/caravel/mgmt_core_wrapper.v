@@ -36,6 +36,10 @@
 /* with the Caravel harness chip. */    
 
 module mgmt_core_wrapper (
+`ifdef USE_POWER_PINS
+    inout VPWR,     /* 1.8V domain */
+    inout VGND,
+`endif
     // Clock and reset
     input core_clk,
     input core_rstn,
@@ -51,16 +55,16 @@ module mgmt_core_wrapper (
     input serial_resetn_in,
     input serial_clock_in,
     input rstb_l_in,
-    input por_l_in,
-    input porb_h_in,
+    //input por_l_in,
+    //input porb_h_in,
 
     output serial_load_out,
     output serial_data_2_out,
     output serial_resetn_out,
     output serial_clock_out,
     output rstb_l_out,
-    output por_l_out,
-    output porb_h_out,
+    //output por_l_out,
+    //output porb_h_out,
 
     // GPIO (one pin)
     output gpio_out_pad,    // Connect to out on gpio pad
@@ -144,13 +148,19 @@ module mgmt_core_wrapper (
     /* Implement the PicoSoC core */
 
     mgmt_core core (
+    `ifdef USE_POWER_PINS
+        .VPWR(VPWR),        /* 1.8V domain */
+        .VGND(VGND),
+    `endif
         .core_clk(core_clk),
         .core_rstn(core_rstn),
+
         // Pass-thru signals
         .clk_in(clk_in),
         .clk_out(clk_out),
         .resetn_in(resetn_in),
         .resetn_out(resetn_out),
+
         .serial_load_in(serial_load_in),
         .serial_load_out(serial_load_out),
         .serial_data_2_in(serial_data_2_in),
@@ -159,13 +169,18 @@ module mgmt_core_wrapper (
         .serial_resetn_out(serial_resetn_out),
         .serial_clock_in(serial_clock_in),
         .serial_clock_out(serial_clock_out),
+
         .rstb_l_in(rstb_l_in),
         .rstb_l_out(rstb_l_out),
-        // [Vic]: POR here is useless
-        // .por_l_in(por_l_in),
-        // .por_l_out(por_l_out),
+        // [Vic]: POR is useless here
+        //.por_l_in(por_l_in),
+        //.por_l_out(por_l_out),
+        //.porb_h_in(porb_h_in),
+        //.porb_h_out(porb_h_out),
+
         // Trap state from CPU
         .trap(trap),
+
         // GPIO (one pin)
         .gpio_out_pad(gpio_out_pad),        // Connect to out on gpio pad
         .gpio_in_pad(gpio_in_pad),      // Connect to in on gpio pad
@@ -173,13 +188,16 @@ module mgmt_core_wrapper (
         .gpio_mode1_pad(gpio_mode1_pad),    // Connect to dm[2] on gpio pad
         .gpio_outenb_pad(gpio_outenb_pad),  // Connect to oe_n on gpio pad
         .gpio_inenb_pad(gpio_inenb_pad),    // Connect to inp_dis on gpio pad
+
         .la_input(la_input),            // From user project to CPU
         .la_output(la_output),          // From CPU to user project
         .la_oenb(la_oenb),          // Logic analyzer output enable
         .la_iena(la_iena),          // Logic analyzer input enable
+
         // IRQ
         .user_irq(irq),     // IRQ from SPI and user project
         .user_irq_ena(user_irq_ena),
+
         // Flash memory control (SPI master)
         .flash_cs_n(flash_csb),
         .flash_clk(flash_clk),

@@ -75,11 +75,11 @@ module mgmt_core(
 	input wire serial_clock_in,
 	output wire serial_clock_out,
 	input wire rstb_l_in,
-	output wire rstb_l_out,
-	input wire por_l_in,
-	output wire por_l_out,
-	input wire porb_h_in,
-	output wire porb_h_out
+	output wire rstb_l_out
+	//input wire por_l_in,
+	//output wire por_l_out.
+	//input wire porb_h_in,
+	//output wire porb_h_out
 );
 
 wire core_rst;
@@ -1821,8 +1821,8 @@ assign serial_data_2_out = serial_data_2_in;
 assign serial_resetn_out = serial_resetn_in;
 assign serial_clock_out = serial_clock_in;
 assign rstb_l_out = rstb_l_in;
-assign por_l_out = por_l_in;
-assign porb_h_out = porb_h_in;
+//assign por_l_out = por_l_in;
+//assign porb_h_out = porb_h_in;
 assign mgmtsoc_bus_error = error;
 always @(*) begin
 	mgmtsoc_interrupt = 32'd0;
