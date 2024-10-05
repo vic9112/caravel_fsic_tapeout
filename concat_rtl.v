@@ -24069,14 +24069,14 @@ module stage_struct (
     rom5_62m16h3v2 rom5_62(
       .CLK(clk),
       .CEN(r_ac_ieee_float_base_read_rom_gm_im_tab_d_rom_map_1_cmp_en),
-      .A(r_ac_ieee_float_base_read_rom_gm_im_tab_d_rom_map_1_cmp_addr),
+      .A(BUTTERFLY_1_else_read_rom_GMb_rom_6_map_1_cmp_addr),
       .Q(r_ac_ieee_float_base_read_rom_gm_im_tab_d_rom_map_1_cmp_data_out)
     );
 
     rom6_64m16h3v2 rom6_64(
       .CLK(clk),
       .CEN(r_ac_ieee_float_base_read_rom_gm_im_tab_d_rom_map_1_cmp_en),
-      .A(r_ac_ieee_float_base_read_rom_gm_im_tab_d_rom_map_1_cmp_addr),
+      .A(BUTTERFLY_1_else_read_rom_GMb_rom_6_map_1_cmp_addr),
       .Q(BUTTERFLY_if_read_rom_gm_re_tab_d_rom_map_1_cmp_data_out)
     );
   
