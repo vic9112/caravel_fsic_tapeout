@@ -1,6 +1,6 @@
 //===========================================================
 // Modified by Vic Chen
-// Sep 28, 2024
+// Oct 5, 2024
 //===========================================================
 
 /* Copyright (C) 1991-2020 Free Software Foundation, Inc.
@@ -919,94 +919,94 @@ module caravel_top (
    // Housekeeping interface
 
    housekeeping housekeeping (
-        .wb_clk_i(caravel_clk),
-        .wb_rstn_i(caravel_rstn),
-
-        .wb_adr_i(mprj_adr_o_core),
-        .wb_dat_i(mprj_dat_o_core),
-        .wb_sel_i(mprj_sel_o_core),
-        .wb_we_i(mprj_we_o_core),
-        .wb_cyc_i(hk_cyc_o),
-        .wb_stb_i(hk_stb_o),
-        .wb_ack_o(hk_ack_i),
-        .wb_dat_o(hk_dat_i),
-
-        .porb(porb_l),
-
-        .pll_ena(spi_pll_ena),
-        .pll_dco_ena(spi_pll_dco_ena),
-        .pll_div(spi_pll_div),
-        .pll_sel(spi_pll_sel),
-        .pll90_sel(spi_pll90_sel),
-        .pll_trim(spi_pll_trim),
-        .pll_bypass(ext_clk_sel),
-
- .qspi_enabled(qspi_enabled),
- .uart_enabled(uart_enabled),
- .spi_enabled(spi_enabled),
- .debug_mode(debug_mode),
-
- .ser_tx(ser_tx),
- .ser_rx(ser_rx),
-
- .spi_sdi(spi_sdi),
- .spi_csb(spi_csb),
- .spi_sck(spi_sck),
- .spi_sdo(spi_sdo),
- .spi_sdoenb(spi_sdoenb),
-
- .debug_in(debug_in),
- .debug_out(debug_out),
- .debug_oeb(debug_oeb),
-
-        .irq(irq_spi),
-        .reset(ext_reset),
-
-        .serial_clock(mprj_io_loader_clock),
-        .serial_load(mprj_io_loader_strobe),
-        .serial_resetn(mprj_io_loader_resetn),
-        .serial_data_1(mprj_io_loader_data_1),
-        .serial_data_2(mprj_io_loader_data_2),
-
- .mgmt_gpio_in(mgmt_io_in_hk),
- .mgmt_gpio_out(mgmt_io_out_hk),
- .mgmt_gpio_oeb(mgmt_io_oeb_hk),
-
- .pwr_ctrl_out(pwr_ctrl_nc), /* Not used in this version */
-
-        .trap(trap),
-
- .user_clock(caravel_clk2),
-
-        .mask_rev_in(mask_rev),
-
- .spimemio_flash_csb(flash_csb_core),
- .spimemio_flash_clk(flash_clk_core),
- .spimemio_flash_io0_oeb(flash_io0_oeb_core),
- .spimemio_flash_io1_oeb(flash_io1_oeb_core),
- .spimemio_flash_io2_oeb(flash_io2_oeb_core),
- .spimemio_flash_io3_oeb(flash_io3_oeb_core),
- .spimemio_flash_io0_do(flash_io0_do_core),
- .spimemio_flash_io1_do(flash_io1_do_core),
- .spimemio_flash_io2_do(flash_io2_do_core),
- .spimemio_flash_io3_do(flash_io3_do_core),
- .spimemio_flash_io0_di(flash_io0_di_core),
- .spimemio_flash_io1_di(flash_io1_di_core),
- .spimemio_flash_io2_di(flash_io2_di_core),
- .spimemio_flash_io3_di(flash_io3_di_core),
-
- .pad_flash_csb(flash_csb_frame),
- .pad_flash_csb_oeb(flash_csb_oeb),
- .pad_flash_clk(flash_clk_frame),
- .pad_flash_clk_oeb(flash_clk_oeb),
- .pad_flash_io0_oeb(flash_io0_oeb),
- .pad_flash_io1_oeb(flash_io1_oeb),
- .pad_flash_io0_ieb(flash_io0_ieb),
- .pad_flash_io1_ieb(flash_io1_ieb),
- .pad_flash_io0_do(flash_io0_do),
- .pad_flash_io1_do(flash_io1_do),
- .pad_flash_io0_di(flash_io0_di_buf),
- .pad_flash_io1_di(flash_io1_di_buf),
+         .wb_clk_i(caravel_clk),
+         .wb_rstn_i(caravel_rstn),
+ 
+         .wb_adr_i(mprj_adr_o_core),
+         .wb_dat_i(mprj_dat_o_core),
+         .wb_sel_i(mprj_sel_o_core),
+         .wb_we_i(mprj_we_o_core),
+         .wb_cyc_i(hk_cyc_o),
+         .wb_stb_i(hk_stb_o),
+         .wb_ack_o(hk_ack_i),
+         .wb_dat_o(hk_dat_i),
+ 
+         .porb(porb_l),
+ 
+         .pll_ena(spi_pll_ena),
+         .pll_dco_ena(spi_pll_dco_ena),
+         .pll_div(spi_pll_div),
+         .pll_sel(spi_pll_sel),
+         .pll90_sel(spi_pll90_sel),
+         .pll_trim(spi_pll_trim),
+         .pll_bypass(ext_clk_sel),
+ 
+  .qspi_enabled(qspi_enabled),
+  .uart_enabled(uart_enabled),
+  .spi_enabled(spi_enabled),
+  .debug_mode(debug_mode),
+ 
+  .ser_tx(ser_tx),
+  .ser_rx(ser_rx),
+ 
+  .spi_sdi(spi_sdi),
+  .spi_csb(spi_csb),
+  .spi_sck(spi_sck),
+  .spi_sdo(spi_sdo),
+  .spi_sdoenb(spi_sdoenb),
+ 
+  .debug_in(debug_in),
+  .debug_out(debug_out),
+  .debug_oeb(debug_oeb),
+ 
+         .irq(irq_spi),
+         .reset(ext_reset),
+ 
+         .serial_clock(mprj_io_loader_clock),
+         .serial_load(mprj_io_loader_strobe),
+         .serial_resetn(mprj_io_loader_resetn),
+         .serial_data_1(mprj_io_loader_data_1),
+         .serial_data_2(mprj_io_loader_data_2),
+ 
+  .mgmt_gpio_in(mgmt_io_in_hk),
+  .mgmt_gpio_out(mgmt_io_out_hk),
+  .mgmt_gpio_oeb(mgmt_io_oeb_hk),
+ 
+  .pwr_ctrl_out(pwr_ctrl_nc), /* Not used in this version */
+ 
+         .trap(trap),
+ 
+  .user_clock(caravel_clk2),
+ 
+         .mask_rev_in(mask_rev),
+ 
+  .spimemio_flash_csb(flash_csb_core),
+  .spimemio_flash_clk(flash_clk_core),
+  .spimemio_flash_io0_oeb(flash_io0_oeb_core),
+  .spimemio_flash_io1_oeb(flash_io1_oeb_core),
+  .spimemio_flash_io2_oeb(flash_io2_oeb_core),
+  .spimemio_flash_io3_oeb(flash_io3_oeb_core),
+  .spimemio_flash_io0_do(flash_io0_do_core),
+  .spimemio_flash_io1_do(flash_io1_do_core),
+  .spimemio_flash_io2_do(flash_io2_do_core),
+  .spimemio_flash_io3_do(flash_io3_do_core),
+  .spimemio_flash_io0_di(flash_io0_di_core),
+  .spimemio_flash_io1_di(flash_io1_di_core),
+  .spimemio_flash_io2_di(flash_io2_di_core),
+  .spimemio_flash_io3_di(flash_io3_di_core),
+ 
+  .pad_flash_csb(flash_csb_frame),
+  .pad_flash_csb_oeb(flash_csb_oeb),
+  .pad_flash_clk(flash_clk_frame),
+  .pad_flash_clk_oeb(flash_clk_oeb),
+  .pad_flash_io0_oeb(flash_io0_oeb),
+  .pad_flash_io1_oeb(flash_io1_oeb),
+  .pad_flash_io0_ieb(flash_io0_ieb),
+  .pad_flash_io1_ieb(flash_io1_ieb),
+  .pad_flash_io0_do(flash_io0_do),
+  .pad_flash_io1_do(flash_io1_do),
+  .pad_flash_io0_di(flash_io0_di_buf),
+  .pad_flash_io1_di(flash_io1_di_buf),
 
 `ifdef USE_SRAM_RO_INTERFACE
  .sram_ro_clk(hkspi_sram_clk),
@@ -1015,679 +1015,17 @@ module caravel_top (
  .sram_ro_data(hkspi_sram_data),
 `endif
 
- .usr1_vcc_pwrgood(user1_vcc_powergood),
- .usr2_vcc_pwrgood(user2_vcc_powergood),
- .usr1_vdd_pwrgood(user1_vdd_powergood),
- .usr2_vdd_pwrgood(user2_vdd_powergood)
+   .usr1_vcc_pwrgood(user1_vcc_powergood),
+   .usr2_vcc_pwrgood(user2_vcc_powergood),
+   .usr1_vdd_pwrgood(user1_vdd_powergood),
+   .usr2_vdd_pwrgood(user2_vdd_powergood)
     );
 
-    /* GPIO defaults (via programmed) */
-    wire [`MPRJ_IO_PADS*13-1:0] gpio_defaults;
+    // [Vic]: Remove GPIO configuration logics
+    assign mprj_io_out = user_io_out;
+    assign user_io_in  = mprj_io_in;
+    assign mgmt_io_in  = mprj_io_in;
 
-    /* Fixed defaults for the first 5 GPIO pins */
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(13'h1803)
-    ) gpio_defaults_block_0 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[12:0])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(13'h1803)
-    ) gpio_defaults_block_1 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[25:13])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(13'h0403)
-    ) gpio_defaults_block_2 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[38:26])
-    );
-
-    // CSB pin is set as an internal pull-up
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(13'h0801)
-    ) gpio_defaults_block_3 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[51:39])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(13'h0403)
-    ) gpio_defaults_block_4 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[64:52])
-    );
-
-    /* Via-programmable defaults for the rest of the GPIO pins */
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_5_INIT)
-    ) gpio_defaults_block_5 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[77:65])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_6_INIT)
-    ) gpio_defaults_block_6 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[90:78])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_7_INIT)
-    ) gpio_defaults_block_7 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[103:91])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_8_INIT)
-    ) gpio_defaults_block_8 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[116:104])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_9_INIT)
-    ) gpio_defaults_block_9 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[129:117])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_10_INIT)
-    ) gpio_defaults_block_10 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[142:130])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_11_INIT)
-    ) gpio_defaults_block_11 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[155:143])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_12_INIT)
-    ) gpio_defaults_block_12 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[168:156])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_13_INIT)
-    ) gpio_defaults_block_13 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[181:169])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_14_INIT)
-    ) gpio_defaults_block_14 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[194:182])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_15_INIT)
-    ) gpio_defaults_block_15 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[207:195])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_16_INIT)
-    ) gpio_defaults_block_16 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[220:208])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_17_INIT)
-    ) gpio_defaults_block_17 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[233:221])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_18_INIT)
-    ) gpio_defaults_block_18 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[246:234])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_19_INIT)
-    ) gpio_defaults_block_19 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[259:247])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_20_INIT)
-    ) gpio_defaults_block_20 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[272:260])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_21_INIT)
-    ) gpio_defaults_block_21 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[285:273])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_22_INIT)
-    ) gpio_defaults_block_22 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[298:286])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_23_INIT)
-    ) gpio_defaults_block_23 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[311:299])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_24_INIT)
-    ) gpio_defaults_block_24 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[324:312])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_25_INIT)
-    ) gpio_defaults_block_25 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[337:325])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_26_INIT)
-    ) gpio_defaults_block_26 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[350:338])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_27_INIT)
-    ) gpio_defaults_block_27 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[363:351])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_28_INIT)
-    ) gpio_defaults_block_28 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[376:364])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_29_INIT)
-    ) gpio_defaults_block_29 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[389:377])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_30_INIT)
-    ) gpio_defaults_block_30 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[402:390])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_31_INIT)
-    ) gpio_defaults_block_31 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[415:403])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_32_INIT)
-    ) gpio_defaults_block_32 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[428:416])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_33_INIT)
-    ) gpio_defaults_block_33 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[441:429])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_34_INIT)
-    ) gpio_defaults_block_34 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[454:442])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_35_INIT)
-    ) gpio_defaults_block_35 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[467:455])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_36_INIT)
-    ) gpio_defaults_block_36 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[480:468])
-    );
-
-    gpio_defaults_block #(
- .GPIO_CONFIG_INIT(`USER_CONFIG_GPIO_37_INIT)
-    ) gpio_defaults_block_37 (
-     `ifdef USE_POWER_PINS
-     .VPWR(vccd_core),
-     .VGND(vssd_core),
-        `endif
- .gpio_defaults(gpio_defaults[493:481])
-    );
-
-    // Each control block sits next to an I/O pad in the user area.
-    // It gets input through a serial chain from the previous control
-    // block and passes it to the next control block.  Due to the nature
-    // of the shift register, bits are presented in reverse, as the first
-    // bit in ends up as the last bit of the last I/O pad control block.
-
-    // There are two types of block;  the first two and the last two
-    // are configured to be full bidirectional under control of the
-    // management Soc (JTAG and SDO for the first two;  flash_io2 and
-    // flash_io3 for the last two).  The rest are configured to be default
-    // (input).  Note that the first two and last two are the ones closest
-    // to the management SoC on either side, which minimizes the wire length
-    // of the extra signals those pads need.
-
-    /* First two GPIOs (JTAG and SDO) */
-
-    gpio_control_block gpio_control_bidir_1 [1:0] (
-     `ifdef USE_POWER_PINS
-     .vccd(vccd_core),
-     .vssd(vssd_core),
-     .vccd1(vccd1_core),
-     .vssd1(vssd1_core),
-        `endif
-
- .gpio_defaults(gpio_defaults[25:0]),
-
-     // Management Soc-facing signals
-
-     .resetn(gpio_resetn_1_shifted[1:0]),
-     .serial_clock(gpio_clock_1_shifted[1:0]),
-     .serial_load(gpio_load_1_shifted[1:0]),
-
-     .resetn_out(gpio_resetn_1[1:0]),
-     .serial_clock_out(gpio_clock_1[1:0]),
-     .serial_load_out(gpio_load_1[1:0]),
-
-     .mgmt_gpio_in(mgmt_io_in[1:0]),
- .mgmt_gpio_out(mgmt_io_out[1:0]),
- .mgmt_gpio_oeb(mgmt_io_oeb[1:0]),
-
-        .one(mprj_io_one[1:0]),
-        .zero(),
-
-     // Serial data chain for pad configuration
-     .serial_data_in(gpio_serial_link_1_shifted[1:0]),
-     .serial_data_out(gpio_serial_link_1[1:0]),
-
-     // User-facing signals
-     .user_gpio_out(user_io_out[1:0]),
-     .user_gpio_oeb(user_io_oeb[1:0]),
-     .user_gpio_in(user_io_in[1:0]),
-
-     // Pad-facing signals (Pad GPIOv2)
-     .pad_gpio_inenb(mprj_io_inp_dis[1:0]),
-     .pad_gpio_ib_mode_sel(mprj_io_ib_mode_sel[1:0]),
-     .pad_gpio_vtrip_sel(mprj_io_vtrip_sel[1:0]),
-     .pad_gpio_slow_sel(mprj_io_slow_sel[1:0]),
-     .pad_gpio_holdover(mprj_io_holdover[1:0]),
-     .pad_gpio_ana_en(mprj_io_analog_en[1:0]),
-     .pad_gpio_ana_sel(mprj_io_analog_sel[1:0]),
-     .pad_gpio_ana_pol(mprj_io_analog_pol[1:0]),
-     .pad_gpio_dm(mprj_io_dm[5:0]),
-     .pad_gpio_outenb(mprj_io_oeb[1:0]),
-     .pad_gpio_out(mprj_io_out[1:0]),
-     .pad_gpio_in(mprj_io_in[1:0])
-    );
-
-    /* Section 1 GPIOs (GPIO 2 to 7) that start up under management control */
-
-    gpio_control_block gpio_control_in_1a [5:0] (
-        `ifdef USE_POWER_PINS
-            .vccd(vccd_core),
-     .vssd(vssd_core),
-     .vccd1(vccd1_core),
-     .vssd1(vssd1_core),
-        `endif
-
- .gpio_defaults(gpio_defaults[103:26]),
-
-     // Management Soc-facing signals
-
-     .resetn(gpio_resetn_1_shifted[7:2]),
-     .serial_clock(gpio_clock_1_shifted[7:2]),
-     .serial_load(gpio_load_1_shifted[7:2]),
-
-     .resetn_out(gpio_resetn_1[7:2]),
-     .serial_clock_out(gpio_clock_1[7:2]),
-     .serial_load_out(gpio_load_1[7:2]),
-
- .mgmt_gpio_in(mgmt_io_in[7:2]),
- .mgmt_gpio_out(mgmt_io_out[7:2]),
- .mgmt_gpio_oeb(mprj_io_one[7:2]),
-
-        .one(mprj_io_one[7:2]),
-        .zero(),
-
-     // Serial data chain for pad configuration
-     .serial_data_in(gpio_serial_link_1_shifted[7:2]),
-     .serial_data_out(gpio_serial_link_1[7:2]),
-
-     // User-facing signals
-     .user_gpio_out(user_io_out[7:2]),
-     .user_gpio_oeb(user_io_oeb[7:2]),
-     .user_gpio_in(user_io_in[7:2]),
-
-     // Pad-facing signals (Pad GPIOv2)
-     .pad_gpio_inenb(mprj_io_inp_dis[7:2]),
-     .pad_gpio_ib_mode_sel(mprj_io_ib_mode_sel[7:2]),
-     .pad_gpio_vtrip_sel(mprj_io_vtrip_sel[7:2]),
-     .pad_gpio_slow_sel(mprj_io_slow_sel[7:2]),
-     .pad_gpio_holdover(mprj_io_holdover[7:2]),
-     .pad_gpio_ana_en(mprj_io_analog_en[7:2]),
-     .pad_gpio_ana_sel(mprj_io_analog_sel[7:2]),
-     .pad_gpio_ana_pol(mprj_io_analog_pol[7:2]),
-     .pad_gpio_dm(mprj_io_dm[23:6]),
-     .pad_gpio_outenb(mprj_io_oeb[7:2]),
-     .pad_gpio_out(mprj_io_out[7:2]),
-     .pad_gpio_in(mprj_io_in[7:2])
-    );
-
-    /* Section 1 GPIOs (GPIO 8 to 18) */
-
-    gpio_control_block gpio_control_in_1 [`MPRJ_IO_PADS_1-9:0] (
-        `ifdef USE_POWER_PINS
-            .vccd(vccd_core),
-     .vssd(vssd_core),
-     .vccd1(vccd1_core),
-     .vssd1(vssd1_core),
-        `endif
-
- .gpio_defaults(gpio_defaults[(`MPRJ_IO_PADS_1*13-1):104]),
-
-     // Management Soc-facing signals
-
-     .resetn(gpio_resetn_1_shifted[(`MPRJ_IO_PADS_1-1):8]),
-     .serial_clock(gpio_clock_1_shifted[(`MPRJ_IO_PADS_1-1):8]),
-     .serial_load(gpio_load_1_shifted[(`MPRJ_IO_PADS_1-1):8]),
-
-     .resetn_out(gpio_resetn_1[(`MPRJ_IO_PADS_1-1):8]),
-     .serial_clock_out(gpio_clock_1[(`MPRJ_IO_PADS_1-1):8]),
-     .serial_load_out(gpio_load_1[(`MPRJ_IO_PADS_1-1):8]),
-
- .mgmt_gpio_in(mgmt_io_in[(`MPRJ_IO_PADS_1-1):8]),
- .mgmt_gpio_out(mgmt_io_out[(`MPRJ_IO_PADS_1-1):8]),
- .mgmt_gpio_oeb(mprj_io_one[(`MPRJ_IO_PADS_1-1):8]),
-
-        .one(mprj_io_one[(`MPRJ_IO_PADS_1-1):8]),
-        .zero(),
-
-     // Serial data chain for pad configuration
-     .serial_data_in(gpio_serial_link_1_shifted[(`MPRJ_IO_PADS_1-1):8]),
-     .serial_data_out(gpio_serial_link_1[(`MPRJ_IO_PADS_1-1):8]),
-
-     // User-facing signals
-     .user_gpio_out(user_io_out[(`MPRJ_IO_PADS_1-1):8]),
-     .user_gpio_oeb(user_io_oeb[(`MPRJ_IO_PADS_1-1):8]),
-     .user_gpio_in(user_io_in[(`MPRJ_IO_PADS_1-1):8]),
-
-     // Pad-facing signals (Pad GPIOv2)
-     .pad_gpio_inenb(mprj_io_inp_dis[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_ib_mode_sel(mprj_io_ib_mode_sel[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_vtrip_sel(mprj_io_vtrip_sel[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_slow_sel(mprj_io_slow_sel[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_holdover(mprj_io_holdover[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_ana_en(mprj_io_analog_en[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_ana_sel(mprj_io_analog_sel[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_ana_pol(mprj_io_analog_pol[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_dm(mprj_io_dm[(`MPRJ_IO_PADS_1*3-1):24]),
-     .pad_gpio_outenb(mprj_io_oeb[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_out(mprj_io_out[(`MPRJ_IO_PADS_1-1):8]),
-     .pad_gpio_in(mprj_io_in[(`MPRJ_IO_PADS_1-1):8])
-    );
-
-    /* Last three GPIOs (spi_sdo, flash_io2, and flash_io3) */
-
-    gpio_control_block gpio_control_bidir_2 [2:0] (
-     `ifdef USE_POWER_PINS
-     .vccd(vccd_core),
-     .vssd(vssd_core),
-     .vccd1(vccd1_core),
-     .vssd1(vssd1_core),
-        `endif
-
- .gpio_defaults(gpio_defaults[(`MPRJ_IO_PADS*13-1):(`MPRJ_IO_PADS*13-39)]),
-
-     // Management Soc-facing signals
-
-     .resetn(gpio_resetn_2_shifted[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-     .serial_clock(gpio_clock_2_shifted[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-     .serial_load(gpio_load_2_shifted[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-
-     .resetn_out(gpio_resetn_2[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-     .serial_clock_out(gpio_clock_2[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-     .serial_load_out(gpio_load_2[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-
-     .mgmt_gpio_in(mgmt_io_in[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
- .mgmt_gpio_out(mgmt_io_out[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
- .mgmt_gpio_oeb(mgmt_io_oeb[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-
-        .one(mprj_io_one[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-        .zero(),
-
-     // Serial data chain for pad configuration
-     .serial_data_in(gpio_serial_link_2_shifted[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-     .serial_data_out(gpio_serial_link_2[(`MPRJ_IO_PADS_2-1):(`MPRJ_IO_PADS_2-3)]),
-
-     // User-facing signals
-     .user_gpio_out(user_io_out[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .user_gpio_oeb(user_io_oeb[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .user_gpio_in(user_io_in[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-
-     // Pad-facing signals (Pad GPIOv2)
-     .pad_gpio_inenb(mprj_io_inp_dis[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_ib_mode_sel(mprj_io_ib_mode_sel[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_vtrip_sel(mprj_io_vtrip_sel[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_slow_sel(mprj_io_slow_sel[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_holdover(mprj_io_holdover[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_ana_en(mprj_io_analog_en[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_ana_sel(mprj_io_analog_sel[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_ana_pol(mprj_io_analog_pol[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_dm(mprj_io_dm[(`MPRJ_IO_PADS*3-1):(`MPRJ_IO_PADS*3-9)]),
-     .pad_gpio_outenb(mprj_io_oeb[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_out(mprj_io_out[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)]),
-     .pad_gpio_in(mprj_io_in[(`MPRJ_IO_PADS-1):(`MPRJ_IO_PADS-3)])
-    );
-
-    /* Section 2 GPIOs (GPIO 19 to 34) */
-
-    gpio_control_block gpio_control_in_2 [`MPRJ_IO_PADS_2-4:0] (
-     `ifdef USE_POWER_PINS
-            .vccd(vccd_core),
-     .vssd(vssd_core),
-     .vccd1(vccd1_core),
-     .vssd1(vssd1_core),
-        `endif
-
- .gpio_defaults(gpio_defaults[(`MPRJ_IO_PADS*13-40):(`MPRJ_IO_PADS_1*13)]),
-
-     // Management Soc-facing signals
-
-     .resetn(gpio_resetn_2_shifted[(`MPRJ_IO_PADS_2-4):0]),
-     .serial_clock(gpio_clock_2_shifted[(`MPRJ_IO_PADS_2-4):0]),
-     .serial_load(gpio_load_2_shifted[(`MPRJ_IO_PADS_2-4):0]),
-
-     .resetn_out(gpio_resetn_2[(`MPRJ_IO_PADS_2-4):0]),
-     .serial_clock_out(gpio_clock_2[(`MPRJ_IO_PADS_2-4):0]),
-     .serial_load_out(gpio_load_2[(`MPRJ_IO_PADS_2-4):0]),
-
- .mgmt_gpio_in(mgmt_io_in[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
- .mgmt_gpio_out(mgmt_io_out[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
- .mgmt_gpio_oeb(mprj_io_one[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-
-
-        .one(mprj_io_one[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-        .zero(),
-
-     // Serial data chain for pad configuration
-     .serial_data_in(gpio_serial_link_2_shifted[(`MPRJ_IO_PADS_2-4):0]),
-     .serial_data_out(gpio_serial_link_2[(`MPRJ_IO_PADS_2-4):0]),
-
-     // User-facing signals
-     .user_gpio_out(user_io_out[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .user_gpio_oeb(user_io_oeb[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .user_gpio_in(user_io_in[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-
-     // Pad-facing signals (Pad GPIOv2)
-     .pad_gpio_inenb(mprj_io_inp_dis[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_ib_mode_sel(mprj_io_ib_mode_sel[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_vtrip_sel(mprj_io_vtrip_sel[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_slow_sel(mprj_io_slow_sel[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_holdover(mprj_io_holdover[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_ana_en(mprj_io_analog_en[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_ana_sel(mprj_io_analog_sel[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_ana_pol(mprj_io_analog_pol[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_dm(mprj_io_dm[(`MPRJ_IO_PADS*3-10):(`MPRJ_IO_PADS_1*3)]),
-     .pad_gpio_outenb(mprj_io_oeb[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_out(mprj_io_out[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)]),
-     .pad_gpio_in(mprj_io_in[(`MPRJ_IO_PADS-4):(`MPRJ_IO_PADS_1)])
-    );
 // FPGA: Remove module user_id_programming
     assign mask_rev = USER_PROJECT_ID;
 

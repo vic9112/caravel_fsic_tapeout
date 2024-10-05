@@ -1,9 +1,7 @@
 //===========================================================
 // Modified by Vic Chen
-// Sep 28, 2024
+// Oct 5, 2024
 //===========================================================
-
-`default_nettype none
 
 `ifndef __GLOBAL_DEFINE_H
 // Global parameters

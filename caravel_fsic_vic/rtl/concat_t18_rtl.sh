@@ -5,8 +5,6 @@ top/pads_config.v \
 top/RAM256.v \
 top/RAM128.v \
 caravel/caravel.v \
-caravel/gpio_defaults_block.v \
-caravel/gpio_control_block.v \
 caravel/housekeeping.vic.v \
 caravel/housekeeping_spi.v \
 caravel/mgmt_core.vic.v \
