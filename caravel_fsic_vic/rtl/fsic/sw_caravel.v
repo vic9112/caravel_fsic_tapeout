@@ -346,6 +346,9 @@ always @* begin
         if(last) grant_next=WAIT_2;
         else grant_next=grant_reg;
     end
+    default: begin
+             grant_next=grant_reg;
+    end
     endcase
 end
 
