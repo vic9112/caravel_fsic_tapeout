@@ -75,7 +75,7 @@ module pads_config (
             assign oe_n[i] = r_OEN[i] | (~resetb);
         end
     endgenerate
-
+    integer t;
     // Caravel FSIC initial IO state when reset
     always @(posedge clk or negedge resetb) begin
         if (~resetb) begin
@@ -88,9 +88,8 @@ module pads_config (
             r_OEN[36]    <=   {{1'b1}};  // IOCLK
             r_OEN[37]    <=   {{1'b1}};  // mprj[37]
         end else begin
-            integer i;
-            for (i = 0; i < 38; i = i + 1) begin
-                if (cnfg_en[i]) r_OEN[i] <= wbs_dat_i[0];
+            for (t = 0; t < 38; t = t + 1) begin
+                if (cnfg_en[t]) r_OEN[t] <= wbs_dat_i[0];
             end
         end
     end
