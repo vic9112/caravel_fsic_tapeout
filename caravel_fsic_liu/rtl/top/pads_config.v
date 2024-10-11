@@ -75,7 +75,7 @@ module pads_config (
             assign oe_n[i] = r_OEN[i] | (~resetb);
         end
     endgenerate
-    integer t;
+
     // Caravel FSIC initial IO state when reset
     always @(posedge clk or negedge resetb) begin
         if (~resetb) begin
@@ -88,9 +88,44 @@ module pads_config (
             r_OEN[36]    <=   {{1'b1}};  // IOCLK
             r_OEN[37]    <=   {{1'b1}};  // mprj[37]
         end else begin
-            for (t = 0; t < 38; t = t + 1) begin
-                if (cnfg_en[t]) r_OEN[t] <= wbs_dat_i[0];
-            end
+                if (cnfg_en[0]) r_OEN[0] <= wbs_dat_i[0];
+                if (cnfg_en[1]) r_OEN[1] <= wbs_dat_i[0];
+                if (cnfg_en[2]) r_OEN[2] <= wbs_dat_i[0];
+                if (cnfg_en[3]) r_OEN[3] <= wbs_dat_i[0];
+                if (cnfg_en[4]) r_OEN[4] <= wbs_dat_i[0];
+                if (cnfg_en[5]) r_OEN[5] <= wbs_dat_i[0];
+                if (cnfg_en[6]) r_OEN[6] <= wbs_dat_i[0];
+                if (cnfg_en[7]) r_OEN[7] <= wbs_dat_i[0];
+                if (cnfg_en[8]) r_OEN[8] <= wbs_dat_i[0];
+                if (cnfg_en[9]) r_OEN[9] <= wbs_dat_i[0];
+                if (cnfg_en[10]) r_OEN[10] <= wbs_dat_i[0];
+                if (cnfg_en[11]) r_OEN[11] <= wbs_dat_i[0];
+                if (cnfg_en[12]) r_OEN[12] <= wbs_dat_i[0];
+                if (cnfg_en[13]) r_OEN[13] <= wbs_dat_i[0];
+                if (cnfg_en[14]) r_OEN[14] <= wbs_dat_i[0];
+                if (cnfg_en[15]) r_OEN[15] <= wbs_dat_i[0];
+                if (cnfg_en[16]) r_OEN[16] <= wbs_dat_i[0];
+                if (cnfg_en[17]) r_OEN[17] <= wbs_dat_i[0];
+                if (cnfg_en[18]) r_OEN[18] <= wbs_dat_i[0];
+                if (cnfg_en[19]) r_OEN[19] <= wbs_dat_i[0];
+                if (cnfg_en[20]) r_OEN[20] <= wbs_dat_i[0];
+                if (cnfg_en[21]) r_OEN[21] <= wbs_dat_i[0];
+                if (cnfg_en[22]) r_OEN[22] <= wbs_dat_i[0];
+                if (cnfg_en[23]) r_OEN[23] <= wbs_dat_i[0];
+                if (cnfg_en[24]) r_OEN[24] <= wbs_dat_i[0];
+                if (cnfg_en[25]) r_OEN[25] <= wbs_dat_i[0];
+                if (cnfg_en[26]) r_OEN[26] <= wbs_dat_i[0];
+                if (cnfg_en[27]) r_OEN[27] <= wbs_dat_i[0];
+                if (cnfg_en[28]) r_OEN[28] <= wbs_dat_i[0];
+                if (cnfg_en[29]) r_OEN[29] <= wbs_dat_i[0];
+                if (cnfg_en[30]) r_OEN[30] <= wbs_dat_i[0];
+                if (cnfg_en[31]) r_OEN[31] <= wbs_dat_i[0];
+                if (cnfg_en[32]) r_OEN[32] <= wbs_dat_i[0];
+                if (cnfg_en[33]) r_OEN[33] <= wbs_dat_i[0];
+                if (cnfg_en[34]) r_OEN[34] <= wbs_dat_i[0];
+                if (cnfg_en[35]) r_OEN[35] <= wbs_dat_i[0];
+                if (cnfg_en[36]) r_OEN[36] <= wbs_dat_i[0];
+                if (cnfg_en[37]) r_OEN[37] <= wbs_dat_i[0];      
         end
     end
 
