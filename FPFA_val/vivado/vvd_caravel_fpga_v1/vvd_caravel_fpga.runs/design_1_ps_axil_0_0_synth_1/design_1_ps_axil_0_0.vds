@@ -1,0 +1,820 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Fri Oct 11 08:20:03 2024
+# Process ID: 5602
+# Current directory: /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_ps_axil_0_0_synth_1
+# Command line: vivado -log design_1_ps_axil_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_ps_axil_0_0.tcl
+# Log file: /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_ps_axil_0_0_synth_1/design_1_ps_axil_0_0.vds
+# Journal file: /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_ps_axil_0_0_synth_1/vivado.jou
+# Running On: ubuntu2004, OS: Linux, CPU Frequency: 1996.808 MHz, CPU Physical cores: 8, Host memory: 10173 MB
+#-----------------------------------------------------------
+source design_1_ps_axil_0_0.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ubuntu/Desktop/FPGA_val/vivado/vitis_prj/hls_caravel_ps'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ubuntu/Desktop/FPGA_val/vivado/vitis_prj/hls_userdma'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ubuntu/Desktop/FPGA_val/vivado/vitis_prj/hls_output_pin'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2022.1/data/ip'.
+Command: synth_design -top design_1_ps_axil_0_0 -part xc7z020clg400-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 5771
+WARNING: [Synth 8-9501] generate block is allowed only inside loop and conditional generate in SystemVerilog mode [/tools/Xilinx/Vivado/2022.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:4023]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.656 ; gain = 0.000 ; free physical = 124 ; free virtual = 3790
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_1_ps_axil_0_0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.gen/sources_1/bd/design_1/ip/design_1_ps_axil_0_0/synth/design_1_ps_axil_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'ps_axil' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:391]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:479]
+INFO: [Synth 8-6157] synthesizing module 'AXIS_SWz' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/sw_fpga.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'AXIS_SWz' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/sw_fpga.v:23]
+WARNING: [Synth 8-7071] port 'up_hpri_req' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_as_tdata' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_as_tstrb' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_as_tkeep' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_as_tlast' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_as_tvalid' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_as_tuser' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'la_hpri_req' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7071] port 'as_la_tready' of module 'AXIS_SWz' is unconnected for instance 'PL_AS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+WARNING: [Synth 8-7023] instance 'PL_AS' of module 'AXIS_SWz' has 81 connections declared, but only 72 given [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:575]
+INFO: [Synth 8-6157] synthesizing module 'AXIL_AXIS' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18934]
+INFO: [Synth 8-6155] done synthesizing module 'AXIL_AXIS' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18934]
+WARNING: [Synth 8-7071] port 'intr_enable_out' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_awvalid' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_awaddr' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_awready' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_wvalid' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_wdata' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_wstrb' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_wready' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_arvalid' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_araddr' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_arready' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_rready' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_rvalid' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7071] port 'm_rdata' of module 'AXIL_AXIS' is unconnected for instance 'PL_AA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+WARNING: [Synth 8-7023] instance 'PL_AA' of module 'AXIL_AXIS' has 47 connections declared, but only 33 given [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:672]
+INFO: [Synth 8-6157] synthesizing module 'IO_SERDES' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:17065]
+INFO: [Synth 8-6157] synthesizing module 'fsic_io_serdes_rx' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16743]
+INFO: [Synth 8-6155] done synthesizing module 'fsic_io_serdes_rx' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16743]
+INFO: [Synth 8-6157] synthesizing module 'fsic_coreclk_phase_cnt' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16658]
+INFO: [Synth 8-6155] done synthesizing module 'fsic_coreclk_phase_cnt' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16658]
+INFO: [Synth 8-6155] done synthesizing module 'IO_SERDES' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:17065]
+WARNING: [Synth 8-7071] port 'rxen_out' of module 'IO_SERDES' is unconnected for instance 'PL_IS' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:718]
+WARNING: [Synth 8-7023] instance 'PL_IS' of module 'IO_SERDES' has 42 connections declared, but only 41 given [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:718]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_control_s_axi' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_control_s_axi.v:7]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_control_s_axi.v:237]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_control_s_axi' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_control_s_axi.v:7]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:11]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_store' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:780]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_srl' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_srl' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_mem' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2918]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_mem' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2918]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized1' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized2' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized1' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized2' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_store' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:780]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_load' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:324]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized3' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_mem__parameterized0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2918]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_mem__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2918]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized3' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_load' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:324]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_write' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:1852]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_reg_slice' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_reg_slice' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized4' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized2' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized2' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized4' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_throttle' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2360]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_reg_slice__parameterized0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_reg_slice__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized5' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized3' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized3' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized5' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized6' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized4' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_srl__parameterized4' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2864]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_fifo__parameterized6' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2686]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_throttle' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2360]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_reg_slice__parameterized1' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_reg_slice__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2352]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2355]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_write' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:1852]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_read' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:1468]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_gmem0_m_axi_reg_slice__parameterized2' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_reg_slice__parameterized2' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:2584]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:1844]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi_read' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:1468]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_gmem0_m_axi' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_gmem0_m_axi.v:11]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_entry_proc' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_entry_proc.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_entry_proc' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_entry_proc.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_getinstream' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_getinstream.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_getinstream_Pipeline_VITIS_LOOP_44_1' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_getinstream_Pipeline_VITIS_LOOP_44_1.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_flow_control_loop_pipe_sequential_init' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_flow_control_loop_pipe_sequential_init.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_flow_control_loop_pipe_sequential_init' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_flow_control_loop_pipe_sequential_init.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_getinstream_Pipeline_VITIS_LOOP_44_1' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_getinstream_Pipeline_VITIS_LOOP_44_1.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_regslice_both' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_regslice_both' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_regslice_both__parameterized0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_regslice_both__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_regslice_both__parameterized1' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_regslice_both__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_regslice_both__parameterized2' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_regslice_both__parameterized2' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_regslice_both.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_getinstream' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_getinstream.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_streamtoparallelwithburst' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_streamtoparallelwithburst.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_streamtoparallelwithburst' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_streamtoparallelwithburst.v:10]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w64_d3_S' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w64_d3_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w64_d3_S_shiftReg' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w64_d3_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w64_d3_S_shiftReg' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w64_d3_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w64_d3_S' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w64_d3_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w33_d128_A' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w33_d128_A.v:52]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w33_d128_A_ram' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w33_d128_A.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w33_d128_A_ram' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w33_d128_A.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w33_d128_A' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w33_d128_A.v:52]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w32_d8_S' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d8_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w32_d8_S_shiftReg' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d8_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w32_d8_S_shiftReg' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d8_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w32_d8_S' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d8_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w1_d2_S' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w1_d2_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w1_d2_S_shiftReg' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w1_d2_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w1_d2_S_shiftReg' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w1_d2_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w1_d2_S' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w1_d2_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w32_d2_S' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d2_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_fifo_w32_d2_S_shiftReg' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d2_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w32_d2_S_shiftReg' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d2_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_fifo_w32_d2_S' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_fifo_w32_d2_S.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_start_for_streamtoparallelwithburst_U0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_start_for_streamtoparallelwithburst_U0.v:43]
+INFO: [Synth 8-6157] synthesizing module 'ladmatr_start_for_streamtoparallelwithburst_U0_shiftReg' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_start_for_streamtoparallelwithburst_U0.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_start_for_streamtoparallelwithburst_U0_shiftReg' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_start_for_streamtoparallelwithburst_U0.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr_start_for_streamtoparallelwithburst_U0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_start_for_streamtoparallelwithburst_U0.v:43]
+INFO: [Synth 8-6155] done synthesizing module 'ladmatr' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr.v:10]
+WARNING: [Synth 8-7071] port 'm_axi_gmem0_WID' of module 'ladmatr' is unconnected for instance 'LA_DMA' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:769]
+WARNING: [Synth 8-7023] instance 'LA_DMA' of module 'ladmatr' has 72 connections declared, but only 71 given [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:769]
+INFO: [Synth 8-6155] done synthesizing module 'ps_axil' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/ps_axil.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_ps_axil_0_0' (0#1) [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.gen/sources_1/bd/design_1/ip/design_1_ps_axil_0_0/synth/design_1_ps_axil_0_0.v:53]
+WARNING: [Synth 8-7137] Register mem_reg in module AXIS_SWz has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code 
+WARNING: [Synth 8-4767] Trying to implement RAM 'mem_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+Reason is one or more of the following :
+	1: RAM is sensitive to asynchronous reset signal. this RTL style is not supported. 
+RAM "mem_reg" dissolved into registers
+WARNING: [Synth 8-6014] Unused sequential element r_tuser_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:19621]
+WARNING: [Synth 8-6014] Unused sequential element int_ap_done_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_srcs/fpga/rtl/PL/LA_DMA/ladmatr_control_s_axi.v:319]
+WARNING: [Synth 8-7129] Port buf_r_dout[32] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[7] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[6] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[5] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[4] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[3] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[2] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[1] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_num_data_valid[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[7] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[6] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[5] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[4] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[3] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[2] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[1] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port buf_r_fifo_cap[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_AWREADY in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_ARREADY in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RVALID in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[31] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[30] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[29] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[28] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[27] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[26] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[25] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[24] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[23] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[22] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[21] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[20] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[19] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[18] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[17] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[16] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[15] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[14] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[13] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[12] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[11] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[10] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[9] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[8] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[7] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[6] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[5] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[4] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[3] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[2] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[1] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RDATA[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RLAST in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RID[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[8] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[7] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[6] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[5] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[4] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[3] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[2] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[1] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RFIFONUM[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RUSER[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RRESP[1] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_RRESP[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_BVALID in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_BRESP[1] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_BRESP[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_BID[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port m_axi_gmem0_BUSER[0] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[61] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[60] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[59] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[58] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[57] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[56] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[55] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[54] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[53] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[52] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[51] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[50] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[49] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[48] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[47] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[46] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[45] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[44] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[43] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[42] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[41] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[40] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[39] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[38] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[37] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[36] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[35] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[34] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sext_ln15[33] in module ladmatr_streamtoparallelwithburst_Pipeline_VITIS_LOOP_15_2 is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:14 . Memory (MB): peak = 2902.656 ; gain = 0.000 ; free physical = 293 ; free virtual = 3214
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:14 . Memory (MB): peak = 2902.656 ; gain = 0.000 ; free physical = 2203 ; free virtual = 5126
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:14 . Memory (MB): peak = 2902.656 ; gain = 0.000 ; free physical = 2203 ; free virtual = 5126
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.3 . Memory (MB): peak = 2902.656 ; gain = 0.000 ; free physical = 2297 ; free virtual = 5222
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2966.688 ; gain = 0.000 ; free physical = 2142 ; free virtual = 5081
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.71 ; elapsed = 00:00:01 . Memory (MB): peak = 2966.688 ; gain = 0.000 ; free physical = 2118 ; free virtual = 5057
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:26 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 2236 ; free virtual = 5225
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:26 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 2236 ; free virtual = 5225
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:26 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 2234 ; free virtual = 5223
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'ls_sm_fsm_reg' in module 'AXIL_AXIS'
+INFO: [Synth 8-802] inferred FSM for state register 'ss_lm_fsm_reg' in module 'AXIL_AXIS'
+INFO: [Synth 8-802] inferred FSM for state register 'wstate_reg' in module 'ladmatr_control_s_axi'
+INFO: [Synth 8-802] inferred FSM for state register 'rstate_reg' in module 'ladmatr_control_s_axi'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ladmatr_gmem0_m_axi_reg_slice'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ladmatr_gmem0_m_axi_reg_slice__parameterized0'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ladmatr_gmem0_m_axi_reg_slice__parameterized1'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ladmatr_gmem0_m_axi_reg_slice__parameterized2'
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-802] inferred FSM for state register 'ps_axi_fsm_reg_reg' in module 'ps_axil'
+INFO: [Synth 8-802] inferred FSM for state register 'axi_fsm_reg_reg' in module 'ps_axil'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE8 |                       0001000000 |                          0000000
+                 iSTATE3 |                       0100000000 |                          0110000
+                 iSTATE0 |                       0000001000 |                          0110010
+                 iSTATE7 |                       0000100000 |                          0011000
+                 iSTATE1 |                       0010000000 |                          1011000
+                 iSTATE5 |                       1000000000 |                          0100000
+                  iSTATE |                       0000000001 |                          0001000
+                 iSTATE4 |                       0000000010 |                          0001010
+                 iSTATE2 |                       0000000100 |                          0000100
+                 iSTATE6 |                       0000010000 |                          0000001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ss_lm_fsm_reg' using encoding 'one-hot' in module 'AXIL_AXIS'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                iSTATE10 |                     000001000000 |                          0000000
+                 iSTATE8 |                     100000000000 |                          0011000
+                 iSTATE5 |                     010000000000 |                          0111001
+                 iSTATE1 |                     000000000100 |                          0111100
+                 iSTATE9 |                     000000001000 |                          0111110
+                 iSTATE2 |                     000010000000 |                          0011100
+                  iSTATE |                     000000000001 |                          0011110
+                 iSTATE6 |                     000000000010 |                          0011001
+                 iSTATE4 |                     000100000000 |                          0010000
+                 iSTATE7 |                     001000000000 |                          0010110
+                 iSTATE0 |                     000000010000 |                          1010000
+                 iSTATE3 |                     000000100000 |                          0010001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ls_sm_fsm_reg' using encoding 'one-hot' in module 'AXIL_AXIS'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                             0001 |                               11
+*
+                  WRIDLE |                             0010 |                               00
+                  WRDATA |                             0100 |                               01
+                  WRRESP |                             1000 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'wstate_reg' using encoding 'one-hot' in module 'ladmatr_control_s_axi'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              001 |                               10
+*
+                  RDIDLE |                              010 |                               00
+                  RDDATA |                              100 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'rstate_reg' using encoding 'one-hot' in module 'ladmatr_control_s_axi'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    ZERO |                               00 |                               10
+                     ONE |                               10 |                               11
+                     TWO |                               01 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'ladmatr_gmem0_m_axi_reg_slice'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    ZERO |                               00 |                               10
+                     ONE |                               10 |                               11
+                     TWO |                               01 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'ladmatr_gmem0_m_axi_reg_slice__parameterized0'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    ZERO |                               00 |                               10
+                     ONE |                               10 |                               11
+                     TWO |                               01 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'ladmatr_gmem0_m_axi_reg_slice__parameterized1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    ZERO |                               00 |                               10
+                     ONE |                               10 |                               11
+                     TWO |                               01 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'ladmatr_gmem0_m_axi_reg_slice__parameterized2'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            axi_fsm_idle |                              000 |                              000
+      axi_fsm_write_data |                              001 |                              011
+  axi_fsm_write_complete |                              010 |                              100
+       axi_fsm_read_data |                              011 |                              001
+   axi_fsm_read_complete |                              100 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'axi_fsm_reg_reg' using encoding 'sequential' in module 'ps_axil'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            axi_fsm_idle |                              000 |                              000
+      axi_fsm_write_data |                              001 |                              011
+  axi_fsm_write_complete |                              010 |                              100
+  axi_fsm_write_response |                              011 |                              101
+       axi_fsm_read_data |                              100 |                              001
+   axi_fsm_read_complete |                              101 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ps_axi_fsm_reg_reg' using encoding 'sequential' in module 'ps_axil'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:23 ; elapsed = 00:00:29 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 2252 ; free virtual = 5203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   64 Bit       Adders := 5     
+	   2 Input   52 Bit       Adders := 2     
+	   2 Input   32 Bit       Adders := 5     
+	   2 Input   31 Bit       Adders := 1     
+	   2 Input   12 Bit       Adders := 2     
+	   2 Input    9 Bit       Adders := 4     
+	   2 Input    8 Bit       Adders := 4     
+	   3 Input    8 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 7     
+	   2 Input    6 Bit       Adders := 4     
+	   2 Input    5 Bit       Adders := 20    
+	   3 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 12    
+	   2 Input    3 Bit       Adders := 28    
+	   2 Input    2 Bit       Adders := 20    
++---XORs : 
+	   2 Input      1 Bit         XORs := 16    
++---Registers : 
+	               96 Bit    Registers := 6     
+	               72 Bit    Registers := 3     
+	               64 Bit    Registers := 11    
+	               62 Bit    Registers := 1     
+	               52 Bit    Registers := 2     
+	               50 Bit    Registers := 16    
+	               37 Bit    Registers := 1     
+	               36 Bit    Registers := 1     
+	               34 Bit    Registers := 1     
+	               33 Bit    Registers := 3     
+	               32 Bit    Registers := 42    
+	               31 Bit    Registers := 2     
+	               24 Bit    Registers := 1     
+	               21 Bit    Registers := 1     
+	               15 Bit    Registers := 3     
+	               10 Bit    Registers := 4     
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 8     
+	                7 Bit    Registers := 8     
+	                6 Bit    Registers := 4     
+	                5 Bit    Registers := 25    
+	                4 Bit    Registers := 61    
+	                3 Bit    Registers := 42    
+	                2 Bit    Registers := 36    
+	                1 Bit    Registers := 221   
++---RAMs : 
+	               8K Bit	(255 X 34 bit)          RAMs := 1     
+	               4K Bit	(127 X 33 bit)          RAMs := 1     
+	               2K Bit	(63 X 36 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input   96 Bit        Muxes := 2     
+	   2 Input   72 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 9     
+	   2 Input   52 Bit        Muxes := 2     
+	   2 Input   33 Bit        Muxes := 1     
+	   4 Input   32 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 37    
+	  12 Input   32 Bit        Muxes := 1     
+	   5 Input   32 Bit        Muxes := 1     
+	   6 Input   32 Bit        Muxes := 3     
+	   2 Input   21 Bit        Muxes := 1     
+	  22 Input   21 Bit        Muxes := 1     
+	   2 Input   20 Bit        Muxes := 2     
+	   2 Input   15 Bit        Muxes := 1     
+	   5 Input   15 Bit        Muxes := 2     
+	  12 Input   12 Bit        Muxes := 1     
+	   2 Input   12 Bit        Muxes := 14    
+	   4 Input   12 Bit        Muxes := 2     
+	  10 Input   10 Bit        Muxes := 1     
+	   2 Input   10 Bit        Muxes := 18    
+	   2 Input    9 Bit        Muxes := 2     
+	   2 Input    8 Bit        Muxes := 30    
+	   4 Input    8 Bit        Muxes := 2     
+	   3 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 10    
+	  11 Input    7 Bit        Muxes := 1     
+	  13 Input    7 Bit        Muxes := 1     
+	   4 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 8     
+	   3 Input    6 Bit        Muxes := 1     
+	   4 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 26    
+	   3 Input    5 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 3     
+	   2 Input    4 Bit        Muxes := 22    
+	   3 Input    4 Bit        Muxes := 1     
+	   5 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 39    
+	   5 Input    3 Bit        Muxes := 7     
+	   8 Input    3 Bit        Muxes := 2     
+	   3 Input    3 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 83    
+	   4 Input    2 Bit        Muxes := 12    
+	   3 Input    2 Bit        Muxes := 16    
+	   4 Input    1 Bit        Muxes := 12    
+	   2 Input    1 Bit        Muxes := 198   
+	   5 Input    1 Bit        Muxes := 15    
+	   6 Input    1 Bit        Muxes := 17    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+INFO: [Synth 8-3332] Sequential element (inst/PL_AA/FSM_onehot_ss_lm_fsm_reg[7]) is unused and will be removed from module design_1_ps_axil_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/PL_AA/FSM_onehot_ss_lm_fsm_reg[5]) is unused and will be removed from module design_1_ps_axil_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/PL_AA/FSM_onehot_ss_lm_fsm_reg[1]) is unused and will be removed from module design_1_ps_axil_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/PL_AA/FSM_onehot_ss_lm_fsm_reg[0]) is unused and will be removed from module design_1_ps_axil_0_0.
+WARNING: [Synth 8-3332] Sequential element (FSM_onehot_wstate_reg[0]) is unused and will be removed from module ladmatr_control_s_axi.
+WARNING: [Synth 8-3332] Sequential element (FSM_onehot_rstate_reg[0]) is unused and will be removed from module ladmatr_control_s_axi.
+WARNING: [Synth 8-3332] Sequential element (bus_read/rs_rreq/FSM_sequential_state_reg[1]) is unused and will be removed from module ladmatr_gmem0_m_axi.
+WARNING: [Synth 8-3332] Sequential element (bus_read/rs_rreq/FSM_sequential_state_reg[0]) is unused and will be removed from module ladmatr_gmem0_m_axi.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:41 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 2135 ; free virtual = 5166
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++----------------------------+------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name                 | RTL Object                               | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++----------------------------+------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|\inst/LA_DMA /gmem0_m_axi_U | store_unit/buff_wdata/U_fifo_mem/mem_reg | 63 x 36(READ_FIRST)    | W |   | 63 x 36(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|\inst/LA_DMA /buf_U         | U_ladmatr_fifo_w33_d128_A_ram/mem_reg    | 127 x 33(READ_FIRST)   | W |   | 127 x 33(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      | 
++----------------------------+------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:40 ; elapsed = 00:00:50 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 222 ; free virtual = 3434
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:41 ; elapsed = 00:00:52 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 135 ; free virtual = 3275
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++----------------------------+------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name                 | RTL Object                               | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++----------------------------+------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|\inst/LA_DMA /gmem0_m_axi_U | store_unit/buff_wdata/U_fifo_mem/mem_reg | 63 x 36(READ_FIRST)    | W |   | 63 x 36(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|\inst/LA_DMA /buf_U         | U_ladmatr_fifo_w33_d128_A_ram/mem_reg    | 127 x 33(READ_FIRST)   | W |   | 127 x 33(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      | 
++----------------------------+------------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:44 ; elapsed = 00:01:04 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 124 ; free virtual = 2081
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:up_hpri_req to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[31] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[30] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[29] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[28] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[27] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[26] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[25] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[24] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[23] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[22] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[21] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[20] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[19] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[18] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[17] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[16] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[15] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[14] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[13] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[12] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[11] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[10] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[9] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[8] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[7] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[6] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[5] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[4] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[3] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[2] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[1] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tdata[0] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tstrb[3] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tstrb[2] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tstrb[1] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tstrb[0] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tkeep[3] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tkeep[2] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tkeep[1] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tkeep[0] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tlast to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tvalid to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tuser[1] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_as_tuser[0] to constant 0
+INFO: [Synth 8-3295] tying undriven pin inst/PL_AS:la_hpri_req to constant 0
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_0' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_1' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_2' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_3' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_4' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_5' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_6' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_7' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_8' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_9' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_10' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_11' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_12' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_13' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_14' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_15' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_16' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_17' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_18' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'insti_19' to logic
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:01:21 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 116 ; free virtual = 1152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:01:22 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 105 ; free virtual = 1137
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:53 ; elapsed = 00:01:25 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 934 ; free virtual = 1997
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:53 ; elapsed = 00:01:26 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 863 ; free virtual = 1953
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:53 ; elapsed = 00:01:27 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 1733 ; free virtual = 2880
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:53 ; elapsed = 00:01:27 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 1731 ; free virtual = 2878
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Dynamic Shift Register Report:
++------------+----------------+--------+------------+--------+---------+--------+--------+--------+
+|Module Name | RTL Name       | Length | Data Width | SRL16E | SRLC32E | Mux F7 | Mux F8 | Mux F9 | 
++------------+----------------+--------+------------+--------+---------+--------+--------+--------+
+|dsrl        | mem_reg[13]    | 96     | 96         | 96     | 0       | 0      | 0      | 0      | 
+|dsrl__1     | mem_reg[14]    | 1      | 1          | 1      | 0       | 0      | 0      | 0      | 
+|dsrl__2     | mem_reg[13]    | 1      | 1          | 1      | 0       | 0      | 0      | 0      | 
+|dsrl__3     | mem_reg[14]    | 8      | 8          | 8      | 0       | 0      | 0      | 0      | 
+|dsrl__4     | mem_reg[14]    | 72     | 72         | 72     | 0       | 0      | 0      | 0      | 
+|dsrl__5     | mem_reg[62]    | 37     | 37         | 0      | 74      | 37     | 0      | 0      | 
+|dsrl__6     | SRL_SIG_reg[2] | 64     | 64         | 64     | 0       | 0      | 0      | 0      | 
+|dsrl__7     | SRL_SIG_reg[7] | 32     | 32         | 32     | 0       | 0      | 0      | 0      | 
++------------+----------------+--------+------------+--------+---------+--------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |   164|
+|2     |LUT1     |    76|
+|3     |LUT2     |   501|
+|4     |LUT3     |   788|
+|5     |LUT4     |   476|
+|6     |LUT5     |   434|
+|7     |LUT6     |  1001|
+|8     |MUXF7    |   170|
+|9     |MUXF8    |    45|
+|10    |RAMB18E1 |     2|
+|12    |SRL16E   |   265|
+|13    |SRLC32E  |    74|
+|14    |FDCE     |  1026|
+|15    |FDPE     |    32|
+|16    |FDRE     |  2967|
+|17    |FDSE     |    19|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:53 ; elapsed = 00:01:27 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 1648 ; free virtual = 2831
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 20 critical warnings and 286 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:47 ; elapsed = 00:01:22 . Memory (MB): peak = 2966.688 ; gain = 0.000 ; free physical = 1333 ; free virtual = 2554
+Synthesis Optimization Complete : Time (s): cpu = 00:00:53 ; elapsed = 00:01:28 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 1278 ; free virtual = 2502
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2966.688 ; gain = 0.000 ; free physical = 743 ; free virtual = 2018
+INFO: [Netlist 29-17] Analyzing 381 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2966.688 ; gain = 0.000 ; free physical = 1827 ; free virtual = 3061
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 9987b14e
+INFO: [Common 17-83] Releasing license: Synthesis
+210 Infos, 142 Warnings, 20 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:09 ; elapsed = 00:01:58 . Memory (MB): peak = 2966.688 ; gain = 64.031 ; free physical = 1195 ; free virtual = 2468
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_ps_axil_0_0_synth_1/design_1_ps_axil_0_0.dcp' has been generated.
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Coretcl 2-1174] Renamed 66 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_ps_axil_0_0_synth_1/design_1_ps_axil_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file design_1_ps_axil_0_0_utilization_synth.rpt -pb design_1_ps_axil_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 11 08:22:34 2024...

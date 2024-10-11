@@ -1,0 +1,16 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Wed Oct  9 18:11:49 2024
+# Process ID: 28454
+# Current directory: /home/ubuntu/Desktop/FPGA_val/vivado
+# Command line: vivado
+# Log file: /home/ubuntu/Desktop/FPGA_val/vivado/vivado.log
+# Journal file: /home/ubuntu/Desktop/FPGA_val/vivado/vivado.jou
+# Running On: ubuntu2004, OS: Linux, CPU Frequency: 1996.807 MHz, CPU Physical cores: 8, Host memory: 10173 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.xpr
+update_compile_order -fileset sources_1
+open_bd_design {/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.srcs/sources_1/bd/design_1/design_1.bd}

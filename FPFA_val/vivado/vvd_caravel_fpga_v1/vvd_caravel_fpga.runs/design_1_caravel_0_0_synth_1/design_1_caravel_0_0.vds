@@ -1,0 +1,1411 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Fri Oct 11 08:20:03 2024
+# Process ID: 5603
+# Current directory: /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_caravel_0_0_synth_1
+# Command line: vivado -log design_1_caravel_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_caravel_0_0.tcl
+# Log file: /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_caravel_0_0_synth_1/design_1_caravel_0_0.vds
+# Journal file: /home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_caravel_0_0_synth_1/vivado.jou
+# Running On: ubuntu2004, OS: Linux, CPU Frequency: 1996.808 MHz, CPU Physical cores: 8, Host memory: 10173 MB
+#-----------------------------------------------------------
+source design_1_caravel_0_0.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ubuntu/Desktop/FPGA_val/vivado/vitis_prj/hls_caravel_ps'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ubuntu/Desktop/FPGA_val/vivado/vitis_prj/hls_userdma'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ubuntu/Desktop/FPGA_val/vivado/vitis_prj/hls_output_pin'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2022.1/data/ip'.
+Command: synth_design -top design_1_caravel_0_0 -part xc7z020clg400-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 5770
+WARNING: [Synth 8-9501] generate block is allowed only inside loop and conditional generate in SystemVerilog mode [/tools/Xilinx/Vivado/2022.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:4023]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 2913.082 ; gain = 0.000 ; free physical = 130 ; free virtual = 3760
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_1_caravel_0_0' [/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.gen/sources_1/bd/design_1/ip/design_1_caravel_0_0/synth/design_1_caravel_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'caravel' [/home/ubuntu/Desktop/FPGA_val/caravel.v:3]
+INFO: [Synth 8-6157] synthesizing module 'caravel_top' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:506]
+INFO: [Synth 8-6157] synthesizing module 'PDDWDGZ' [/home/ubuntu/Desktop/FPGA_val/virtual_t18_pad.v:18]
+INFO: [Synth 8-6155] done synthesizing module 'PDDWDGZ' (0#1) [/home/ubuntu/Desktop/FPGA_val/virtual_t18_pad.v:18]
+INFO: [Synth 8-6157] synthesizing module 'PDISDGZ' [/home/ubuntu/Desktop/FPGA_val/virtual_t18_pad.v:30]
+INFO: [Synth 8-6155] done synthesizing module 'PDISDGZ' (0#1) [/home/ubuntu/Desktop/FPGA_val/virtual_t18_pad.v:30]
+INFO: [Synth 8-6157] synthesizing module 'PDUW04DGZ' [/home/ubuntu/Desktop/FPGA_val/virtual_t18_pad.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'PDUW04DGZ' (0#1) [/home/ubuntu/Desktop/FPGA_val/virtual_t18_pad.v:4]
+WARNING: [Synth 8-6104] Input port 'flash_io1' has an internal driver [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:788]
+INFO: [Synth 8-6157] synthesizing module 'mgmt_core_wrapper' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11592]
+INFO: [Synth 8-6157] synthesizing module 'mgmt_core' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:3079]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:4965]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:9899]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:9915]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10226]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10271]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10294]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10306]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10318]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10351]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10363]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10407]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10500]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10512]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10524]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10572]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10627]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10669]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10681]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10722]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10763]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10804]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10845]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10886]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10927]
+INFO: [Synth 8-6157] synthesizing module 'RAM256' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:384]
+INFO: [Synth 8-6157] synthesizing module 'RAM128' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:414]
+INFO: [Synth 8-6157] synthesizing module 'ra1shd128x32m4h3v2' [/home/ubuntu/Desktop/FPGA_val/spram.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'ra1shd128x32m4h3v2' (0#1) [/home/ubuntu/Desktop/FPGA_val/spram.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'RAM128' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:414]
+INFO: [Synth 8-6155] done synthesizing module 'RAM256' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:384]
+INFO: [Synth 8-6157] synthesizing module 'VexRiscv' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11990]
+INFO: [Synth 8-6157] synthesizing module 'InstructionCache' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15606]
+INFO: [Synth 8-6155] done synthesizing module 'InstructionCache' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15606]
+INFO: [Synth 8-6155] done synthesizing module 'VexRiscv' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11990]
+INFO: [Synth 8-6155] done synthesizing module 'mgmt_core' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:3079]
+INFO: [Synth 8-6155] done synthesizing module 'mgmt_core_wrapper' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11592]
+INFO: [Synth 8-6157] synthesizing module 'user_project_wrapper' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20394]
+INFO: [Synth 8-6157] synthesizing module 'FSIC' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15929]
+INFO: [Synth 8-6157] synthesizing module 'CFG_CTRL' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18334]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18683]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18792]
+INFO: [Synth 8-6155] done synthesizing module 'CFG_CTRL' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18334]
+INFO: [Synth 8-6157] synthesizing module 'AXIL_AXIS' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18934]
+INFO: [Synth 8-6155] done synthesizing module 'AXIL_AXIS' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18934]
+WARNING: [Synth 8-7071] port 'intr_enable_out' of module 'AXIL_AXIS' is unconnected for instance 'U_AXIL_AXIS0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16185]
+WARNING: [Synth 8-7023] instance 'U_AXIL_AXIS0' of module 'AXIL_AXIS' has 47 connections declared, but only 46 given [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16185]
+INFO: [Synth 8-6157] synthesizing module 'AXIS_SW' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:17624]
+INFO: [Synth 8-6157] synthesizing module 'fifo' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20141]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20277]
+INFO: [Synth 8-6155] done synthesizing module 'fifo' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20141]
+INFO: [Synth 8-6157] synthesizing module 'ra1shd16x100m4h3v2' [/home/ubuntu/Desktop/FPGA_val/spram.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'ra1shd16x100m4h3v2' (0#1) [/home/ubuntu/Desktop/FPGA_val/spram.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'AXIS_SW' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:17624]
+INFO: [Synth 8-6157] synthesizing module 'IO_SERDES' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:17065]
+INFO: [Synth 8-6157] synthesizing module 'fsic_io_serdes_rx' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16743]
+INFO: [Synth 8-6155] done synthesizing module 'fsic_io_serdes_rx' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16743]
+INFO: [Synth 8-6157] synthesizing module 'fsic_coreclk_phase_cnt' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16658]
+INFO: [Synth 8-6155] done synthesizing module 'fsic_coreclk_phase_cnt' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16658]
+INFO: [Synth 8-6155] done synthesizing module 'IO_SERDES' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:17065]
+WARNING: [Synth 8-7071] port 'rxen_out' of module 'IO_SERDES' is unconnected for instance 'U_IO_SERDES0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16340]
+WARNING: [Synth 8-7023] instance 'U_IO_SERDES0' of module 'IO_SERDES' has 42 connections declared, but only 41 given [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:16340]
+INFO: [Synth 8-6157] synthesizing module 'LOGIC_ANLZ' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18090]
+INFO: [Synth 8-6157] synthesizing module 'fifo__parameterized0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20141]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20277]
+INFO: [Synth 8-6155] done synthesizing module 'fifo__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20141]
+INFO: [Synth 8-6157] synthesizing module 'ra1shd32x64m4h3v2' [/home/ubuntu/Desktop/FPGA_val/spram.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'ra1shd32x64m4h3v2' (0#1) [/home/ubuntu/Desktop/FPGA_val/spram.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'LOGIC_ANLZ' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:18090]
+INFO: [Synth 8-6157] synthesizing module 'USER_SUBSYS' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20494]
+INFO: [Synth 8-6157] synthesizing module 'AXIL_SLAV' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:19707]
+INFO: [Synth 8-6155] done synthesizing module 'AXIL_SLAV' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:19707]
+INFO: [Synth 8-6157] synthesizing module 'USER_PRJ0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21085]
+INFO: [Synth 8-226] default block is never used [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21241]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_Top' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27804]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_Top_struct' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27612]
+INFO: [Synth 8-6157] synthesizing module 'ccs_pipe_v6' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22650]
+INFO: [Synth 8-6157] synthesizing module 'ccs_fifo_wait_core_v5' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22367]
+INFO: [Synth 8-6157] synthesizing module 'ccs_genreg_v1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22201]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_genreg_v1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22201]
+INFO: [Synth 8-6157] synthesizing module 'ccs_genreg_v1__parameterized0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22201]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_genreg_v1__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22201]
+INFO: [Synth 8-6157] synthesizing module 'ccs_genreg_v1__parameterized1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22201]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_genreg_v1__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22201]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_fifo_wait_core_v5' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22367]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_pipe_v6' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22650]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27383]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_ccs_sample_mem_ccs_ram_sync_singleport_rwport_en_6_64_7_80_80_64_5_gen' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22780]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_ccs_sample_mem_ccs_ram_sync_singleport_rwport_en_6_64_7_80_80_64_5_gen' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22780]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_ccs_sample_mem_ccs_ram_sync_singleport_rwport_en_7_64_7_80_80_64_5_gen' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22747]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_ccs_sample_mem_ccs_ram_sync_singleport_rwport_en_7_64_7_80_80_64_5_gen' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22747]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24362]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_dat_in_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23852]
+INFO: [Synth 8-6157] synthesizing module 'ccs_in_wait_v1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28662]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_v1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28662]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_dat_in_rsci_dat_in_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23120]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_dat_in_rsci_dat_in_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23120]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_dat_in_rsci_dat_in_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23047]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_dat_in_rsci_dat_in_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23047]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_dat_in_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23852]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_pix_out_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23790]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_wait_v1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_wait_v1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_pix_out_rsci_pix_out_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23018]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_pix_out_rsci_pix_out_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23018]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_pix_out_rsci_pix_out_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22982]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_pix_out_rsci_pix_out_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22982]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_pix_out_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23790]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_dy_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23728]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_wait_v1__parameterized0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_wait_v1__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_dy_rsci_dy_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22953]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_dy_rsci_dy_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22953]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_dy_rsci_dy_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22918]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_dy_rsci_dy_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22918]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_dy_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23728]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22899]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22899]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_staller' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22880]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_staller' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22880]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_VerDer_run_run_fsm' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22814]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run_run_fsm' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22814]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer_run' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24362]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_VerDer' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27383]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27489]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24980]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_pix_in_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24043]
+INFO: [Synth 8-6157] synthesizing module 'ccs_in_wait_coupled_v1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22000]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_coupled_v1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22000]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_pix_in_rsci_pix_in_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23364]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_pix_in_rsci_pix_in_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23364]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_pix_in_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24043]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_pix_out_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23981]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_wait_v1__parameterized1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_wait_v1__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_pix_out_rsci_pix_out_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23335]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_pix_out_rsci_pix_out_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23335]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_pix_out_rsci_pix_out_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23299]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_pix_out_rsci_pix_out_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23299]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_pix_out_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23981]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_dx_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23919]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_wait_v1__parameterized2' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_wait_v1__parameterized2' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_dx_rsci_dx_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23270]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_dx_rsci_dx_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23270]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_dx_rsci_dx_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23235]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_dx_rsci_dx_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23235]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_dx_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23919]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_staller' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23216]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_staller' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23216]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_HorDer_run_run_fsm' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23150]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run_run_fsm' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23150]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer_run' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24980]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_HorDer' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27489]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27535]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_v1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22166]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_v1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22166]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_v1__parameterized0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22166]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_v1__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22166]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:25474]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dx_in_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24318]
+INFO: [Synth 8-6157] synthesizing module 'ccs_in_wait_coupled_v1__parameterized0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22000]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_coupled_v1__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22000]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dx_in_rsci_dx_in_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23710]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dx_in_rsci_dx_in_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23710]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dx_in_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24318]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dy_in_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24274]
+INFO: [Synth 8-6157] synthesizing module 'ccs_in_wait_coupled_v1__parameterized1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22000]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_coupled_v1__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:22000]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dy_in_rsci_dy_in_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23692]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dy_in_rsci_dy_in_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23692]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dy_in_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24274]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_pix_in_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24209]
+INFO: [Synth 8-6157] synthesizing module 'ccs_in_wait_v1__parameterized0' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28662]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_v1__parameterized0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28662]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_pix_in_rsci_pix_in_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23663]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_pix_in_rsci_pix_in_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23663]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_pix_in_rsci_pix_in_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23590]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_pix_in_rsci_pix_in_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23590]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_pix_in_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24209]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dat_out_rsci' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24147]
+INFO: [Synth 8-6157] synthesizing module 'ccs_out_wait_v1__parameterized3' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_wait_v1__parameterized3' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dat_out_rsci_dat_out_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23561]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dat_out_rsci_dat_out_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23561]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_dat_out_rsci_dat_out_wait_dp' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23525]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dat_out_rsci_dat_out_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23525]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_dat_out_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24147]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_crc32_pix_in_triosy_obj' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24117]
+INFO: [Synth 8-6157] synthesizing module 'mgc_io_sync_v2' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28700]
+INFO: [Synth 8-6155] done synthesizing module 'mgc_io_sync_v2' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28700]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_crc32_pix_in_triosy_obj_crc32_pix_in_triosy_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23506]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_crc32_pix_in_triosy_obj_crc32_pix_in_triosy_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23506]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_crc32_pix_in_triosy_obj' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24117]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_crc32_dat_out_triosy_obj' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24087]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_crc32_dat_out_triosy_obj_crc32_dat_out_triosy_wait_ctrl' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23487]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_crc32_dat_out_triosy_obj_crc32_dat_out_triosy_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23487]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_crc32_dat_out_triosy_obj' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:24087]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_staller' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23449]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_staller' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23449]
+INFO: [Synth 8-6157] synthesizing module 'EdgeDetect_MagAng_run_run_fsm' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23383]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run_run_fsm' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:23383]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng_run' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:25474]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_MagAng' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27535]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_Top_struct' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27612]
+INFO: [Synth 8-6155] done synthesizing module 'EdgeDetect_Top' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27804]
+INFO: [Synth 8-6157] synthesizing module 'ra1shd80x64m4h3v2' [/home/ubuntu/Desktop/FPGA_val/spram.v:78]
+INFO: [Synth 8-6155] done synthesizing module 'ra1shd80x64m4h3v2' (0#1) [/home/ubuntu/Desktop/FPGA_val/spram.v:78]
+INFO: [Synth 8-6155] done synthesizing module 'USER_PRJ0' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21085]
+INFO: [Synth 8-6157] synthesizing module 'USER_PRJ1' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21371]
+INFO: [Synth 8-226] default block is never used [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21494]
+INFO: [Synth 8-6157] synthesizing module 'In_copy' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28585]
+INFO: [Synth 8-6157] synthesizing module 'In_copy_ccs_sample_mem_ccs_ram_sync_singleport_rwport_en_2_64_10_1024_1024_64_5_gen' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27905]
+INFO: [Synth 8-6155] done synthesizing module 'In_copy_ccs_sample_mem_ccs_ram_sync_singleport_rwport_en_2_64_10_1024_1024_64_5_gen' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:27905]
+INFO: [Synth 8-6157] synthesizing module 'In_copy_run' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28352]
+INFO: [Common 17-14] Message 'Synth 8-6157' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_v1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28707]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_v1__parameterized1' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28662]
+INFO: [Synth 8-6155] done synthesizing module 'In_copy_run_in_data_rsci_in_data_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28152]
+INFO: [Synth 8-6155] done synthesizing module 'In_copy_run_in_data_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28309]
+INFO: [Synth 8-6155] done synthesizing module 'In_copy_run_wait_dp' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28133]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_out_wait_v1__parameterized4' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28681]
+INFO: [Synth 8-6155] done synthesizing module 'In_copy_run_ap_done_rsci_ap_done_wait_ctrl' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28115]
+INFO: [Synth 8-6155] done synthesizing module 'In_copy_run_ap_done_rsci' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28270]
+INFO: [Synth 8-6155] done synthesizing module 'ccs_in_wait_v1__parameterized2' (0#1) [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:28662]
+INFO: [Common 17-14] Message 'Synth 8-6155' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-7071] port 'mode_triosy_lz' of module 'In_copy' is unconnected for instance 'In_copy' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21595]
+WARNING: [Synth 8-7023] instance 'In_copy' of module 'In_copy' has 20 connections declared, but only 19 given [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21595]
+WARNING: [Synth 8-7071] port 'vccd' of module 'FSIC' is unconnected for instance 'u_fsic' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20438]
+WARNING: [Synth 8-7071] port 'vssd' of module 'FSIC' is unconnected for instance 'u_fsic' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20438]
+WARNING: [Synth 8-7023] instance 'u_fsic' of module 'FSIC' has 17 connections declared, but only 15 given [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20438]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:2019]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:2459]
+WARNING: [Synth 8-7071] port 'VPWR' of module 'housekeeping' is unconnected for instance 'housekeeping' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1278]
+WARNING: [Synth 8-7071] port 'VGND' of module 'housekeeping' is unconnected for instance 'housekeeping' [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1278]
+WARNING: [Synth 8-7023] instance 'housekeeping' of module 'housekeeping' has 78 connections declared, but only 76 given [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1278]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_isIoAccess_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15887]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_allowRead_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15889]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_allowWrite_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15890]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_bypassTranslation_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15894]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_fetchPc_correctionReg_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13677]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_injector_nextPcCalc_valids_2_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13785]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_injector_nextPcCalc_valids_3_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13786]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_injector_nextPcCalc_valids_4_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13787]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_rspCounter_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:14993]
+WARNING: [Synth 8-6014] Unused sequential element execute_CsrPlugin_wfiWake_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15013]
+WARNING: [Synth 8-6014] Unused sequential element HazardSimplePlugin_writeBackBuffer_payload_data_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15279]
+WARNING: [Synth 8-6014] Unused sequential element CsrPlugin_mcycle_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15283]
+WARNING: [Synth 8-6014] Unused sequential element CsrPlugin_minstret_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15285]
+WARNING: [Synth 8-6014] Unused sequential element decode_to_execute_FORMAL_PC_NEXT_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13289]
+WARNING: [Synth 8-6014] Unused sequential element execute_to_memory_FORMAL_PC_NEXT_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13288]
+WARNING: [Synth 8-6014] Unused sequential element memory_to_writeBack_FORMAL_PC_NEXT_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13287]
+WARNING: [Synth 8-6014] Unused sequential element decode_to_execute_BYPASSABLE_EXECUTE_STAGE_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13308]
+WARNING: [Synth 8-6014] Unused sequential element decode_to_execute_BYPASSABLE_MEMORY_STAGE_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13277]
+WARNING: [Synth 8-6014] Unused sequential element execute_to_memory_BYPASSABLE_MEMORY_STAGE_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13311]
+WARNING: [Synth 8-6014] Unused sequential element memory_to_writeBack_MEMORY_STORE_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13356]
+WARNING: [Synth 8-6014] Unused sequential element decode_to_execute_CSR_READ_OPCODE_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13294]
+WARNING: [Synth 8-6014] Unused sequential element CsrPlugin_mtvec_mode_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15504]
+WARNING: [Synth 8-6014] Unused sequential element DebugPlugin_firstCycle_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15522]
+WARNING: [Synth 8-6014] Unused sequential element DebugPlugin_secondCycle_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:15526]
+WARNING: [Synth 8-3936] Found unconnected internal register 'memory_to_writeBack_INSTRUCTION_reg' and it is trimmed from '32' to '30' bits. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13416]
+WARNING: [Synth 8-3848] Net IBusCachedPlugin_cache_io_cpu_fetch_isRemoved in module/entity VexRiscv does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:12033]
+WARNING: [Synth 8-3848] Net IBusCachedPlugin_mmuBus_rsp_bypassTranslation in module/entity VexRiscv does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:12431]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_tx_fifo_source_first_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:5946]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_tx_fifo_source_last_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:5947]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_rx_fifo_source_first_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:9995]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_rx_fifo_source_last_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:9996]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_scratch_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10290]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_bus_errors_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10291]
+WARNING: [Synth 8-6014] Unused sequential element debug_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10303]
+WARNING: [Synth 8-6014] Unused sequential element debug_oeb_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10315]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_litespimmap_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10339]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_cs_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10343]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_phyconfig_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10347]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_master_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10348]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_litespisdrphycore_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10360]
+WARNING: [Synth 8-6014] Unused sequential element gpio_mode1_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10387]
+WARNING: [Synth 8-6014] Unused sequential element gpio_mode0_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10391]
+WARNING: [Synth 8-6014] Unused sequential element gpio_ien_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10395]
+WARNING: [Synth 8-6014] Unused sequential element gpio_oe_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10399]
+WARNING: [Synth 8-6014] Unused sequential element gpio_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10400]
+WARNING: [Synth 8-6014] Unused sequential element gpio_out_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10404]
+WARNING: [Synth 8-6014] Unused sequential element la_ien_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10470]
+WARNING: [Synth 8-6014] Unused sequential element la_oe_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10483]
+WARNING: [Synth 8-6014] Unused sequential element la_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10484]
+WARNING: [Synth 8-6014] Unused sequential element la_out_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10497]
+WARNING: [Synth 8-6014] Unused sequential element mprj_wb_iena_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10509]
+WARNING: [Synth 8-6014] Unused sequential element spi_enabled_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10521]
+WARNING: [Synth 8-6014] Unused sequential element spi_master_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10552]
+WARNING: [Synth 8-6014] Unused sequential element spi_master_mosi_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10556]
+WARNING: [Synth 8-6014] Unused sequential element spi_master_miso_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10557]
+WARNING: [Synth 8-6014] Unused sequential element spi_master_cs_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10561]
+WARNING: [Synth 8-6014] Unused sequential element spi_master_loopback_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10565]
+WARNING: [Synth 8-6014] Unused sequential element spimaster_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10569]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_load_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10602]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_reload_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10606]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_en_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10610]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_value_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10615]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10616]
+WARNING: [Synth 8-6014] Unused sequential element mgmtsoc_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10624]
+WARNING: [Synth 8-6014] Unused sequential element uart_txfull_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10654]
+WARNING: [Synth 8-6014] Unused sequential element uart_rxempty_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10655]
+WARNING: [Synth 8-6014] Unused sequential element uart_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10656]
+WARNING: [Synth 8-6014] Unused sequential element uart_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10664]
+WARNING: [Synth 8-6014] Unused sequential element uart_txempty_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10665]
+WARNING: [Synth 8-6014] Unused sequential element uart_rxfull_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10666]
+WARNING: [Synth 8-6014] Unused sequential element uart_enabled_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10678]
+WARNING: [Synth 8-6014] Unused sequential element gpioin0_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10702]
+WARNING: [Synth 8-6014] Unused sequential element gpioin0_gpioin0_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10706]
+WARNING: [Synth 8-6014] Unused sequential element gpioin0_gpioin0_edge_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10710]
+WARNING: [Synth 8-6014] Unused sequential element gpioin0_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10711]
+WARNING: [Synth 8-6014] Unused sequential element gpioin0_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10719]
+WARNING: [Synth 8-6014] Unused sequential element gpioin1_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10743]
+WARNING: [Synth 8-6014] Unused sequential element gpioin1_gpioin1_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10747]
+WARNING: [Synth 8-6014] Unused sequential element gpioin1_gpioin1_edge_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10751]
+WARNING: [Synth 8-6014] Unused sequential element gpioin1_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10752]
+WARNING: [Synth 8-6014] Unused sequential element gpioin1_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10760]
+WARNING: [Synth 8-6014] Unused sequential element gpioin2_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10784]
+WARNING: [Synth 8-6014] Unused sequential element gpioin2_gpioin2_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10788]
+WARNING: [Synth 8-6014] Unused sequential element gpioin2_gpioin2_edge_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10792]
+WARNING: [Synth 8-6014] Unused sequential element gpioin2_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10793]
+WARNING: [Synth 8-6014] Unused sequential element gpioin2_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10801]
+WARNING: [Synth 8-6014] Unused sequential element gpioin3_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10825]
+WARNING: [Synth 8-6014] Unused sequential element gpioin3_gpioin3_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10829]
+WARNING: [Synth 8-6014] Unused sequential element gpioin3_gpioin3_edge_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10833]
+WARNING: [Synth 8-6014] Unused sequential element gpioin3_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10834]
+WARNING: [Synth 8-6014] Unused sequential element gpioin3_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10842]
+WARNING: [Synth 8-6014] Unused sequential element gpioin4_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10866]
+WARNING: [Synth 8-6014] Unused sequential element gpioin4_gpioin4_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10870]
+WARNING: [Synth 8-6014] Unused sequential element gpioin4_gpioin4_edge_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10874]
+WARNING: [Synth 8-6014] Unused sequential element gpioin4_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10875]
+WARNING: [Synth 8-6014] Unused sequential element gpioin4_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10883]
+WARNING: [Synth 8-6014] Unused sequential element gpioin5_in_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10907]
+WARNING: [Synth 8-6014] Unused sequential element gpioin5_gpioin5_mode_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10911]
+WARNING: [Synth 8-6014] Unused sequential element gpioin5_gpioin5_edge_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10915]
+WARNING: [Synth 8-6014] Unused sequential element gpioin5_status_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10916]
+WARNING: [Synth 8-6014] Unused sequential element gpioin5_enable_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10924]
+WARNING: [Synth 8-6014] Unused sequential element user_irq_ena_re_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:10936]
+WARNING: [Synth 8-6014] Unused sequential element memdat_reg was removed.  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11488]
+INFO: [Common 17-14] Message 'Synth 8-6014' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-3936] Found unconnected internal register 'litespi_tx_mux_source_payload_mask_reg' and it is trimmed from '8' to '1' bits. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:5264]
+WARNING: [Synth 8-3848] Net sm_tid in module/entity USER_PRJ0 does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21114]
+WARNING: [Synth 8-3848] Net low__pri_irq in module/entity USER_PRJ0 does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21119]
+WARNING: [Synth 8-3848] Net High_pri_req in module/entity USER_PRJ0 does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21120]
+WARNING: [Synth 8-3848] Net reg_rst_incpopy in module/entity USER_PRJ1 does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21586]
+WARNING: [Synth 8-3848] Net reg_rst in module/entity USER_PRJ1 does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:21651]
+WARNING: [Synth 8-3848] Net la_data_out in module/entity user_project_wrapper does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:20410]
+WARNING: [Synth 8-7137] Register wb_dat_o_reg in module housekeeping has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:2047]
+WARNING: [Synth 8-3848] Net pll_ena in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1483]
+WARNING: [Synth 8-3848] Net pll_dco_ena in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1484]
+WARNING: [Synth 8-3848] Net pll_div in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1485]
+WARNING: [Synth 8-3848] Net pll_sel in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1486]
+WARNING: [Synth 8-3848] Net pll90_sel in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1487]
+WARNING: [Synth 8-3848] Net pll_trim in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1488]
+WARNING: [Synth 8-3848] Net pll_bypass in module/entity housekeeping does not have driver. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:1489]
+WARNING: [Synth 8-7129] Port pll_ena in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_dco_ena in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_div[4] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_div[3] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_div[2] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_div[1] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_div[0] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_sel[2] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_sel[1] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_sel[0] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll90_sel[2] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll90_sel[1] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll90_sel[0] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[25] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[24] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[23] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[22] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[21] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[20] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[19] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[18] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[17] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[16] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[15] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[14] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[13] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[12] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[11] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[10] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[9] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[8] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[7] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[6] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[5] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[4] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[3] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[2] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[1] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_trim[0] in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pll_bypass in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port VPWR in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port VGND in module housekeeping is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_sel_i[3] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_sel_i[2] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_sel_i[1] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_sel_i[0] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[31] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[30] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[29] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[28] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[27] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[26] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[25] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[24] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[23] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[22] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[21] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[20] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[19] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[18] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[17] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[16] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[15] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[14] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[13] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[12] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[11] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[10] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[9] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[8] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[7] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[6] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[5] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[4] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[3] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[2] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_dat_i[1] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_adr_i[11] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_adr_i[10] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_adr_i[9] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port wbs_adr_i[8] in module pads_config is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vccd in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vssd in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_prj_sel[4] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_prj_sel[3] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_prj_sel[2] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_prj_sel[1] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_prj_sel[0] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[37] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[35] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[34] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[33] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[32] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[31] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[30] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[29] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[28] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[27] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[26] in module MPRJ_IO is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_in[25] in module MPRJ_IO is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:21 ; elapsed = 00:00:27 . Memory (MB): peak = 3006.223 ; gain = 93.141 ; free physical = 2272 ; free virtual = 5221
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 3021.066 ; gain = 107.984 ; free physical = 2261 ; free virtual = 5211
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 3021.066 ; gain = 107.984 ; free physical = 2261 ; free virtual = 5211
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.33 ; elapsed = 00:00:00.33 . Memory (MB): peak = 3021.066 ; gain = 0.000 ; free physical = 2238 ; free virtual = 5200
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3171.816 ; gain = 0.000 ; free physical = 2131 ; free virtual = 5093
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.53 ; elapsed = 00:00:00.31 . Memory (MB): peak = 3171.816 ; gain = 0.000 ; free physical = 2127 ; free virtual = 5089
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:33 ; elapsed = 00:00:38 . Memory (MB): peak = 3171.816 ; gain = 258.734 ; free physical = 2187 ; free virtual = 5168
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:33 ; elapsed = 00:00:38 . Memory (MB): peak = 3171.816 ; gain = 258.734 ; free physical = 2184 ; free virtual = 5165
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:38 . Memory (MB): peak = 3171.816 ; gain = 258.734 ; free physical = 2190 ; free virtual = 5172
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'execute_to_memory_INSTRUCTION_reg' and it is trimmed from '32' to '30' bits. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:13310]
+INFO: [Synth 8-802] inferred FSM for state register 'switch_Fetcher_l362_reg' in module 'VexRiscv'
+WARNING: [Synth 8-3936] Found unconnected internal register 'memdat_3_reg' and it is trimmed from '10' to '8' bits. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11510]
+WARNING: [Synth 8-3936] Found unconnected internal register 'memdat_1_reg' and it is trimmed from '10' to '8' bits. [/home/ubuntu/Desktop/FPGA_val/caravel_fpga.v:11493]
+INFO: [Synth 8-802] inferred FSM for state register 'litespiphy_state_reg' in module 'mgmt_core'
+INFO: [Synth 8-802] inferred FSM for state register 'spimaster_state_reg' in module 'mgmt_core'
+INFO: [Synth 8-802] inferred FSM for state register 'grant_reg' in module 'mgmt_core'
+INFO: [Synth 8-802] inferred FSM for state register 'f_axi_fsm_reg_reg' in module 'CFG_CTRL'
+INFO: [Synth 8-802] inferred FSM for state register 'm_axi_fsm_reg_reg' in module 'CFG_CTRL'
+INFO: [Synth 8-802] inferred FSM for state register 'ls_sm_fsm_reg' in module 'AXIL_AXIS'
+INFO: [Synth 8-802] inferred FSM for state register 'ss_lm_fsm_reg' in module 'AXIL_AXIS'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'fifo'
+INFO: [Synth 8-802] inferred FSM for state register 'grant_reg_reg' in module 'AXIS_SW'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'fifo__parameterized0'
+INFO: [Synth 8-802] inferred FSM for state register 'state_var_reg' in module 'EdgeDetect_VerDer_run_run_fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'state_var_reg' in module 'EdgeDetect_HorDer_run_run_fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'state_var_reg' in module 'EdgeDetect_MagAng_run_run_fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'state_var_reg' in module 'In_copy_run_run_fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'state_var_reg' in module 'stage_run_run_fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'USER_PRJ1'
+INFO: [Synth 8-802] inferred FSM for state register 'Out_state_reg' in module 'USER_PRJ1'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'housekeeping_spi'
+INFO: [Synth 8-802] inferred FSM for state register 'wbbd_state_reg' in module 'housekeeping'
+INFO: [Synth 8-802] inferred FSM for state register 'xfer_state_reg' in module 'housekeeping'
+INFO: [Synth 8-7082] The signal banks_0_reg is implemented as Block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The depth (4 address bits) is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+INFO: [Synth 8-7082] The signal ways_0_tags_reg is implemented as Block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The depth (1 address bits) is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              000 |                              000
+                 iSTATE0 |                              001 |                              001
+                 iSTATE1 |                              010 |                              010
+                 iSTATE2 |                              011 |                              011
+                 iSTATE3 |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'switch_Fetcher_l362_reg' using encoding 'sequential' in module 'VexRiscv'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                              001 |                               00
+                  iSTATE |                              010 |                               10
+                 iSTATE0 |                              100 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'grant_reg' using encoding 'one-hot' in module 'mgmt_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                               00 |                               00
+*
+                  iSTATE |                               01 |                               01
+                 iSTATE0 |                               10 |                               10
+                 iSTATE2 |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'spimaster_state_reg' using encoding 'sequential' in module 'mgmt_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                               00 |                               00
+*
+                  iSTATE |                               01 |                               01
+                 iSTATE0 |                               10 |                               10
+                 iSTATE2 |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'litespiphy_state_reg' using encoding 'sequential' in module 'mgmt_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            axi_fsm_idle |                              000 |                              000
+      axi_fsm_write_data |                              001 |                              011
+  axi_fsm_write_complete |                              010 |                              100
+       axi_fsm_read_data |                              011 |                              001
+   axi_fsm_read_complete |                              100 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'm_axi_fsm_reg_reg' using encoding 'sequential' in module 'CFG_CTRL'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            axi_fsm_idle |                              000 |                              000
+      axi_fsm_write_data |                              001 |                              011
+  axi_fsm_write_complete |                              010 |                              100
+       axi_fsm_read_data |                              011 |                              001
+   axi_fsm_read_complete |                              100 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'f_axi_fsm_reg_reg' using encoding 'sequential' in module 'CFG_CTRL'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE8 |                       0001000000 |                          0000000
+                 iSTATE3 |                       0100000000 |                          0110000
+                 iSTATE0 |                       0000001000 |                          0110010
+                 iSTATE7 |                       0000100000 |                          0011000
+                 iSTATE1 |                       0010000000 |                          1011000
+                 iSTATE5 |                       1000000000 |                          0100000
+                  iSTATE |                       0000000001 |                          0001000
+                 iSTATE4 |                       0000000010 |                          0001010
+                 iSTATE2 |                       0000000100 |                          0000100
+                 iSTATE6 |                       0000010000 |                          0000001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ss_lm_fsm_reg' using encoding 'one-hot' in module 'AXIL_AXIS'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                iSTATE10 |                     000001000000 |                          0000000
+                 iSTATE8 |                     100000000000 |                          0011000
+                 iSTATE5 |                     010000000000 |                          0111001
+                 iSTATE1 |                     000000000100 |                          0111100
+                 iSTATE9 |                     000000001000 |                          0111110
+                 iSTATE2 |                     000010000000 |                          0011100
+                  iSTATE |                     000000000001 |                          0011110
+                 iSTATE6 |                     000000000010 |                          0011001
+                 iSTATE4 |                     000100000000 |                          0010000
+                 iSTATE7 |                     001000000000 |                          0010110
+                 iSTATE0 |                     000000010000 |                          1010000
+                 iSTATE3 |                     000000100000 |                          0010001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ls_sm_fsm_reg' using encoding 'one-hot' in module 'AXIL_AXIS'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+          WAIT_SRAM_READ |                               01 |                               01
+          WAIT_FIFO_READ |                               10 |                               10
+                  NORMAL |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'fifo'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  WAIT_0 |                              000 |                             0001
+                 GRANT_1 |                              001 |                             1010
+                  WAIT_1 |                              010 |                             0010
+                 GRANT_2 |                              011 |                             1100
+                  WAIT_2 |                              100 |                             0100
+                 GRANT_0 |                              101 |                             1001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'grant_reg_reg' using encoding 'sequential' in module 'AXIS_SW'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+          WAIT_SRAM_READ |                               01 |                               01
+          WAIT_FIFO_READ |                               10 |                               10
+                  NORMAL |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'fifo__parameterized0'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                               00
+*
+                VROW_C_0 |                               01 |                               01
+                main_C_1 |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_var_reg' using encoding 'sequential' in module 'EdgeDetect_VerDer_run_run_fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                               00
+*
+                HROW_C_0 |                               01 |                               01
+                main_C_1 |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_var_reg' using encoding 'sequential' in module 'EdgeDetect_HorDer_run_run_fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                               00
+*
+                MROW_C_0 |                               01 |                               01
+                main_C_1 |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_var_reg' using encoding 'sequential' in module 'EdgeDetect_MagAng_run_run_fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              000 |                              000
+*
+                main_C_0 |                              001 |                              001
+                 for_C_0 |                              010 |                              010
+                 for_C_1 |                              011 |                              011
+                 for_C_2 |                              100 |                              100
+                 for_C_3 |                              101 |                              101
+                main_C_1 |                              110 |                              110
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_var_reg' using encoding 'sequential' in module 'In_copy_run_run_fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                           000000 |                           000000
+*
+                main_C_0 |                           000001 |                           000001
+                 for_C_0 |                           000010 |                           000010
+           BUTTERFLY_C_0 |                           000011 |                           000011
+           BUTTERFLY_C_1 |                           000100 |                           000100
+           BUTTERFLY_C_2 |                           000101 |                           000101
+           BUTTERFLY_C_3 |                           000110 |                           000110
+           BUTTERFLY_C_4 |                           000111 |                           000111
+           BUTTERFLY_C_5 |                           001000 |                           001000
+           BUTTERFLY_C_6 |                           001001 |                           001001
+           BUTTERFLY_C_7 |                           001010 |                           001010
+           BUTTERFLY_C_8 |                           001011 |                           001011
+           BUTTERFLY_C_9 |                           001100 |                           001100
+          BUTTERFLY_C_10 |                           001101 |                           001101
+          BUTTERFLY_C_11 |                           001110 |                           001110
+          BUTTERFLY_C_12 |                           001111 |                           001111
+          BUTTERFLY_C_13 |                           010000 |                           010000
+          BUTTERFLY_C_14 |                           010001 |                           010001
+          BUTTERFLY_C_15 |                           010010 |                           010010
+          BUTTERFLY_C_16 |                           010011 |                           010011
+          BUTTERFLY_C_17 |                           010100 |                           010100
+          BUTTERFLY_C_18 |                           010101 |                           010101
+          BUTTERFLY_C_19 |                           010110 |                           010110
+          BUTTERFLY_C_20 |                           010111 |                           010111
+          BUTTERFLY_C_21 |                           011000 |                           011000
+          BUTTERFLY_C_22 |                           011001 |                           011001
+          BUTTERFLY_C_23 |                           011010 |                           011010
+          BUTTERFLY_C_24 |                           011011 |                           011011
+         BUTTERFLY_1_C_0 |                           011100 |                           011100
+         BUTTERFLY_1_C_1 |                           011101 |                           011101
+         BUTTERFLY_1_C_2 |                           011110 |                           011110
+         BUTTERFLY_1_C_3 |                           011111 |                           011111
+         BUTTERFLY_1_C_4 |                           100000 |                           100000
+         BUTTERFLY_1_C_5 |                           100001 |                           100001
+         BUTTERFLY_1_C_6 |                           100010 |                           100010
+         BUTTERFLY_1_C_7 |                           100011 |                           100011
+         BUTTERFLY_1_C_8 |                           100100 |                           100100
+         BUTTERFLY_1_C_9 |                           100101 |                           100101
+        BUTTERFLY_1_C_10 |                           100110 |                           100110
+        BUTTERFLY_1_C_11 |                           100111 |                           100111
+        BUTTERFLY_1_C_12 |                           101000 |                           101000
+        BUTTERFLY_1_C_13 |                           101001 |                           101001
+        BUTTERFLY_1_C_14 |                           101010 |                           101010
+        BUTTERFLY_1_C_15 |                           101011 |                           101011
+        BUTTERFLY_1_C_16 |                           101100 |                           101100
+        BUTTERFLY_1_C_17 |                           101101 |                           101101
+        BUTTERFLY_1_C_18 |                           101110 |                           101110
+        BUTTERFLY_1_C_19 |                           101111 |                           101111
+        BUTTERFLY_1_C_20 |                           110000 |                           110000
+        BUTTERFLY_1_C_21 |                           110001 |                           110001
+        BUTTERFLY_1_C_22 |                           110010 |                           110010
+        BUTTERFLY_1_C_23 |                           110011 |                           110011
+        BUTTERFLY_1_C_24 |                           110100 |                           110100
+               for_1_C_0 |                           110101 |                           110101
+               for_1_C_1 |                           110110 |                           110110
+               for_1_C_2 |                           110111 |                           110111
+                main_C_1 |                           111000 |                           111000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_var_reg' using encoding 'sequential' in module 'stage_run_run_fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 Command |                            00001 |                             0000
+                 F_WAIT1 |                            01000 |                             0001
+                  F_OUT1 |                            10000 |                             0010
+                  F_OUT2 |                            00100 |                             0011
+                   U_OUT |                            00010 |                             0100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'Out_state_reg' using encoding 'one-hot' in module 'USER_PRJ1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 Command |                             0001 |                             0000
+                 IN_COPY |                             0010 |                             0001
+                OUT_COPY |                             0100 |                             0010
+                   RESET |                             1000 |                             0011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'USER_PRJ1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE0 |                            00001 |                              000
+                 iSTATE1 |                            00010 |                              101
+                 iSTATE3 |                            00100 |                              100
+                 iSTATE2 |                            01000 |                              001
+                  iSTATE |                            10000 |                              010
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'housekeeping_spi'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                               00
+                 iSTATE1 |                               01 |                               01
+                 iSTATE0 |                               10 |                               10
+                 iSTATE2 |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'xfer_state_reg' using encoding 'sequential' in module 'housekeeping'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE4 |                             0000 |                             0000
+                 iSTATE3 |                             0001 |                             0001
+                 iSTATE1 |                             0010 |                             0010
+                  iSTATE |                             0011 |                             0011
+                 iSTATE0 |                             0100 |                             0100
+                 iSTATE9 |                             0101 |                             0101
+                 iSTATE8 |                             0110 |                             0110
+                 iSTATE6 |                             0111 |                             0111
+                 iSTATE7 |                             1000 |                             1000
+                 iSTATE5 |                             1001 |                             1001
+                 iSTATE2 |                             1010 |                             1010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'wbbd_state_reg' using encoding 'sequential' in module 'housekeeping'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:58 ; elapsed = 00:01:48 . Memory (MB): peak = 3171.816 ; gain = 258.734 ; free physical = 1591 ; free virtual = 2843
+---------------------------------------------------------------------------------
+INFO: [Synth 8-223] decloning instance 'inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ1/fiFFNTT/stage_struct_inst/stage_run_inst/leading_sign_57_0_1_0_19_rg' (leading_sign_57_0_1_0) to 'inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ1/fiFFNTT/stage_struct_inst/stage_run_inst/leading_sign_57_0_1_0_10_rg'
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input  106 Bit       Adders := 1     
+	   2 Input   58 Bit       Adders := 2     
+	   2 Input   54 Bit       Adders := 7     
+	   3 Input   53 Bit       Adders := 3     
+	   2 Input   52 Bit       Adders := 1     
+	   2 Input   33 Bit       Adders := 4     
+	   3 Input   32 Bit       Adders := 1     
+	   2 Input   32 Bit       Adders := 4     
+	   2 Input   30 Bit       Adders := 1     
+	   2 Input   24 Bit       Adders := 4     
+	   2 Input   19 Bit       Adders := 1     
+	   2 Input   18 Bit       Adders := 5     
+	   2 Input   17 Bit       Adders := 2     
+	   3 Input   17 Bit       Adders := 9     
+	   3 Input   16 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 3     
+	   2 Input   15 Bit       Adders := 2     
+	   2 Input   14 Bit       Adders := 2     
+	   2 Input   13 Bit       Adders := 13    
+	   3 Input   12 Bit       Adders := 9     
+	   4 Input   12 Bit       Adders := 1     
+	   2 Input   12 Bit       Adders := 7     
+	   3 Input   11 Bit       Adders := 4     
+	   2 Input   11 Bit       Adders := 4     
+	   2 Input   10 Bit       Adders := 7     
+	   2 Input    9 Bit       Adders := 13    
+	   3 Input    9 Bit       Adders := 8     
+	   2 Input    8 Bit       Adders := 18    
+	   3 Input    8 Bit       Adders := 3     
+	   2 Input    7 Bit       Adders := 3     
+	   2 Input    6 Bit       Adders := 10    
+	   2 Input    5 Bit       Adders := 4     
+	   2 Input    4 Bit       Adders := 14    
+	   2 Input    3 Bit       Adders := 33    
+	   2 Input    2 Bit       Adders := 17    
+	   4 Input    1 Bit       Adders := 1     
+	   2 Input    1 Bit       Adders := 3     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
+	   2 Input      8 Bit         XORs := 8     
+	   2 Input      1 Bit         XORs := 189   
+	   9 Input      1 Bit         XORs := 12    
+	   7 Input      1 Bit         XORs := 23    
+	   3 Input      1 Bit         XORs := 18    
+	   8 Input      1 Bit         XORs := 15    
+	   6 Input      1 Bit         XORs := 8     
+	  10 Input      1 Bit         XORs := 3     
+	   4 Input      1 Bit         XORs := 2     
+	  11 Input      1 Bit         XORs := 3     
++---Registers : 
+	              106 Bit    Registers := 1     
+	              100 Bit    Registers := 1     
+	               64 Bit    Registers := 9     
+	               62 Bit    Registers := 2     
+	               57 Bit    Registers := 2     
+	               56 Bit    Registers := 1     
+	               52 Bit    Registers := 1     
+	               51 Bit    Registers := 5     
+	               50 Bit    Registers := 7     
+	               38 Bit    Registers := 2     
+	               36 Bit    Registers := 2     
+	               32 Bit    Registers := 109   
+	               30 Bit    Registers := 4     
+	               28 Bit    Registers := 1     
+	               24 Bit    Registers := 4     
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 5     
+	               15 Bit    Registers := 3     
+	               14 Bit    Registers := 4     
+	               13 Bit    Registers := 41    
+	               12 Bit    Registers := 5     
+	               11 Bit    Registers := 2     
+	               10 Bit    Registers := 9     
+	                9 Bit    Registers := 20    
+	                8 Bit    Registers := 41    
+	                7 Bit    Registers := 9     
+	                6 Bit    Registers := 10    
+	                5 Bit    Registers := 22    
+	                4 Bit    Registers := 63    
+	                3 Bit    Registers := 52    
+	                2 Bit    Registers := 35    
+	                1 Bit    Registers := 1024  
++---RAMs : 
+	              64K Bit	(1024 X 64 bit)          RAMs := 2     
+	               5K Bit	(80 X 64 bit)          RAMs := 2     
+	               4K Bit	(128 X 32 bit)          RAMs := 3     
+	               2K Bit	(32 X 64 bit)          RAMs := 1     
+	               1K Bit	(16 X 100 bit)          RAMs := 1     
+	             1024 Bit	(32 X 32 bit)          RAMs := 1     
+	              512 Bit	(16 X 32 bit)          RAMs := 1     
+	              160 Bit	(16 X 10 bit)          RAMs := 2     
+	               56 Bit	(2 X 28 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input  106 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 12    
+	   2 Input   62 Bit        Muxes := 2     
+	  57 Input   57 Bit        Muxes := 1     
+	   2 Input   57 Bit        Muxes := 1     
+	   2 Input   56 Bit        Muxes := 7     
+	   2 Input   53 Bit        Muxes := 1     
+	   2 Input   52 Bit        Muxes := 5     
+	   2 Input   51 Bit        Muxes := 24    
+	   2 Input   50 Bit        Muxes := 29    
+	   2 Input   42 Bit        Muxes := 2     
+	   2 Input   41 Bit        Muxes := 1     
+	   6 Input   38 Bit        Muxes := 1     
+	   2 Input   38 Bit        Muxes := 2     
+	  89 Input   38 Bit        Muxes := 1     
+	   2 Input   36 Bit        Muxes := 4     
+	   2 Input   32 Bit        Muxes := 147   
+	   3 Input   32 Bit        Muxes := 4     
+	   5 Input   32 Bit        Muxes := 4     
+	   4 Input   32 Bit        Muxes := 21    
+	   7 Input   32 Bit        Muxes := 2     
+	   9 Input   32 Bit        Muxes := 2     
+	  11 Input   32 Bit        Muxes := 2     
+	   2 Input   31 Bit        Muxes := 1     
+	   2 Input   30 Bit        Muxes := 3     
+	   9 Input   30 Bit        Muxes := 1     
+	   2 Input   26 Bit        Muxes := 1     
+	   2 Input   25 Bit        Muxes := 1     
+	   4 Input   24 Bit        Muxes := 1     
+	   2 Input   24 Bit        Muxes := 3     
+	  89 Input   24 Bit        Muxes := 1     
+	   2 Input   17 Bit        Muxes := 9     
+	   2 Input   16 Bit        Muxes := 5     
+	   5 Input   15 Bit        Muxes := 2     
+	   2 Input   15 Bit        Muxes := 1     
+	   4 Input   14 Bit        Muxes := 1     
+	   2 Input   14 Bit        Muxes := 5     
+	   2 Input   13 Bit        Muxes := 1     
+	  90 Input   13 Bit        Muxes := 38    
+	   4 Input   13 Bit        Muxes := 2     
+	   2 Input   12 Bit        Muxes := 29    
+	  12 Input   12 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 23    
+	   2 Input   10 Bit        Muxes := 60    
+	  10 Input   10 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 36    
+	   4 Input    9 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 94    
+	   7 Input    8 Bit        Muxes := 3     
+	   4 Input    8 Bit        Muxes := 3     
+	   5 Input    8 Bit        Muxes := 1     
+	   3 Input    8 Bit        Muxes := 2     
+	  11 Input    8 Bit        Muxes := 2     
+	   7 Input    7 Bit        Muxes := 1     
+	   3 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 8     
+	  11 Input    7 Bit        Muxes := 1     
+	  13 Input    7 Bit        Muxes := 1     
+	   5 Input    7 Bit        Muxes := 1     
+	 113 Input    7 Bit        Muxes := 4     
+	  64 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 35    
+	   4 Input    6 Bit        Muxes := 2     
+	   3 Input    6 Bit        Muxes := 1     
+	   9 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 35    
+	   5 Input    5 Bit        Muxes := 1     
+	   3 Input    5 Bit        Muxes := 2     
+	   4 Input    5 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 42    
+	   4 Input    4 Bit        Muxes := 5     
+	   5 Input    4 Bit        Muxes := 2     
+	   3 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 2     
+	  11 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 45    
+	   9 Input    3 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 6     
+	   5 Input    3 Bit        Muxes := 4     
+	  25 Input    3 Bit        Muxes := 1     
+	   7 Input    3 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 1     
+	  89 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 35    
+	   3 Input    2 Bit        Muxes := 2     
+	   4 Input    2 Bit        Muxes := 8     
+	   5 Input    2 Bit        Muxes := 3     
+	   7 Input    2 Bit        Muxes := 1     
+	   9 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 901   
+	   3 Input    1 Bit        Muxes := 15    
+	   4 Input    1 Bit        Muxes := 45    
+	   5 Input    1 Bit        Muxes := 37    
+	   6 Input    1 Bit        Muxes := 1     
+	   7 Input    1 Bit        Muxes := 14    
+	   9 Input    1 Bit        Muxes := 9     
+	  89 Input    1 Bit        Muxes := 6     
+	  90 Input    1 Bit        Muxes := 1     
+	  11 Input    1 Bit        Muxes := 10    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP nl_z_out_105, operation Mode is: A*B.
+DSP Report: operator nl_z_out_105 is absorbed into DSP nl_z_out_105.
+DSP Report: Generating DSP nl_operator_32_false_acc_7_nl, operation Mode is: C+A*B.
+DSP Report: operator nl_operator_32_false_acc_7_nl is absorbed into DSP nl_operator_32_false_acc_7_nl.
+DSP Report: operator nl_z_out_105 is absorbed into DSP nl_operator_32_false_acc_7_nl.
+DSP Report: Generating DSP z_out_104, operation Mode is: A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: PCIN+A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: PCIN+A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: PCIN+A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: Generating DSP z_out_104, operation Mode is: PCIN+A*B.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+DSP Report: operator z_out_104 is absorbed into DSP z_out_104.
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[37] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[36] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[35] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[34] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[33] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[32] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[31] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[30] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[29] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[28] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[27] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[26] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[25] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[24] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[23] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[22] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[21] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[20] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[18] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[17] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[16] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[15] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[14] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[13] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[12] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[11] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[10] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[9] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[8] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[7] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[6] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[5] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[4] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[3] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[2] driven by constant 0
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[1] driven by constant 1
+INFO: [Synth 8-3917] design design_1_caravel_0_0 has port mprj_en[0] driven by constant 0
+INFO: [Synth 8-7082] The signal IBusCachedPlugin_cache/banks_0_reg is implemented as Block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The depth (4 address bits) is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+INFO: [Synth 8-7082] The signal IBusCachedPlugin_cache/ways_0_tags_reg is implemented as Block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The depth (1 address bits) is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+INFO: [Synth 8-3971] The signal "caravel_topi_6/\soc/core /VexRiscv/RegFilePlugin_regFile_reg" was recognized as a true dual port RAM template.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:25 ; elapsed = 00:05:09 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 808 ; free virtual = 1381
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++-----------------------------------------------------------+------------+---------------+----------------+
+|Module Name                                                | RTL Object | Depth x Width | Implemented As | 
++-----------------------------------------------------------+------------+---------------+----------------+
+|stagemgc_rom_sync_regout_14_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_13_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_12_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_11_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_10_1024_62_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x57       | LUT            | 
+|stagemgc_rom_sync_regout_9_1024_64_1_0_0_1_0_1_0_0_0_1_60  | mem        | 1024x59       | LUT            | 
+|stagemgc_rom_sync_regout_14_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_12_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_11_1024_14_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x14       | LUT            | 
+|stagemgc_rom_sync_regout_10_1024_62_1_0_0_1_0_1_0_0_0_1_60 | mem        | 1024x57       | LUT            | 
+|stagemgc_rom_sync_regout_9_1024_64_1_0_0_1_0_1_0_0_0_1_60  | mem        | 1024x59       | LUT            | 
+|housekeeping                                               | spiaddr    | 1024x7        | LUT            | 
+|housekeeping                                               | spiaddr0   | 1024x7        | LUT            | 
+|housekeeping                                               | spiaddr1   | 1024x7        | LUT            | 
+|housekeeping                                               | spiaddr2   | 1024x7        | LUT            | 
++-----------------------------------------------------------+------------+---------------+----------------+
+
+
+Block RAM: Preliminary Mapping Report (see note below)
++-----------------------------------+----------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name                        | RTL Object                             | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-----------------------------------+----------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|design_1_caravel_0_0               | SRAM0/mem_reg                          | 1 K x 64(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 2      | 
+|design_1_caravel_0_0               | SRAM1/mem_reg                          | 1 K x 64(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 2      | 
+|U_USER_SUBSYS0i_4/U_USRPRJ0        | U_SPRAM_0/mem_reg                      | 80 x 64(READ_FIRST)    | W | R |                        |   |   | Port A           | 0      | 1      | 
+|U_USER_SUBSYS0i_4/U_USRPRJ0        | U_SPRAM_1/mem_reg                      | 80 x 64(READ_FIRST)    | W | R |                        |   |   | Port A           | 0      | 1      | 
+|u_fsici_5/AXIS_SW0                 | AS_SRAM16x100/mem_reg                  | 16 x 100(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 1      | 
+|u_fsici_5/U_LOGIC_ANLZ0            | la_SRAM32x64/mem_reg                   | 32 x 64(READ_FIRST)    | W | R |                        |   |   | Port A           | 0      | 1      | 
+|caravel_topi_6/\soc/core /RAM256   | BANK128[0].RAM128/RAM128x32/mem_reg    | 128 x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 0      | 
+|caravel_topi_6/\soc/core /RAM256   | BANK128[1].RAM128/RAM128x32/mem_reg    | 128 x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 0      | 
+|caravel_topi_6/\soc/core           | RAM128/RAM128x32/mem_reg               | 128 x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 0      | 
+|caravel_topi_6/\soc/core /VexRiscv | IBusCachedPlugin_cache/banks_0_reg     | 16 x 32(READ_FIRST)    | W |   | 16 x 32(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|caravel_topi_6/\soc/core /VexRiscv | IBusCachedPlugin_cache/ways_0_tags_reg | 2 x 28(READ_FIRST)     | W |   | 2 x 28(WRITE_FIRST)    |   | R | Port A and B     | 1      | 0      | 
++-----------------------------------+----------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++--------------------------+---------------+-----------+----------------------+-------------+
+|Module Name               | RTL Object    | Inference | Size (Depth x Width) | Primitives  | 
++--------------------------+---------------+-----------+----------------------+-------------+
+|caravel_topi_6/\soc/core  | storage_1_reg | Implied   | 16 x 8               | RAM32M x 2  | 
++--------------------------+---------------+-----------+----------------------+-------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|stage_run   | A*B            | 18     | 15     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | C+A*B          | 18     | 15     | 30     | -      | 32     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|stage_run   | A*B            | 20     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B       | 20     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | (PCIN>>17)+A*B | 20     | 18     | -      | -      | 38     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | A*B            | 20     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B       | 20     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:30 ; elapsed = 00:05:14 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 656 ; free virtual = 1250
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:03:33 ; elapsed = 00:05:18 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 569 ; free virtual = 1164
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-----------------------------------+----------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name                        | RTL Object                             | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-----------------------------------+----------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|design_1_caravel_0_0               | SRAM0/mem_reg                          | 1 K x 64(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 2      | 
+|design_1_caravel_0_0               | SRAM1/mem_reg                          | 1 K x 64(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 2      | 
+|U_USER_SUBSYS0i_4/U_USRPRJ0        | U_SPRAM_0/mem_reg                      | 80 x 64(READ_FIRST)    | W | R |                        |   |   | Port A           | 0      | 1      | 
+|U_USER_SUBSYS0i_4/U_USRPRJ0        | U_SPRAM_1/mem_reg                      | 80 x 64(READ_FIRST)    | W | R |                        |   |   | Port A           | 0      | 1      | 
+|u_fsici_5/AXIS_SW0                 | AS_SRAM16x100/mem_reg                  | 16 x 100(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 1      | 
+|u_fsici_5/U_LOGIC_ANLZ0            | la_SRAM32x64/mem_reg                   | 32 x 64(READ_FIRST)    | W | R |                        |   |   | Port A           | 0      | 1      | 
+|caravel_topi_6/\soc/core /RAM256   | BANK128[0].RAM128/RAM128x32/mem_reg    | 128 x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 0      | 
+|caravel_topi_6/\soc/core /RAM256   | BANK128[1].RAM128/RAM128x32/mem_reg    | 128 x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 0      | 
+|caravel_topi_6/\soc/core           | RAM128/RAM128x32/mem_reg               | 128 x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 1      | 0      | 
+|caravel_topi_6/\soc/core /VexRiscv | IBusCachedPlugin_cache/banks_0_reg     | 16 x 32(READ_FIRST)    | W |   | 16 x 32(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|caravel_topi_6/\soc/core /VexRiscv | IBusCachedPlugin_cache/ways_0_tags_reg | 2 x 28(READ_FIRST)     | W |   | 2 x 28(WRITE_FIRST)    |   | R | Port A and B     | 1      | 0      | 
++-----------------------------------+----------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+
+Distributed RAM: Final Mapping Report
++--------------------------+---------------+-----------+----------------------+-------------+
+|Module Name               | RTL Object    | Inference | Size (Depth x Width) | Primitives  | 
++--------------------------+---------------+-----------+----------------------+-------------+
+|caravel_topi_6/\soc/core  | storage_1_reg | Implied   | 16 x 8               | RAM32M x 2  | 
++--------------------------+---------------+-----------+----------------------+-------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ1/SRAM0/mem_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ1/SRAM0/mem_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ1/SRAM1/mem_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ1/SRAM1/mem_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ0/U_SPRAM_0/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ0/U_SPRAM_0/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ0/U_SPRAM_1/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_USER_SUBSYS0/U_USRPRJ0/U_SPRAM_1/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/AXIS_SW0/AS_SRAM16x100/mem_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/AXIS_SW0/AS_SRAM16x100/mem_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/AXIS_SW0/AS_SRAM16x100/mem_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/AXIS_SW0/AS_SRAM16x100/mem_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_LOGIC_ANLZ0/la_SRAM32x64/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/mprj/u_fsic/U_LOGIC_ANLZ0/la_SRAM32x64/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/BANK128[0].RAM128/RAM128x32/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/BANK128[0].RAM128/RAM128x32/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/BANK128[1].RAM128/RAM128x32/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/BANK128[1].RAM128/RAM128x32/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/soc/core/RAM128/RAM128x32/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/soc/core/RAM128/RAM128x32/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/soc/core/VexRiscv/IBusCachedPlugin_cache/banks_0_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/caravel_top/soc/core/VexRiscv/IBusCachedPlugin_cache/ways_0_tags_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:03:44 ; elapsed = 00:05:29 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 642 ; free virtual = 1237
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'caravel_topi_19812' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'caravel_topi_19813' to logic
+CRITICAL WARNING: [Synth 8-5799] Converted tricell instance 'caravel_topi_19814' to logic
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:03:48 ; elapsed = 00:05:33 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 630 ; free virtual = 1231
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:48 ; elapsed = 00:05:33 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 630 ; free virtual = 1231
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:51 ; elapsed = 00:05:36 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 627 ; free virtual = 1228
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:51 ; elapsed = 00:05:37 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 627 ; free virtual = 1228
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:52 ; elapsed = 00:05:37 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 628 ; free virtual = 1230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:52 ; elapsed = 00:05:38 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 628 ; free virtual = 1230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|stage_run   | A*B          | 30     | 14     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | C+A*B        | 30     | 14     | 30     | -      | 32     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|stage_run   | A*B          | 19     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B     | 19     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN>>17+A*B | 19     | 17     | -      | -      | 38     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | A*B          | 19     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B     | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B     | 19     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN>>17+A*B | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|stage_run   | PCIN+A*B     | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |   724|
+|2     |DSP48E1  |    11|
+|4     |LUT1     |   455|
+|5     |LUT2     |  2314|
+|6     |LUT3     |  2543|
+|7     |LUT4     |  2777|
+|8     |LUT5     |  4552|
+|9     |LUT6     | 13118|
+|10    |MUXF7    |  1481|
+|11    |MUXF8    |     7|
+|12    |RAM32M   |     1|
+|13    |RAM32X1D |     2|
+|14    |RAMB18E1 |     8|
+|17    |RAMB36E1 |     8|
+|19    |FDCE     |  4563|
+|20    |FDPE     |   177|
+|21    |FDRE     |  2698|
+|22    |FDSE     |    53|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:52 ; elapsed = 00:05:38 . Memory (MB): peak = 3534.051 ; gain = 620.969 ; free physical = 628 ; free virtual = 1230
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 3 critical warnings and 5 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:05:09 ; elapsed = 00:05:35 . Memory (MB): peak = 3537.961 ; gain = 474.129 ; free physical = 5680 ; free virtual = 6337
+Synthesis Optimization Complete : Time (s): cpu = 00:05:15 ; elapsed = 00:05:40 . Memory (MB): peak = 3537.961 ; gain = 624.879 ; free physical = 5678 ; free virtual = 6337
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.24 ; elapsed = 00:00:00.26 . Memory (MB): peak = 3537.961 ; gain = 0.000 ; free physical = 5653 ; free virtual = 6319
+INFO: [Netlist 29-17] Analyzing 2242 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3574.070 ; gain = 0.000 ; free physical = 5598 ; free virtual = 6285
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 3 instances were transformed.
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 1 instance 
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 2 instances
+
+Synth Design complete, checksum: db452ce8
+INFO: [Common 17-83] Releasing license: Synthesis
+361 Infos, 238 Warnings, 3 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:05:23 ; elapsed = 00:05:49 . Memory (MB): peak = 3574.070 ; gain = 660.988 ; free physical = 5849 ; free virtual = 6537
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_caravel_0_0_synth_1/design_1_caravel_0_0.dcp' has been generated.
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Coretcl 2-1174] Renamed 112 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/Desktop/FPGA_val/vivado/vvd_caravel_fpga/vvd_caravel_fpga.runs/design_1_caravel_0_0_synth_1/design_1_caravel_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file design_1_caravel_0_0_utilization_synth.rpt -pb design_1_caravel_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 11 08:26:23 2024...
