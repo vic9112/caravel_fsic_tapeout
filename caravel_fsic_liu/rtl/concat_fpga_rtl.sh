@@ -1,11 +1,12 @@
 cpp -P -D FPGA ./user_project/falcon_stage.v falcon_stage.v
+cpp -P -D FPGA ./caravel/caravel.v caravel.v
 cat \
 top/defines.v \
 top/user_defines.v \
 top/pads_config.v \
 top/RAM256.v \
 top/RAM128.v \
-caravel/caravel.v \
+caravel.v \
 caravel/housekeeping.vic.v \
 caravel/housekeeping_spi.v \
 caravel/mgmt_core.vic.v \
@@ -39,3 +40,4 @@ user_project/falcon_In_copy.v \
 falcon_stage.v \
 > caravel_fpga.v
 rm falcon_stage.v
+rm caravel.v

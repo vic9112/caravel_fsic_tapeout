@@ -74,7 +74,10 @@
 /*--------------------------------------------------------------*/
 module caravel_top (
     inout [`MPRJ_IO_PADS-1:0]  mprj_io,
-
+    #ifdef FPGA
+	  input [`MPRJ_IO_PADS-1:0] mprj__in,
+	  output [`MPRJ_IO_PADS-1:0] mprj__out,
+    #endif
     //Willy debug - e
     input clock, // CMOS core clock input, not a crystal
     input resetb, // Reset input (sense inverted)
@@ -291,7 +294,10 @@ module caravel_top (
    //===================================================//
    wire        REN;
    wire [37:0] mprj_oen;
-
+#ifdef FPGA
+   assign mprj_io_in=mprj__in;
+   assign mprj__out=mprj_io_out;
+#else 
 
     // Input Pad for MPRJ
     `define INPAD_MPRJ(n) \
@@ -309,6 +315,9 @@ module caravel_top (
             .PAD(mprj_io[n]),     \
             .REN(REN)             \
         );
+
+#endif
+
 
     PDDWDGZ iopad_CLK(
         .PAD(clock), 
@@ -363,6 +372,8 @@ module caravel_top (
         .OEN(gpio_oen), 
         .REN(REN)
     );
+    #ifdef FPGA
+    #else
     // Instance 38 MPRJ Pads
     `IOPAD_MPRJ(0)   // JTAG
     `IOPAD_MPRJ(1)   // SDO
@@ -405,7 +416,7 @@ module caravel_top (
     
     `INPAD_MPRJ(36)  // IOCLK
     `IOPAD_MPRJ(37)  // NOT USE
-
+    #endif
 
 //Willy debug - e
     
