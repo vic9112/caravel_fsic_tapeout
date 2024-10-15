@@ -5,3 +5,4 @@
 - `caravel_chip.cache.1004.v`: Modified version with Cache RISCV core
 - `caravel_chip.1004.v`: Modified version with original RISCV core
 - `caravel_chip.1005.v`: Remove GPIO configuration logics and fix some latch issues
+- `caravel_chip.1015.v`: Remove redundant `define`s
