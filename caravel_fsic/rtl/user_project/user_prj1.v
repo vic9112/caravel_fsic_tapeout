@@ -224,7 +224,7 @@ assign In_vld=(state==IN_COPY)?ss_tvalid:1'b0;
 
 In_copy In_copy (
   .clk(axi_clk), 
-  .rst(reg_rst_incpopy), 
+  .rst(state==RESET), 
   .arst_n(axi_reset_n),
   .in_data_rsc_dat(ss_tdata),
   .in_data_rsc_vld(In_vld), //I
@@ -379,7 +379,7 @@ assign Out_rdy   = (Out_state==U_OUT||Out_state==F_OUT2) ? sm_tready : 0;
 
 fiFFNTT fiFFNTT(
 .clk(axi_clk),          // I
-.rst(reg_rst),          // I
+	.rst(state==RESET),          // I
 .arst_n(axi_reset_n),   // I
 .ap_start_rsc_dat(1'b1),// I
 .ap_start_rsc_vld(state==OUT_COPY),    // I
