@@ -213,8 +213,7 @@ wire In_rdy;
 wire [9:0] Inram_adr;
 wire [63:0] Inram_d;
 wire Inram_we;
-reg reg_rst_incpopy;
-reg reg_rst_out_stage;
+
 reg [31:0]regx_data;
 reg [31:0]regy_data;
 reg [15:0]reg_mode1_in;
@@ -232,15 +231,15 @@ In_copy In_copy (
   .qin_rsc_adr(Inram_adr),
   .qin_rsc_d(Inram_d),
   .qin_rsc_we(Inram_we),
-  .qin_rsc_q(),
+  .qin_rsc_q(),//O
   .qin_rsc_en(Inram_en),
-  .qin_triosy_lz(),
+  .qin_triosy_lz(),//O
   .ap_done_rsc_dat(), 
   .ap_done_rsc_vld(In_copy_done),
   .ap_done_rsc_rdy(1'b1),
   .ap_start_rsc_dat(1'b1),
   .ap_start_rsc_vld(state==IN_COPY),
-  .ap_start_rsc_rdy(),
+  .ap_start_rsc_rdy(),//O
   .mode_rsc_dat(reg_mode1_in==2||reg_mode1_in==3)
 );
 
@@ -278,7 +277,7 @@ always@(*)begin
   endcase
 end 
 
-reg reg_rst;
+
 
 always @(posedge axi_clk or negedge axi_reset_n)  begin
   if ( !axi_reset_n ) begin
@@ -379,7 +378,7 @@ assign Out_rdy   = (Out_state==U_OUT||Out_state==F_OUT2) ? sm_tready : 0;
 
 fiFFNTT fiFFNTT(
 .clk(axi_clk),          // I
-	.rst(state==RESET),          // I
+.rst(state==RESET),     // I
 .arst_n(axi_reset_n),   // I
 .ap_start_rsc_dat(1'b1),// I
 .ap_start_rsc_vld(state==OUT_COPY),    // I
@@ -388,31 +387,31 @@ fiFFNTT fiFFNTT(
 .ap_done_rsc_vld(Out_copy_done), // O
 .ap_done_rsc_rdy(1'b1),     // I
 .mode1_rsc_dat(reg_mode1_in),  //I 16
-.mode1_triosy_lz(), 
+.mode1_triosy_lz(), //O
 .in_f_d_rsc_adr(in_ramf_adr),  // O 10
 .in_f_d_rsc_d(in_ramf_d),    // O 64
 .in_f_d_rsc_we(in_ramf_we),   // O 1 
 .in_f_d_rsc_q(in_ramf_q),    // I 64
 .in_f_d_rsc_en(in_ramf_en),   // O 1
-.in_f_d_triosy_lz(), 
+.in_f_d_triosy_lz(), //O
 .in_u_rsc_adr(in_ramu_adr), // O 10
 .in_u_rsc_d(in_ramu_d),   // O 16
 .in_u_rsc_we(in_ramu_we),  // O
 .in_u_rsc_q(in_ramu_q),   // I 16
 .in_u_rsc_en(in_ramu_en),  // O 
-.in_u_triosy_lz(),
+.in_u_triosy_lz(),//O
 .out_f_d_rsc_adr(out_ramf_adr),
 .out_f_d_rsc_d(out_ramf_d),
 .out_f_d_rsc_we(out_ramf_we),
 .out_f_d_rsc_q(out_ramf_q), 
 .out_f_d_rsc_en(out_ramf_en),
-.out_f_d_triosy_lz(),
+.out_f_d_triosy_lz(),//O
 .out_u_rsc_adr(out_ramu_adr), 
 .out_u_rsc_d(out_ramu_d),
 .out_u_rsc_we(out_ramu_we), 
 .out_u_rsc_q(out_ramu_q),
 .out_u_rsc_en(out_ramu_en),
-.out_u_triosy_lz(),
+.out_u_triosy_lz(),//O
 .out1_rsc_dat(Out_data),//O,80 bit{16'b,64'b},
 .out1_rsc_vld(Out_vld),//O;
 .out1_rsc_rdy(Out_rdy)
