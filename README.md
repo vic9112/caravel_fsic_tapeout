@@ -1,4 +1,4 @@
-# caravel_fsic_tapeout
+![SOC專題block diagram (1)](https://github.com/user-attachments/assets/b075847f-6418-489e-997d-410d0ec610c1)# caravel_fsic_tapeout
 
 <!--
 You should download the latest version(2024) of `SAED32_EDK`
@@ -50,4 +50,7 @@ Contribution 3：Post-Silicon Validation System (Caravel FSIC FPGA)
 We want to build an IC Validation System that is scalable and easy to deploy
 
 ## System Overview
-![system_view](https://github.com/user-attachments/assets/a2fad1c4-6a7b-4726-9683-853f288b0920)
+![SOC專題block diagram (1)](https://github.com/user-attachments/assets/8cd54385-f034-4435-9ce3-fb09ea7bccca)
+
+
+
