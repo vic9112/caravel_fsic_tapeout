@@ -1,4 +1,4 @@
-# caravel_fsic_tapeout
+# T18 Chip Implementation - Caravel SoC with Integrated FSIC and Falcon
 
 | File Structure | Description |
 | -------------- | ----------- |
