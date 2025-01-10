@@ -1,11 +1,11 @@
 # caravel_fsic_tapeout
 
-
-## File Structure
-`/FPGA_val`: FPGA Implementation<br>
-`/caravel_fsic`: ASIC Implementation<br>
-`/chip_rtl`: Concatenated RTL file of the whole chip<br>
-`/backup`: Backup folders of contributors<br>
+| File Structure | Description |
+| -------------- | ----------- |
+|`/FPGA_val`     | FPGA Implementation |
+|`/caravel_fsic` | ASIC Implementation |
+|`/chip_rtl`     | Concatenated RTL file of the whole chip }
+|`/backup`       | Backup folders of contributors |
 
 ## Introduction
 
