@@ -23,8 +23,8 @@ In this project, we built upon our previous work, where we developed a hardware 
 ### :star:Contribution 3：Post-Silicon Validation System (Caravel FSIC FPGA)
 -	Description: A general PCB design for IC system-level validation
 -	Application: An online FPGA system is built to facilitate IC system-level validation. 
-
-> We want to build an IC Validation System that is scalable and easy to deploy
+---
+:hammer:We want to build an IC Validation System that is scalable and easy to deploy
 
 ## System Overview
 ![SOC專題block diagram (1)](https://github.com/user-attachments/assets/8cd54385-f034-4435-9ce3-fb09ea7bccca)
