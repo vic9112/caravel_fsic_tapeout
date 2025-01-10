@@ -485,6 +485,7 @@ module VexRiscv (
   wire                IBusCachedPlugin_mmuBus_rsp_exception;
   wire                IBusCachedPlugin_mmuBus_rsp_refilling;
   wire                IBusCachedPlugin_mmuBus_rsp_bypassTranslation;
+  assign IBusCachedPlugin_mmuBus_rsp_bypassTranslation=1'b0; // youwei add
   wire                IBusCachedPlugin_mmuBus_end;
   wire                IBusCachedPlugin_mmuBus_busy;
   reg                 DBusSimplePlugin_memoryExceptionPort_valid;
@@ -608,6 +609,7 @@ module VexRiscv (
   wire       [31:0]   iBus_rsp_payload_data;
   wire                iBus_rsp_payload_error;
   wire       [31:0]   _zz_IBusCachedPlugin_rspCounter;
+  assign _zz_IBusCachedPlugin_rspCounter=0; // youwei add
   reg        [31:0]   IBusCachedPlugin_rspCounter;
   wire                IBusCachedPlugin_s0_tightlyCoupledHit;
   reg                 IBusCachedPlugin_s1_tightlyCoupledHit;
@@ -1672,7 +1674,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_jumpInterface_payload = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    //CsrPlugin_jumpInterface_payload = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    CsrPlugin_jumpInterface_payload = 0; // youwei add
     if(when_CsrPlugin_l1019) begin
       CsrPlugin_jumpInterface_payload = {CsrPlugin_xtvec_base,2'b00};
     end
@@ -1905,7 +1908,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    IBusCachedPlugin_decodeExceptionPort_payload_code = 4'bxxxx;
+    //IBusCachedPlugin_decodeExceptionPort_payload_code = 4'bxxxx;
+    IBusCachedPlugin_decodeExceptionPort_payload_code = 4'b0000;//youwei add
     if(when_IBusCachedPlugin_l244) begin
       IBusCachedPlugin_decodeExceptionPort_payload_code = 4'b1100;
     end
@@ -1983,7 +1987,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    DBusSimplePlugin_memoryExceptionPort_payload_code = 4'bxxxx;
+    //DBusSimplePlugin_memoryExceptionPort_payload_code = 4'bxxxx;
+    DBusSimplePlugin_memoryExceptionPort_payload_code=4'b0000; //youwei add 
     if(when_DBusSimplePlugin_l486) begin
       DBusSimplePlugin_memoryExceptionPort_payload_code = 4'b0101;
     end
@@ -2579,7 +2584,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_xtvec_mode = 2'bxx;
+    //CsrPlugin_xtvec_mode = 2'bxx;
+    CsrPlugin_xtvec_mode=0; // youwei add
     case(CsrPlugin_targetPrivilege)
       2'b11 : begin
         CsrPlugin_xtvec_mode = CsrPlugin_mtvec_mode;
@@ -2590,7 +2596,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_xtvec_base = 30'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    //CsrPlugin_xtvec_base = 30'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    CsrPlugin_xtvec_base=0;//youwei add 
     case(CsrPlugin_targetPrivilege)
       2'b11 : begin
         CsrPlugin_xtvec_base = CsrPlugin_mtvec_base;
@@ -2671,7 +2678,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_selfException_payload_code = 4'bxxxx;
+    //CsrPlugin_selfException_payload_code = 4'bxxxx;
+    CsrPlugin_selfException_payload_code=0;// youwei add
     if(when_CsrPlugin_l1144) begin
       case(CsrPlugin_privilege)
         2'b00 : begin
@@ -2973,7 +2981,8 @@ module VexRiscv (
   assign iBusWishbone_BTE = 2'b00;
   assign iBusWishbone_SEL = 4'b1111;
   assign iBusWishbone_WE = 1'b0;
-  assign iBusWishbone_DAT_MOSI = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+  //assign iBusWishbone_DAT_MOSI = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+  assign iBusWishbone_DAT_MOSI =0; //youwei add
   always @(*) begin
     iBusWishbone_CYC = 1'b0;
     if(when_InstructionCache_l239) begin

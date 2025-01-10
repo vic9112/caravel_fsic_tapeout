@@ -180,8 +180,8 @@ module caravel_top (
     wire [`MPRJ_IO_PADS-10:0] user_analog_io;
 
     /* Padframe control signals */
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2;
+    //wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1;
+    //wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2;
     wire mprj_io_loader_resetn;
     wire mprj_io_loader_clock;
     wire mprj_io_loader_strobe;
@@ -300,6 +300,7 @@ module caravel_top (
 #else 
 
     // Input Pad for MPRJ
+    /*
     `define INPAD_MPRJ(n) \
         PDDWDGZ iopad_MPRJ``n(  \
             .C(mprj_io_in[n]),  \
@@ -314,7 +315,7 @@ module caravel_top (
             .OEN(mprj_oen[n]),    \
             .PAD(mprj_io[n]),     \
             .REN(REN)             \
-        );
+        );*/
 
 #endif
 
@@ -335,18 +336,19 @@ module caravel_top (
     assign fio0_oen = 1'b0 | (~resetb_core);
     assign fio1_oen = 1'b1 | (~resetb_core);
     assign gpio_oen = 1'b1 | (~resetb_core);
-
+    wire  iopad_FCSB_C_o;
+    wire  iopad_FCLK_C_o;
     PDUW04DGZ iopad_FCSB(
         .PAD(flash_csb), 
         .I(flash_csb_frame_buf), 
-        .C(), 
+        .C(iopad_FCSB_C_o), 
         .OEN(fcsb_oen), 
         .REN(REN)
     );
     PDUW04DGZ iopad_FCLK(
         .PAD(flash_clk), 
         .I(flash_clk_frame_buf), 
-        .C(), 
+        .C(iopad_FCLK_C_o), 
         .OEN(fclk_oen), 
         .REN(REN)
     );
@@ -375,47 +377,285 @@ module caravel_top (
     #ifdef FPGA
     #else
     // Instance 38 MPRJ Pads
-    `IOPAD_MPRJ(0)   // JTAG
-    `IOPAD_MPRJ(1)   // SDO
-    `IOPAD_MPRJ(2)   // SDI
-    `IOPAD_MPRJ(3)   // CSB
-    `IOPAD_MPRJ(4)   // SCK
-    `IOPAD_MPRJ(5)   // ser_rx
-    `IOPAD_MPRJ(6)   // ser_tx
-    `INPAD_MPRJ(7)   // irq
+// IOPAD youwei add
+
+                PDUW04DGZ iopad_MPRJ0(
+            .I(mprj_io_out[0]),  
+            .C(mprj_io_in[0]),   
+            .OEN(mprj_oen[0]),    
+            .PAD(mprj_io[0]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ1(
+            .I(mprj_io_out[1]),  
+            .C(mprj_io_in[1]),   
+            .OEN(mprj_oen[1]),    
+            .PAD(mprj_io[1]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ2(
+            .I(mprj_io_out[2]),  
+            .C(mprj_io_in[2]),   
+            .OEN(mprj_oen[2]),    
+            .PAD(mprj_io[2]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ3(
+            .I(mprj_io_out[3]),  
+            .C(mprj_io_in[3]),   
+            .OEN(mprj_oen[3]),    
+            .PAD(mprj_io[3]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ4(
+            .I(mprj_io_out[4]),  
+            .C(mprj_io_in[4]),   
+            .OEN(mprj_oen[4]),    
+            .PAD(mprj_io[4]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ5(
+            .I(mprj_io_out[5]),  
+            .C(mprj_io_in[5]),   
+            .OEN(mprj_oen[5]),    
+            .PAD(mprj_io[5]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ6(
+            .I(mprj_io_out[6]),  
+            .C(mprj_io_in[6]),   
+            .OEN(mprj_oen[6]),    
+            .PAD(mprj_io[6]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ22(
+            .I(mprj_io_out[22]),  
+            .C(mprj_io_in[22]),   
+            .OEN(mprj_oen[22]),    
+            .PAD(mprj_io[22]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ23(
+            .I(mprj_io_out[23]),  
+            .C(mprj_io_in[23]),   
+            .OEN(mprj_oen[23]),    
+            .PAD(mprj_io[23]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ24(
+            .I(mprj_io_out[24]),  
+            .C(mprj_io_in[24]),   
+            .OEN(mprj_oen[24]),    
+            .PAD(mprj_io[24]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ25(
+            .I(mprj_io_out[25]),  
+            .C(mprj_io_in[25]),   
+            .OEN(mprj_oen[25]),    
+            .PAD(mprj_io[25]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ26(
+            .I(mprj_io_out[26]),  
+            .C(mprj_io_in[26]),   
+            .OEN(mprj_oen[26]),    
+            .PAD(mprj_io[26]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ27(
+            .I(mprj_io_out[27]),  
+            .C(mprj_io_in[27]),   
+            .OEN(mprj_oen[27]),    
+            .PAD(mprj_io[27]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ28(
+            .I(mprj_io_out[28]),  
+            .C(mprj_io_in[28]),   
+            .OEN(mprj_oen[28]),    
+            .PAD(mprj_io[28]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ29(
+            .I(mprj_io_out[29]),  
+            .C(mprj_io_in[29]),   
+            .OEN(mprj_oen[29]),    
+            .PAD(mprj_io[29]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ30(
+            .I(mprj_io_out[30]),  
+            .C(mprj_io_in[30]),   
+            .OEN(mprj_oen[30]),    
+            .PAD(mprj_io[30]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ31(
+            .I(mprj_io_out[31]),  
+            .C(mprj_io_in[31]),   
+            .OEN(mprj_oen[31]),    
+            .PAD(mprj_io[31]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ32(
+            .I(mprj_io_out[32]),  
+            .C(mprj_io_in[32]),   
+            .OEN(mprj_oen[32]),    
+            .PAD(mprj_io[32]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ33(
+            .I(mprj_io_out[33]),  
+            .C(mprj_io_in[33]),   
+            .OEN(mprj_oen[33]),    
+            .PAD(mprj_io[33]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ34(
+            .I(mprj_io_out[34]),  
+            .C(mprj_io_in[34]),   
+            .OEN(mprj_oen[34]),    
+            .PAD(mprj_io[34]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ35(
+            .I(mprj_io_out[35]),  
+            .C(mprj_io_in[35]),   
+            .OEN(mprj_oen[35]),    
+            .PAD(mprj_io[35]),     
+            .REN(REN)             
+        );
+                PDUW04DGZ iopad_MPRJ37(
+            .I(mprj_io_out[37]),  
+            .C(mprj_io_in[37]),   
+            .OEN(mprj_oen[37]),    
+            .PAD(mprj_io[37]),     
+            .REN(REN)             
+        );
+
+// INPAD youwei add
+                PDDWDGZ iopad_MPRJ7(  
+            .C(mprj_io_in[7]),  
+            .PAD(mprj_io[7]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ8(  
+            .C(mprj_io_in[8]),  
+            .PAD(mprj_io[8]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ9(  
+            .C(mprj_io_in[9]),  
+            .PAD(mprj_io[9]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ10(  
+            .C(mprj_io_in[10]),  
+            .PAD(mprj_io[10]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ11(  
+            .C(mprj_io_in[11]),  
+            .PAD(mprj_io[11]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ12(  
+            .C(mprj_io_in[12]),  
+            .PAD(mprj_io[12]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ13(  
+            .C(mprj_io_in[13]),  
+            .PAD(mprj_io[13]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ14(  
+            .C(mprj_io_in[14]),  
+            .PAD(mprj_io[14]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ15(  
+            .C(mprj_io_in[15]),  
+            .PAD(mprj_io[15]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ16(  
+            .C(mprj_io_in[16]),  
+            .PAD(mprj_io[16]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ17(  
+            .C(mprj_io_in[17]),  
+            .PAD(mprj_io[17]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ18(  
+            .C(mprj_io_in[18]),  
+            .PAD(mprj_io[18]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ19(  
+            .C(mprj_io_in[19]),  
+            .PAD(mprj_io[19]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ20(  
+            .C(mprj_io_in[20]),  
+            .PAD(mprj_io[20]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ21(  
+            .C(mprj_io_in[21]),  
+            .PAD(mprj_io[21]),   
+            .REN(REN)           
+        );
+                PDDWDGZ iopad_MPRJ36(  
+            .C(mprj_io_in[36]),  
+            .PAD(mprj_io[36]),   
+            .REN(REN)           
+        );
+    // `IOPAD_MPRJ(0)   // JTAG
+    // `IOPAD_MPRJ(1)   // SDO
+    // `IOPAD_MPRJ(2)   // SDI
+    // `IOPAD_MPRJ(3)   // CSB
+    // `IOPAD_MPRJ(4)   // SCK
+    // `IOPAD_MPRJ(5)   // ser_rx
+    // `IOPAD_MPRJ(6)   // ser_tx
+    // `INPAD_MPRJ(7)   // irq
     
-    `INPAD_MPRJ(8)   // RXD[0]
-    `INPAD_MPRJ(9)   // RXD[1]
-    `INPAD_MPRJ(10)  // RXD[2]
-    `INPAD_MPRJ(11)  // RXD[3]
-    `INPAD_MPRJ(12)  // RXD[4]
-    `INPAD_MPRJ(13)  // RXD[5]
-    `INPAD_MPRJ(14)  // RXD[6]
-    `INPAD_MPRJ(15)  // RXD[7]
-    `INPAD_MPRJ(16)  // RXD[8]
-    `INPAD_MPRJ(17)  // RXD[9]
-    `INPAD_MPRJ(18)  // RXD[10]
-    `INPAD_MPRJ(19)  // RXD[11]
-    `INPAD_MPRJ(20)  // RXD[12]
-    `INPAD_MPRJ(21)  // RXCLK
+    // `INPAD_MPRJ(8)   // RXD[0]
+    // `INPAD_MPRJ(9)   // RXD[1]
+    // `INPAD_MPRJ(10)  // RXD[2]
+    // `INPAD_MPRJ(11)  // RXD[3]
+    // `INPAD_MPRJ(12)  // RXD[4]
+    // `INPAD_MPRJ(13)  // RXD[5]
+    // `INPAD_MPRJ(14)  // RXD[6]
+    // `INPAD_MPRJ(15)  // RXD[7]
+    // `INPAD_MPRJ(16)  // RXD[8]
+    // `INPAD_MPRJ(17)  // RXD[9]
+    // `INPAD_MPRJ(18)  // RXD[10]
+    // `INPAD_MPRJ(19)  // RXD[11]
+    // `INPAD_MPRJ(20)  // RXD[12]
+    // `INPAD_MPRJ(21)  // RXCLK
     
-    `IOPAD_MPRJ(22)  // TXD[0]
-    `IOPAD_MPRJ(23)  // TXD[1]
-    `IOPAD_MPRJ(24)  // TXD[2]
-    `IOPAD_MPRJ(25)  // TXD[3]
-    `IOPAD_MPRJ(26)  // TXD[4]
-    `IOPAD_MPRJ(27)  // TXD[5]
-    `IOPAD_MPRJ(28)  // TXD[6]
-    `IOPAD_MPRJ(29)  // TXD[7]
-    `IOPAD_MPRJ(30)  // TXD[8]
-    `IOPAD_MPRJ(31)  // TXD[9]
-    `IOPAD_MPRJ(32)  // TXD[10]
-    `IOPAD_MPRJ(33)  // TXD[11]
-    `IOPAD_MPRJ(34)  // TXD[12]
-    `IOPAD_MPRJ(35)  // TXCLK
+    // `IOPAD_MPRJ(22)  // TXD[0]
+    // `IOPAD_MPRJ(23)  // TXD[1]
+    // `IOPAD_MPRJ(24)  // TXD[2]
+    // `IOPAD_MPRJ(25)  // TXD[3]
+    // `IOPAD_MPRJ(26)  // TXD[4]
+    // `IOPAD_MPRJ(27)  // TXD[5]
+    // `IOPAD_MPRJ(28)  // TXD[6]
+    // `IOPAD_MPRJ(29)  // TXD[7]
+    // `IOPAD_MPRJ(30)  // TXD[8]
+    // `IOPAD_MPRJ(31)  // TXD[9]
+    // `IOPAD_MPRJ(32)  // TXD[10]
+    // `IOPAD_MPRJ(33)  // TXD[11]
+    // `IOPAD_MPRJ(34)  // TXD[12]
+    // `IOPAD_MPRJ(35)  // TXCLK
     
-    `INPAD_MPRJ(36)  // IOCLK
-    `IOPAD_MPRJ(37)  // NOT USE
+    // `INPAD_MPRJ(36)  // IOCLK
+    // `IOPAD_MPRJ(37)  // NOT USE
     #endif
 
 //Willy debug - e
@@ -795,43 +1035,35 @@ module caravel_top (
    assign mprj_dat_i_user = (wb_mux)? io_cnfg_dat : uspj_dat;
    //======================================================//
 
+// youwei add (delete)
+    //wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1_shifted;
+    //wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2_shifted;
 
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2_shifted;
-
-    assign gpio_serial_link_1_shifted = {gpio_serial_link_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_data_1};
+    //assign gpio_serial_link_1_shifted = {gpio_serial_link_1[`MPRJ_IO_PADS_1-2:0],mprj_io_loader_data_1};
     // Note that serial_link_2 is backwards compared to serial_link_1, so it
     // shifts in the other direction.
-    assign gpio_serial_link_2_shifted = {mprj_io_loader_data_2_buf,
-      gpio_serial_link_2[`MPRJ_IO_PADS_2-1:1]};
+    //assign gpio_serial_link_2_shifted = {mprj_io_loader_data_2_buf,gpio_serial_link_2[`MPRJ_IO_PADS_2-1:1]};
 
     // Propagating clock and reset to mitigate timing and fanout issues
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_clock_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_clock_2;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_resetn_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_resetn_2;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_load_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_load_2;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_clock_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_clock_2_shifted;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_resetn_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_resetn_2_shifted;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_load_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_load_2_shifted;
+    // wire [`MPRJ_IO_PADS_1-1:0] gpio_clock_1;
+    // wire [`MPRJ_IO_PADS_2-1:0] gpio_clock_2;
+    // wire [`MPRJ_IO_PADS_1-1:0] gpio_resetn_1;
+    // wire [`MPRJ_IO_PADS_2-1:0] gpio_resetn_2;
+    // wire [`MPRJ_IO_PADS_1-1:0] gpio_load_1;
+    // wire [`MPRJ_IO_PADS_2-1:0] gpio_load_2;
+    // wire [`MPRJ_IO_PADS_1-1:0] gpio_clock_1_shifted;
+    // wire [`MPRJ_IO_PADS_2-1:0] gpio_clock_2_shifted;
+    // wire [`MPRJ_IO_PADS_1-1:0] gpio_resetn_1_shifted;
+    // wire [`MPRJ_IO_PADS_2-1:0] gpio_resetn_2_shifted;
+    // wire [`MPRJ_IO_PADS_1-1:0] gpio_load_1_shifted;
+    // wire [`MPRJ_IO_PADS_2-1:0] gpio_load_2_shifted;
 
-    assign gpio_clock_1_shifted = {gpio_clock_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_clock};
-    assign gpio_clock_2_shifted = {mprj_io_loader_clock_buf,
-     gpio_clock_2[`MPRJ_IO_PADS_2-1:1]};
-    assign gpio_resetn_1_shifted = {gpio_resetn_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_resetn};
-    assign gpio_resetn_2_shifted = {mprj_io_loader_resetn_buf,
-     gpio_resetn_2[`MPRJ_IO_PADS_2-1:1]};
-    assign gpio_load_1_shifted = {gpio_load_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_strobe};
-    assign gpio_load_2_shifted = {mprj_io_loader_strobe_buf,
-     gpio_load_2[`MPRJ_IO_PADS_2-1:1]};
+    // assign gpio_clock_1_shifted = {gpio_clock_1[`MPRJ_IO_PADS_1-2:0],mprj_io_loader_clock};
+    // assign gpio_clock_2_shifted = {mprj_io_loader_clock_buf,gpio_clock_2[`MPRJ_IO_PADS_2-1:1]};
+    // assign gpio_resetn_1_shifted = {gpio_resetn_1[`MPRJ_IO_PADS_1-2:0],mprj_io_loader_resetn};
+    // assign gpio_resetn_2_shifted = {mprj_io_loader_resetn_buf,gpio_resetn_2[`MPRJ_IO_PADS_2-1:1]};
+    // assign gpio_load_1_shifted = {gpio_load_1[`MPRJ_IO_PADS_1-2:0],mprj_io_loader_strobe};
+    // assign gpio_load_2_shifted = {mprj_io_loader_strobe_buf,gpio_load_2[`MPRJ_IO_PADS_2-1:1]};
 
     wire [2:0] spi_pll_sel;
     wire [2:0] spi_pll90_sel;

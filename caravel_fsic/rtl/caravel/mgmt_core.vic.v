@@ -6741,7 +6741,7 @@ always @(posedge sdrio_clk) begin
 	flash_clk <= mgmtsoc_litespisdrphycore_clk;
 	flash_io0_oeb <= (~mgmtsoc_litespisdrphycore_dq_oe);
 	flash_io0_do <= mgmtsoc_litespisdrphycore_dq_o;
-	mgmtsoc_litespisdrphycore_dq_i[1] <= flash_io1_di;
+	mgmtsoc_litespisdrphycore_dq_i <= {flash_io1_di,1'b0}; // youwei add 1'b0
 end
 
 always @(posedge sys_clk) begin
