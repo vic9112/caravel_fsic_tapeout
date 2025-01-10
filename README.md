@@ -4,7 +4,7 @@
 | -------------- | ----------- |
 |`/FPGA_val`     | FPGA Implementation |
 |`/caravel_fsic` | ASIC Implementation |
-|`/chip_rtl`     | Concatenated RTL file of the whole chip }
+|`/chip_rtl`     | Concatenated RTL file of the whole chip |
 |`/backup`       | Backup folders of contributors |
 ---
 ## Introduction
