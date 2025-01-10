@@ -1,44 +1,13 @@
 # caravel_fsic_tapeout
 
-::: info
+:::info
 ## File Structure
 '/FPGA_val': FPGA Implementation
 '/caravel_fsic': ASIC Implementation
 '/chip_rtl': Concatenated RTL file of the whole chip
 '/backup': Backup folders of contributors
 :::
-<!--
-You should download the latest version(2024) of `SAED32_EDK`
-and place `SAED32_EDK` and `caravel_fsic_vic` in the same directory
-```
-/Your working directory
-   - /caravel_fsic_vic
-   - /SAED32_EDK
-```
-## Makefile
-``` bash
-$ cd caravel_fsic_vic
-```
 
-1. Synthesis
-``` bash
-$ make saed32_syn
-```
-2. Pre-sim
-``` bash
-$ make saed32_sim
-```
-3. Floorplan
-``` bash
-$ make saed32_planning
-```
-or directly `cd` to the workspace of each flow:
-``` bash
-$ cd caravel_fsic_vic/flow/0_synthesis/work
-$ make all
-```
-**Be sure to extract `caravel_fsic_vic/flow/ndm_libs` and its sub-directories**
--->
 In this project, we built upon our previous work, where we developed a hardware IP to accelerate the post-quantum cryptography algorithm, Falcon, and implemented it using a hardware/software co-design approach in response to the threats posed by quantum computers. Rather than designing just an IP, we developed a complete system this time and tapeout. Our project introduces the following key contributions:
 
 Contribution 1: FSIC Validation Architecture and IP
