@@ -11,16 +11,16 @@
 
 In this project, we built upon our previous work, where we developed a hardware IP to accelerate the post-quantum cryptography algorithm, Falcon, and implemented it using a hardware/software co-design approach in response to the threats posed by quantum computers. Rather than designing just an IP, we developed a complete system this time and tapeout. Our project introduces the following key contributions:
 
-### Contribution 1: FSIC Validation Architecture and IP
+### :star:Contribution 1: FSIC Validation Architecture and IP
 -	Description: A full-stack IC (FSIC) validation architecture and IP framework.
 -	Benefit: Enables comprehensive silicon system-level validation, ensuring robust performance and reliability for integrated circuits.
 
-### Contribution 2: PQC Falcon Application Accelerator
+### :star:Contribution 2: PQC Falcon Application Accelerator
 -	Description: A powerful PQC (Post-Quantum Cryptography) Falcon IP accelerator.
 -	Validation: Successfully validated within the FSIC system.
 -	Application: Designed for seamless execution in real-world applications, enhancing security and processing speeds.
 
-### Contribution 3：Post-Silicon Validation System (Caravel FSIC FPGA)
+### :star:Contribution 3：Post-Silicon Validation System (Caravel FSIC FPGA)
 -	Description: A general PCB design for IC system-level validation
 -	Application: An online FPGA system is built to facilitate IC system-level validation. 
 
