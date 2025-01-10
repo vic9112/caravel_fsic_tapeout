@@ -1,6 +1,6 @@
 //===========================================================
 // Modified by Vic Chen
-// Oct 5, 2024
+// Oct 15, 2024
 //===========================================================
 
 //`ifndef __GLOBAL_DEFINE_H
@@ -242,10 +242,44 @@ module pads_config (
             r_OEN[36]    <=   {{1'b1}};  // IOCLK
             r_OEN[37]    <=   {{1'b1}};  // mprj[37]
         end else begin
-            integer i;
-            for (i = 0; i < 38; i = i + 1) begin
-                if (cnfg_en[i]) r_OEN[i] <= wbs_dat_i[0];
-            end
+                if (cnfg_en[0]) r_OEN[0] <= wbs_dat_i[0];
+                if (cnfg_en[1]) r_OEN[1] <= wbs_dat_i[0];
+                if (cnfg_en[2]) r_OEN[2] <= wbs_dat_i[0];
+                if (cnfg_en[3]) r_OEN[3] <= wbs_dat_i[0];
+                if (cnfg_en[4]) r_OEN[4] <= wbs_dat_i[0];
+                if (cnfg_en[5]) r_OEN[5] <= wbs_dat_i[0];
+                if (cnfg_en[6]) r_OEN[6] <= wbs_dat_i[0];
+                if (cnfg_en[7]) r_OEN[7] <= wbs_dat_i[0];
+                if (cnfg_en[8]) r_OEN[8] <= wbs_dat_i[0];
+                if (cnfg_en[9]) r_OEN[9] <= wbs_dat_i[0];
+                if (cnfg_en[10]) r_OEN[10] <= wbs_dat_i[0];
+                if (cnfg_en[11]) r_OEN[11] <= wbs_dat_i[0];
+                if (cnfg_en[12]) r_OEN[12] <= wbs_dat_i[0];
+                if (cnfg_en[13]) r_OEN[13] <= wbs_dat_i[0];
+                if (cnfg_en[14]) r_OEN[14] <= wbs_dat_i[0];
+                if (cnfg_en[15]) r_OEN[15] <= wbs_dat_i[0];
+                if (cnfg_en[16]) r_OEN[16] <= wbs_dat_i[0];
+                if (cnfg_en[17]) r_OEN[17] <= wbs_dat_i[0];
+                if (cnfg_en[18]) r_OEN[18] <= wbs_dat_i[0];
+                if (cnfg_en[19]) r_OEN[19] <= wbs_dat_i[0];
+                if (cnfg_en[20]) r_OEN[20] <= wbs_dat_i[0];
+                if (cnfg_en[21]) r_OEN[21] <= wbs_dat_i[0];
+                if (cnfg_en[22]) r_OEN[22] <= wbs_dat_i[0];
+                if (cnfg_en[23]) r_OEN[23] <= wbs_dat_i[0];
+                if (cnfg_en[24]) r_OEN[24] <= wbs_dat_i[0];
+                if (cnfg_en[25]) r_OEN[25] <= wbs_dat_i[0];
+                if (cnfg_en[26]) r_OEN[26] <= wbs_dat_i[0];
+                if (cnfg_en[27]) r_OEN[27] <= wbs_dat_i[0];
+                if (cnfg_en[28]) r_OEN[28] <= wbs_dat_i[0];
+                if (cnfg_en[29]) r_OEN[29] <= wbs_dat_i[0];
+                if (cnfg_en[30]) r_OEN[30] <= wbs_dat_i[0];
+                if (cnfg_en[31]) r_OEN[31] <= wbs_dat_i[0];
+                if (cnfg_en[32]) r_OEN[32] <= wbs_dat_i[0];
+                if (cnfg_en[33]) r_OEN[33] <= wbs_dat_i[0];
+                if (cnfg_en[34]) r_OEN[34] <= wbs_dat_i[0];
+                if (cnfg_en[35]) r_OEN[35] <= wbs_dat_i[0];
+                if (cnfg_en[36]) r_OEN[36] <= wbs_dat_i[0];
+                if (cnfg_en[37]) r_OEN[37] <= wbs_dat_i[0];      
         end
     end
 
@@ -391,164 +425,23 @@ module RAM128 #(parameter USE_LATCH = 1,
 
   
 endmodule
-//===========================================================
-// Modified by Vic Chen
-// Oct 5, 2024
-//===========================================================
-
-/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-/* This header is separate from features.h so that the compiler can
-   include it implicitly at the start of every compilation.  It must
-   not itself include <features.h> or any other header that includes
-   <features.h> because the implicit include comes before any feature
-   test macros that may be defined in a source file before it first
-   explicitly includes a system header.  GCC knows the name of this
-   header in order to preinclude it.  */
-
-/* glibc's intent is to support the IEC 559 math functionality, real
-   and complex.  If the GCC (4.9 and later) predefined macros
-   specifying compiler intent are available, use them to determine
-   whether the overall intent is to support these features; otherwise,
-   presume an older compiler has intent to support these features and
-   define these macros by default.  */
-/* wchar_t uses Unicode 10.0.0.  Version 10.0 of the Unicode Standard is
-   synchronized with ISO/IEC 10646:2017, fifth edition, plus
-   the following additions from Amendment 1 to the fifth edition:
-   - 56 emoji characters
-   - 285 hentaigana
-   - 3 additional Zanabazar Square characters */
- 
-
-// SPDX-FileCopyrightText: 2020 Efabless Corporation
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
-/*--------------------------------------------------------------*/
-/* caravel, a project harness for the Google/SkyWater sky130	*/
-/* fabrication process and open source PDK			*/
-/*                                                          	*/
-/* Copyright 2020 efabless, Inc.                            	*/
-/* Written by Tim Edwards, December 2019                    	*/
-/* and Mohamed Shalan, August 2020			    	*/
-/* This file is open source hardware released under the     	*/
-/* Apache 2.0 license.  See file LICENSE.                   	*/
-/*								*/
-/* Updated 10/15/2021:  Revised using the housekeeping module	*/
-/* from housekeeping.v (refactoring a number of functions from	*/
-/* the management SoC).						*/
-/*                                                          	*/
-/*--------------------------------------------------------------*/
 module caravel_top (
-    inout [`MPRJ_IO_PADS-1:0]  mprj_io,
-
-    //Willy debug - e
-    input clock, // CMOS core clock input, not a crystal
-    input resetb, // Reset input (sense inverted)
-
-    // Note that only two flash data pins are dedicated to the
-    // management SoC wrapper.  The management SoC exports the
-    // quad SPI mode status to make use of the top two mprj_io
-    // pins for io2 and io3.
-
+    inout [`MPRJ_IO_PADS-1:0] mprj_io,
+    input clock,
+    input resetb,
     output flash_csb,
     output flash_clk,
     output flash_io0,
-    input  flash_io1, //Willy debug
-
-    inout gpio // Used for external LDO control
+    input flash_io1,
+    inout gpio
 );
-
-
-    //------------------------------------------------------------
-    // This value is uniquely defined for each user project.
-    //------------------------------------------------------------
     parameter USER_PROJECT_ID = 32'h00000000;
-
-    /*
-     *--------------------------------------------------------------------
-     *
-     * These pins are overlaid on mprj_io space.  They have the function
-     * below when the management processor is in reset, or in the default
-     * configuration.  They are assigned to uses in the user space by the
-     * configuration program running off of the SPI flash.  Note that even
-     * when the user has taken control of these pins, they can be restored
-     * to the original use by setting the resetb pin low.  The SPI pins and
-     * UART pins can be connected directly to an FTDI chip as long as the
-     * FTDI chip sets these lines to high impedence (input function) at
-     * all times except when holding the chip in reset.
-     *
-     * JTAG       = mprj_io[0]		(inout)
-     * SDO 	  = mprj_io[1]		(output)
-     * SDI 	  = mprj_io[2]		(input)
-     * CSB 	  = mprj_io[3]		(input)
-     * SCK	  = mprj_io[4]		(input)
-     * ser_rx     = mprj_io[5]		(input)
-     * ser_tx     = mprj_io[6]		(output)
-     * irq 	  = mprj_io[7]		(input)
-     *
-     * spi_sck    = mprj_io[32]		(output)
-     * spi_csb    = mprj_io[33]		(output)
-     * spi_sdi    = mprj_io[34]		(input)
-     * spi_sdo    = mprj_io[35]		(output)
-     * flash_io2  = mprj_io[36]		(inout) 
-     * flash_io3  = mprj_io[37]		(inout) 
-     *
-     * These pins are reserved for any project that wants to incorporate
-     * its own processor and flash controller.  While a user project can
-     * technically use any available I/O pins for the purpose, these
-     * four pins connect to a pass-through mode from the SPI slave (pins
-     * 1-4 above) so that any SPI flash connected to these specific pins
-     * can be accessed through the SPI slave even when the processor is in
-     * reset.
-     *
-     * user_flash_csb = mprj_io[8]
-     * user_flash_sck = mprj_io[9]
-     * user_flash_io0 = mprj_io[10]
-     * user_flash_io1 = mprj_io[11]
-     *
-     *--------------------------------------------------------------------
-     */
-    //Willy debug - s
-    //wire [`MPRJ_IO_PADS-1:0] mprj_io;
-    //Willy debug - e
-
-
-    // One-bit GPIO dedicated to management SoC (outside of user control)
     wire gpio_out_core;
     wire gpio_in_core;
     wire gpio_mode0_core;
     wire gpio_mode1_core;
     wire gpio_outenb_core;
     wire gpio_inenb_core;
-
-    // User Project Control (pad-facing)
     wire [`MPRJ_IO_PADS-1:0] mprj_io_inp_dis;
     wire [`MPRJ_IO_PADS-1:0] mprj_io_oeb;
     wire [`MPRJ_IO_PADS-1:0] mprj_io_ib_mode_sel;
@@ -562,63 +455,28 @@ module caravel_top (
     wire [`MPRJ_IO_PADS-1:0] mprj_io_in;
     wire [`MPRJ_IO_PADS-1:0] mprj_io_out;
     wire [`MPRJ_IO_PADS-1:0] mprj_io_one;
-
-    // User Project Control (user-facing)
     wire [`MPRJ_IO_PADS-1:0] user_io_oeb;
     wire [`MPRJ_IO_PADS-1:0] user_io_in;
     wire [`MPRJ_IO_PADS-1:0] user_io_out;
     wire [`MPRJ_IO_PADS-10:0] user_analog_io;
-
-    /* Padframe control signals */
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2;
     wire mprj_io_loader_resetn;
     wire mprj_io_loader_clock;
     wire mprj_io_loader_strobe;
-    wire mprj_io_loader_data_1; /* user1 side serial loader */
-    wire mprj_io_loader_data_2; /* user2 side serial loader */
-
-    // User Project Control management I/O
-    // There are two types of GPIO connections:
-    // (1) Full Bidirectional: Management connects to in, out, and oeb
-    //     Uses:  JTAG and SDO
-    // (2) Selectable bidirectional:  Management connects to in and out,
-    //	   which are tied together.  oeb is grounded (oeb from the
-    //	   configuration is used)
-
-    // SDI 	 = mprj_io[2]		(input)
-    // CSB 	 = mprj_io[3]		(input)
-    // SCK	 = mprj_io[4]		(input)
-    // ser_rx    = mprj_io[5]		(input)
-    // ser_tx    = mprj_io[6]		(output)
-    // irq 	 = mprj_io[7]		(input)
-
-    wire [`MPRJ_IO_PADS-1:0] mgmt_io_in; /* two- and three-pin data in	*/
-    wire [`MPRJ_IO_PADS-1:0] mgmt_io_out; /* two- and three-pin data out	*/
-    wire [`MPRJ_IO_PADS-1:0] mgmt_io_oeb; /* output enable, used only by	*/
-      /* the three-pin interfaces	*/
-    wire [`MPRJ_PWR_PADS-1:0] pwr_ctrl_nc; /* no-connects */
-
-    /* Buffers are placed between housekeeping and gpio_control_block		*/
-    /* instances to mitigate timing issues on very long (> 1.5mm) wires.	*/
-    wire [`MPRJ_IO_PADS-1:0] mgmt_io_in_hk; /* mgmt_io_in at housekeeping	*/
-    wire [`MPRJ_IO_PADS-1:0] mgmt_io_out_hk; /* mgmt_io_out at housekeeping	*/
-    wire [`MPRJ_IO_PADS-1:0] mgmt_io_oeb_hk; /* mgmt_io_oeb at housekeeping	*/
-
+    wire mprj_io_loader_data_1;
+    wire mprj_io_loader_data_2;
+    wire [`MPRJ_IO_PADS-1:0] mgmt_io_in;
+    wire [`MPRJ_IO_PADS-1:0] mgmt_io_out;
+    wire [`MPRJ_IO_PADS-1:0] mgmt_io_oeb;
+    wire [`MPRJ_PWR_PADS-1:0] pwr_ctrl_nc;
+    wire [`MPRJ_IO_PADS-1:0] mgmt_io_in_hk;
+    wire [`MPRJ_IO_PADS-1:0] mgmt_io_out_hk;
+    wire [`MPRJ_IO_PADS-1:0] mgmt_io_oeb_hk;
     wire clock_core;
-
-    // Power-on-reset signal.  The reset pad generates the sense-inverted
-    // reset at 3.3V.  The 1.8V signal and the inverted 1.8V signal are
-    // derived.
-
     wire porb_h;
     wire porb_l;
     wire por_l;
-
     wire rstb_h;
     wire rstb_l;
-
-    // Flash SPI communication (management SoC to housekeeping)
     wire flash_clk_core, flash_csb_core;
     wire flash_clk_oeb_core, flash_csb_oeb_core;
     wire flash_io0_oeb_core, flash_io1_oeb_core;
@@ -629,8 +487,6 @@ module caravel_top (
     wire flash_io2_do_core, flash_io3_do_core;
     wire flash_io0_di_core, flash_io1_di_core;
     wire flash_io2_di_core, flash_io3_di_core;
-
-    // Flash SPI communication (
     wire flash_clk_frame;
     wire flash_csb_frame;
     wire flash_clk_oeb, flash_csb_oeb;
@@ -639,8 +495,6 @@ module caravel_top (
     wire flash_io0_ieb, flash_io1_ieb;
     wire flash_io0_do, flash_io1_do;
     wire flash_io0_di, flash_io1_di;
-
- // Flash buffered signals
     wire flash_clk_frame_buf;
     wire flash_csb_frame_buf;
     wire flash_clk_ieb_buf, flash_csb_ieb_buf;
@@ -648,13 +502,9 @@ module caravel_top (
     wire flash_io0_ieb_buf, flash_io1_ieb_buf;
     wire flash_io0_do_buf, flash_io1_do_buf;
     wire flash_io0_di_buf, flash_io1_di_buf;
-
-   // Clock and reset buffered signals
    wire caravel_clk_buf;
    wire caravel_rstn_buf;
    wire clock_core_buf;
-
- // SoC pass through buffered signals
  wire mprj_io_loader_clock_buf;
  wire mprj_io_loader_strobe_buf;
  wire mprj_io_loader_resetn_buf;
@@ -662,49 +512,13 @@ module caravel_top (
  wire rstb_l_buf;
  wire por_l_buf;
  wire porb_h_buf;
-
-
-    // SoC core
     wire caravel_clk;
     wire caravel_clk2;
     wire caravel_rstn;
-    
-//Willy debug - s
-//assign mprj_o = mprj_io_out;
-//assign mprj_en = mprj_io_oeb;
-//assign mprj_io_in = mprj_i;
-
-   //================ Start of Padframe ================//
-   //================= IO Configure ====================//
-   // Input:  OEN = 1, REN = 0 during reset operation
-   //         OEN = 1, REN = 1 during normal operation
-   //---------------------------------------------------//
-   // Output: OEN = 1, REN = 1 during reset operation
-   //         OEN = 0, REN = 1 during normal operation
-   //===================================================//
-   wire        REN;
+   wire REN;
    wire [37:0] mprj_oen;
-
-
-    // Input Pad for MPRJ
-    `define INPAD_MPRJ(n) \
-        PDDWDGZ iopad_MPRJ``n(  \
-            .C(mprj_io_in[n]),  \
-            .PAD(mprj_io[n]),   \
-            .REN(REN)           \
-        );
-
-    `define IOPAD_MPRJ(n)         \
-        PDUW04DGZ iopad_MPRJ``n(  \
-            .I(mprj_io_out[n]),   \
-            .C(mprj_io_in[n]),    \
-            .OEN(mprj_oen[n]),    \
-            .PAD(mprj_io[n]),     \
-            .REN(REN)             \
-        );
-
     PDDWDGZ iopad_CLK(
-        .PAD(clock), 
+        .PAD(clock),
         .C(clock_core),
         .REN(REN)
     );
@@ -712,100 +526,283 @@ module caravel_top (
         .C(resetb_core),
         .PAD(resetb)
     );
-
     wire fcsb_oen, fclk_oen, fio0_oen, fio1_oen;
     assign fclk_oen = 1'b0 | (~resetb_core);
     assign fcsb_oen = 1'b0 | (~resetb_core);
     assign fio0_oen = 1'b0 | (~resetb_core);
     assign fio1_oen = 1'b1 | (~resetb_core);
     assign gpio_oen = 1'b1 | (~resetb_core);
-
+    wire iopad_FCSB_C_o;
+    wire iopad_FCLK_C_o;
     PDUW04DGZ iopad_FCSB(
-        .PAD(flash_csb), 
-        .I(flash_csb_frame_buf), 
-        .C(), 
-        .OEN(fcsb_oen), 
+        .PAD(flash_csb),
+        .I(flash_csb_frame_buf),
+        .C(iopad_FCSB_C_o),
+        .OEN(fcsb_oen),
         .REN(REN)
     );
     PDUW04DGZ iopad_FCLK(
-        .PAD(flash_clk), 
-        .I(flash_clk_frame_buf), 
-        .C(), 
-        .OEN(fclk_oen), 
+        .PAD(flash_clk),
+        .I(flash_clk_frame_buf),
+        .C(iopad_FCLK_C_o),
+        .OEN(fclk_oen),
         .REN(REN)
     );
     PDUW04DGZ iopad_FIO0(
-        .PAD(flash_io0), 
-        .I(flash_io0_do_buf), 
-    	  .C(flash_io0_di), 
-        .OEN(fio0_oen), 
+        .PAD(flash_io0),
+        .I(flash_io0_do_buf),
+       .C(flash_io0_di),
+        .OEN(fio0_oen),
         .REN(REN)
     );
     PDUW04DGZ iopad_FIO1(
-        .PAD(flash_io1), 
-        .I(flash_io1_do_buf), 
-    	  .C(flash_io1_di), 
-        .OEN(fio1_oen), 
+        .PAD(flash_io1),
+        .I(flash_io1_do_buf),
+       .C(flash_io1_di),
+        .OEN(fio1_oen),
         .REN(REN)
     );
-    // Management GPIO pad
     PDUW04DGZ iopad_GPIO(
-        .PAD(gpio), 
-        .I(gpio_out_core), 
-        .C(gpio_in_core), 
-        .OEN(gpio_oen), 
+        .PAD(gpio),
+        .I(gpio_out_core),
+        .C(gpio_in_core),
+        .OEN(gpio_oen),
         .REN(REN)
     );
-    // Instance 38 MPRJ Pads
-    `IOPAD_MPRJ(0)   // JTAG
-    `IOPAD_MPRJ(1)   // SDO
-    `IOPAD_MPRJ(2)   // SDI
-    `IOPAD_MPRJ(3)   // CSB
-    `IOPAD_MPRJ(4)   // SCK
-    `IOPAD_MPRJ(5)   // ser_rx
-    `IOPAD_MPRJ(6)   // ser_tx
-    `INPAD_MPRJ(7)   // irq
-    
-    `INPAD_MPRJ(8)   // RXD[0]
-    `INPAD_MPRJ(9)   // RXD[1]
-    `INPAD_MPRJ(10)  // RXD[2]
-    `INPAD_MPRJ(11)  // RXD[3]
-    `INPAD_MPRJ(12)  // RXD[4]
-    `INPAD_MPRJ(13)  // RXD[5]
-    `INPAD_MPRJ(14)  // RXD[6]
-    `INPAD_MPRJ(15)  // RXD[7]
-    `INPAD_MPRJ(16)  // RXD[8]
-    `INPAD_MPRJ(17)  // RXD[9]
-    `INPAD_MPRJ(18)  // RXD[10]
-    `INPAD_MPRJ(19)  // RXD[11]
-    `INPAD_MPRJ(20)  // RXD[12]
-    `INPAD_MPRJ(21)  // RXCLK
-    
-    `IOPAD_MPRJ(22)  // TXD[0]
-    `IOPAD_MPRJ(23)  // TXD[1]
-    `IOPAD_MPRJ(24)  // TXD[2]
-    `IOPAD_MPRJ(25)  // TXD[3]
-    `IOPAD_MPRJ(26)  // TXD[4]
-    `IOPAD_MPRJ(27)  // TXD[5]
-    `IOPAD_MPRJ(28)  // TXD[6]
-    `IOPAD_MPRJ(29)  // TXD[7]
-    `IOPAD_MPRJ(30)  // TXD[8]
-    `IOPAD_MPRJ(31)  // TXD[9]
-    `IOPAD_MPRJ(32)  // TXD[10]
-    `IOPAD_MPRJ(33)  // TXD[11]
-    `IOPAD_MPRJ(34)  // TXD[12]
-    `IOPAD_MPRJ(35)  // TXCLK
-    
-    `INPAD_MPRJ(36)  // IOCLK
-    `IOPAD_MPRJ(37)  // NOT USE
-
-
-//Willy debug - e
-    
-    
- // FPGA - Remove module buff_flash_clkrst - bypass the buffer
- //  .A({in_n, in_s}), 
- //	.X({out_s, out_n})); 
+                PDUW04DGZ iopad_MPRJ0(
+            .I(mprj_io_out[0]),
+            .C(mprj_io_in[0]),
+            .OEN(mprj_oen[0]),
+            .PAD(mprj_io[0]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ1(
+            .I(mprj_io_out[1]),
+            .C(mprj_io_in[1]),
+            .OEN(mprj_oen[1]),
+            .PAD(mprj_io[1]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ2(
+            .I(mprj_io_out[2]),
+            .C(mprj_io_in[2]),
+            .OEN(mprj_oen[2]),
+            .PAD(mprj_io[2]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ3(
+            .I(mprj_io_out[3]),
+            .C(mprj_io_in[3]),
+            .OEN(mprj_oen[3]),
+            .PAD(mprj_io[3]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ4(
+            .I(mprj_io_out[4]),
+            .C(mprj_io_in[4]),
+            .OEN(mprj_oen[4]),
+            .PAD(mprj_io[4]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ5(
+            .I(mprj_io_out[5]),
+            .C(mprj_io_in[5]),
+            .OEN(mprj_oen[5]),
+            .PAD(mprj_io[5]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ6(
+            .I(mprj_io_out[6]),
+            .C(mprj_io_in[6]),
+            .OEN(mprj_oen[6]),
+            .PAD(mprj_io[6]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ22(
+            .I(mprj_io_out[22]),
+            .C(mprj_io_in[22]),
+            .OEN(mprj_oen[22]),
+            .PAD(mprj_io[22]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ23(
+            .I(mprj_io_out[23]),
+            .C(mprj_io_in[23]),
+            .OEN(mprj_oen[23]),
+            .PAD(mprj_io[23]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ24(
+            .I(mprj_io_out[24]),
+            .C(mprj_io_in[24]),
+            .OEN(mprj_oen[24]),
+            .PAD(mprj_io[24]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ25(
+            .I(mprj_io_out[25]),
+            .C(mprj_io_in[25]),
+            .OEN(mprj_oen[25]),
+            .PAD(mprj_io[25]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ26(
+            .I(mprj_io_out[26]),
+            .C(mprj_io_in[26]),
+            .OEN(mprj_oen[26]),
+            .PAD(mprj_io[26]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ27(
+            .I(mprj_io_out[27]),
+            .C(mprj_io_in[27]),
+            .OEN(mprj_oen[27]),
+            .PAD(mprj_io[27]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ28(
+            .I(mprj_io_out[28]),
+            .C(mprj_io_in[28]),
+            .OEN(mprj_oen[28]),
+            .PAD(mprj_io[28]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ29(
+            .I(mprj_io_out[29]),
+            .C(mprj_io_in[29]),
+            .OEN(mprj_oen[29]),
+            .PAD(mprj_io[29]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ30(
+            .I(mprj_io_out[30]),
+            .C(mprj_io_in[30]),
+            .OEN(mprj_oen[30]),
+            .PAD(mprj_io[30]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ31(
+            .I(mprj_io_out[31]),
+            .C(mprj_io_in[31]),
+            .OEN(mprj_oen[31]),
+            .PAD(mprj_io[31]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ32(
+            .I(mprj_io_out[32]),
+            .C(mprj_io_in[32]),
+            .OEN(mprj_oen[32]),
+            .PAD(mprj_io[32]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ33(
+            .I(mprj_io_out[33]),
+            .C(mprj_io_in[33]),
+            .OEN(mprj_oen[33]),
+            .PAD(mprj_io[33]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ34(
+            .I(mprj_io_out[34]),
+            .C(mprj_io_in[34]),
+            .OEN(mprj_oen[34]),
+            .PAD(mprj_io[34]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ35(
+            .I(mprj_io_out[35]),
+            .C(mprj_io_in[35]),
+            .OEN(mprj_oen[35]),
+            .PAD(mprj_io[35]),
+            .REN(REN)
+        );
+                PDUW04DGZ iopad_MPRJ37(
+            .I(mprj_io_out[37]),
+            .C(mprj_io_in[37]),
+            .OEN(mprj_oen[37]),
+            .PAD(mprj_io[37]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ7(
+            .C(mprj_io_in[7]),
+            .PAD(mprj_io[7]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ8(
+            .C(mprj_io_in[8]),
+            .PAD(mprj_io[8]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ9(
+            .C(mprj_io_in[9]),
+            .PAD(mprj_io[9]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ10(
+            .C(mprj_io_in[10]),
+            .PAD(mprj_io[10]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ11(
+            .C(mprj_io_in[11]),
+            .PAD(mprj_io[11]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ12(
+            .C(mprj_io_in[12]),
+            .PAD(mprj_io[12]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ13(
+            .C(mprj_io_in[13]),
+            .PAD(mprj_io[13]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ14(
+            .C(mprj_io_in[14]),
+            .PAD(mprj_io[14]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ15(
+            .C(mprj_io_in[15]),
+            .PAD(mprj_io[15]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ16(
+            .C(mprj_io_in[16]),
+            .PAD(mprj_io[16]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ17(
+            .C(mprj_io_in[17]),
+            .PAD(mprj_io[17]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ18(
+            .C(mprj_io_in[18]),
+            .PAD(mprj_io[18]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ19(
+            .C(mprj_io_in[19]),
+            .PAD(mprj_io[19]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ20(
+            .C(mprj_io_in[20]),
+            .PAD(mprj_io[20]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ21(
+            .C(mprj_io_in[21]),
+            .PAD(mprj_io[21]),
+            .REN(REN)
+        );
+                PDDWDGZ iopad_MPRJ36(
+            .C(mprj_io_in[36]),
+            .PAD(mprj_io[36]),
+            .REN(REN)
+        );
  assign {caravel_clk_buf,
   caravel_rstn_buf,
   flash_clk_frame_buf,
@@ -840,92 +837,23 @@ module caravel_top (
   clock_core,
   flash_io1_di,
   flash_io0_di };
-// end of module buff_flash_clkrst 
-
-
-
-
-  /* NOTE: The first 7 GPIO are unbuffered, and all
-		 * OEB lines except the last three are unbuffered
-		 * (most of these end up being no-connects from
-		 * housekeeping).
-		 */
   assign mgmt_io_in_hk[6:0] = mgmt_io_in[6:0];
   assign mgmt_io_out[6:0] = mgmt_io_out_hk[6:0];
   assign mgmt_io_oeb[34:0] = mgmt_io_oeb_hk[34:0];
-// FPGA Remove module gpio_signal_buffering
   assign mgmt_io_in_hk[37:7] = mgmt_io_in[37:7];
          assign mgmt_io_out[37:7] = mgmt_io_out_hk[37:7];
   assign mgmt_io_oeb[37:35] = mgmt_io_oeb_hk[37:35];
-
-
-/*
- chip_io padframe(
-// FPGA: Remove vdd, vss, ports
- // Core Side Pins
- .gpio(gpio),
- .mprj_io(mprj_io),
- .clock(clock),
- .resetb(resetb),
- .flash_csb(flash_csb),
- .flash_clk(flash_clk),
- .flash_io0(flash_io0),
- .flash_io1(flash_io1),
- // SoC Core Interface
- .porb_h(porb_h),
- .por(por_l_buf),
- .resetb_core_h(rstb_h),
- .clock_core(clock_core),
- .gpio_out_core(gpio_out_core),
- .gpio_in_core(gpio_in_core),
- .gpio_mode0_core(gpio_mode0_core),
- .gpio_mode1_core(gpio_mode1_core),
- .gpio_outenb_core(gpio_outenb_core),
- .gpio_inenb_core(gpio_inenb_core),
- .flash_csb_core(flash_csb_frame_buf),
- .flash_clk_core(flash_clk_frame_buf),
- .flash_csb_oeb_core(flash_csb_oeb_buf),
- .flash_clk_oeb_core(flash_clk_oeb_buf),
- .flash_io0_oeb_core(flash_io0_oeb_buf),
- .flash_io1_oeb_core(flash_io1_oeb_buf),
- .flash_io0_ieb_core(flash_io0_ieb_buf),
- .flash_io1_ieb_core(flash_io1_ieb_buf),
- .flash_io0_do_core(flash_io0_do_buf),
- .flash_io1_do_core(flash_io1_do_buf),
- .flash_io0_di_core(flash_io0_di),
- .flash_io1_di_core(flash_io1_di),
- .mprj_io_one(mprj_io_one),
-//Willy debug .mprj_io_in(mprj_io_in),
- .mprj_io_out(mprj_io_out),
- .mprj_io_oeb(mprj_io_oeb),
- .mprj_io_inp_dis(mprj_io_inp_dis),
- .mprj_io_ib_mode_sel(mprj_io_ib_mode_sel),
- .mprj_io_vtrip_sel(mprj_io_vtrip_sel),
- .mprj_io_slow_sel(mprj_io_slow_sel),
- .mprj_io_holdover(mprj_io_holdover),
- .mprj_io_analog_en(mprj_io_analog_en),
- .mprj_io_analog_sel(mprj_io_analog_sel),
- .mprj_io_analog_pol(mprj_io_analog_pol),
- .mprj_io_dm(mprj_io_dm),
- .mprj_analog_io(user_analog_io)
-    );
-*/
-
-    // Logic analyzer signals
-    wire [127:0] la_data_in_user; // From CPU to MPRJ
-    wire [127:0] la_data_in_mprj; // From MPRJ to CPU
-    wire [127:0] la_data_out_mprj; // From CPU to MPRJ
-    wire [127:0] la_data_out_user; // From MPRJ to CPU
-    wire [127:0] la_oenb_user; // From CPU to MPRJ
-    wire [127:0] la_oenb_mprj; // From CPU to MPRJ
-    wire [127:0] la_iena_mprj; // From CPU only
-
-    wire [2:0] user_irq; // From MRPJ to CPU
+    wire [127:0] la_data_in_user;
+    wire [127:0] la_data_in_mprj;
+    wire [127:0] la_data_out_mprj;
+    wire [127:0] la_data_out_user;
+    wire [127:0] la_oenb_user;
+    wire [127:0] la_oenb_mprj;
+    wire [127:0] la_iena_mprj;
+    wire [2:0] user_irq;
     wire [2:0] user_irq_core;
     wire [2:0] user_irq_ena;
-    wire [2:0] irq_spi; // From SPI and external pins
-
-    // Exported Wishbone Bus (processor facing)
+    wire [2:0] irq_spi;
     wire mprj_iena_wb;
     wire mprj_cyc_o_core;
     wire mprj_stb_o_core;
@@ -935,13 +863,10 @@ module caravel_top (
     wire [31:0] mprj_dat_o_core;
     wire mprj_ack_i_core;
     wire [31:0] mprj_dat_i_core;
-
     wire [31:0] hk_dat_i;
     wire hk_ack_i;
     wire hk_stb_o;
     wire hk_cyc_o;
-
-    // Exported Wishbone Bus (user area facing)
     wire mprj_cyc_o_user;
     wire mprj_stb_o_user;
     wire mprj_we_o_user;
@@ -950,146 +875,90 @@ module caravel_top (
     wire [31:0] mprj_dat_o_user;
     wire [31:0] mprj_dat_i_user;
     wire mprj_ack_i_user;
-
-    // Mask revision
     wire [31:0] mask_rev;
-
     wire mprj_clock;
     wire mprj_clock2;
     wire mprj_reset;
-
-    // Power monitoring 
-
-
-    // Management processor (wrapper).  Any management core
-    // implementation must match this pinout.
-
-    // Pass thru clock and reset
     wire clk_passthru;
     wire resetn_passthru;
-
- // NC passthru signal porb_h 
- //wire porb_h_in_nc;
- //wire porb_h_out_nc;
-
     mgmt_core_wrapper soc (
-
-	    // SoC pass through buffered signals
-	    .serial_clock_in(mprj_io_loader_clock),
-	    .serial_clock_out(mprj_io_loader_clock_buf),
-	    .serial_load_in(mprj_io_loader_strobe),
-	    .serial_load_out(mprj_io_loader_strobe_buf),
-	    .serial_resetn_in(mprj_io_loader_resetn),
-	    .serial_resetn_out(mprj_io_loader_resetn_buf),
-	    .serial_data_2_in(mprj_io_loader_data_2),
-	    .serial_data_2_out(mprj_io_loader_data_2_buf),
-	    .rstb_l_in(rstb_l),
-	    .rstb_l_out(rstb_l_buf),
-
-		 // [Vic]: POR is useless here
-	    //.porb_h_in(porb_h_in_nc),
-	    //.porb_h_out(porb_h_out_nc),
-	    //.por_l_in(por_l),
-	    //.por_l_out(por_l_buf),
-    
-	    // Clock and reset
-	    .core_clk(caravel_clk_buf),
-	    .core_rstn(caravel_rstn_buf),
-    
-        // Pass thru Clock and reset
-	    .clk_in(caravel_clk_buf),
-	    .resetn_in(caravel_rstn_buf),
-	    .clk_out(clk_passthru),
-	    .resetn_out(resetn_passthru),
-    
-	    // GPIO (1 pin)
-	    .gpio_out_pad(gpio_out_core),
-	    .gpio_in_pad(gpio_in_core),
-	    .gpio_mode0_pad(gpio_mode0_core),
-	    .gpio_mode1_pad(gpio_mode1_core),
-	    .gpio_outenb_pad(gpio_outenb_core),
-	    .gpio_inenb_pad(gpio_inenb_core),
-    
-	    // Primary SPI flash controller
-	    .flash_csb(flash_csb_core),
-	    .flash_clk(flash_clk_core),
-	    .flash_io0_oeb(flash_io0_oeb_core),
-	    .flash_io0_di(flash_io0_di_core),
-	    .flash_io0_do(flash_io0_do_core),
-	    .flash_io1_oeb(flash_io1_oeb_core),
-	    .flash_io1_di(flash_io1_di_core),
-	    .flash_io1_do(flash_io1_do_core),
-	    .flash_io2_oeb(flash_io2_oeb_core),
-	    .flash_io2_di(flash_io2_di_core),
-	    .flash_io2_do(flash_io2_do_core),
-	    .flash_io3_oeb(flash_io3_oeb_core),
-	    .flash_io3_di(flash_io3_di_core),
-	    .flash_io3_do(flash_io3_do_core),
-    
-	    // Exported Wishbone Bus
-	    .mprj_wb_iena(mprj_iena_wb),
-	    .mprj_cyc_o(mprj_cyc_o_core),
-	    .mprj_stb_o(mprj_stb_o_core),
-	    .mprj_we_o(mprj_we_o_core),
-	    .mprj_sel_o(mprj_sel_o_core),
-	    .mprj_adr_o(mprj_adr_o_core),
-	    .mprj_dat_o(mprj_dat_o_core),
-	    .mprj_ack_i(mprj_ack_i_core),
-	    .mprj_dat_i(mprj_dat_i_core),
-    
-	    .hk_stb_o(hk_stb_o),
-	    .hk_cyc_o(hk_cyc_o),
-	    .hk_dat_i(hk_dat_i),
-	    .hk_ack_i(hk_ack_i),
-    
-	    // IRQ
-	    .irq({irq_spi, user_irq}),
-	    .user_irq_ena(user_irq_ena),
-    
-	    // Module status (these may or may not be implemented)
-	    .qspi_enabled(qspi_enabled),
-	    .uart_enabled(uart_enabled),
-	    .spi_enabled(spi_enabled),
-	    .debug_mode(debug_mode),
-    
-	    // Module I/O (these may or may not be implemented)
-	    // UART
-	    .ser_tx(ser_tx),
-	    .ser_rx(ser_rx),
-	    // SPI master
-	    .spi_sdi(spi_sdi),
-	    .spi_csb(spi_csb),
-	    .spi_sck(spi_sck),
-	    .spi_sdo(spi_sdo),
-	    .spi_sdoenb(spi_sdoenb),
-	    // Debug
-	    .debug_in(debug_in),
-	    .debug_out(debug_out),
-	    .debug_oeb(debug_oeb),
-	    // Logic analyzer
-	    .la_input(la_data_in_mprj),
-	    .la_output(la_data_out_mprj),
-	    .la_oenb(la_oenb_mprj),
-	    .la_iena(la_iena_mprj),
-    
-    	// Trap status
-    	.trap(trap)
+     .serial_clock_in(mprj_io_loader_clock),
+     .serial_clock_out(mprj_io_loader_clock_buf),
+     .serial_load_in(mprj_io_loader_strobe),
+     .serial_load_out(mprj_io_loader_strobe_buf),
+     .serial_resetn_in(mprj_io_loader_resetn),
+     .serial_resetn_out(mprj_io_loader_resetn_buf),
+     .serial_data_2_in(mprj_io_loader_data_2),
+     .serial_data_2_out(mprj_io_loader_data_2_buf),
+     .rstb_l_in(rstb_l),
+     .rstb_l_out(rstb_l_buf),
+     .core_clk(caravel_clk_buf),
+     .core_rstn(caravel_rstn_buf),
+     .clk_in(caravel_clk_buf),
+     .resetn_in(caravel_rstn_buf),
+     .clk_out(clk_passthru),
+     .resetn_out(resetn_passthru),
+     .gpio_out_pad(gpio_out_core),
+     .gpio_in_pad(gpio_in_core),
+     .gpio_mode0_pad(gpio_mode0_core),
+     .gpio_mode1_pad(gpio_mode1_core),
+     .gpio_outenb_pad(gpio_outenb_core),
+     .gpio_inenb_pad(gpio_inenb_core),
+     .flash_csb(flash_csb_core),
+     .flash_clk(flash_clk_core),
+     .flash_io0_oeb(flash_io0_oeb_core),
+     .flash_io0_di(flash_io0_di_core),
+     .flash_io0_do(flash_io0_do_core),
+     .flash_io1_oeb(flash_io1_oeb_core),
+     .flash_io1_di(flash_io1_di_core),
+     .flash_io1_do(flash_io1_do_core),
+     .flash_io2_oeb(flash_io2_oeb_core),
+     .flash_io2_di(flash_io2_di_core),
+     .flash_io2_do(flash_io2_do_core),
+     .flash_io3_oeb(flash_io3_oeb_core),
+     .flash_io3_di(flash_io3_di_core),
+     .flash_io3_do(flash_io3_do_core),
+     .mprj_wb_iena(mprj_iena_wb),
+     .mprj_cyc_o(mprj_cyc_o_core),
+     .mprj_stb_o(mprj_stb_o_core),
+     .mprj_we_o(mprj_we_o_core),
+     .mprj_sel_o(mprj_sel_o_core),
+     .mprj_adr_o(mprj_adr_o_core),
+     .mprj_dat_o(mprj_dat_o_core),
+     .mprj_ack_i(mprj_ack_i_core),
+     .mprj_dat_i(mprj_dat_i_core),
+     .hk_stb_o(hk_stb_o),
+     .hk_cyc_o(hk_cyc_o),
+     .hk_dat_i(hk_dat_i),
+     .hk_ack_i(hk_ack_i),
+     .irq({irq_spi, user_irq}),
+     .user_irq_ena(user_irq_ena),
+     .qspi_enabled(qspi_enabled),
+     .uart_enabled(uart_enabled),
+     .spi_enabled(spi_enabled),
+     .debug_mode(debug_mode),
+     .ser_tx(ser_tx),
+     .ser_rx(ser_rx),
+     .spi_sdi(spi_sdi),
+     .spi_csb(spi_csb),
+     .spi_sck(spi_sck),
+     .spi_sdo(spi_sdo),
+     .spi_sdoenb(spi_sdoenb),
+     .debug_in(debug_in),
+     .debug_out(debug_out),
+     .debug_oeb(debug_oeb),
+     .la_input(la_data_in_mprj),
+     .la_output(la_data_out_mprj),
+     .la_oenb(la_oenb_mprj),
+     .la_iena(la_iena_mprj),
+     .trap(trap)
     );
-
-    /* Clock and reset to user space are passed through a tristate	*/
-    /* buffer like the above, but since they are intended to be		*/
-    /* always active, connect the enable to the logic-1 output from	*/
-    /* the vccd1 domain.						*/
-// FPGA : Remove mgmt_protect module, passthrough
-
-
  assign la_data_in_mprj = la_data_out_user;
  assign la_data_in_user = la_data_out_mprj;
  assign la_oenb_user = la_oenb_mprj;
-
    assign mprj_clock = clk_passthru;
    assign mprj_clock2 = caravel_clk2;
-   assign mprj_reset = ~resetn_passthru; // Note: it is inversted - mprj_reset is active high
+   assign mprj_reset = ~resetn_passthru;
    assign mprj_cyc_o_user = mprj_cyc_o_core;
    assign mprj_stb_o_user = mprj_stb_o_core;
    assign mprj_we_o_user = mprj_we_o_core;
@@ -1099,25 +968,16 @@ module caravel_top (
    assign mprj_dat_i_core = mprj_dat_i_user;
    assign mprj_ack_i_core = mprj_ack_i_user;
    assign user_irq = user_irq_core;
-
    assign user1_vcc_powergood = 1'b1;
    assign user2_vcc_powergood = 1'b1;
    assign user1_vdd_powergood = 1'b1;
    assign user2_vdd_powergood = 1'b1;
-
-    /*--------------------------------------------------*/
-    /* Wrapper module around the user project 		*/
-    /*--------------------------------------------------*/
-   wire        uspj_cyc; // CYC
-   wire        uspj_ack;
+   wire uspj_cyc;
+   wire uspj_ack;
    wire [31:0] uspj_dat;
-
    user_project_wrapper mprj (
-
       .wb_clk_i(mprj_clock),
       .wb_rst_i(mprj_reset),
-
-      // Management SoC Wishbone bus (exported)
       .wbs_cyc_i(uspj_cyc),
       .wbs_stb_i(mprj_stb_o_user),
       .wbs_we_i(mprj_we_o_user),
@@ -1126,115 +986,52 @@ module caravel_top (
       .wbs_dat_i(mprj_dat_o_user),
       .wbs_ack_o(uspj_ack),
       .wbs_dat_o(uspj_dat),
-
-      // GPIO pad 3-pin interface (plus analog)
       .io_in (user_io_in),
       .io_out(user_io_out),
       .io_oeb(user_io_oeb),
-      //.analog_io(user_analog_io),
-
-      // Logic analyzer
       .la_data_in(la_data_in_user),
       .la_data_out(la_data_out_user),
       .la_oenb(la_oenb_user),
-
-      // Independent clock
       .user_clock2(mprj_clock2),
-
-      // IRQ
       .user_irq(user_irq_core)
    );
-
-   //======================================================//
-   // [Vic]: PAD IOs should also be flexible
-   //======================================================//
-   wire        wb_mux;
-   wire        io_cnfg_cyc;
-   wire        io_cnfg_ack;
+   wire wb_mux;
+   wire io_cnfg_cyc;
+   wire io_cnfg_ack;
    wire [31:0] io_cnfg_dat;
-
    pads_config PAD_IO_CNFG (
-  	   .clk(clock_core),
-	   .resetb(resetb_core),
-	   .wb_clk_i(mprj_clock),
-	   .wb_rst_i(mprj_reset),
-	   .wbs_cyc_i(io_cnfg_cyc),
-	   .wbs_stb_i(mprj_stb_o_user),
-	   .wbs_we_i(mprj_we_o_user),
-	   .wbs_sel_i(mprj_sel_o_user),
-	   .wbs_adr_i(mprj_adr_o_user),
-	   .wbs_dat_i(mprj_dat_o_user),
-	   .wbs_ack_o(io_cnfg_ack),
-	   .wbs_dat_o(io_cnfg_dat),
-	   .re_n(REN),
-	   .oe_n(mprj_oen)
+      .clk(clock_core),
+    .resetb(resetb_core),
+    .wb_clk_i(mprj_clock),
+    .wb_rst_i(mprj_reset),
+    .wbs_cyc_i(io_cnfg_cyc),
+    .wbs_stb_i(mprj_stb_o_user),
+    .wbs_we_i(mprj_we_o_user),
+    .wbs_sel_i(mprj_sel_o_user),
+    .wbs_adr_i(mprj_adr_o_user),
+    .wbs_dat_i(mprj_dat_o_user),
+    .wbs_ack_o(io_cnfg_ack),
+    .wbs_dat_o(io_cnfg_dat),
+    .re_n(REN),
+    .oe_n(mprj_oen)
    );
-   // IO configuration area: 3000_6000 ~ 3000_6025
    assign wb_mux = (mprj_adr_o_user[31:12] == 20'h3000_6)? 1'b1 : 1'b0;
-   assign uspj_cyc    = (wb_mux)? 0 : mprj_cyc_o_user;
+   assign uspj_cyc = (wb_mux)? 0 : mprj_cyc_o_user;
    assign io_cnfg_cyc = (wb_mux)? mprj_cyc_o_user : 0;
    assign mprj_ack_i_user = (wb_mux)? io_cnfg_ack : uspj_ack;
    assign mprj_dat_i_user = (wb_mux)? io_cnfg_dat : uspj_dat;
-   //======================================================//
-
-
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_serial_link_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_serial_link_2_shifted;
-
-    assign gpio_serial_link_1_shifted = {gpio_serial_link_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_data_1};
-    // Note that serial_link_2 is backwards compared to serial_link_1, so it
-    // shifts in the other direction.
-    assign gpio_serial_link_2_shifted = {mprj_io_loader_data_2_buf,
-      gpio_serial_link_2[`MPRJ_IO_PADS_2-1:1]};
-
-    // Propagating clock and reset to mitigate timing and fanout issues
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_clock_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_clock_2;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_resetn_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_resetn_2;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_load_1;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_load_2;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_clock_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_clock_2_shifted;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_resetn_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_resetn_2_shifted;
-    wire [`MPRJ_IO_PADS_1-1:0] gpio_load_1_shifted;
-    wire [`MPRJ_IO_PADS_2-1:0] gpio_load_2_shifted;
-
-    assign gpio_clock_1_shifted = {gpio_clock_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_clock};
-    assign gpio_clock_2_shifted = {mprj_io_loader_clock_buf,
-     gpio_clock_2[`MPRJ_IO_PADS_2-1:1]};
-    assign gpio_resetn_1_shifted = {gpio_resetn_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_resetn};
-    assign gpio_resetn_2_shifted = {mprj_io_loader_resetn_buf,
-     gpio_resetn_2[`MPRJ_IO_PADS_2-1:1]};
-    assign gpio_load_1_shifted = {gpio_load_1[`MPRJ_IO_PADS_1-2:0],
-      mprj_io_loader_strobe};
-    assign gpio_load_2_shifted = {mprj_io_loader_strobe_buf,
-     gpio_load_2[`MPRJ_IO_PADS_2-1:1]};
-
     wire [2:0] spi_pll_sel;
     wire [2:0] spi_pll90_sel;
     wire [4:0] spi_pll_div;
     wire [25:0] spi_pll_trim;
-    wire  ext_reset;
-// FPGA Remove module caravel_clocking: clock/reset directly from IO pad
+    wire ext_reset;
     assign caravel_clk = clock_core_buf;
     assign caravel_clk2 = clock_core_buf;
-    assign caravel_rstn = rstb_l_buf // original design : sync rstb_l_buf 3T 
+    assign caravel_rstn = rstb_l_buf
                           & ~ext_reset;
-
-   // DCO/Digital Locked Loop
-   // FPGA: Remove digital_pll
-
-   // Housekeeping interface
-
    housekeeping housekeeping (
          .wb_clk_i(caravel_clk),
          .wb_rstn_i(caravel_rstn),
- 
          .wb_adr_i(mprj_adr_o_core),
          .wb_dat_i(mprj_dat_o_core),
          .wb_sel_i(mprj_sel_o_core),
@@ -1243,9 +1040,7 @@ module caravel_top (
          .wb_stb_i(hk_stb_o),
          .wb_ack_o(hk_ack_i),
          .wb_dat_o(hk_dat_i),
- 
          .porb(porb_l),
- 
          .pll_ena(spi_pll_ena),
          .pll_dco_ena(spi_pll_dco_ena),
          .pll_div(spi_pll_div),
@@ -1253,46 +1048,34 @@ module caravel_top (
          .pll90_sel(spi_pll90_sel),
          .pll_trim(spi_pll_trim),
          .pll_bypass(ext_clk_sel),
- 
   .qspi_enabled(qspi_enabled),
   .uart_enabled(uart_enabled),
   .spi_enabled(spi_enabled),
   .debug_mode(debug_mode),
- 
   .ser_tx(ser_tx),
   .ser_rx(ser_rx),
- 
   .spi_sdi(spi_sdi),
   .spi_csb(spi_csb),
   .spi_sck(spi_sck),
   .spi_sdo(spi_sdo),
   .spi_sdoenb(spi_sdoenb),
- 
   .debug_in(debug_in),
   .debug_out(debug_out),
   .debug_oeb(debug_oeb),
- 
          .irq(irq_spi),
          .reset(ext_reset),
- 
          .serial_clock(mprj_io_loader_clock),
          .serial_load(mprj_io_loader_strobe),
          .serial_resetn(mprj_io_loader_resetn),
          .serial_data_1(mprj_io_loader_data_1),
          .serial_data_2(mprj_io_loader_data_2),
- 
   .mgmt_gpio_in(mgmt_io_in_hk),
   .mgmt_gpio_out(mgmt_io_out_hk),
   .mgmt_gpio_oeb(mgmt_io_oeb_hk),
- 
-  .pwr_ctrl_out(pwr_ctrl_nc), /* Not used in this version */
- 
+  .pwr_ctrl_out(pwr_ctrl_nc),
          .trap(trap),
- 
   .user_clock(caravel_clk2),
- 
          .mask_rev_in(mask_rev),
- 
   .spimemio_flash_csb(flash_csb_core),
   .spimemio_flash_clk(flash_clk_core),
   .spimemio_flash_io0_oeb(flash_io0_oeb_core),
@@ -1307,7 +1090,6 @@ module caravel_top (
   .spimemio_flash_io1_di(flash_io1_di_core),
   .spimemio_flash_io2_di(flash_io2_di_core),
   .spimemio_flash_io3_di(flash_io3_di_core),
- 
   .pad_flash_csb(flash_csb_frame),
   .pad_flash_csb_oeb(flash_csb_oeb),
   .pad_flash_clk(flash_clk_frame),
@@ -1320,36 +1102,20 @@ module caravel_top (
   .pad_flash_io1_do(flash_io1_do),
   .pad_flash_io0_di(flash_io0_di_buf),
   .pad_flash_io1_di(flash_io1_di_buf),
-
-
    .usr1_vcc_pwrgood(user1_vcc_powergood),
    .usr2_vcc_pwrgood(user2_vcc_powergood),
    .usr1_vdd_pwrgood(user1_vdd_powergood),
    .usr2_vdd_pwrgood(user2_vdd_powergood)
     );
-
-    // [Vic]: Remove GPIO configuration logics
     assign mprj_io_out = user_io_out;
-    assign user_io_in  = mprj_io_in;
-    assign mgmt_io_in  = mprj_io_in;
-
-// FPGA: Remove module user_id_programming
+    assign user_io_in = mprj_io_in;
+    assign mgmt_io_in = mprj_io_in;
     assign mask_rev = USER_PROJECT_ID;
-
-
-   // Power-on-reset circuit
-   // FPGA: Remove module "simple_por", "xres_buf"
-   // Hack por equal to resetb
    assign porb_h = resetb_core;
    assign porb_l = resetb_core;
    assign por_l = ~porb_l;
-// rstb_l is a level-shift version of rstb_h
     assign rstb_l = resetb_core;
-// FPGA: remove module spare_logic_block
-
-
 endmodule
-// `default_nettype wire
 //===========================================================
 // Modified by Vic Chen
 // July 26, 2024
@@ -9772,7 +9538,7 @@ always @(posedge sdrio_clk) begin
 	flash_clk <= mgmtsoc_litespisdrphycore_clk;
 	flash_io0_oeb <= (~mgmtsoc_litespisdrphycore_dq_oe);
 	flash_io0_do <= mgmtsoc_litespisdrphycore_dq_o;
-	mgmtsoc_litespisdrphycore_dq_i[1] <= flash_io1_di;
+	mgmtsoc_litespisdrphycore_dq_i <= {flash_io1_di,1'b0}; // youwei add 1'b0
 end
 
 always @(posedge sys_clk) begin
@@ -12385,6 +12151,7 @@ module VexRiscv (
   wire                IBusCachedPlugin_mmuBus_rsp_exception;
   wire                IBusCachedPlugin_mmuBus_rsp_refilling;
   wire                IBusCachedPlugin_mmuBus_rsp_bypassTranslation;
+  assign IBusCachedPlugin_mmuBus_rsp_bypassTranslation=1'b0; // youwei add
   wire                IBusCachedPlugin_mmuBus_end;
   wire                IBusCachedPlugin_mmuBus_busy;
   reg                 DBusSimplePlugin_memoryExceptionPort_valid;
@@ -12508,6 +12275,7 @@ module VexRiscv (
   wire       [31:0]   iBus_rsp_payload_data;
   wire                iBus_rsp_payload_error;
   wire       [31:0]   _zz_IBusCachedPlugin_rspCounter;
+  assign _zz_IBusCachedPlugin_rspCounter=0; // youwei add
   reg        [31:0]   IBusCachedPlugin_rspCounter;
   wire                IBusCachedPlugin_s0_tightlyCoupledHit;
   reg                 IBusCachedPlugin_s1_tightlyCoupledHit;
@@ -13572,7 +13340,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_jumpInterface_payload = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    //CsrPlugin_jumpInterface_payload = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    CsrPlugin_jumpInterface_payload = 0; // youwei add
     if(when_CsrPlugin_l1019) begin
       CsrPlugin_jumpInterface_payload = {CsrPlugin_xtvec_base,2'b00};
     end
@@ -13805,7 +13574,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    IBusCachedPlugin_decodeExceptionPort_payload_code = 4'bxxxx;
+    //IBusCachedPlugin_decodeExceptionPort_payload_code = 4'bxxxx;
+    IBusCachedPlugin_decodeExceptionPort_payload_code = 4'b0000;//youwei add
     if(when_IBusCachedPlugin_l244) begin
       IBusCachedPlugin_decodeExceptionPort_payload_code = 4'b1100;
     end
@@ -13883,7 +13653,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    DBusSimplePlugin_memoryExceptionPort_payload_code = 4'bxxxx;
+    //DBusSimplePlugin_memoryExceptionPort_payload_code = 4'bxxxx;
+    DBusSimplePlugin_memoryExceptionPort_payload_code=4'b0000; //youwei add 
     if(when_DBusSimplePlugin_l486) begin
       DBusSimplePlugin_memoryExceptionPort_payload_code = 4'b0101;
     end
@@ -14479,7 +14250,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_xtvec_mode = 2'bxx;
+    //CsrPlugin_xtvec_mode = 2'bxx;
+    CsrPlugin_xtvec_mode=0; // youwei add
     case(CsrPlugin_targetPrivilege)
       2'b11 : begin
         CsrPlugin_xtvec_mode = CsrPlugin_mtvec_mode;
@@ -14490,7 +14262,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_xtvec_base = 30'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    //CsrPlugin_xtvec_base = 30'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+    CsrPlugin_xtvec_base=0;//youwei add 
     case(CsrPlugin_targetPrivilege)
       2'b11 : begin
         CsrPlugin_xtvec_base = CsrPlugin_mtvec_base;
@@ -14571,7 +14344,8 @@ module VexRiscv (
   end
 
   always @(*) begin
-    CsrPlugin_selfException_payload_code = 4'bxxxx;
+    //CsrPlugin_selfException_payload_code = 4'bxxxx;
+    CsrPlugin_selfException_payload_code=0;// youwei add
     if(when_CsrPlugin_l1144) begin
       case(CsrPlugin_privilege)
         2'b00 : begin
@@ -14873,7 +14647,8 @@ module VexRiscv (
   assign iBusWishbone_BTE = 2'b00;
   assign iBusWishbone_SEL = 4'b1111;
   assign iBusWishbone_WE = 1'b0;
-  assign iBusWishbone_DAT_MOSI = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+  //assign iBusWishbone_DAT_MOSI = 32'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+  assign iBusWishbone_DAT_MOSI =0; //youwei add
   always @(*) begin
     iBusWishbone_CYC = 1'b0;
     if(when_InstructionCache_l239) begin
@@ -16589,7 +16364,7 @@ assign ioclk = io_clk;
 
 endmodule // FSIC_CLKRST
 
-`timescale 1ns / 1ps
+//`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Author : Tony Ho
 //
@@ -17978,15 +17753,15 @@ assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFS
 
 
 
-    localparam fifo_depth=16;
+    localparam fifo__depth=16;
     localparam sram_datawidth=100;
 
     wire sram_we;
-    wire [$clog2(fifo_depth)-1:0] sram_addr;
+    wire [$clog2(fifo__depth)-1:0] sram_addr;
     wire [sram_datawidth-1:0]sram_din;
     wire [sram_datawidth-1:0] sram_dout;
 
-    fifo #(.WIDTH(WIDTH),.depth(fifo_depth),.sram_datawidth(sram_datawidth),.mode(1)) as_fifo
+    fifo #(.WIDTH(WIDTH),.depth(fifo__depth),.sram_datawidth(sram_datawidth),.mode(1)) as_fifo
     (
         .axis_clk(axis_clk),
         .axi_reset_n(axi_reset_n),
@@ -19219,6 +18994,14 @@ end
 always @(posedge axis_clk or negedge axis_rst_n) begin
     if( !axis_rst_n ) begin
         intr_enable <= 0;
+        mb_regs[0][31:0]<=32'd0;
+        mb_regs[1][31:0]<=32'd0;
+        mb_regs[2][31:0]<=32'd0;
+        mb_regs[3][31:0]<=32'd0;
+        mb_regs[4][31:0]<=32'd0;
+        mb_regs[5][31:0]<=32'd0;
+        mb_regs[6][31:0]<=32'd0;
+        mb_regs[7][31:0]<=32'd0;
     end else begin
 
         // intr_enable
@@ -19751,55 +19534,66 @@ assign axi_rdata_bus[0] = ( (user_prj_sel == 5'b00000) && cc_up_enable) ? rdata_
 //user project 1 
 assign awvalid_1 = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? axi_awvalid : 0;
 assign axi_awready_bus[1] = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? awready_1 : 0;
-assign awaddr = axi_awaddr[11:0];
+// youwei add (delete)
+//assign awaddr = axi_awaddr[11:0];
 assign wstrb_1 = axi_wstrb;    //[TODO] share wstrb for all user projects.
 
 assign wvalid_1 = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? axi_wvalid : 0;
 assign axi_wready_bus[1] = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? wready_1 : 0;
-assign wdata = axi_wdata;
+//assign wdata = axi_wdata;
 
 assign arvalid_1 = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? axi_arvalid : 0;
 assign axi_arready_bus[1] = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? arready_1 : 0;
-assign araddr = axi_araddr;
+// youwei add (delete)
+//assign araddr = axi_araddr;
 
 assign axi_rvalid_bus[1] = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? rvalid_1 : 0;
-assign rready = axi_rready;
+// youwei add (delete)
+//assign rready = axi_rready;
 assign axi_rdata_bus[1] = ( (user_prj_sel == 5'b00001) && cc_up_enable) ? rdata_1 : 0;
 
 //user project 2 
 assign awvalid_2 = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? axi_awvalid : 0;
 assign axi_awready_bus[2] = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? awready_2 : 0;
-assign awaddr = axi_awaddr[11:0];
+// youwei add (delete)
+//assign awaddr = axi_awaddr[11:0];
 assign wstrb_2 = axi_wstrb;    //[TODO] share wstrb for all user projects.
 
 assign wvalid_2 = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? axi_wvalid : 0;
 assign axi_wready_bus[2] = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? wready_2 : 0;
-assign wdata = axi_wdata;
+// youwei add (delete)
+//assign wdata = axi_wdata;
 
 assign arvalid_2 = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? axi_arvalid : 0;
 assign axi_arready_bus[2] = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? arready_2 : 0;
-assign araddr = axi_araddr;
+// youwei add (delete)
+//assign araddr = axi_araddr;
 
 assign axi_rvalid_bus[2] = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? rvalid_2 : 0;
-assign rready = axi_rready;
+// youwei add (delete)
+//assign rready = axi_rready;
 assign axi_rdata_bus[2] = ( (user_prj_sel == 5'b00010) && cc_up_enable) ? rdata_2 : 0;
 
 //user project 3 
 assign awvalid_3 = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? axi_awvalid : 0;
 assign axi_awready_bus[3] = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? awready_3 : 0;
-assign awaddr = axi_awaddr[11:0];
+// youwei add (delete)
+//assign awaddr = axi_awaddr[11:0];
 assign wstrb_3 = axi_wstrb;    //[TODO] share wstrb for all user projects.
 
 assign wvalid_3 = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? axi_wvalid : 0;
 assign axi_wready_bus[3] = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? wready_3 : 0;
-assign wdata = axi_wdata;
+// youwei add (delete)
+//assign wdata = axi_wdata;
 
 assign arvalid_3 = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? axi_arvalid : 0;
 assign axi_arready_bus[3] = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? arready_3 : 0;
-assign araddr = axi_araddr;
+// youwei add (delete)
+//assign araddr = axi_araddr;
 
 assign axi_rvalid_bus[3] = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? rvalid_3 : 0;
-assign rready = axi_rready;
+// youwei add (delete)
+//assign rready = axi_rready;
 assign axi_rdata_bus[3] = ( (user_prj_sel == 5'b00011) && cc_up_enable) ? rdata_3 : 0;
 
 
@@ -20383,6 +20177,7 @@ assign io_out      = 38'd0;
 assign io_oeb      = 38'd0;
 assign user_irq    = 3'd0;
 */
+assign la_data_out = 128'd0;// youwei add 
 FSIC #(.BITS( BITS )) u_fsic  (
 
                       // MGMT SoC Wishbone Slave
@@ -21074,7 +20869,8 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
   input  wire                        user_clock2,
   input  wire                        uck2_rst_n
   );
-
+  assign low__pri_irq=0;
+  assign High_pri_req=0;
   localparam	RD_IDLE = 1'b0;
   localparam	RD_ADDR_DONE = 1'b1;
    wire sm_tvalid_out;
@@ -21410,7 +21206,7 @@ end
 localparam	RD_IDLE = 1'b0;
 localparam	RD_ADDR_DONE = 1'b1;
 localparam	Command   = 4'd0;
-localparam	IN_COPY   = 4'd1;
+localparam	IN_COPY_STAGE   = 4'd1;
 localparam	OUT_COPY  = 4'd2;
 localparam	RESET     = 4'd3;
 localparam	F_WAIT1    = 4'd1;
@@ -21531,18 +21327,17 @@ wire In_rdy;
 wire [9:0] Inram_adr;
 wire [63:0] Inram_d;
 wire Inram_we;
-reg reg_rst_incpopy;
-reg reg_rst_out_stage;
+
 reg [31:0]regx_data;
 reg [31:0]regy_data;
 reg [15:0]reg_mode1_in;
 
-assign ss_tready_out=(state==Command)?1'b1:(state==IN_COPY)?In_rdy:1'b0;
-assign In_vld=(state==IN_COPY)?ss_tvalid:1'b0;
+assign ss_tready_out=(state==Command)?1'b1:(state==IN_COPY_STAGE)?In_rdy:1'b0;
+assign In_vld=(state==IN_COPY_STAGE)?ss_tvalid:1'b0;
 
 In_copy In_copy (
   .clk(axi_clk), 
-  .rst(reg_rst_incpopy), 
+  .rst(state==RESET), 
   .arst_n(axi_reset_n),
   .in_data_rsc_dat(ss_tdata),
   .in_data_rsc_vld(In_vld), //I
@@ -21550,15 +21345,15 @@ In_copy In_copy (
   .qin_rsc_adr(Inram_adr),
   .qin_rsc_d(Inram_d),
   .qin_rsc_we(Inram_we),
-  .qin_rsc_q(),
+  .qin_rsc_q(),//O
   .qin_rsc_en(Inram_en),
-  .qin_triosy_lz(),
+  .qin_triosy_lz(),//O
   .ap_done_rsc_dat(), 
   .ap_done_rsc_vld(In_copy_done),
   .ap_done_rsc_rdy(1'b1),
   .ap_start_rsc_dat(1'b1),
-  .ap_start_rsc_vld(state==IN_COPY),
-  .ap_start_rsc_rdy(),
+  .ap_start_rsc_vld(state==IN_COPY_STAGE),
+  .ap_start_rsc_rdy(),//O
   .mode_rsc_dat(reg_mode1_in==2||reg_mode1_in==3)
 );
 
@@ -21581,11 +21376,11 @@ wire Out_copy_done;
 always@(*)begin
   case(state)
     Command:   
-    	if(ss_tvalid && ss_tdata[3:2]==2'b01) next_state = IN_COPY;
+    	if(ss_tvalid && ss_tdata[3:2]==2'b01) next_state = IN_COPY_STAGE;
    		else next_state = Command;
-    IN_COPY:   
+    IN_COPY_STAGE:   
     	if(In_copy_done) next_state = OUT_COPY;
-   		else next_state = IN_COPY;
+   		else next_state = IN_COPY_STAGE;
     OUT_COPY:  
     	if(Out_copy_done) next_state=RESET;
    		else next_state=OUT_COPY;
@@ -21596,7 +21391,7 @@ always@(*)begin
   endcase
 end 
 
-reg reg_rst;
+
 
 always @(posedge axi_clk or negedge axi_reset_n)  begin
   if ( !axi_reset_n ) begin
@@ -21697,7 +21492,7 @@ assign Out_rdy   = (Out_state==U_OUT||Out_state==F_OUT2) ? sm_tready : 0;
 
 fiFFNTT fiFFNTT(
 .clk(axi_clk),          // I
-.rst(reg_rst),          // I
+.rst(state==RESET),     // I
 .arst_n(axi_reset_n),   // I
 .ap_start_rsc_dat(1'b1),// I
 .ap_start_rsc_vld(state==OUT_COPY),    // I
@@ -21706,31 +21501,31 @@ fiFFNTT fiFFNTT(
 .ap_done_rsc_vld(Out_copy_done), // O
 .ap_done_rsc_rdy(1'b1),     // I
 .mode1_rsc_dat(reg_mode1_in),  //I 16
-.mode1_triosy_lz(), 
+.mode1_triosy_lz(), //O
 .in_f_d_rsc_adr(in_ramf_adr),  // O 10
 .in_f_d_rsc_d(in_ramf_d),    // O 64
 .in_f_d_rsc_we(in_ramf_we),   // O 1 
 .in_f_d_rsc_q(in_ramf_q),    // I 64
 .in_f_d_rsc_en(in_ramf_en),   // O 1
-.in_f_d_triosy_lz(), 
+.in_f_d_triosy_lz(), //O
 .in_u_rsc_adr(in_ramu_adr), // O 10
 .in_u_rsc_d(in_ramu_d),   // O 16
 .in_u_rsc_we(in_ramu_we),  // O
 .in_u_rsc_q(in_ramu_q),   // I 16
 .in_u_rsc_en(in_ramu_en),  // O 
-.in_u_triosy_lz(),
+.in_u_triosy_lz(),//O
 .out_f_d_rsc_adr(out_ramf_adr),
 .out_f_d_rsc_d(out_ramf_d),
 .out_f_d_rsc_we(out_ramf_we),
 .out_f_d_rsc_q(out_ramf_q), 
 .out_f_d_rsc_en(out_ramf_en),
-.out_f_d_triosy_lz(),
+.out_f_d_triosy_lz(),//O
 .out_u_rsc_adr(out_ramu_adr), 
 .out_u_rsc_d(out_ramu_d),
 .out_u_rsc_we(out_ramu_we), 
 .out_u_rsc_q(out_ramu_q),
 .out_u_rsc_en(out_ramu_en),
-.out_u_triosy_lz(),
+.out_u_triosy_lz(),//O
 .out1_rsc_dat(Out_data),//O,80 bit{16'b,64'b},
 .out1_rsc_vld(Out_vld),//O;
 .out1_rsc_rdy(Out_rdy)
@@ -21743,10 +21538,10 @@ fiFFNTT fiFFNTT(
 
 wire mux_state;
 assign mux_state=!(reg_mode1_in==2||reg_mode1_in==3);
-assign ram0_en   = (state==IN_COPY)?Inram_en  : ((mux_state)? in_ramf_en:in_ramu_en);
-assign ram0_we   = (state==IN_COPY)?Inram_we  : ((mux_state)? in_ramf_we:in_ramu_we);
-assign ram0_adr  = (state==IN_COPY)?Inram_adr : ((mux_state)? in_ramf_adr:in_ramu_adr);
-assign ram0_d    = (state==IN_COPY)?Inram_d   : ((mux_state)? in_ramf_d:{48'b0,in_ramu_d});
+assign ram0_en   = (state==IN_COPY_STAGE)?Inram_en  : ((mux_state)? in_ramf_en:in_ramu_en);
+assign ram0_we   = (state==IN_COPY_STAGE)?Inram_we  : ((mux_state)? in_ramf_we:in_ramu_we);
+assign ram0_adr  = (state==IN_COPY_STAGE)?Inram_adr : ((mux_state)? in_ramf_adr:in_ramu_adr);
+assign ram0_d    = (state==IN_COPY_STAGE)?Inram_d   : ((mux_state)? in_ramf_d:{48'b0,in_ramu_d});
 assign in_ramu_q = ram0_q[15:0];
 assign in_ramf_q = ram0_q;
 
