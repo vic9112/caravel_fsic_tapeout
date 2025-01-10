@@ -400,15 +400,15 @@ assign as_aa_tuser = (m_axis[TID_OFFSET +: TID_WIDTH]==2'b01) ? m_axis[USER_OFFS
 
 
 
-    localparam fifo_depth=16;
+    localparam fifo__depth=16;
     localparam sram_datawidth=100;
 
     wire sram_we;
-    wire [$clog2(fifo_depth)-1:0] sram_addr;
+    wire [$clog2(fifo__depth)-1:0] sram_addr;
     wire [sram_datawidth-1:0]sram_din;
     wire [sram_datawidth-1:0] sram_dout;
 
-    fifo #(.WIDTH(WIDTH),.depth(fifo_depth),.sram_datawidth(sram_datawidth),.mode(1)) as_fifo
+    fifo #(.WIDTH(WIDTH),.depth(fifo__depth),.sram_datawidth(sram_datawidth),.mode(1)) as_fifo
     (
         .axis_clk(axis_clk),
         .axi_reset_n(axi_reset_n),
