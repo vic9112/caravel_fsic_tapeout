@@ -50,7 +50,8 @@ module USER_PRJ0 #(parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
   input  wire                        user_clock2,
   input  wire                        uck2_rst_n
   );
-
+  assign low__pri_irq=0;
+  assign High_pri_req=0;
   localparam	RD_IDLE = 1'b0;
   localparam	RD_ADDR_DONE = 1'b1;
    wire sm_tvalid_out;

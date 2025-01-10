@@ -73,6 +73,7 @@ assign io_out      = 38'd0;
 assign io_oeb      = 38'd0;
 assign user_irq    = 3'd0;
 */
+assign la_data_out = 128'd0;// youwei add 
 FSIC #(.BITS( BITS )) u_fsic  (
 
                       // MGMT SoC Wishbone Slave

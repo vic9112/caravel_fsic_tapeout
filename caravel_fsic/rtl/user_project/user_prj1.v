@@ -92,7 +92,7 @@ end
 localparam	RD_IDLE = 1'b0;
 localparam	RD_ADDR_DONE = 1'b1;
 localparam	Command   = 4'd0;
-localparam	IN_COPY   = 4'd1;
+localparam	IN_COPY_STAGE   = 4'd1;
 localparam	OUT_COPY  = 4'd2;
 localparam	RESET     = 4'd3;
 localparam	F_WAIT1    = 4'd1;
@@ -218,8 +218,8 @@ reg [31:0]regx_data;
 reg [31:0]regy_data;
 reg [15:0]reg_mode1_in;
 
-assign ss_tready_out=(state==Command)?1'b1:(state==IN_COPY)?In_rdy:1'b0;
-assign In_vld=(state==IN_COPY)?ss_tvalid:1'b0;
+assign ss_tready_out=(state==Command)?1'b1:(state==IN_COPY_STAGE)?In_rdy:1'b0;
+assign In_vld=(state==IN_COPY_STAGE)?ss_tvalid:1'b0;
 
 In_copy In_copy (
   .clk(axi_clk), 
@@ -238,7 +238,7 @@ In_copy In_copy (
   .ap_done_rsc_vld(In_copy_done),
   .ap_done_rsc_rdy(1'b1),
   .ap_start_rsc_dat(1'b1),
-  .ap_start_rsc_vld(state==IN_COPY),
+  .ap_start_rsc_vld(state==IN_COPY_STAGE),
   .ap_start_rsc_rdy(),//O
   .mode_rsc_dat(reg_mode1_in==2||reg_mode1_in==3)
 );
@@ -262,11 +262,11 @@ wire Out_copy_done;
 always@(*)begin
   case(state)
     Command:   
-    	if(ss_tvalid && ss_tdata[3:2]==2'b01) next_state = IN_COPY;
+    	if(ss_tvalid && ss_tdata[3:2]==2'b01) next_state = IN_COPY_STAGE;
    		else next_state = Command;
-    IN_COPY:   
+    IN_COPY_STAGE:   
     	if(In_copy_done) next_state = OUT_COPY;
-   		else next_state = IN_COPY;
+   		else next_state = IN_COPY_STAGE;
     OUT_COPY:  
     	if(Out_copy_done) next_state=RESET;
    		else next_state=OUT_COPY;
@@ -424,10 +424,10 @@ fiFFNTT fiFFNTT(
 
 wire mux_state;
 assign mux_state=!(reg_mode1_in==2||reg_mode1_in==3);
-assign ram0_en   = (state==IN_COPY)?Inram_en  : ((mux_state)? in_ramf_en:in_ramu_en);
-assign ram0_we   = (state==IN_COPY)?Inram_we  : ((mux_state)? in_ramf_we:in_ramu_we);
-assign ram0_adr  = (state==IN_COPY)?Inram_adr : ((mux_state)? in_ramf_adr:in_ramu_adr);
-assign ram0_d    = (state==IN_COPY)?Inram_d   : ((mux_state)? in_ramf_d:{48'b0,in_ramu_d});
+assign ram0_en   = (state==IN_COPY_STAGE)?Inram_en  : ((mux_state)? in_ramf_en:in_ramu_en);
+assign ram0_we   = (state==IN_COPY_STAGE)?Inram_we  : ((mux_state)? in_ramf_we:in_ramu_we);
+assign ram0_adr  = (state==IN_COPY_STAGE)?Inram_adr : ((mux_state)? in_ramf_adr:in_ramu_adr);
+assign ram0_d    = (state==IN_COPY_STAGE)?Inram_d   : ((mux_state)? in_ramf_d:{48'b0,in_ramu_d});
 assign in_ramu_q = ram0_q[15:0];
 assign in_ramf_q = ram0_q;
 
