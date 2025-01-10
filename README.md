@@ -1,12 +1,12 @@
 # caravel_fsic_tapeout
 
-:::info
+
 ## File Structure
-`/FPGA_val`: FPGA Implementation
-`/caravel_fsic`: ASIC Implementation
-`/chip_rtl`: Concatenated RTL file of the whole chip
-`/backup`: Backup folders of contributors
-:::
+`/FPGA_val`: FPGA Implementation<br>
+`/caravel_fsic`: ASIC Implementation<br>
+`/chip_rtl`: Concatenated RTL file of the whole chip<br>
+`/backup`: Backup folders of contributors<br>
+
 ## Introduction
 
 In this project, we built upon our previous work, where we developed a hardware IP to accelerate the post-quantum cryptography algorithm, Falcon, and implemented it using a hardware/software co-design approach in response to the threats posed by quantum computers. Rather than designing just an IP, we developed a complete system this time and tapeout. Our project introduces the following key contributions:
