@@ -6,7 +6,7 @@
 |`/caravel_fsic` | ASIC Implementation |
 |`/chip_rtl`     | Concatenated RTL file of the whole chip }
 |`/backup`       | Backup folders of contributors |
-
+---
 ## Introduction
 
 In this project, we built upon our previous work, where we developed a hardware IP to accelerate the post-quantum cryptography algorithm, Falcon, and implemented it using a hardware/software co-design approach in response to the threats posed by quantum computers. Rather than designing just an IP, we developed a complete system this time and tapeout. Our project introduces the following key contributions:
@@ -24,7 +24,7 @@ In this project, we built upon our previous work, where we developed a hardware 
 -	Description: A general PCB design for IC system-level validation
 -	Application: An online FPGA system is built to facilitate IC system-level validation. 
 ---
-:hammer:We want to build an IC Validation System that is scalable and easy to deploy
+:hammer:***We want to build an IC Validation System that is scalable and easy to deploy***:hammer:
 
 ## System Overview
 ![SOC專題block diagram (1)](https://github.com/user-attachments/assets/8cd54385-f034-4435-9ce3-fb09ea7bccca)
