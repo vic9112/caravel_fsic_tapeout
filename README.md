@@ -1,5 +1,11 @@
 # caravel_fsic_tapeout
 
+>[!Note] File Structure
+>'/FPGA_val': FPGA Implementation
+>'/caravel_fsic': ASIC Implementation
+>'/chip_rtl': Concatenated RTL file of the whole chip
+>'/backup': Backup folders of contributers
+
 <!--
 You should download the latest version(2024) of `SAED32_EDK`
 and place `SAED32_EDK` and `caravel_fsic_vic` in the same directory
